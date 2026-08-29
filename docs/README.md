@@ -3,6 +3,14 @@
 文档按用途分类。第一次使用系统从“使用指南”开始；开发或审阅引擎时从“架构设计”与
 “参考资料”开始。
 
+## 维护与交接
+
+- [`maintainer/START_HERE.md`](maintainer/START_HERE.md)：新维护任务与 Codex 会话入口。
+- [`maintainer/CURRENT_STATE.md`](maintainer/CURRENT_STATE.md)：当前能力和验证基线。
+- [`maintainer/ACTIVE_WORK.md`](maintainer/ACTIVE_WORK.md)：未完成或未合并工作。
+- [`maintainer/ARCHITECTURE_DECISIONS.md`](maintainer/ARCHITECTURE_DECISIONS.md)：跨会话架构决策。
+- [`maintainer/OPERATIONS.md`](maintainer/OPERATIONS.md)：数据、run、报告和后台任务操作规则。
+
 ## 实际策略工作区
 
 - [`../strategies/README.md`](../strategies/README.md)：用户实际策略的规格、配置与正式回测索引；不属于框架验收。

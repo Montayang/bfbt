@@ -26,6 +26,7 @@ htmlcov/
 .aider*
 .codex/
 .agents/
+/.local/
 
 # Keep the bianbt.data Python package trackable despite /data/ above.
 !src/bianbt/data/

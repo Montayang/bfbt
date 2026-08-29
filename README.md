@@ -24,6 +24,8 @@
 
 ## 文档
 
+- [`docs/maintainer/START_HERE.md`](docs/maintainer/START_HERE.md)：维护者和新 Codex 会话的持久化入口。
+
 - [`strategies/README.md`](strategies/README.md)：用户实际策略工作区，以及策略规格到正式回测报告的协作流程。
 
 - [`docs/README.md`](docs/README.md)：按用途分类的完整文档导航。
