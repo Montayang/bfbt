@@ -8,11 +8,13 @@ facts rather than chat transcripts and contains no credentials or machine-specif
 1. Repository `AGENTS.md` for safety, authorization, architecture, and Git rules.
 2. `CURRENT_STATE.md` for implemented capabilities and the latest verified baseline.
 3. `ACTIVE_WORK.md` for unfinished or unmerged work.
-4. `ARCHITECTURE_DECISIONS.md` for decisions that cannot be reconstructed safely from one file.
-5. `OPERATIONS.md` for data, artifact, formal-run, report, and background-job handling.
-6. The relevant file under `docs/design/`, `docs/reference/`, `docs/acceptance/`,
+4. `AI_AGENT_READINESS.md` for the natural-language research target, readiness gaps, and ordered
+   development backlog.
+5. `ARCHITECTURE_DECISIONS.md` for decisions that cannot be reconstructed safely from one file.
+6. `OPERATIONS.md` for data, artifact, formal-run, report, and background-job handling.
+7. The relevant file under `docs/design/`, `docs/reference/`, `docs/acceptance/`,
    `docs/research/`, or `strategies/` for the current task.
-7. `.local/CODEX_HANDOFF.md`, when present, for machine-private paths and preferences.
+8. `.local/CODEX_HANDOFF.md`, when present, for machine-private paths and preferences.
 
 ## Read-only startup check
 
@@ -51,4 +53,3 @@ backtest, commit, push, or merge.
 Report the inherited architecture, current strategy/research identities, unfinished work,
 and authorization boundaries, then wait for my task.
 ```
-

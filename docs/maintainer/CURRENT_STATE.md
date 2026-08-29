@@ -47,8 +47,10 @@ V1 remains for compatibility and historical reproduction, not for new daily stra
 
 - The former mixed-repository cut point recorded `321 passed` before standalone extraction.
 - The standalone repository changed path semantics and added a standalone Git-fingerprint test.
-- No pytest suite has yet been authorized or run against the standalone repository. Therefore
-  `321 passed` is historical evidence, not a claim about the current standalone HEAD.
+- The standalone offline suite completed on 2026-08-29 against HEAD `69e8588` with only maintainer
+  documentation changes uncommitted: `322 passed in 35.23s` on Python 3.12.3 and pytest 8.4.2.
+- The earlier `321 passed` result remains migration history; `322 passed` is the current verified
+  independent-repository baseline.
 - Migration-time static checks covered Python AST parsing, TOML/YAML parsing, shell syntax,
   imports, project-root discovery, Markdown links, secret/path scanning, and Git integrity.
 
@@ -63,3 +65,12 @@ V1 remains for compatibility and historical reproduction, not for new daily stra
 - Minute-level full-market schedules can create very large target sets and extreme turnover; they
   require an explicit cost warning before execution.
 
+## AI Agent readiness
+
+- The deterministic research and Event engines, immutable identities, reports, and CLI provide a
+  strong execution foundation for supervised Agent use.
+- A general no-code Agent control plane is not implemented. In particular, there is no versioned
+  ResearchIntent, authorization action contract, safe factor-expression boundary, unified research
+  orchestrator, or recorded background-job service.
+- The durable gap register and implementation order are maintained in
+  `docs/maintainer/AI_AGENT_READINESS.md`.
