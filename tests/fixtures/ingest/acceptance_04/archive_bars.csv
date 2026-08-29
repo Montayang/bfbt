@@ -1,0 +1,2 @@
+open_time,open,high,low,close,volume,close_time,quote_volume,trades,taker_buy_base_volume,taker_buy_quote_volume,ignore
+1704067200000,42000.0,42100.0,41900.0,42050.0,12.5,1704067259999,525625.0,100,6.0,252300.0,0

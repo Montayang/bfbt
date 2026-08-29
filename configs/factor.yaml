@@ -1,0 +1,61 @@
+# A07 内建因子示例；运行时仍需按研究目标调整窗口。
+factors:
+  - name: momentum
+    version: v1
+    parameters:
+      lookback: 24h
+      skip_recent: 1h
+    compute_interval: 1h
+    preprocess:
+      - name: winsorize
+        method: quantile
+        lower: 0.01
+        upper: 0.99
+      - name: zscore
+        cross_sectional: true
+
+  - name: reversal
+    version: v1
+    parameters:
+      lookback: 1h
+    compute_interval: 1h
+    preprocess:
+      - name: rank
+
+  - name: realized_volatility
+    version: v1
+    parameters:
+      window: 24h
+    compute_interval: 1h
+    preprocess:
+      - name: rank
+
+  - name: quote_volume
+    version: v1
+    parameters:
+      window: 24h
+    compute_interval: 1h
+    preprocess:
+      - name: rank
+
+  - name: taker_buy_ratio
+    version: v1
+    parameters:
+      window: 24h
+    compute_interval: 1h
+    preprocess:
+      - name: winsorize
+        method: quantile
+        lower: 0.01
+        upper: 0.99
+      - name: zscore
+
+labels:
+  - name: forward_return_4h
+    signal_delay_bars: 1
+    horizon: 4h
+    entry_field: open
+    exit_field: open
+
+cache:
+  enabled: true

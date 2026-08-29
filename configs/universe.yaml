@@ -1,0 +1,30 @@
+# 每个回测时点重建合约池，禁止使用今天的存续列表回看历史。
+schedule:
+  interval: 1h
+
+market:
+  venue: binance
+  segment: usd_m_futures
+  contract_type: perpetual
+  quote_asset: USDT
+  margin_asset: USDT
+
+point_in_time:
+  enabled: true
+  use_contract_snapshots: true
+  use_first_last_valid_bar: true
+
+filters:
+  trading_status_only: true
+  min_listing_age_days: 30
+  min_history_bars: 1440
+  rolling_quote_volume:
+    window: 24h
+    minimum: null
+  max_missing_ratio:
+    window: 24h
+    maximum: 0.01
+  exclude_symbols: []
+
+output:
+  save_reason_codes: true

@@ -1,0 +1,10 @@
+timestamp,symbol,value,is_valid,factor_version,universe_version
+2026-01-01T00:00:00Z,BTCUSDT,10.0,true,factor-a13,universe-a13
+2026-01-01T00:00:00Z,ETHUSDT,10.0,true,factor-a13,universe-a13
+2026-01-01T00:00:00Z,XRPUSDT,8.0,true,factor-a13,universe-a13
+2026-01-01T00:00:00Z,ADAUSDT,2.0,true,factor-a13,universe-a13
+2026-01-01T04:00:00Z,BTCUSDT,7.0,true,factor-a13,universe-a13
+2026-01-01T04:00:00Z,ETHUSDT,5.0,true,factor-a13,universe-a13
+2026-01-01T04:00:00Z,XRPUSDT,1.0,true,factor-a13,universe-a13
+2026-01-01T08:00:00Z,BTCUSDT,3.0,true,factor-a13,universe-a13
+2026-01-01T08:00:00Z,ETHUSDT,,false,factor-a13,universe-a13

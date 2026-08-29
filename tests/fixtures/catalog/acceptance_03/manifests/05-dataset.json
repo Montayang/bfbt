@@ -1,0 +1,22 @@
+{
+  "manifest_version": "dataset-snapshot/v1",
+  "dataset_id": "usd-m-perpetual",
+  "dataset_version": "snapshot-v1",
+  "created_at": "2026-07-29T12:00:00Z",
+  "status": "published",
+  "datasets": [
+    {
+      "dataset_name": "bars",
+      "dataset_version": "bars-dataset-v1",
+      "schema_version": "v1",
+      "schema_fingerprint": "1670f990d1f84612ba24ccdac36e6ede47bd01b503fea838a32fcd0648126887",
+      "available_from": "2024-01-01T00:00:00Z",
+      "available_to": "2024-03-01T00:00:00Z",
+      "partition_manifest_ids": ["bars-1m-2024-01", "bars-1m-2024-02"],
+      "quality_report_ids": ["quality-bars-2024-01", "quality-bars-2024-02"]
+    }
+  ],
+  "source_manifest_hash": "eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+  "normalizer_code_version": "normalizer-fixture-v1",
+  "normalizer_parameters_hash": "ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"
+}

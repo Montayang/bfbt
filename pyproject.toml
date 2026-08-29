@@ -1,0 +1,50 @@
+[build-system]
+requires = ["setuptools>=69"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "bianbt"
+version = "0.1.0"
+description = "Research and backtesting framework for Binance perpetual futures"
+readme = "README.md"
+requires-python = ">=3.10"
+license = { file = "LICENSE" }
+authors = [
+    { name = "montayang", email = "montayang0421@gmail.com" },
+]
+classifiers = [
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3 :: Only",
+]
+
+dependencies = [
+    "duckdb>=1.4,<2",
+    "httpx>=0.27,<1",
+    "polars>=1.30,<2",
+    "pydantic>=2.8,<3",
+    "pyarrow>=18,<26",
+    "pytz>=2024.1",
+    "PyYAML>=6.0.2,<7",
+    "typer>=0.12,<1",
+]
+
+[project.optional-dependencies]
+test = [
+    "pytest>=8,<9",
+]
+
+[project.scripts]
+bianbt = "bianbt.cli:app"
+
+[project.urls]
+Repository = "https://github.com/montayang/bianbt"
+Issues = "https://github.com/montayang/bianbt/issues"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+include = ["bianbt*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-ra"

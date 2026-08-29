@@ -1,0 +1,14 @@
+{
+  "manifest_version": "raw-object/v1",
+  "object_id": "invalid-secret-uri",
+  "dataset_name": "bars",
+  "source": "binance_public_archive",
+  "source_uri": "https://user:secret@example.invalid/data.zip",
+  "retrieved_at": "2026-07-29T12:00:00Z",
+  "byte_size": 10,
+  "checksum_sha256": "not-a-sha256",
+  "media_type": "application/zip",
+  "compression": "zip",
+  "http_status": 200,
+  "status": "verified"
+}

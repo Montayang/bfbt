@@ -1,0 +1,19 @@
+{
+  "manifest_version": "raw-object/v1",
+  "object_id": "raw-bars-btcusdt-1m-2024-01",
+  "dataset_name": "bars",
+  "source": "binance_public_archive",
+  "source_uri": "https://data.binance.vision/data/futures/um/monthly/klines/BTCUSDT/1m/BTCUSDT-1m-2024-01.zip",
+  "symbol": "BTCUSDT",
+  "interval": "1m",
+  "available_from": "2024-01-01T00:00:00Z",
+  "available_to": "2024-02-01T00:00:00Z",
+  "retrieved_at": "2026-07-29T10:00:00Z",
+  "byte_size": 1000,
+  "checksum_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+  "upstream_checksum_sha256": null,
+  "media_type": "application/zip",
+  "compression": "zip",
+  "http_status": 200,
+  "status": "verified"
+}

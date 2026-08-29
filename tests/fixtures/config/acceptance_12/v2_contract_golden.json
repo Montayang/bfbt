@@ -1,0 +1,109 @@
+{
+  "artifacts": {
+    "rankings": {
+      "version": "v1",
+      "primary_key": ["timestamp", "factor_name", "symbol"],
+      "sort_key": ["timestamp", "factor_name", "ordinal_rank", "symbol"],
+      "fields": [
+        ["timestamp", "timestamp[ms, tz=UTC]", false],
+        ["rank_clock", "string", false],
+        ["symbol", "string", false],
+        ["factor_name", "string", false],
+        ["raw_score", "double", false],
+        ["ordinal_rank", "int32", false],
+        ["percentile_rank", "double", false],
+        ["sample_count", "int32", false],
+        ["factor_version", "string", false],
+        ["universe_version", "string", false],
+        ["run_id", "string", false]
+      ]
+    },
+    "position_instructions": {
+      "version": "v1",
+      "primary_key": ["instruction_id"],
+      "sort_key": ["decision_time", "priority", "symbol", "instruction_id"],
+      "fields": [
+        ["instruction_id", "string", false],
+        ["decision_time", "timestamp[ms, tz=UTC]", false],
+        ["rank_source_time", "timestamp[ms, tz=UTC]", true],
+        ["symbol", "string", false],
+        ["side", "string", false],
+        ["instruction_mode", "string", false],
+        ["requested_delta_notional", "double", true],
+        ["constrained_delta_notional", "double", true],
+        ["requested_target_weight", "double", true],
+        ["source_event_id", "string", true],
+        ["reason_code", "string", false],
+        ["priority", "int16", false],
+        ["run_id", "string", false]
+      ]
+    },
+    "risk_events": {
+      "version": "v1",
+      "primary_key": ["event_id"],
+      "sort_key": ["evaluation_time", "symbol", "event_id"],
+      "fields": [
+        ["event_id", "string", false],
+        ["evaluation_time", "timestamp[ms, tz=UTC]", false],
+        ["trigger_time", "timestamp[ms, tz=UTC]", false],
+        ["symbol", "string", true],
+        ["event_type", "string", false],
+        ["direction", "string", true],
+        ["entry_price", "double", true],
+        ["trigger_level", "double", false],
+        ["observed_price", "double", false],
+        ["conflict_policy", "string", false],
+        ["action", "string", false],
+        ["fill_time", "timestamp[ms, tz=UTC]", true],
+        ["reason_code", "string", false],
+        ["run_id", "string", false]
+      ]
+    }
+  },
+  "event_contract": {
+    "contract_version": "events/v3",
+    "priority_semantics": "lower_numeric_value_wins",
+    "priorities": [
+      {"name": "LIQUIDATION_RESERVED", "value": 0},
+      {"name": "PORTFOLIO_RISK", "value": 100},
+      {"name": "SYMBOL_RISK", "value": 200},
+      {"name": "UNIVERSE_FORCED_EXIT", "value": 300},
+      {"name": "SCHEDULED_STRATEGY", "value": 400}
+    ],
+    "reason_codes": [
+      "SELECTED_CURRENT_RANK",
+      "SELECTED_HISTORICAL_RANK",
+      "RANK_OUT_OF_RANGE",
+      "INSUFFICIENT_RANK_HISTORY",
+      "HISTORICAL_RANK_NOT_CURRENTLY_ELIGIBLE",
+      "NOT_SELECTED",
+      "RANK_DESCENT_TRIGGERED",
+      "ACCEPTED",
+      "SCALED_MAX_GROSS_EXPOSURE",
+      "SCALED_MAX_NET_EXPOSURE",
+      "SCALED_MAX_SYMBOL_WEIGHT",
+      "SCALED_MAX_SYMBOL_NOTIONAL",
+      "REJECTED_MAX_CONSECUTIVE_ADDS",
+      "SCALED_MAX_TURNOVER",
+      "REJECTED_INSUFFICIENT_MARGIN",
+      "ZERO_POSITION_SKIPPED",
+      "ALREADY_HELD",
+      "REPLACED_BY_SIGNAL",
+      "STOP_LOSS_TRIGGERED",
+      "TAKE_PROFIT_TRIGGERED",
+      "TRAILING_STOP_TRIGGERED",
+      "PORTFOLIO_STOP_LOSS_TRIGGERED",
+      "PORTFOLIO_TAKE_PROFIT_TRIGGERED",
+      "PORTFOLIO_MAX_DRAWDOWN_TRIGGERED",
+      "COOLDOWN_ACTIVE",
+      "SUPPRESSED_BY_HIGHER_PRIORITY",
+      "UNIVERSE_FORCED_EXIT",
+      "END_OF_DATA_UNFILLED"
+    ],
+    "rank_semantics": {
+      "direction": "score_descending",
+      "first_rank": 1,
+      "tie_break": ["score_desc", "symbol_asc"]
+    }
+  }
+}

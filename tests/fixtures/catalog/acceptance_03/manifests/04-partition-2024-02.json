@@ -1,0 +1,18 @@
+{
+  "manifest_version": "partition/v1",
+  "partition_id": "bars-1m-2024-02",
+  "dataset_name": "bars",
+  "schema_version": "v1",
+  "schema_fingerprint": "1670f990d1f84612ba24ccdac36e6ede47bd01b503fea838a32fcd0648126887",
+  "dataset_version": "bars-dataset-v1",
+  "partition_path": "bars/schema=v1/interval=1m/year=2024/month=02/part-0.parquet",
+  "partition_values": {"interval": "1m", "year": "2024", "month": "02"},
+  "row_count": 200,
+  "min_time": "2024-02-01T00:00:00Z",
+  "max_time": "2024-02-29T23:59:00Z",
+  "symbols_count": 1,
+  "content_sha256": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+  "source_object_ids": ["raw-bars-btcusdt-1m-2024-02"],
+  "quality_report_id": "quality-bars-2024-02",
+  "published_at": "2026-07-29T11:01:00Z"
+}

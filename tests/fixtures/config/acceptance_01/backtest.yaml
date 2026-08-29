@@ -1,0 +1,51 @@
+run:
+  name: acceptance_01
+  start: 2024-01-01T00:00:00Z
+  end: 2024-02-01T00:00:00Z
+  dataset_version: fixture-v1
+  random_seed: 42
+
+schedule:
+  factor_interval: 1h
+  rebalance_interval: 4h
+  signal_delay_bars: 1
+
+portfolio:
+  construction: long_short_quantile
+  long_quantile: 0.2
+  short_quantile: 0.2
+  weighting: equal
+  gross_exposure: 1.0
+  net_exposure: 0.0
+  max_symbol_weight: 0.1
+  max_turnover: null
+
+execution:
+  fill_price: next_bar_open
+  partial_fill: false
+  fee:
+    model: fixed_bps
+    taker_bps: 4.0
+    maker_bps: null
+  slippage:
+    model: fixed_bps
+    bps: 2.0
+  funding:
+    enabled: true
+    missing_policy: error
+
+valuation:
+  price: mark_close
+
+risk:
+  leverage: 1.0
+  enforce_liquidation: false
+
+output:
+  root: data/backtest/runs/acceptance
+  save_factor_values: true
+  save_universe: true
+  save_positions: true
+  save_trades: true
+  save_costs: true
+  render_html: true

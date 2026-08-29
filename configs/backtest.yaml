@@ -1,0 +1,63 @@
+# 回测行为草稿；null 字段必须在正式运行前显式填写。
+config_version: v1
+
+run:
+  name: null
+  start: null
+  end: null
+  dataset_version: null
+  random_seed: 42
+
+schedule:
+  factor_interval: 1h
+  rebalance_interval: 4h
+  signal_delay_bars: 1
+
+portfolio:
+  construction: long_short_quantile
+  long_quantile: 0.2
+  short_quantile: 0.2
+  long_count: null
+  short_count: null
+  weighting: equal
+  gross_exposure: 1.0
+  net_exposure: 0.0
+  max_symbol_weight: null
+  max_turnover: null
+
+execution:
+  fill_price: next_bar_open
+  partial_fill: false
+  fee:
+    model: fixed_bps
+    taker_bps: null
+    maker_bps: null
+  slippage:
+    model: fixed_bps
+    bps: null
+  funding:
+    enabled: true
+    missing_policy: error
+
+valuation:
+  price: mark_close
+
+risk:
+  leverage: 1.0
+  enforce_liquidation: false
+
+output:
+  root: data/backtest/runs
+  save_factor_values: true
+  save_universe: true
+  save_positions: true
+  save_trades: true
+  save_costs: true
+  render_html: true
+
+performance:
+  mode: chunked
+  chunk_interval: 2d
+  max_input_rows_per_chunk: 5000000
+  max_incremental_rss_mib: 2048
+  collect_diagnostics: true

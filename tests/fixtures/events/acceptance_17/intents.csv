@@ -1,0 +1,6 @@
+instruction_id,decision_time,fill_time,rank_source_time,symbol,side,instruction_mode,requested_delta_notional,constrained_delta_notional,requested_target_weight,source_event_id,reason_code,priority,run_id
+risk-btc,2024-01-01T00:00:00Z,2024-01-01T00:01:00Z,,BTCUSDT,FLAT,risk_close,-100,-100,,risk-event-btc,STOP_LOSS_TRIGGERED,200,engine-a17
+strategy-btc,2024-01-01T00:00:00Z,2024-01-01T00:01:00Z,2023-12-31T20:00:00Z,BTCUSDT,LONG,fixed_notional,100,100,,,ACCEPTED,400,engine-a17
+universe-eth,2024-01-01T00:00:00Z,2024-01-01T00:01:00Z,,ETHUSDT,FLAT,universe_exit,-50,-50,,,UNIVERSE_FORCED_EXIT,300,engine-a17
+strategy-eth,2024-01-01T00:00:00Z,2024-01-01T00:01:00Z,2023-12-31T20:00:00Z,ETHUSDT,LONG,fixed_notional,50,50,,,ACCEPTED,400,engine-a17
+strategy-sol,2024-01-01T00:00:00Z,2024-01-01T00:01:00Z,2023-12-31T20:00:00Z,SOLUSDT,SHORT,fixed_notional,-25,-25,,,ACCEPTED,400,engine-a17

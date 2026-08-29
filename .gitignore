@@ -1,0 +1,32 @@
+# Local secrets and environments
+.env
+.env.*
+!.env.example
+.venv/
+venv/
+
+# Generated Python and test state
+__pycache__/
+**/__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Backtest data, catalogs, checkpoints, runs, reports, and logs
+/data/
+/log/
+/outputs/
+
+# Local editor and assistant state
+.DS_Store
+.vscode/
+.idea/
+.aider*
+.codex/
+.agents/
+
+# Keep the bianbt.data Python package trackable despite /data/ above.
+!src/bianbt/data/
+!src/bianbt/data/**

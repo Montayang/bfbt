@@ -1,0 +1,55 @@
+# 数据源与本地存储草稿；仅定义契约，不会触发下载。
+market:
+  venue: binance
+  segment: usd_m_futures
+  contract_type: perpetual
+  quote_asset: USDT
+  margin_asset: USDT
+
+datasets:
+  bars:
+    enabled: true
+    base_interval: 1m
+  mark_bars:
+    enabled: true
+    base_interval: 1m
+  funding:
+    enabled: true
+  contracts:
+    enabled: true
+  index_bars:
+    enabled: false
+    base_interval: 1m
+
+source:
+  primary: binance_public_archive
+  incremental: binance_rest
+  allow_authenticated_endpoints: false
+  request_timeout_seconds: 20
+  max_retries: 4
+  max_concurrency: 8
+
+time:
+  timezone: UTC
+  base_interval: 1m
+  derived_intervals: [5m, 15m, 1h, 4h]
+  start: null
+  end: null
+  range_semantics: left_closed_right_open
+
+storage:
+  root: data/backtest/datasets/default
+  format: parquet
+  layout: long
+  compression: zstd
+  partition_granularity: month
+  target_file_size_mib: 256
+  row_group_rows: 262144
+
+validation:
+  reject_duplicate_keys: true
+  reject_bad_ohlc: true
+  reject_non_positive_prices: true
+  report_missing_bars: true
+  verify_archive_checksums: true
+  max_partition_missing_ratio: 0.01
