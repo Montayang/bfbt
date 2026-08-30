@@ -11,6 +11,14 @@
 | R5 | `R5-相位均值比正向Rank5固定1/3` | `rdl_sampled_mean_ratio_15m12_pos_fixed_margin_third` | 每分钟用 `t、t-15m…t-165m` 12 点价格均值比，原始方向 | 固定为初始权益 1/3 的保证金 | 七月 6-profile Event 研究已完成 |
 | R6 | `R6-相位均值比反向Rank5固定1/3` | `rdl_sampled_mean_ratio_15m12_neg_fixed_margin_third` | R5 因子直接取负，作为独立因子身份 | 固定为初始权益 1/3 的保证金 | 七月 6-profile Event 研究已完成，2 组权益非正 |
 
+R5-T4 在 R5 正向因子上冻结激活式移动止盈和滚仓语义；采样间隔变化形成以下独立身份：
+
+| 正式简称 | `variant_id` | 12 点采样间隔 | 状态 |
+|---|---|---:|---|
+| `R5-T4-ROLLING` | `rdl_sampled_mean_ratio_15m12_pos_t4_rolling` | 15 分钟 | 五月至七月已回测 |
+| `R5-T4-H1-ROLLING` | `rdl_sampled_mean_ratio_1h12_pos_t4_rolling` | 1 小时 | 五月至七月已回测 |
+| `R5-T4-H2-ROLLING` | `rdl_sampled_mean_ratio_2h12_pos_t4_rolling` | 2 小时 | 五月至七月已回测 |
+
 ## 可接受的口头简称
 
 - `R1`、`24H动量全仓策略` → `rdl_momentum_24h_equity_full`

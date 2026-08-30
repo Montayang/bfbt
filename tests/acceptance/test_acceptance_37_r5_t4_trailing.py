@@ -50,25 +50,28 @@ def test_r5_t4_run_contracts_are_frozen(variant: str, month: str) -> None:
 
 
 @pytest.mark.parametrize("month", ["2026-05", "2026-06", "2026-07"])
-def test_r5_t4_h1_rolling_identity_changes_only_factor_sampling(
-    month: str,
+@pytest.mark.parametrize(
+    ("factor_profile", "sample_interval"), [("H1", "1h"), ("H2", "2h")]
+)
+def test_r5_t4_hourly_rolling_identity_changes_only_factor_sampling(
+    month: str, factor_profile: str, sample_interval: str
 ) -> None:
     baseline = resolved("ROLLING", month)
-    hourly = resolved("ROLLING", month, "H1")
+    hourly = resolved("ROLLING", month, factor_profile)
     compact_month = month.replace("-", "")
     assert hourly.backtest.run.name == (
-        f"R5-T4-H1-ROLLING-{compact_month}-r01"
+        f"R5-T4-{factor_profile}-ROLLING-{compact_month}-r01"
     )
-    assert FACTOR_PROFILES["H1"] == "1h"
+    assert FACTOR_PROFILES[factor_profile] == sample_interval
     assert hourly.factor.factors[0].parameters == {
         "sample_count": 12,
-        "sample_interval": "1h",
+        "sample_interval": sample_interval,
     }
     baseline_payload = baseline.model_dump(mode="json")
     hourly_payload = hourly.model_dump(mode="json")
     baseline_payload["factor"]["factors"][0]["parameters"][
         "sample_interval"
-    ] = "1h"
+    ] = sample_interval
     baseline_payload["backtest"]["run"]["name"] = hourly_payload[
         "backtest"
     ]["run"]["name"]

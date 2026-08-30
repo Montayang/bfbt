@@ -1,16 +1,20 @@
 # Active work
 
-Updated: 2026-08-29.
+Updated: 2026-08-30.
 
 ## Current state
 
 - No engine development or formal backtest is active.
+- The three authorized `R5-T4-H2-ROLLING` May–July formal runs are complete and registered; their
+  generated artifacts and derived margin-trajectory report remain ignored local data.
 - An AI Agent readiness audit is recorded in `AI_AGENT_READINESS.md`. It defines the intended
   natural-language research workflow and AG01–AG16 backlog; implementation has not started.
 - Durable cross-session guidance is maintained by root `AGENTS.md`, `docs/maintainer/`, and the
   ignored local `.local/CODEX_HANDOFF.md` when it is present.
 - The standalone offline pytest suite passed all 322 tests on 2026-08-29 against HEAD `69e8588`;
   only the current maintainer documentation changes were uncommitted.
+- The H2 result registration changes passed the full offline suite on 2026-08-30:
+  `325 passed in 37.65s`.
 - Inspect Git for the exact current branch, commit, worktree, and upstream state rather than relying
   on a branch name recorded in this document.
 

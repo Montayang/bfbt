@@ -1,6 +1,6 @@
 # Current project state
 
-Updated: 2026-08-29.
+Updated: 2026-08-30.
 
 ## Repository identity
 
@@ -39,9 +39,13 @@ V1 remains for compatibility and historical reproduction, not for new daily stra
 - Factor research registry and promotion rules: `docs/research/`.
 - Stable strategy identities and formal run mappings: `strategies/`.
 - Current recorded families include full-market Rank-descent variants R1-R6, R5-T4 trailing and
-  rolling-margin variants, and the C1 full-market EMA crossover family.
+  rolling-margin variants (including independent H1 and H2 sampling identities), and the C1
+  full-market EMA crossover family.
 - Formal run files and HTML reports are local generated assets; Git stores their identities,
   specifications, and recorded summaries, not the artifacts themselves.
+- `R5-T4-H2-ROLLING` May, June, and July formal runs are complete and registered under
+  `strategies/full_market_rank_descent_long/`; their immutable environments record commit
+  `3b0a32e` with `git_dirty=true`, which remains an explicit audit qualification.
 
 ## Verification baseline
 
@@ -50,7 +54,9 @@ V1 remains for compatibility and historical reproduction, not for new daily stra
 - The standalone offline suite completed on 2026-08-29 against HEAD `69e8588` with only maintainer
   documentation changes uncommitted: `322 passed in 35.23s` on Python 3.12.3 and pytest 8.4.2.
 - The earlier `321 passed` result remains migration history; `322 passed` is the current verified
-  independent-repository baseline.
+  independent-repository migration baseline.
+- The H2 runner/identity/result registration branch completed the full offline suite on
+  2026-08-30: `325 passed in 37.65s` on Python 3.12.3 and pytest 8.4.2.
 - Migration-time static checks covered Python AST parsing, TOML/YAML parsing, shell syntax,
   imports, project-root discovery, Markdown links, secret/path scanning, and Git integrity.
 

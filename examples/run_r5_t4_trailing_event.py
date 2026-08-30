@@ -24,7 +24,12 @@ from run_sampled_mean_rank5_event_2026_07 import (
 
 
 VARIANTS = ("FIXED", "ROLLING")
-FACTOR_PROFILES = {"M15": "15m", "H1": "1h"}
+FACTOR_PROFILES = {"M15": "15m", "H1": "1h", "H2": "2h"}
+FACTOR_WORKSPACES = {
+    "M15": "rdl_sampled_mean_ratio_15m12_pos_t4",
+    "H1": "rdl_sampled_mean_ratio_1h12_pos_t4",
+    "H2": "rdl_sampled_mean_ratio_2h12_pos_t4",
+}
 MONTHS: dict[str, dict[str, str]] = {
     "2026-05": {
         "dataset_id": "binance-usdm-perpetual-1m-2026-05-event",
@@ -132,11 +137,7 @@ def _write_config(
     config: ResolvedConfig,
     factor_profile: str = "M15",
 ) -> None:
-    workspace = (
-        "rdl_sampled_mean_ratio_15m12_pos_t4"
-        if factor_profile == "M15"
-        else "rdl_sampled_mean_ratio_1h12_pos_t4"
-    )
+    workspace = FACTOR_WORKSPACES[factor_profile]
     root = (
         Path(__file__).resolve().parents[1]
         / f"data/backtest/workspaces/{workspace}"
