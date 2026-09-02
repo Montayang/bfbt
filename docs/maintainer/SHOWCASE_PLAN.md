@@ -2,6 +2,20 @@
 
 Updated: 2026-09-01.
 
+## Public discovery direction update (2026-09-02)
+
+The public repository is primarily explored by users on their own machines; it is not presented by
+the maintainer as an 8–12 minute live pitch. The public front door and `showcase/README.md` therefore
+center the three report outputs—Quick Research, Fast Matrix, and Event Engine—and explain what each
+one answers. English is the primary Showcase document and an independent Simplified-Chinese sibling
+is published beside it.
+
+The H2 May–July comparison implemented below remains a valid optional evidence case for a prepared
+machine that already holds the exact immutable runs. It must not occupy the main README as if three
+selected run results represented the product, and it must not be described as the default fresh-
+checkout experience. The remainder of this document records the historical bounded-case
+implementation and its acceptance boundaries.
+
 Implementation status (2026-09-02): S0–S5 were implemented, verified, committed as `9f991f2`, and
 merged into `main`. Six focused A39 tests and the 331-test full offline suite passed; real local
 preparation verified all three H2 runs with one expected provenance warning and no failures. The

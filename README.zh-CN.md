@@ -7,7 +7,7 @@
 **Binance Futures Backtesting Framework**——面向 Binance USDⓈ-M 永续合约截面因子研究的
 离线研究与回测系统。
 
-[English](README.md) · [文档导航](docs/README.md) · [Showcase 指南](showcase/README.md) ·
+[English](README.md) · [文档导航](docs/README.md) · [探索三层报告](showcase/README.zh-CN.md) ·
 [贡献指南](CONTRIBUTING.zh-CN.md)
 
 > BFBT 是独立的开源研究项目，与 Binance 不存在隶属、背书、赞助或任何利益关系。项目只
@@ -28,39 +28,17 @@ BFBT 把快速因子诊断、常规组合研究和路径依赖的正式回测分
 - BFBT 将探索性研究与正式模拟分开：用户从研究结果中选择候选，依赖精确事件路径的策略再
   交给 Event 引擎确认。
 
-## Showcase
+## 探索三层报告
 
-仓库包含一个有证据支撑的 Agent/研究展示入口。它把自然语言请求、已确认的研究口径、三个
-独立月份的回测、滚仓保证金轨迹和逐笔证据连成一个离线页面；每个数字都能追溯到已验证结果。
+理解 BFBT 最直接的方式是查看它产生的报告：Quick Research 判断因子是否值得继续研究，
+Fast Matrix 评估选定组合计入成本后的路径，Event 引擎则把候选策略变成可追溯到逐笔成交的
+正式回测。三类报告互相衔接，但不能互相替代。
 
-![bfbt 三个月 Showcase 预览](docs/assets/showcase-preview.svg)
+![Quick Research、Fast Matrix 和 Event 引擎报告](docs/assets/three-layer-reports.zh-CN.svg)
 
-在已经保存这三个月回测结果的机器上：
-
-```bash
-.venv/bin/bfbt showcase prepare \
-  --spec showcase/r5_t4_h2_rolling_202605_202607.json
-```
-
-生成页面位于：
-
-```text
-data/backtest/showcases/r5-t4-h2-rolling-202605-202607-r01/index.html
-```
-
-默认 `index.html` 为英文入口；同目录还会生成显式英文 `index.en.html` 与独立简体中文
-`index.zh-CN.html`。其他面向人的 HTML 报告也遵循相同语言合同，机器可读证据不复制。
-
-只读检查，不生成页面：
-
-```bash
-.venv/bin/bfbt doctor \
-  --spec showcase/r5_t4_h2_rolling_202605_202607.json
-```
-
-市场数据和完整回测结果按设计不提交 Git，因此全新下载的仓库不会自带这三份真实结果。仓库
-包含预览，以及验证和展示已准备结果所需的代码；完整演示步骤见
-[`showcase/README.md`](showcase/README.md)。
+[三层报告自助导览](showcase/README.zh-CN.md)说明每类报告回答什么、应该查看哪些内容，以及
+全新下载仓库后如何继续探索。原有三个月证据案例仍可供已经保存精确本地 run 的机器使用，
+但不再作为普通用户的默认入口。
 
 ## 当前能力
 
@@ -119,7 +97,7 @@ bfbt doctor
 - [入门教程](docs/guides/beginner_tutorial.md)：准备公开数据并生成第一份回测报告。
 - [用户手册](docs/guides/user_manual.md)：命令、配置、输出解读和故障排查。
 - [自定义因子教程](docs/guides/custom_factor_tutorial.md)：添加并研究新的截面因子。
-- [Showcase 指南](showcase/README.md)：查看仓库内可追溯的演示案例。
+- [三层报告自助导览](showcase/README.zh-CN.md)：理解并探索三层报告。
 - [文档导航](docs/README.md)：架构、数据合同、研究记录和开发者资料。
 
 ## 参与和安全

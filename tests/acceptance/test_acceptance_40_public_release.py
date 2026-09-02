@@ -29,11 +29,21 @@ def test_public_identity_is_bfbt_with_english_front_door() -> None:
     assert "```mermaid" not in readme
     assert "V2" not in readme
     assert "docs/assets/research-workflow.svg" in readme
+    assert "docs/assets/three-layer-reports.svg" in readme
+    assert "showcase/README.md" in readme
     assert chinese.startswith("# BFBT\n")
     assert "不存在隶属、背书、赞助或任何利益关系" in chinese
     assert "```mermaid" not in chinese
     assert "V2" not in chinese
     assert "docs/assets/research-workflow.zh-CN.svg" in chinese
+    assert "docs/assets/three-layer-reports.zh-CN.svg" in chinese
+    assert "showcase/README.zh-CN.md" in chinese
+    showcase_english = (ROOT / "showcase" / "README.md").read_text(encoding="utf-8")
+    showcase_chinese = (ROOT / "showcase" / "README.zh-CN.md").read_text(encoding="utf-8")
+    assert showcase_english.startswith("# Explore BFBT\n")
+    assert "README.zh-CN.md" in showcase_english
+    assert showcase_chinese.startswith("# 探索 BFBT\n")
+    assert "README.md" in showcase_chinese
     for name in ("research-workflow.svg", "research-workflow.zh-CN.svg"):
         root = ET.parse(ROOT / "docs" / "assets" / name).getroot()
         assert root.attrib["viewBox"] == "0 0 1100 920"
@@ -41,6 +51,11 @@ def test_public_identity_is_bfbt_with_english_front_door() -> None:
         assert not names.intersection({"a", "button", "foreignObject", "script"})
         visible_text = "".join(root.itertext())
         assert "V2" not in visible_text
+    for name in ("three-layer-reports.svg", "three-layer-reports.zh-CN.svg"):
+        root = ET.parse(ROOT / "docs" / "assets" / name).getroot()
+        assert root.attrib["viewBox"] == "0 0 1200 940"
+        names = {element.tag.rsplit("}", 1)[-1] for element in root.iter()}
+        assert not names.intersection({"a", "button", "foreignObject", "script"})
 
 
 def test_declared_python_310_compatibility_surface() -> None:

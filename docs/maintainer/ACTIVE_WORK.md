@@ -4,6 +4,10 @@ Updated: 2026-09-02.
 
 ## Current state
 
+- Public Showcase discovery is being reframed on `codex/self-guided-showcase`: English-first and
+  independent Chinese guides now lead a fresh-checkout user through the three report layers, while
+  the prior H2 three-month comparison is retained only as an optional prepared-machine evidence
+  case. The root README preview now represents report surfaces rather than selected run returns.
 - No engine development or formal backtest is active.
 - The public-release implementation was completed on `codex/bfbt-public-release` and approved for
   fast-forward publication to `main`. It performs the complete

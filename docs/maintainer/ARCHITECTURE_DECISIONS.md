@@ -53,6 +53,9 @@ silently approximated.
 
 - Natural language is translated into a versioned ResearchIntent before deterministic application
   code is invoked. Unresolved economic ambiguity fails closed.
+- The public Showcase entry is a self-guided report tour: Quick Research, Fast Matrix, and Event
+  Engine reports are the primary product surfaces. A selected multi-run comparison is an optional
+  evidence case, not the repository's main product preview or a required fresh-checkout path.
 - The bounded showcase implements this contract for a curated result-query scenario; it is not a
   general no-code Agent service and never embeds arbitrary code execution.
 - Showcase pages are deterministic derived views of verified immutable artifacts. They may compare

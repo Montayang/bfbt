@@ -100,6 +100,12 @@ V1 remains for compatibility and historical reproduction, not for new daily stra
 
 ## Showcase surface
 
+- Public discovery is now a self-guided tour of the reports produced by Quick Research, Fast Matrix,
+  and the Event Engine. The root README uses bilingual report-surface previews rather than strategy
+  performance from selected runs; `showcase/README.md` is English-first with an independent Chinese
+  sibling.
+- The H2 three-month Showcase remains an optional verified case for machines that already hold its
+  exact local runs. It is not the default fresh-checkout experience.
 - `bfbt doctor` performs stable read-only runtime, storage, catalog, intent, artifact, provenance,
   and optional loopback-port checks.
 - `bfbt showcase inspect/build/prepare` verifies exact immutable runs and publishes only derived

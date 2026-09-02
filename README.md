@@ -8,7 +8,7 @@
 cross-sectional factors on Binance USDⓈ-M perpetual futures.
 
 [中文说明](README.zh-CN.md) · [Documentation](docs/README.en.md) ·
-[Showcase guide](showcase/README.md) · [Contributing](CONTRIBUTING.md)
+[Explore the reports](showcase/README.md) · [Contributing](CONTRIBUTING.md)
 
 > BFBT is an independent open-source research project. It is not affiliated with, endorsed by,
 > sponsored by, or financially connected to Binance. It uses public historical market data only,
@@ -27,31 +27,18 @@ cross-sectional factors on Binance USDⓈ-M perpetual futures.
 - BFBT keeps exploratory research separate from formal simulation: the user selects promising
   research results, and strategies that depend on an exact event path move to the Event Engine.
 
-## Verified offline Showcase
+## Explore the three report layers
 
-The repository includes an evidence-backed Agent/research showcase. It connects a natural-language
-request, confirmed research assumptions, three independent monthly backtests, rolling opening-margin
-paths, and trade-level evidence. Every displayed number traces back to a verified result.
+BFBT is best understood through the reports it produces. Quick Research tests whether a factor is
+worth pursuing, Fast Matrix evaluates selected portfolio paths after costs, and the Event Engine
+turns a chosen strategy into a formal, trade-level backtest. The reports are complementary rather
+than interchangeable.
 
-![Three-month BFBT Showcase preview](docs/assets/showcase-preview.svg)
+![Quick Research, Fast Matrix, and Event Engine reports](docs/assets/three-layer-reports.svg)
 
-On a prepared machine that contains the three recorded monthly runs:
-
-```bash
-.venv/bin/bfbt showcase prepare \
-  --spec showcase/r5_t4_h2_rolling_202605_202607.json
-```
-
-Read-only preflight:
-
-```bash
-.venv/bin/bfbt doctor \
-  --spec showcase/r5_t4_h2_rolling_202605_202607.json
-```
-
-Market data and completed backtest results are intentionally excluded from Git, so a fresh checkout
-does not contain these three runs. The repository includes the preview and the code needed to verify
-and present prepared results; see the [Showcase guide](showcase/README.md).
+The [self-guided report tour](showcase/README.md) explains what each report answers, what to inspect,
+and how to continue from a fresh checkout. A separate three-month evidence case remains available
+for machines that already hold its exact local runs, but it is not the default user experience.
 
 ## Implemented capabilities
 
@@ -128,7 +115,7 @@ not duplicated. Compatibility entry pages default to English and link to the Chi
 - [User manual](docs/guides/user_manual.md): commands, configuration, outputs, and troubleshooting.
 - [Custom factor tutorial](docs/guides/custom_factor_tutorial.md): add and research a new
   cross-sectional factor.
-- [Showcase guide](showcase/README.md): inspect the included evidence-backed demonstration.
+- [Self-guided report tour](showcase/README.md): understand and explore the three report layers.
 - [Documentation map](docs/README.en.md): architecture, data contracts, research records, and
   contributor references.
 

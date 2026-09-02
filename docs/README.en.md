@@ -13,7 +13,8 @@ text; filenames, commands, schemas, and immutable identities are language-neutra
   troubleshooting.
 - [Custom factor tutorial](guides/custom_factor_tutorial.md): implement, register, test, and run a
   cross-sectional factor.
-- [Showcase guide](../showcase/README.md): verify and render the bounded offline Showcase.
+- [Self-guided report tour](../showcase/README.md): explore the Quick Research, Fast Matrix, and
+  Event Engine reports; the optional verified case study is documented separately on that page.
 
 ## Architecture and contracts
 

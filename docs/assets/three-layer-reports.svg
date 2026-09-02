@@ -1,0 +1,106 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="940" viewBox="0 0 1200 940" role="img" aria-labelledby="title desc">
+  <title id="title">BFBT three-layer report experience</title>
+  <desc id="desc">Illustrative previews of the Quick Research, Fast Matrix, and Event Engine reports using the BFBT report color system. No strategy results are shown.</desc>
+  <rect width="1200" height="940" fill="#ffffff"/>
+
+  <g font-family="system-ui,-apple-system,'Segoe UI',sans-serif">
+    <text x="50" y="48" fill="#1b2722" font-size="28" font-weight="750">Explore BFBT through its reports</text>
+    <text x="50" y="75" fill="#68776f" font-size="14">Each layer answers a different question. This interface preview contains no strategy results.</text>
+
+    <!-- Quick Research -->
+    <g>
+      <rect x="50" y="105" width="1100" height="230" rx="14" fill="#ffffff" stroke="#d3ddd7" stroke-width="2"/>
+      <path d="M64 105H310V335H64Q50 335 50 321V119Q50 105 64 105Z" fill="#edf3ef"/>
+      <text x="78" y="143" fill="#238c72" font-size="12" font-weight="800" letter-spacing="1.4">01 · FACTOR DIAGNOSTICS</text>
+      <text x="78" y="182" fill="#1b2722" font-size="24" font-weight="750">Quick Research</text>
+      <text x="78" y="215" fill="#68776f" font-size="14">Does the factor ranking</text>
+      <text x="78" y="236" fill="#68776f" font-size="14">contain useful information?</text>
+      <text x="78" y="296" fill="#276f5e" font-size="13" font-weight="700">No account simulation</text>
+
+      <text x="342" y="139" fill="#1b2722" font-size="19" font-weight="700">Quick Research report</text>
+      <text x="342" y="161" fill="#68776f" font-size="12">Compare factor, period, horizon, coverage, and turnover</text>
+      <g>
+        <rect x="342" y="181" width="150" height="55" rx="9" fill="#f7f9f7" stroke="#e3e9e5"/>
+        <text x="357" y="202" fill="#68776f" font-size="11">Rank IC</text><rect x="357" y="214" width="91" height="7" rx="3.5" fill="#238c72"/>
+        <rect x="506" y="181" width="150" height="55" rx="9" fill="#f7f9f7" stroke="#e3e9e5"/>
+        <text x="521" y="202" fill="#68776f" font-size="11">Coverage</text><rect x="521" y="214" width="112" height="7" rx="3.5" fill="#3f709f"/>
+        <rect x="670" y="181" width="150" height="55" rx="9" fill="#f7f9f7" stroke="#e3e9e5"/>
+        <text x="685" y="202" fill="#68776f" font-size="11">Turnover</text><rect x="685" y="214" width="64" height="7" rx="3.5" fill="#cb8930"/>
+      </g>
+      <rect x="342" y="251" width="478" height="55" rx="9" fill="#f7f9f7" stroke="#e3e9e5"/>
+      <line x1="360" y1="291" x2="800" y2="291" stroke="#d3ddd7"/>
+      <g fill="#238c72"><rect x="390" y="274" width="42" height="17"/><rect x="462" y="263" width="42" height="28"/><rect x="534" y="251" width="42" height="40"/><rect x="606" y="260" width="42" height="31"/><rect x="678" y="268" width="42" height="23"/></g>
+      <text x="360" y="270" fill="#68776f" font-size="10">Quantile profile</text>
+      <rect x="844" y="181" width="270" height="125" rx="9" fill="#ffffff" stroke="#d3ddd7"/>
+      <rect x="844" y="181" width="270" height="29" rx="9" fill="#edf3ef"/>
+      <text x="860" y="200" fill="#68776f" font-size="10" font-weight="700">FACTOR</text><text x="1000" y="200" fill="#68776f" font-size="10" font-weight="700">PERIOD</text>
+      <g stroke="#e3e9e5"><line x1="844" y1="235" x2="1114" y2="235"/><line x1="844" y1="260" x2="1114" y2="260"/><line x1="844" y1="285" x2="1114" y2="285"/></g>
+      <g fill="#cbd5d0"><rect x="860" y="220" width="88" height="7" rx="3"/><rect x="1000" y="220" width="69" height="7" rx="3"/><rect x="860" y="245" width="104" height="7" rx="3"/><rect x="1000" y="245" width="52" height="7" rx="3"/><rect x="860" y="270" width="76" height="7" rx="3"/><rect x="1000" y="270" width="82" height="7" rx="3"/></g>
+    </g>
+
+    <!-- Fast Matrix -->
+    <g>
+      <rect x="50" y="360" width="1100" height="230" rx="14" fill="#ffffff" stroke="#d3ddd7" stroke-width="2"/>
+      <path d="M64 360H310V590H64Q50 590 50 576V374Q50 360 64 360Z" fill="#edf3ef"/>
+      <text x="78" y="398" fill="#238c72" font-size="12" font-weight="800" letter-spacing="1.4">02 · PORTFOLIO RESEARCH</text>
+      <text x="78" y="437" fill="#1b2722" font-size="24" font-weight="750">Fast Matrix</text>
+      <text x="78" y="470" fill="#68776f" font-size="14">How does the portfolio behave</text>
+      <text x="78" y="491" fill="#68776f" font-size="14">after costs and turnover?</text>
+      <text x="78" y="551" fill="#276f5e" font-size="13" font-weight="700">Research result · human review</text>
+
+      <text x="342" y="394" fill="#1b2722" font-size="19" font-weight="700">Fast Matrix report</text>
+      <text x="342" y="416" fill="#68776f" font-size="12">Compare target paths, costs, funding, exposure, and valuation</text>
+      <g>
+        <rect x="342" y="436" width="150" height="55" rx="9" fill="#f7f9f7" stroke="#e3e9e5"/>
+        <text x="357" y="457" fill="#68776f" font-size="11">Return after costs</text><rect x="357" y="469" width="84" height="7" rx="3.5" fill="#238c72"/>
+        <rect x="506" y="436" width="150" height="55" rx="9" fill="#f7f9f7" stroke="#e3e9e5"/>
+        <text x="521" y="457" fill="#68776f" font-size="11">Cost drag</text><rect x="521" y="469" width="58" height="7" rx="3.5" fill="#cb8930"/>
+        <rect x="670" y="436" width="150" height="55" rx="9" fill="#f7f9f7" stroke="#e3e9e5"/>
+        <text x="685" y="457" fill="#68776f" font-size="11">Exposure</text><rect x="685" y="469" width="104" height="7" rx="3.5" fill="#3f709f"/>
+      </g>
+      <rect x="342" y="506" width="478" height="55" rx="9" fill="#f7f9f7" stroke="#e3e9e5"/>
+      <line x1="360" y1="548" x2="800" y2="548" stroke="#d3ddd7"/>
+      <polyline points="360,542 405,537 450,540 495,526 540,531 585,516 630,519 675,505 720,511 760,497 800,501" fill="none" stroke="#238c72" stroke-width="2.5"/>
+      <text x="360" y="525" fill="#68776f" font-size="10">Portfolio path</text>
+      <rect x="844" y="436" width="270" height="125" rx="9" fill="#ffffff" stroke="#d3ddd7"/>
+      <rect x="844" y="436" width="270" height="29" rx="9" fill="#edf3ef"/>
+      <text x="860" y="455" fill="#68776f" font-size="10" font-weight="700">RESEARCH RUN</text><text x="1020" y="455" fill="#68776f" font-size="10" font-weight="700">STATUS</text>
+      <g stroke="#e3e9e5"><line x1="844" y1="490" x2="1114" y2="490"/><line x1="844" y1="515" x2="1114" y2="515"/><line x1="844" y1="540" x2="1114" y2="540"/></g>
+      <g fill="#cbd5d0"><rect x="860" y="475" width="112" height="7" rx="3"/><rect x="1020" y="475" width="55" height="7" rx="3"/><rect x="860" y="500" width="91" height="7" rx="3"/><rect x="1020" y="500" width="68" height="7" rx="3"/><rect x="860" y="525" width="124" height="7" rx="3"/><rect x="1020" y="525" width="47" height="7" rx="3"/></g>
+    </g>
+
+    <!-- Event Engine -->
+    <g>
+      <rect x="50" y="615" width="1100" height="230" rx="14" fill="#ffffff" stroke="#d3ddd7" stroke-width="2"/>
+      <path d="M64 615H310V845H64Q50 845 50 831V629Q50 615 64 615Z" fill="#e0f1ea"/>
+      <text x="78" y="653" fill="#238c72" font-size="12" font-weight="800" letter-spacing="1.4">03 · FORMAL BACKTEST</text>
+      <text x="78" y="692" fill="#1b2722" font-size="24" font-weight="750">Event Engine</text>
+      <text x="78" y="725" fill="#68776f" font-size="14">What happened to fills, positions,</text>
+      <text x="78" y="746" fill="#68776f" font-size="14">margin, and risk through time?</text>
+      <text x="78" y="806" fill="#276f5e" font-size="13" font-weight="700">Formal result · complete audit</text>
+
+      <text x="342" y="649" fill="#1b2722" font-size="19" font-weight="700">Event Engine report</text>
+      <text x="342" y="671" fill="#68776f" font-size="12">Trace performance to exact fills, positions, risk events, and identities</text>
+      <g>
+        <rect x="342" y="691" width="150" height="55" rx="9" fill="#f7f9f7" stroke="#e3e9e5"/>
+        <text x="357" y="712" fill="#68776f" font-size="11">Total return</text><rect x="357" y="724" width="90" height="7" rx="3.5" fill="#238c72"/>
+        <rect x="506" y="691" width="150" height="55" rx="9" fill="#f7f9f7" stroke="#e3e9e5"/>
+        <text x="521" y="712" fill="#68776f" font-size="11">Maximum drawdown</text><rect x="521" y="724" width="67" height="7" rx="3.5" fill="#cb8930"/>
+        <rect x="670" y="691" width="150" height="55" rx="9" fill="#f7f9f7" stroke="#e3e9e5"/>
+        <text x="685" y="712" fill="#68776f" font-size="11">Fills and risk events</text><rect x="685" y="724" width="108" height="7" rx="3.5" fill="#3f709f"/>
+      </g>
+      <rect x="342" y="761" width="478" height="55" rx="9" fill="#f7f9f7" stroke="#e3e9e5"/>
+      <line x1="360" y1="803" x2="800" y2="803" stroke="#d3ddd7"/>
+      <polyline points="360,797 404,793 448,798 492,780 536,786 580,772 624,781 668,763 712,770 756,754 800,760" fill="none" stroke="#238c72" stroke-width="2.5"/>
+      <g fill="#cb8930" stroke="#ffffff" stroke-width="1.5"><circle cx="492" cy="780" r="4"/><circle cx="624" cy="781" r="4"/><circle cx="756" cy="754" r="4"/></g>
+      <text x="360" y="780" fill="#68776f" font-size="10">Equity and event navigation</text>
+      <rect x="844" y="691" width="270" height="125" rx="9" fill="#ffffff" stroke="#d3ddd7"/>
+      <rect x="844" y="691" width="270" height="29" rx="9" fill="#edf3ef"/>
+      <text x="860" y="710" fill="#68776f" font-size="10" font-weight="700">AUDIT EVIDENCE</text>
+      <g stroke="#e3e9e5"><line x1="844" y1="745" x2="1114" y2="745"/><line x1="844" y1="770" x2="1114" y2="770"/><line x1="844" y1="795" x2="1114" y2="795"/></g>
+      <g fill="#68776f" font-size="11"><text x="860" y="738">Fills</text><text x="860" y="763">Position changes</text><text x="860" y="788">Risk events</text><text x="1015" y="738">Settings</text><text x="1015" y="763">Data version</text><text x="1015" y="788">Fingerprints</text></g>
+    </g>
+
+    <text x="600" y="895" text-anchor="middle" fill="#68776f" font-size="12">Illustrative interface preview · no performance values or strategy claims</text>
+  </g>
+</svg>
