@@ -49,3 +49,13 @@ silently approximated.
 - Event strategy acceptance is manual economically, while technical correctness remains covered by
   shared contracts and acceptance tests.
 
+## Agent and showcase boundary
+
+- Natural language is translated into a versioned ResearchIntent before deterministic application
+  code is invoked. Unresolved economic ambiguity fails closed.
+- The bounded showcase implements this contract for a curated result-query scenario; it is not a
+  general no-code Agent service and never embeds arbitrary code execution.
+- Showcase pages are deterministic derived views of verified immutable artifacts. They may compare
+  runs and derive opening margin from audited notional/leverage, but cannot rewrite result truth.
+- Dirty source provenance, data warnings, and authorization action classes are presentation facts,
+  not details the renderer may suppress.

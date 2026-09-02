@@ -5,7 +5,7 @@ from __future__ import annotations
 import json
 from datetime import datetime
 from pathlib import Path
-from typing import Annotated
+from typing import Annotated, Any
 
 import polars as pl
 import typer
@@ -85,6 +85,13 @@ from bianbt.universe.point_in_time import (
     build_point_in_time_universe,
     build_schedule,
 )
+from bianbt.showcase.doctor import doctor as run_doctor
+from bianbt.showcase.models import (
+    ShowcaseContractError,
+    ShowcaseSpec,
+    load_showcase_spec,
+)
+from bianbt.showcase.service import ShowcaseError, build_showcase, inspect_showcase
 
 
 app = typer.Typer(no_args_is_help=True, help="Binance perpetual backtest tools.")
@@ -105,6 +112,9 @@ backtest_app = typer.Typer(
 performance_app = typer.Typer(
     no_args_is_help=True, help="Plan chunks and inspect bounded-run diagnostics."
 )
+showcase_app = typer.Typer(
+    no_args_is_help=True, help="Build a verified offline research showcase."
+)
 app.add_typer(config_app, name="config")
 app.add_typer(schema_app, name="schema")
 app.add_typer(manifest_app, name="manifest")
@@ -114,6 +124,7 @@ app.add_typer(universe_app, name="universe")
 app.add_typer(research_app, name="research")
 app.add_typer(backtest_app, name="backtest")
 app.add_typer(performance_app, name="performance")
+app.add_typer(showcase_app, name="showcase")
 
 PathOption = Annotated[Path | None, typer.Option()]
 
@@ -139,6 +150,51 @@ def _load_config_or_exit(paths: ConfigPaths, run_ready: bool):
     except (ConfigLoadError, ValidationError, RunReadinessError) as exc:
         typer.echo(f"Configuration error:\n{exc}", err=True)
         raise typer.Exit(code=2) from exc
+
+
+def _project_path(path: Path) -> Path:
+    return path if path.is_absolute() else project_root() / path
+
+
+def _showcase_spec_or_exit(path: Path) -> ShowcaseSpec:
+    try:
+        return load_showcase_spec(_project_path(path))
+    except ShowcaseContractError as exc:
+        typer.echo(f"Showcase contract error:\n{exc}", err=True)
+        raise typer.Exit(code=2) from exc
+
+
+def _showcase_doctor_payload(
+    *,
+    spec_path: Path | None,
+    runs_root: Path,
+    output_root: Path,
+    port: int | None,
+) -> dict[str, Any]:
+    spec = None if spec_path is None else _showcase_spec_or_exit(spec_path)
+    return run_doctor(
+        project_root=project_root(),
+        output_root=_project_path(output_root),
+        spec=spec,
+        runs_root=_project_path(runs_root) if spec is not None else None,
+        port=port,
+    )
+
+
+def _print_doctor(payload: dict[str, Any]) -> None:
+    for check in payload["checks"]:
+        typer.echo(
+            f"[{str(check['status']).upper()}] {check['check_id']}: "
+            f"{check['summary']}"
+        )
+        if check["remedy"]:
+            typer.echo(f"  remedy: {check['remedy']}")
+    summary = payload["summary"]
+    typer.echo(
+        f"ready={str(payload['ready']).lower()} "
+        f"passed={summary['passed']} warned={summary['warned']} "
+        f"failed={summary['failed']}"
+    )
 
 
 @config_app.command("validate")
@@ -1281,6 +1337,133 @@ def backtest_preview(
         frame = getattr(result, name).head(limit).collect()
         typer.echo(f"{name}_rows={frame.height}")
         typer.echo(f"{name}={frame.write_json()}")
+
+
+@app.command("doctor")
+def doctor_command(
+    spec: Annotated[
+        Path | None,
+        typer.Option(help="Optional ShowcaseSpec JSON to verify."),
+    ] = None,
+    runs_root: Annotated[
+        Path,
+        typer.Option(help="Root containing immutable run directories."),
+    ] = Path("data/backtest/runs"),
+    output_root: Annotated[
+        Path,
+        typer.Option(help="Derived showcase output root to inspect."),
+    ] = Path("data/backtest/showcases"),
+    port: Annotated[
+        int | None,
+        typer.Option(help="Optional loopback presentation port to probe."),
+    ] = None,
+    json_output: Annotated[
+        bool,
+        typer.Option("--json", help="Print machine-readable JSON."),
+    ] = False,
+) -> None:
+    """Inspect local readiness without downloading, testing, or writing files."""
+
+    payload = _showcase_doctor_payload(
+        spec_path=spec,
+        runs_root=runs_root,
+        output_root=output_root,
+        port=port,
+    )
+    if json_output:
+        typer.echo(json.dumps(payload, ensure_ascii=False, indent=2, sort_keys=True))
+    else:
+        _print_doctor(payload)
+    if not payload["ready"]:
+        raise typer.Exit(code=2)
+
+
+@showcase_app.command("inspect")
+def showcase_inspect(
+    spec: Annotated[Path, typer.Option(help="Versioned ShowcaseSpec JSON.")],
+    runs_root: Annotated[
+        Path,
+        typer.Option(help="Root containing immutable run directories."),
+    ] = Path("data/backtest/runs"),
+    output_root: Annotated[
+        Path,
+        typer.Option(help="Derived showcase output root used for relative links."),
+    ] = Path("data/backtest/showcases"),
+) -> None:
+    """Verify showcase evidence and print JSON without writing output."""
+
+    contract = _showcase_spec_or_exit(spec)
+    try:
+        evidence = inspect_showcase(
+            contract,
+            runs_root=_project_path(runs_root),
+            output_root=_project_path(output_root),
+        )
+    except ShowcaseError as exc:
+        typer.echo(f"Showcase inspection error:\n{exc}", err=True)
+        raise typer.Exit(code=2) from exc
+    typer.echo(json.dumps(evidence, ensure_ascii=False, indent=2, sort_keys=True))
+
+
+@showcase_app.command("build")
+def showcase_build(
+    spec: Annotated[Path, typer.Option(help="Versioned ShowcaseSpec JSON.")],
+    runs_root: Annotated[
+        Path,
+        typer.Option(help="Root containing immutable run directories."),
+    ] = Path("data/backtest/runs"),
+    output_root: Annotated[
+        Path,
+        typer.Option(help="Root for derived showcase output."),
+    ] = Path("data/backtest/showcases"),
+) -> None:
+    """Verify immutable evidence and build a self-contained static showcase."""
+
+    contract = _showcase_spec_or_exit(spec)
+    try:
+        page, evidence = build_showcase(
+            contract,
+            runs_root=_project_path(runs_root),
+            output_root=_project_path(output_root),
+        )
+    except (OSError, ShowcaseError) as exc:
+        typer.echo(f"Showcase build error:\n{exc}", err=True)
+        raise typer.Exit(code=2) from exc
+    typer.echo(f"showcase_id={contract.showcase_id}")
+    typer.echo(f"verified_runs={evidence['summary']['verified_run_count']}")
+    typer.echo(f"provenance={evidence['summary']['provenance_status']}")
+    typer.echo(f"evidence_sha256={evidence['evidence_sha256']}")
+    typer.echo(f"page={page}")
+
+
+@showcase_app.command("prepare")
+def showcase_prepare(
+    spec: Annotated[Path, typer.Option(help="Versioned ShowcaseSpec JSON.")],
+    runs_root: Annotated[
+        Path,
+        typer.Option(help="Root containing immutable run directories."),
+    ] = Path("data/backtest/runs"),
+    output_root: Annotated[
+        Path,
+        typer.Option(help="Root for derived showcase output."),
+    ] = Path("data/backtest/showcases"),
+    port: Annotated[
+        int | None,
+        typer.Option(help="Optional loopback presentation port to probe."),
+    ] = None,
+) -> None:
+    """Run read-only readiness checks, then build the verified showcase."""
+
+    payload = _showcase_doctor_payload(
+        spec_path=spec,
+        runs_root=runs_root,
+        output_root=output_root,
+        port=port,
+    )
+    _print_doctor(payload)
+    if not payload["ready"]:
+        raise typer.Exit(code=2)
+    showcase_build(spec=spec, runs_root=runs_root, output_root=output_root)
 
 
 @app.command("run")

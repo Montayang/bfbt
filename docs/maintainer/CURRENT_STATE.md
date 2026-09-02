@@ -1,6 +1,6 @@
 # Current project state
 
-Updated: 2026-08-30.
+Updated: 2026-09-02.
 
 ## Repository identity
 
@@ -23,8 +23,8 @@ Updated: 2026-08-30.
   sweep, per-symbol crossover instructions, and missing-bar valuation.
 - A31-A35: Fast Matrix capability planning, TargetSchedule, columnar economics, funding/mark,
   chunked checkpoints, research artifacts, and explicit Event promotion.
-- A36-A38: sampled-mean factors, Event parameter studies, activated trailing exits, rolling-margin
-  state, and complete trade/position audit navigation.
+- A36-A39: sampled-mean factors, Event parameter studies, activated trailing exits, rolling-margin
+  state, complete trade/position audit navigation, and a verified offline Agent Showcase thin slice.
 
 The intended workflow is:
 
@@ -57,6 +57,10 @@ V1 remains for compatibility and historical reproduction, not for new daily stra
   independent-repository migration baseline.
 - The H2 runner/identity/result registration branch completed the full offline suite on
   2026-08-30: `325 passed in 37.65s` on Python 3.12.3 and pytest 8.4.2.
+- The Showcase implementation candidate completed the full offline suite on 2026-09-02:
+  `331 passed in 21.58s` on Python 3.12.3 and pytest 8.4.2. Its focused A39 suite passed 6 tests,
+  and the real local H2 preparation verified all three immutable runs with one expected provenance
+  warning and no failures.
 - Migration-time static checks covered Python AST parsing, TOML/YAML parsing, shell syntax,
   imports, project-root discovery, Markdown links, secret/path scanning, and Git integrity.
 
@@ -80,3 +84,19 @@ V1 remains for compatibility and historical reproduction, not for new daily stra
   orchestrator, or recorded background-job service.
 - The durable gap register and implementation order are maintained in
   `docs/maintainer/AI_AGENT_READINESS.md`.
+- The bounded Showcase now has a strict ResearchIntent/ShowcaseSpec, ambiguity gate, action classes,
+  read-only doctor/preflight, verified evidence JSON, and a deterministic static hub. This validates
+  the interaction shape for a curated result query; it does not complete the general control plane.
+
+## Showcase surface
+
+- `bianbt doctor` performs stable read-only runtime, storage, catalog, intent, artifact, provenance,
+  and optional loopback-port checks.
+- `bianbt showcase inspect/build/prepare` verifies exact immutable runs and publishes only derived
+  output under `data/backtest/showcases/`.
+- Showcase preflight proves each run's period, factor parameters, strategy name, and shared frozen
+  economic identity match the ResearchIntent before rendering.
+- The initial H2 three-month Showcase exposes all dirty-provenance and funding-warning qualifications,
+  includes loss and profit months, and derives opening margin directly from verified trades.
+- The repository front door now reflects A01-A39 and includes CI configuration plus minimum
+  contribution, security, and changelog documents.

@@ -8,6 +8,7 @@
 - [`maintainer/START_HERE.md`](maintainer/START_HERE.md)：新维护任务与 Codex 会话入口。
 - [`maintainer/CURRENT_STATE.md`](maintainer/CURRENT_STATE.md)：当前能力和验证基线。
 - [`maintainer/ACTIVE_WORK.md`](maintainer/ACTIVE_WORK.md)：未完成或未合并工作。
+- [`maintainer/SHOWCASE_PLAN.md`](maintainer/SHOWCASE_PLAN.md)：工程级开源前的受控展示版本范围、验收与实施顺序。
 - [`maintainer/ARCHITECTURE_DECISIONS.md`](maintainer/ARCHITECTURE_DECISIONS.md)：跨会话架构决策。
 - [`maintainer/OPERATIONS.md`](maintainer/OPERATIONS.md)：数据、run、报告和后台任务操作规则。
 
@@ -92,3 +93,5 @@
   固定/滚仓两次正式结果。
 - [`acceptance/A38.md`](acceptance/A38.md)：所有曲线报告的完整成交时点、持仓变化导航与
   真实相邻账本状态。
+- [`acceptance/A39.md`](acceptance/A39.md)：受控 ResearchIntent、只读 doctor、不可变证据
+  验证与离线 Showcase 页面。

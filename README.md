@@ -1,64 +1,125 @@
 # bianbt
 
-`bianbt` 是独立的 Binance 永续合约研究与回测框架。它只处理公开历史市场数据和本地
-回测产物，不包含交易账户 Client、实盘下单代码或私有凭据。
+`bianbt` 是面向 Binance USDⓈ-M 永续合约的离线截面因子研究与回测框架。它把快速因子
+诊断、常规组合研究和路径依赖的正式事件回测分层处理，并为数据、配置、源码、成交和报告
+保留可验证身份。
 
-框架包含快速因子研究、Fast Matrix 常规截面组合回测，以及支持时序状态、风险事件、
-可恢复 chunk 和不可变审计产物的 Event 引擎。公开验收规格位于 `docs/acceptance/`。
+项目只处理公开历史市场数据和本地研究产物，不包含交易账户 Client、API 凭据或实盘下单
+代码。历史模拟不构成投资建议。
 
-## 隔离边界
+## 为什么分成三层
 
-- 不包含或导入任何实盘 Client，不访问账户、余额或下单接口。
-- 不读取 `.env`；市场历史数据来自公开归档或用户提供的本地数据仓库。
-- 使用独立的 `pyproject.toml`、包名 `bianbt`、测试目录和配置文件。
-- 回测数据和产物统一写入仓库根目录 `data/backtest/`，并按 `datasets`、`catalogs`、`workspaces`、`runs`、`reports` 分层；全部不提交 Git。
-- 与其他系统集成时只应交换纯数据结构或策略信号协议，不能引入有副作用的交易 Client。
+```mermaid
+flowchart LR
+    A[自然语言研究想法] --> B[ResearchIntent / 语义冻结]
+    B --> C[Quick Research<br/>IC · 分层 · 覆盖 · 换手]
+    C --> D[Fast Matrix<br/>常规截面组合研究]
+    D --> E{用户人工选择}
+    E --> F[Event / V2<br/>路径状态 · 风险仲裁 · 正式产物]
+    F --> G[不可变 run · 报告 · 逐笔审计]
+```
 
-## 第一版预定范围
+- **Quick Research** 不模拟账户，用于因子 IC、分层收益、覆盖率和 Rank turnover 诊断。
+- **Fast Matrix** 处理目标权重、固定调仓和线性成本边界内的列式组合研究，发布 `fm-*`
+  研究产物，不充当正式策略真相。
+- **Event/V2** 按时间维护账户、仓位、保证金和风险状态，负责移动止损、事件仲裁、滚仓、
+  checkpoint/恢复及不可变正式 run。
+- Fast Matrix 不支持的行为失败关闭或明确提升到 Event，不做静默近似。V1 仅保留兼容性。
 
-- Binance USDⓈ-M、USDT 保证金、永续合约。
-- 以 1 分钟 K 线为基础数据，支持向更高周期重采样。
-- OHLCV、成交额、成交笔数、主动买入量和资金费率。
-- 时点化合约池、截面因子、IC/Rank IC、分层收益、多空组合。
-- 手续费、滑点、换手和资金费率成本。
+## Showcase
 
-## 文档
+仓库包含一个受控的 Agent/研究展示入口。它把自然语言请求、冻结语义、多月结果、滚仓保证金
+轨迹和不可变证据连成一个离线页面；所有数字从逐文件验证后的 run artifact 读取。
 
-- [`docs/maintainer/START_HERE.md`](docs/maintainer/START_HERE.md)：维护者和新 Codex 会话的持久化入口。
+![bianbt 三个月 Showcase 预览](docs/assets/showcase-preview.svg)
 
-- [`strategies/README.md`](strategies/README.md)：用户实际策略工作区，以及策略规格到正式回测报告的协作流程。
+在已准备好本地 H2 产物的机器上：
 
-- [`docs/README.md`](docs/README.md)：按用途分类的完整文档导航。
-- [`docs/guides/beginner_tutorial.md`](docs/guides/beginner_tutorial.md)：第一次使用时照着复制命令即可完成真实数据回测的傻瓜式教程。
-- [`docs/guides/custom_factor_tutorial.md`](docs/guides/custom_factor_tutorial.md)：实现、注册、测试全新截面因子并在教程数据集上回测。
-- [`docs/guides/user_manual.md`](docs/guides/user_manual.md)：当前版本的安装、真实数据、配置、正式回测、结果解读和故障排查手册。
-- [`docs/design/system_design.md`](docs/design/system_design.md)：系统目标、输入输出、功能分层、时序和正确性约束。
-- [`docs/design/architecture.md`](docs/design/architecture.md)：模块结构和端到端数据流摘要。
-- [`docs/reference/data_contract.md`](docs/reference/data_contract.md)：各事实表、派生表和运行产物的 schema 契约。
-- [`docs/reference/interfaces.md`](docs/reference/interfaces.md)：模块之间的 Protocol 和职责边界。
-- [`docs/reference/data_management.md`](docs/reference/data_management.md)：本地目录、分区、版本、增量更新和质量管理。
-- [`docs/reference/dependencies_and_sources.md`](docs/reference/dependencies_and_sources.md)：Python 包、Binance 数据源和 REST 接口选型。
-- [`docs/reference/configuration.md`](docs/reference/configuration.md)：配置分层、字段语义、默认值和校验规则。
-- [`docs/design/implementation_plan.md`](docs/design/implementation_plan.md)：第一版技术实施顺序和完成标准。
-- [`docs/design/v2_design.md`](docs/design/v2_design.md)：第二版架构、配置、事件语义和内存边界。
-- [`docs/design/v2_implementation_plan.md`](docs/design/v2_implementation_plan.md)：第二版 A12–A18 实施路线。
-- [`docs/design/v3_low_memory_design.md`](docs/design/v3_low_memory_design.md)：第三阶段低内存分块、恢复和全市场策略设计。
-- [`docs/acceptance/plan.md`](docs/acceptance/plan.md)：第一版用户验收里程碑。
-- [`docs/acceptance/v2_plan.md`](docs/acceptance/v2_plan.md)：第二版验收和提交规则。
-- [`docs/acceptance/v3_plan.md`](docs/acceptance/v3_plan.md)：第三阶段 A19–A24 验收路线。
-- [`docs/acceptance/A01.md`](docs/acceptance/A01.md)：配置层环境搭建、测试命令和预期结果。
-- [`docs/acceptance/A02.md`](docs/acceptance/A02.md)：Arrow schema 与 manifest 验收步骤。
-- [`docs/acceptance/A03.md`](docs/acceptance/A03.md)：DuckDB catalog 的环境、自动验收和人工 CLI 步骤。
-- [`docs/acceptance/A04.md`](docs/acceptance/A04.md)：公开归档、REST 分页和原始数据发布验收步骤。
-- [`docs/acceptance/A05.md`](docs/acceptance/A05.md)：标准化、质量门、Parquet 发布和 DataStore 验收步骤。
-- [`docs/acceptance/A06.md`](docs/acceptance/A06.md)：多周期重采样和时点化合约池验收步骤。
-- [`docs/acceptance/A07.md`](docs/acceptance/A07.md)：因子、标签和研究评估验收步骤。
-- [`docs/acceptance/A08.md`](docs/acceptance/A08.md)：组合构建、成本、资金费率和账本验收步骤。
-- [`docs/acceptance/A09.md`](docs/acceptance/A09.md)：指标、正式产物、报告重建和失败状态验收步骤。
-- [`docs/acceptance/A10.md`](docs/acceptance/A10.md)：分块等价、内存预算、清理和全年容量验收步骤。
-- [`docs/acceptance/A11.md`](docs/acceptance/A11.md)：双语交互报告和快照审计验收步骤。
-- [`docs/acceptance/A12.md`](docs/acceptance/A12.md)：V2 配置、schema、事件与 manifest 契约验收。
-- [`docs/acceptance/A20.md`](docs/acceptance/A20.md)：V2 独立时间块 worker、恢复和经济等价验收。
-- [`docs/acceptance/A21.md`](docs/acceptance/A21.md)：V2 流式归并、指标、报告和正式原子发布验收。
+```bash
+.venv/bin/bianbt showcase prepare \
+  --spec showcase/r5_t4_h2_rolling_202605_202607.json
+```
 
-A01 引入 Pydantic、PyYAML、Typer 和 pytest，A02 增加 PyArrow，A03 增加 DuckDB 和 pytz，A04 增加 HTTPX，A05 增加 Polars。其余计算依赖在对应验收阶段再加入。
+生成页面位于：
+
+```text
+data/backtest/showcases/r5-t4-h2-rolling-202605-202607-r01/index.html
+```
+
+只读检查，不生成页面：
+
+```bash
+.venv/bin/bianbt doctor \
+  --spec showcase/r5_t4_h2_rolling_202605_202607.json
+```
+
+市场数据和正式 run 按设计不提交 Git，因此全新 checkout 不会自带这三份真实结果。展示规格、
+合同、渲染器和离线 fixture 测试均在仓库内；完整演示步骤见
+[`showcase/README.md`](showcase/README.md)。
+
+## 当前能力
+
+- Binance USD-M、USDT 保证金、永续合约；1m trade/mark bars、funding 与合约元数据。
+- 不可变 Raw、标准化 Parquet、质量报告、DuckDB Catalog 和精确 DatasetSnapshot。
+- 时点化合约池、无前视因子/标签、预处理、IC/Rank IC、分层收益和 turnover。
+- 内建 momentum、reversal、波动率、成交量、主动买入、Amihud、EMA、采样均值比和已登记
+  GTJA191 因子；精确清单由 `bianbt research list-factors` 输出。
+- Fast Matrix 列式经济内核、funding/mark、分块 checkpoint、批量研究与 Event promotion。
+- Event/V2 下一根 K 线成交、显式手续费/滑点/资金费率、增量仓位、杠杆/敞口限制、固定与
+  移动风险退出、滚仓保证金和统一事件优先级。
+- 全市场分钟级 bounded-memory chunk、原子 checkpoint、失败恢复和连续/恢复经济等价。
+- 不可变成功/失败 artifact、源码与依赖指纹、双语交互报告，以及完整成交、持仓变化和风险
+  事件导航。
+- 当前公开验收覆盖 A01–A39；Showcase 提交候选的完整离线 suite 为 331 项通过，精确环境
+  与历史基线见 [`CURRENT_STATE.md`](docs/maintainer/CURRENT_STATE.md)。
+
+## 安装
+
+需要 Python 3.10 或更高版本：
+
+```bash
+python3 -m venv .venv
+source .venv/bin/activate
+python -m pip install --upgrade pip
+python -m pip install -e ".[test]"
+bianbt --help
+bianbt doctor
+```
+
+真实数据首次使用需要访问 Binance 公共市场数据服务，但不需要 API key。详细安装、数据准备
+和第一份真实小样本回测见
+[`beginner_tutorial.md`](docs/guides/beginner_tutorial.md)；完整配置与故障排查见
+[`user_manual.md`](docs/guides/user_manual.md)。
+
+## 正确性和身份边界
+
+- 所有时间区间采用 UTC 左闭右开 `[start, end)`；因子、Rank、决策、成交、风险、funding
+  和估值拥有显式时钟。
+- 正式运行拒绝 `latest`，必须固定数据集 ID/版本、完整配置、因子版本、源码和依赖环境。
+- 成功和失败的终态 artifact 都不可变；修改策略或重跑使用新 alias/revision 和新 run ID。
+- 曲线可以压缩展示点，但每笔成交、每次持仓变化和风险事件必须留在审计导航中。
+- 路径依赖策略必须使用 Event/V2；不以快速矩阵结果冒充正式事件回测。
+
+## 明确不支持
+
+- 实盘账户、余额、订单、API key 或 `.env` 访问。
+- 交易所完整强平阶梯、ADL、订单簿排队和 tick 级成交。
+- Agent 自动替用户选择 Fast Matrix 候选。
+- 任意 LLM 生成 Python、shell 或因子表达式的直接执行。
+- 当前 Showcase 的 ResearchIntent 是受控薄切片，不等于通用无代码 Agent 平台已经完成。
+
+## 项目导航
+
+- [`docs/README.md`](docs/README.md)：设计、参考、验收、研究和使用文档总入口。
+- [`docs/maintainer/START_HERE.md`](docs/maintainer/START_HERE.md)：维护任务入口和授权规则。
+- [`docs/maintainer/SHOWCASE_PLAN.md`](docs/maintainer/SHOWCASE_PLAN.md)：展示版本范围和验收门。
+- [`docs/maintainer/AI_AGENT_READINESS.md`](docs/maintainer/AI_AGENT_READINESS.md)：通用自然语言研究工作流欠缺清单。
+- [`strategies/README.md`](strategies/README.md)：稳定策略身份、规格与正式 run 映射。
+- [`docs/design/architecture.md`](docs/design/architecture.md)：模块与端到端数据流。
+- [`docs/reference/data_contract.md`](docs/reference/data_contract.md)：事实表与产物 schema。
+
+## 参与和安全
+
+开发约定见 [`CONTRIBUTING.md`](CONTRIBUTING.md)，安全边界与漏洞报告见
+[`SECURITY.md`](SECURITY.md)，版本变化见 [`CHANGELOG.md`](CHANGELOG.md)。项目采用
+[`MIT License`](LICENSE)。

@@ -15,6 +15,7 @@ data/backtest/
 ├── research_runs/
 ├── research_studies/
 ├── event_studies/
+├── showcases/
 └── jobs/
 ```
 
@@ -45,6 +46,11 @@ manifests before reporting success.
 - Strategy-family parent reports may index multiple immutable child reports but must not merge their
   identities.
 
+Showcase pages under `showcases/` are derived presentation views. They must verify every selected
+immutable run before reading metrics, display source/warning qualifications, avoid absolute machine
+paths and remote assets, and never write inside `runs/`. Rebuilding a showcase does not authorize a
+research run or formal backtest.
+
 ## Development workflow
 
 1. Inspect `main`, upstream state, and the worktree.
@@ -56,4 +62,3 @@ manifests before reporting success.
 
 Never force-push, rewrite immutable results, or modify another system as an implied part of a
 backtest task.
-
