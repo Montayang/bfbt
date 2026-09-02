@@ -28,8 +28,8 @@ Updated: 2026-09-02.
   and the complete offline suite (`334 passed in 21.58s`). Its real derived Showcase rebuild
   verified all three immutable H2 runs. Editable installation, CLI metadata, dependencies, and a
   `bfbt`-only wheel are verified. Public-surface/history, secret/path, format, link, generated-output,
-  and diff checks passed. Commit, push, GitHub repository rename, and visibility change remain
-  pending external publication actions.
+  and diff checks passed. The candidate is committed as `3507c52`; push, GitHub repository rename,
+  and visibility change remain pending external publication actions.
 - Inspect Git for the exact current branch, commit, worktree, and upstream state rather than relying
   on a branch name recorded in this document.
 
