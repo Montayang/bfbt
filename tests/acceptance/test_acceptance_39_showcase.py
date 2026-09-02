@@ -205,7 +205,7 @@ def _spec(run_id: str, *, unresolved: tuple[str, ...] = ()) -> ShowcaseSpec:
                     "terminal_handling": "explicit tail",
                 },
                 "unresolved_ambiguities": list(unresolved),
-                "user_decisions": ["Event/V2"],
+                "user_decisions": ["Event Engine"],
                 "requested_outputs": ["comparison"],
                 "required_actions": ["read_only_inspection", "derived_report_write"],
             },

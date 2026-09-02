@@ -170,7 +170,7 @@ def _matrix_report(summary: dict[str, Any]) -> str:
         "<th data-type='number'>滑点</th><th data-type='number'>Funding</th><th>详情</th>"
     )
     policy = html.escape(json.dumps(summary.get("policy", {}), ensure_ascii=False, sort_keys=True))
-    body = f"""<section class="panel"><p>这里模拟目标权重账户路径。单 run 详情补充因子、组合、成交、估值、成本、敞口和身份信息；仍属于研究结果，不是 Event/V2 正式 run。</p><p class="muted">统一执行口径：<code>{policy}</code></p>{toolbar}
+    body = f"""<section class="panel"><p>这里模拟目标权重账户路径。单 run 详情补充因子、组合、成交、估值、成本、敞口和身份信息；仍属于研究结果，尚未经过 Event 引擎的正式回测确认。</p><p class="muted">统一执行口径：<code>{policy}</code></p>{toolbar}
 <div class="table-wrap"><table id="results"><thead><tr>{headers}</tr></thead><tbody>{''.join(rows)}</tbody></table></div></section>"""
     return _page("Fast Matrix 组合研究", "PORTFOLIO RESEARCH", body, script=_filter_script(("period", "factor", "cost")))
 

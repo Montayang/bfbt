@@ -25,9 +25,9 @@ python -B -m pytest -q
 
 ## Non-negotiable contracts
 
-- Preserve the `Quick Research -> Fast Matrix -> Event/V2` responsibility boundary.
+- Preserve the `Quick Research -> Fast Matrix -> Event Engine` responsibility boundary.
 - Preserve point-in-time data, next-bar execution, explicit costs, and UTC `[start, end)` semantics.
-- Formal full-market Event/V2 runs must be chunked, bounded in memory, checkpointable/recoverable,
+- Formal full-market Event Engine runs must be chunked, bounded in memory, checkpointable/recoverable,
   and economically equivalent to continuous execution.
 - Never overwrite a successful or failed terminal run; revisions receive new identities.
 - Reports may compress display curves but must retain every fill, position change, and risk event.

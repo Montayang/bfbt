@@ -20,7 +20,7 @@ text; filenames, commands, schemas, and immutable identities are language-neutra
 - [Architecture overview](design/architecture.md): module boundaries and end-to-end data flow.
 - [System design](design/system_design.md): goals, timing, correctness constraints, inputs, and
   outputs.
-- [Event/V2 design](design/v2_design.md): chronological execution, state, risk, and artifact model.
+- [Event Engine design](design/v2_design.md): chronological execution, state, risk, and artifact model.
 - [Fast Matrix design](design/v5_fast_matrix_engine.md): capability boundary, columnar economics,
   research artifacts, and Event promotion.
 - [Configuration reference](reference/configuration.md): fields, defaults, and validation rules.
@@ -31,7 +31,7 @@ text; filenames, commands, schemas, and immutable identities are language-neutra
 ## Verification and audit evidence
 
 - [Acceptance overview](acceptance/plan.md): A01–A11 foundation.
-- [Event/V2 acceptance](acceptance/v2_plan.md): A12–A18.
+- [Event Engine acceptance](acceptance/v2_plan.md): A12–A18.
 - [Low-memory acceptance](acceptance/v3_plan.md): A19–A25.
 - [Reusable analysis acceptance](acceptance/v4_plan.md): A27–A30.
 - [Fast Matrix acceptance](acceptance/v5_plan.md): A31–A35.

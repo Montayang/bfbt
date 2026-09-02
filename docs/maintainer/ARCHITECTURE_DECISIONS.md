@@ -64,6 +64,9 @@ silently approximated.
 
 - The public brand is BFBT — Binance Futures Backtesting Framework; distribution, import namespace,
   module entry point, and CLI use `bfbt`. No pre-release `bianbt` compatibility package is retained.
+- User-facing surfaces call the chronological formal engine the **Event Engine**. Internal module,
+  configuration, schema, and compatibility identities may retain `v2`; they are implementation
+  contracts and must not leak into README, guides, Showcase copy, or generated report headings.
 - The historical `bianbt.*` Arrow metadata namespace is frozen as part of v1 wire-schema and run
   fingerprints. Brand migration must not invalidate immutable evidence by renaming those keys.
 - English is the default repository and generated-report language. Human-facing HTML also publishes

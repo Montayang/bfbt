@@ -26,9 +26,8 @@ _ENGLISH: Mapping[str, str] = {
         "Every fill is retained; trade points show affected positions at the true adjacent "
         "ledger timestamps."
     ),
-    "研究结果，未经过 Event 正式确认；也不是 V2 正式 run。": (
-        "Research result only; it has not received formal Event confirmation and is not a "
-        "formal V2 run."
+    "这是研究结果，尚未经过 Event 引擎的正式回测确认。": (
+        "This is a research result and has not yet been confirmed by a formal Event Engine backtest."
     ),
     "这里只判断因子排序是否具有预测信息，不模拟账户、不扣交易成本。点击表头排序；索引键可精确定位某个结果。": (
         "This layer evaluates whether factor ranks contain predictive information. It does "
@@ -42,10 +41,10 @@ _ENGLISH: Mapping[str, str] = {
         "is long the low-volatility tail, so its raw negative relation is normalized to a "
         "positive strategy-direction value."
     ),
-    "这里模拟目标权重账户路径。单 run 详情补充因子、组合、成交、估值、成本、敞口和身份信息；仍属于研究结果，不是 Event/V2 正式 run。": (
+    "这里模拟目标权重账户路径。单 run 详情补充因子、组合、成交、估值、成本、敞口和身份信息；仍属于研究结果，尚未经过 Event 引擎的正式回测确认。": (
         "This layer simulates a target-weight account path. Each run adds factor, portfolio, "
         "fill, valuation, cost, exposure, and identity details. It remains a research result, "
-        "not a formal Event/V2 run."
+        "not a completed Event Engine backtest."
     ),
     "快速筛选与组合模拟已经拆分。先在快速研究索引中筛选因子，只把保留候选送入 Fast Matrix；本页不再混放两阶段明细。": (
         "Factor screening and portfolio simulation are separated. Screen factors in Quick "
@@ -66,9 +65,9 @@ _ENGLISH: Mapping[str, str] = {
         "One parent study identity indexes multiple independent economic configurations; every "
         "child report is still generated deterministically from an immutable Event run."
     ),
-    "自然语言负责表达意图；版本化合同和既有引擎负责检查、计算与发布。复杂的路径依赖风险只进入 Event/V2。": (
+    "自然语言负责表达意图；版本化合同和既有引擎负责检查、计算与发布。复杂的路径依赖风险只进入 Event 引擎。": (
         "Natural language expresses intent; versioned contracts and deterministic engines "
-        "validate, compute, and publish. Complex path-dependent risk is handled only by Event/V2."
+        "validate, compute, and publish. Complex path-dependent risk is handled only by the Event Engine."
     ),
     "IC、分层、覆盖率与换手，不模拟账户。": (
         "IC, quantiles, coverage, and turnover without account simulation."
@@ -113,8 +112,8 @@ _ENGLISH: Mapping[str, str] = {
         "The same strategy identity produces different results in three independent months, "
         "showing multi-period evidence rather than one selected winning curve."
     ),
-    "Event/V2 负责移动止盈、滚仓状态和逐分钟风险仲裁；Fast Matrix 不近似这些路径依赖语义。": (
-        "Event/V2 handles trailing exits, rolling state, and minute-level risk arbitration; "
+    "Event 引擎负责移动止盈、滚仓状态和逐分钟风险仲裁；Fast Matrix 不近似这些路径依赖语义。": (
+        "The Event Engine handles trailing exits, rolling state, and minute-level risk arbitration; "
         "Fast Matrix does not approximate these path-dependent semantics."
     ),
     "换手、手续费、滑点、资金费率和警告与收益同时出现，避免只展示毛收益。": (
@@ -128,8 +127,8 @@ _ENGLISH: Mapping[str, str] = {
     "全市场截面因子研究，如何变成可追溯的正式回测": (
         "From full-market factor research to an auditable formal backtest"
     ),
-    "从自然语言研究请求，到冻结语义、三个月 Event/V2 结果与逐笔审计证据": (
-        "From a natural-language request to frozen semantics, three Event/V2 months, and "
+    "从自然语言研究请求，到冻结语义、三个月正式回测结果与逐笔审计证据": (
+        "From a natural-language request to frozen semantics, three formal backtest months, and "
         "trade-level evidence"
     ),
     "Agent 控制面，确定性计算内核": "Agent control plane, deterministic computation",
@@ -146,7 +145,7 @@ _ENGLISH: Mapping[str, str] = {
     ),
     "快速诊断": "Fast diagnostics",
     "组合研究": "Portfolio research",
-    "正式确认": "Formal confirmation",
+    "正式回测": "Formal backtest",
     "工作流": "Workflow",
     "研究冻结": "Research freeze",
     "多期结果": "Multi-period results",

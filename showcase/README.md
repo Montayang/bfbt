@@ -36,7 +36,7 @@ data/backtest/showcases/r5-t4-h2-rolling-202605-202607-r01/index.html
 
 1. 用一句自然语言提出“两小时采样、三个月、滚仓保证金轨迹”的研究请求。
 2. 展示 ResearchIntent 和冻结单，强调 Agent 只翻译意图，经济计算仍由确定性引擎完成。
-3. 说明 Quick Research、Fast Matrix、Event/V2 的职责；本策略因为路径依赖直接使用 Event。
+3. 说明 Quick Research、Fast Matrix、Event 引擎的职责；本策略因为路径依赖直接使用 Event。
 4. 同屏比较三个月收益、回撤、成本和换手，明确七月为亏损，避免收益挑选偏差。
 5. 展示每次开仓保证金轨迹，再进入六月深度报告，点击一笔成交查看相邻持仓和风险事件。
 6. 打开配置、指标和 manifest，说明数据版本、配置哈希、源码与每个文件都可验证。

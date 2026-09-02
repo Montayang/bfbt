@@ -31,5 +31,5 @@ BFBT keeps a behavior-oriented changelog. Release dates use UTC.
 ## 0.1.0
 
 - Standalone repository baseline.
-- Quick Research, Fast Matrix, Event/V2, bounded-memory recovery, immutable artifacts, and
+- Quick Research, Fast Matrix, Event Engine, bounded-memory recovery, immutable artifacts, and
   interactive audit reports.

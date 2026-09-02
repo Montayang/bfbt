@@ -591,7 +591,7 @@ lookback/universe window；末端必须覆盖 signal delay 后的下一根 K 线
 
 ## 13. Fast Matrix 常规截面研究
 
-Fast Matrix 是 V2 语义下的研究后端，不是正式回测的替代品。配置使用
+Fast Matrix 是 Event 引擎经济语义下的研究后端，不是正式回测的替代品。配置使用
 `engine.backend=fast_matrix`、`engine.purpose=research`；准备好版本化行情 parquet、规范化
 TargetSchedule parquet、完整调仓时间 JSON 和父 SignalSnapshot hash 后运行：
 

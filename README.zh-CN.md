@@ -13,32 +13,29 @@
 > BFBT 是独立的开源研究项目，与 Binance 不存在隶属、背书、赞助或任何利益关系。项目只
 > 使用公开历史市场数据，不包含账户 Client 或实盘下单路径，也不构成投资建议。
 
-`bfbt` 是面向 Binance USDⓈ-M 永续合约的离线截面因子研究与回测框架。它把快速因子
-诊断、常规组合研究和路径依赖的正式事件回测分层处理，并为数据、配置、源码、成交和报告
-保留可验证身份。
-
-项目只处理公开历史市场数据和本地研究产物，不包含交易账户 Client、API 凭据或实盘下单
-代码。历史模拟不构成投资建议。
+BFBT 把快速因子诊断、常规组合研究和路径依赖的正式回测分层处理，并让数据、设置、成交和
+报告可以相互追溯。
 
 ## 为什么分成三层
 
 ![BFBT 从研究意图到不可变证据的工作流](docs/assets/research-workflow.zh-CN.svg)
 
 - **Quick Research** 不模拟账户，用于因子 IC、分层收益、覆盖率和 Rank turnover 诊断。
-- **Fast Matrix** 处理目标权重、固定调仓和线性成本边界内的列式组合研究，发布 `fm-*`
-  研究产物，不充当正式策略真相。
-- **Event/V2** 按时间维护账户、仓位、保证金和风险状态，负责移动止损、事件仲裁、滚仓、
-  checkpoint/恢复及不可变正式 run。
-- Fast Matrix 不支持的行为失败关闭或明确提升到 Event，不做静默近似。V1 仅保留兼容性。
+- **Fast Matrix** 快速评估常规截面组合，同时计算估值、手续费、滑点、资金费和换手；结果
+  仍是供用户筛选的研究结果。
+- **Event 引擎** 执行精细的正式回测，按时间追踪账户、仓位、保证金、成交和风险状态，支持
+  路径依赖退出和滚仓保证金。
+- BFBT 将探索性研究与正式模拟分开：用户从研究结果中选择候选，依赖精确事件路径的策略再
+  交给 Event 引擎确认。
 
 ## Showcase
 
-仓库包含一个受控的 Agent/研究展示入口。它把自然语言请求、冻结语义、多月结果、滚仓保证金
-轨迹和不可变证据连成一个离线页面；所有数字从逐文件验证后的 run artifact 读取。
+仓库包含一个有证据支撑的 Agent/研究展示入口。它把自然语言请求、已确认的研究口径、三个
+独立月份的回测、滚仓保证金轨迹和逐笔证据连成一个离线页面；每个数字都能追溯到已验证结果。
 
 ![bfbt 三个月 Showcase 预览](docs/assets/showcase-preview.svg)
 
-在已准备好本地 H2 产物的机器上：
+在已经保存这三个月回测结果的机器上：
 
 ```bash
 .venv/bin/bfbt showcase prepare \
@@ -61,25 +58,26 @@ data/backtest/showcases/r5-t4-h2-rolling-202605-202607-r01/index.html
   --spec showcase/r5_t4_h2_rolling_202605_202607.json
 ```
 
-市场数据和正式 run 按设计不提交 Git，因此全新 checkout 不会自带这三份真实结果。展示规格、
-合同、渲染器和离线 fixture 测试均在仓库内；完整演示步骤见
+市场数据和完整回测结果按设计不提交 Git，因此全新下载的仓库不会自带这三份真实结果。仓库
+包含预览，以及验证和展示已准备结果所需的代码；完整演示步骤见
 [`showcase/README.md`](showcase/README.md)。
 
 ## 当前能力
 
 - Binance USD-M、USDT 保证金、永续合约；1m trade/mark bars、funding 与合约元数据。
-- 不可变 Raw、标准化 Parquet、质量报告、DuckDB Catalog 和精确 DatasetSnapshot。
+- 不可变原始数据、标准化 Parquet、质量报告、DuckDB Catalog 和版本化数据快照。
 - 时点化合约池、无前视因子/标签、预处理、IC/Rank IC、分层收益和 turnover。
 - 内建 momentum、reversal、波动率、成交量、主动买入、Amihud、EMA、采样均值比和已登记
   GTJA191 因子；精确清单由 `bfbt research list-factors` 输出。
-- Fast Matrix 列式经济内核、funding/mark、分块 checkpoint、批量研究与 Event promotion。
-- Event/V2 下一根 K 线成交、显式手续费/滑点/资金费率、增量仓位、杠杆/敞口限制、固定与
+- Fast Matrix 组合研究、资金费与标记价格估值、成本、checkpoint 和可比较的研究结果。
+- Event 引擎下一根 K 线成交、显式手续费/滑点/资金费率、增量仓位、杠杆/敞口限制、固定与
   移动风险退出、滚仓保证金和统一事件优先级。
 - 全市场分钟级 bounded-memory chunk、原子 checkpoint、失败恢复和连续/恢复经济等价。
 - 不可变成功/失败 artifact、源码与依赖指纹、双语交互报告，以及完整成交、持仓变化和风险
   事件导航。
-- 当前公开验收覆盖 A01–A40；BFBT 公开发布候选的完整离线 suite 为 335 项通过，精确环境
-  与历史基线见 [`CURRENT_STATE.md`](docs/maintainer/CURRENT_STATE.md)。
+- Showcase 提供受控的自然语言研究工作流，包含歧义检查、只读诊断和可追溯结果；目前还不是
+  通用无代码服务。
+- 自动化离线验证覆盖研究、执行、恢复、报告和不可变证据，并在支持的 Python 版本上运行。
 
 ## 安装
 
@@ -99,14 +97,14 @@ bfbt doctor
 [`beginner_tutorial.md`](docs/guides/beginner_tutorial.md)；完整配置与故障排查见
 [`user_manual.md`](docs/guides/user_manual.md)。
 
-## 正确性和身份边界
+## 可复现与可审计
 
 - 所有时间区间采用 UTC 左闭右开 `[start, end)`；因子、Rank、决策、成交、风险、funding
   和估值拥有显式时钟。
 - 正式运行拒绝 `latest`，必须固定数据集 ID/版本、完整配置、因子版本、源码和依赖环境。
 - 成功和失败的终态 artifact 都不可变；修改策略或重跑使用新 alias/revision 和新 run ID。
 - 曲线可以压缩展示点，但每笔成交、每次持仓变化和风险事件必须留在审计导航中。
-- 路径依赖策略必须使用 Event/V2；不以快速矩阵结果冒充正式事件回测。
+- 路径依赖策略使用 Event 引擎；Fast Matrix 研究结果不会被包装成已经完成的正式回测。
 
 ## 明确不支持
 
@@ -116,15 +114,13 @@ bfbt doctor
 - 任意 LLM 生成 Python、shell 或因子表达式的直接执行。
 - 当前 Showcase 的 ResearchIntent 是受控薄切片，不等于通用无代码 Agent 平台已经完成。
 
-## 项目导航
+## 从这里开始
 
-- [`docs/README.md`](docs/README.md)：设计、参考、验收、研究和使用文档总入口。
-- [`docs/maintainer/START_HERE.md`](docs/maintainer/START_HERE.md)：维护任务入口和授权规则。
-- [`docs/maintainer/SHOWCASE_PLAN.md`](docs/maintainer/SHOWCASE_PLAN.md)：展示版本范围和验收门。
-- [`docs/maintainer/AI_AGENT_READINESS.md`](docs/maintainer/AI_AGENT_READINESS.md)：通用自然语言研究工作流欠缺清单。
-- [`strategies/README.md`](strategies/README.md)：稳定策略身份、规格与正式 run 映射。
-- [`docs/design/architecture.md`](docs/design/architecture.md)：模块与端到端数据流。
-- [`docs/reference/data_contract.md`](docs/reference/data_contract.md)：事实表与产物 schema。
+- [入门教程](docs/guides/beginner_tutorial.md)：准备公开数据并生成第一份回测报告。
+- [用户手册](docs/guides/user_manual.md)：命令、配置、输出解读和故障排查。
+- [自定义因子教程](docs/guides/custom_factor_tutorial.md)：添加并研究新的截面因子。
+- [Showcase 指南](showcase/README.md)：查看仓库内可追溯的演示案例。
+- [文档导航](docs/README.md)：架构、数据合同、研究记录和开发者资料。
 
 ## 参与和安全
 

@@ -22,9 +22,9 @@ python -B -m pytest -q
 
 ## 不可破坏的合同
 
-- 保持 `Quick Research -> Fast Matrix -> Event/V2` 的职责分离。
+- 保持 `Quick Research -> Fast Matrix -> Event 引擎` 的职责分离。
 - 保持时点化数据、下一根 K 线成交、显式成本和 UTC `[start, end)` 语义。
-- Event/V2 正式全市场运行必须分块、有限内存、可 checkpoint/恢复，并与连续执行经济等价。
+- Event 引擎的正式全市场运行必须分块、有限内存、可 checkpoint/恢复，并与连续执行经济等价。
 - 不覆盖成功或失败的终态 run；修订必须获得新身份。
 - 报告压缩曲线时仍须保留每笔成交、持仓变化和风险事件。
 - 不加入账户 Client、API 凭据、下单入口或依赖 `.env` 的行为。

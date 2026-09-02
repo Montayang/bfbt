@@ -520,7 +520,7 @@ def test_v2_report_contains_localized_interactive_audit(tmp_path: Path) -> None:
     assert '<html lang="en">' in report
     assert '<html lang="zh-CN">' in chinese
     for expected in (
-        "V2 Strategy & Risk Execution",
+        "Event Strategy &amp; Risk Execution",
         "Rank Sources",
         "Position Instructions & Suppression",
         "Risk Events",
@@ -557,7 +557,7 @@ def test_v2_report_contains_localized_interactive_audit(tmp_path: Path) -> None:
         "font-size:14px;margin-top:2px",
     ):
         assert expected in report
-    for expected in ("第二版策略与风险执行", "Rank 来源", "仓位指令与抑制", "风险事件"):
+    for expected in ("Event 策略与风险执行", "Rank 来源", "仓位指令与抑制", "风险事件"):
         assert expected in chinese
     assert "移动鼠标查看任意时刻" not in report
     assert "min-height:320px" not in report

@@ -28,4 +28,4 @@
 ## 0.1.0
 
 - 独立 `bfbt` 仓库基线。
-- Quick Research、Fast Matrix、Event/V2、有限内存恢复、不可变 artifact 与交互审计报告。
+- Quick Research、Fast Matrix、Event 引擎、有限内存恢复、不可变 artifact 与交互审计报告。

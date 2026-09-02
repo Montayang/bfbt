@@ -962,8 +962,8 @@ def _v2_audit_html(config: Mapping[str, Any]) -> str:
         ("敞口与资金约束 / Exposure & Capital Limits", _text(constraints)),
     ]
     return f"""
-<section class="card"><p class="eyebrow">V2 AUDIT</p>
-<h2>第二版策略与风险执行 / V2 Strategy & Risk Execution</h2>
+<section class="card"><p class="eyebrow">EVENT AUDIT</p>
+<h2>Event 策略与风险执行 / Event Strategy &amp; Risk Execution</h2>
 <p class="strategy-line">{html.escape(natural)}</p>
 <div class="flow">
 <div><b>F</b><span>因子频率 / Factor<br>{html.escape(_text(schedule.get("factor_interval")))}</span></div>

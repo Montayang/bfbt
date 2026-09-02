@@ -236,7 +236,7 @@ h1{{margin:4px 0 6px;font-size:25px}}h2{{font-size:17px;margin:0 0 14px}}.eyebro
 @media(max-width:800px){{.cards{{grid-template-columns:1fr 1fr}}.two{{grid-template-columns:1fr}}dl div{{grid-template-columns:1fr}}}}
 </style></head><body><main>
 <header><div class="eyebrow">FAST MATRIX · RESEARCH RUN</div><h1>{_text(context.get('factor_code', '矩阵组合研究'))}</h1>
-<p>{_text(context.get('factor_description', '目标权重矩阵组合回测'))}</p><p class="warning">研究结果，未经过 Event 正式确认；也不是 V2 正式 run。</p><p class="muted">报告版本：{MATRIX_REPORT_VERSION} · Run：{_text(result.run_id)}</p></header>
+<p>{_text(context.get('factor_description', '目标权重矩阵组合回测'))}</p><p class="warning">这是研究结果，尚未经过 Event 引擎的正式回测确认。</p><p class="muted">报告版本：{MATRIX_REPORT_VERSION} · Run：{_text(result.run_id)}</p></header>
 <section><h2>核心结果 / Performance</h2><div class="cards">{card_html}</div></section>
 <section><h2>净值路径 / Equity</h2>{_equity_svg(result.returns)}</section>
 <div class="two"><section><h2>因子说明 / Factor</h2><dl>{definition(factor_items)}</dl></section>

@@ -27,16 +27,20 @@ def test_public_identity_is_bfbt_with_english_front_door() -> None:
     assert "not affiliated with" in readme
     assert "financially connected to Binance" in readme
     assert "```mermaid" not in readme
+    assert "V2" not in readme
     assert "docs/assets/research-workflow.svg" in readme
     assert chinese.startswith("# BFBT\n")
     assert "不存在隶属、背书、赞助或任何利益关系" in chinese
     assert "```mermaid" not in chinese
+    assert "V2" not in chinese
     assert "docs/assets/research-workflow.zh-CN.svg" in chinese
     for name in ("research-workflow.svg", "research-workflow.zh-CN.svg"):
         root = ET.parse(ROOT / "docs" / "assets" / name).getroot()
-        assert root.attrib["viewBox"] == "0 0 1200 940"
+        assert root.attrib["viewBox"] == "0 0 1100 920"
         names = {element.tag.rsplit("}", 1)[-1] for element in root.iter()}
         assert not names.intersection({"a", "button", "foreignObject", "script"})
+        visible_text = "".join(root.itertext())
+        assert "V2" not in visible_text
 
 
 def test_declared_python_310_compatibility_surface() -> None:
