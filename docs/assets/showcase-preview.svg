@@ -1,5 +1,5 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1200" height="680" viewBox="0 0 1200 680" role="img" aria-labelledby="title desc">
-  <title id="title">bianbt 三个月 Showcase 页面预览</title>
+  <title id="title">bfbt 三个月 Showcase 页面预览</title>
   <desc id="desc">R5-T4-H2-ROLLING 五月、六月、七月收益、回撤与来源限定卡片。</desc>
   <defs>
     <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
@@ -12,7 +12,7 @@
     </linearGradient>
   </defs>
   <rect width="1200" height="680" rx="24" fill="url(#bg)"/>
-  <text x="62" y="62" fill="#55d6be" font-family="system-ui,sans-serif" font-size="14" font-weight="700" letter-spacing="3">BIANBT · VERIFIED RESEARCH SHOWCASE</text>
+  <text x="62" y="62" fill="#55d6be" font-family="system-ui,sans-serif" font-size="14" font-weight="700" letter-spacing="3">BFBT · VERIFIED RESEARCH SHOWCASE</text>
   <text x="62" y="119" fill="#eaf2ff" font-family="system-ui,sans-serif" font-size="42" font-weight="750">同一策略身份，三个独立月份</text>
   <text x="62" y="155" fill="#9eabc0" font-family="system-ui,sans-serif" font-size="18">收益、回撤、成本、换手与来源限定同时展示</text>
   <g transform="translate(62 198)">

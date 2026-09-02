@@ -11,15 +11,15 @@ from time import perf_counter
 
 import polars as pl
 
-from bianbt.config.factor import FactorDefinition, LabelDefinition
-from bianbt.data.hashing import content_sha256
-from bianbt.data.resample import resample_bars
-from bianbt.factors.registry import compute_factor
-from bianbt.labels.forward_returns import compute_forward_returns
-from bianbt.reports.research_study import render_quick_only_study_report
-from bianbt.research.ic import information_coefficient
-from bianbt.research.quantiles import quantile_returns
-from bianbt.research.turnover import factor_rank_turnover
+from bfbt.config.factor import FactorDefinition, LabelDefinition
+from bfbt.data.hashing import content_sha256
+from bfbt.data.resample import resample_bars
+from bfbt.factors.registry import compute_factor
+from bfbt.labels.forward_returns import compute_forward_returns
+from bfbt.reports.research_study import render_quick_only_study_report
+from bfbt.research.ic import information_coefficient
+from bfbt.research.quantiles import quantile_returns
+from bfbt.research.turnover import factor_rank_turnover
 
 
 ROOT = Path(__file__).resolve().parents[1]

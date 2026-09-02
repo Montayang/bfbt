@@ -7,15 +7,18 @@
 ### Added
 
 - 受控 Showcase 合同、ResearchIntent、冻结语义和 action-class 边界。
-- 只读 `bianbt doctor` 与 verified `showcase inspect/build/prepare` 工作流。
+- 只读 `bfbt doctor` 与 verified `showcase inspect/build/prepare` 工作流。
 - 基于不可变 run 的多期静态展示页、成本/风险/来源限定和开仓保证金轨迹。
 - A39 离线验收、展示脚本和最小贡献/安全文档。
+- 独立英文、简体中文 HTML 产物与 A40 公开发布验收合同。
 
 ### Changed
 
-- 根 README 更新为 A01–A39 架构、当前能力、快速展示和明确不支持范围。
+- 根 README 更新为 A01–A40 架构、当前能力、快速展示和明确不支持范围。
+- 项目品牌、Python distribution、import namespace、CLI 与仓库链接完整迁移为
+  BFBT/`bfbt`；英文 README 成为默认入口，中文 README 独立保留。
 
 ## 0.1.0
 
-- 独立 `bianbt` 仓库基线。
+- 独立 `bfbt` 仓库基线。
 - Quick Research、Fast Matrix、Event/V2、有限内存恢复、不可变 artifact 与交互审计报告。

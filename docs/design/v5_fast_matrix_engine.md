@@ -320,7 +320,7 @@ Fast Matrix 需要复用 A27–A29，而不是建立另一套 cache：
 实现时遵循现有职责，不建立顶层杂乱脚本：
 
 ```text
-src/bianbt/
+src/bfbt/
   engine/
     fast_matrix/
       __init__.py
@@ -370,10 +370,10 @@ docs/acceptance/A32.md
 建议最终用户入口保持意图清晰，准确命令在 A31 固定：
 
 ```text
-bianbt research factor-evaluate ...
-bianbt research matrix-run ...
-bianbt research matrix-sweep ...
-bianbt run ...                         # 默认正式 Event/V2
+bfbt research factor-evaluate ...
+bfbt research matrix-run ...
+bfbt research matrix-sweep ...
+bfbt run ...                         # 默认正式 Event/V2
 ```
 
 提升流程：
@@ -402,7 +402,7 @@ Fast Matrix 不直接触发 Event，不自动替用户选择候选。
 - 表格必须支持按索引键搜索，并按月份、因子、预测周期或成本口径筛选及按列排序。
 
 `fm-*` 目录保持不可变。报告布局升级不能覆盖旧 run；旧产物通过
-`bianbt research study-report` 在研究项目目录生成可重建展示报告，新发布 run 才在不可变目录
+`bfbt research study-report` 在研究项目目录生成可重建展示报告，新发布 run 才在不可变目录
 内原生使用新版报告。
 
 ## 16. 等价性合同

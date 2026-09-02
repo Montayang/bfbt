@@ -7,10 +7,10 @@ from datetime import datetime, timedelta, timezone
 import polars as pl
 from polars.testing import assert_frame_equal
 
-from bianbt.config.backtest import BacktestConfig
-from bianbt.engine.fast_matrix.kernel import run_fast_matrix
-from bianbt.engine.fast_matrix.target_schedule import build_target_schedule
-from bianbt.engine.v2 import run_v2_backtest
+from bfbt.config.backtest import BacktestConfig
+from bfbt.engine.fast_matrix.kernel import run_fast_matrix
+from bfbt.engine.fast_matrix.target_schedule import build_target_schedule
+from bfbt.engine.v2 import run_v2_backtest
 
 START = datetime(2026, 1, 1, tzinfo=timezone.utc)
 UTC_MS = pl.Datetime("ms", "UTC")

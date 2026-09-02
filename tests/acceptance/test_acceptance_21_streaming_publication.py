@@ -7,15 +7,15 @@ from pathlib import Path
 import polars as pl
 import pytest
 
-from bianbt.artifacts.store import ArtifactStoreError
-from bianbt.artifacts.v2 import V2RunArtifactStore
-from bianbt.data.v2_contracts import V2ReasonCode
-from bianbt.engine.events import (
+from bfbt.artifacts.store import ArtifactStoreError
+from bfbt.artifacts.v2 import V2RunArtifactStore
+from bfbt.data.v2_contracts import V2ReasonCode
+from bfbt.engine.events import (
     EventArbitrationError,
     link_risk_event_fills_lazy,
 )
-from bianbt.metrics import compute_run_metrics
-from bianbt.reports.renderer import (
+from bfbt.metrics import compute_run_metrics
+from bfbt.reports.renderer import (
     _bounded_event_times,
     _interactive_payload,
     _bounded_returns,

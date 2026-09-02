@@ -1,11 +1,11 @@
-# bianbt repository instructions
+# BFBT repository instructions
 
 These instructions apply to the entire repository. User instructions in the current task
 take precedence. Keep this file concise because Codex loads it at the start of every task.
 
 ## Start of every task
 
-- Treat this Git repository as the complete `bianbt` project; do not depend on a parent
+- Treat this Git repository as the complete BFBT (`bfbt`) project; do not depend on a parent
   repository or any live-trading package.
 - Read `docs/maintainer/START_HERE.md`, then the maintainer documents it routes to.
 - If `.local/CODEX_HANDOFF.md` exists, read it as machine-private context. Never add
@@ -57,4 +57,3 @@ take precedence. Keep this file concise because Codex loads it at the start of e
   behavior or a durable contract changes.
 - Do not claim tests passed unless they were run in the current repository state. Keep the
   previous verified baseline distinct from unverified changes.
-

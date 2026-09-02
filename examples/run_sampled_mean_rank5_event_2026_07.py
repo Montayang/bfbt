@@ -11,15 +11,15 @@ from typing import Any
 
 import polars as pl
 
-from bianbt.application.run import RunExecutionError, execute_formal_run
-from bianbt.artifacts.environment import capture_environment
-from bianbt.artifacts.store import RunArtifactStore
-from bianbt.config.bundle import ResolvedConfig
-from bianbt.data.catalog import DuckDBCatalog
-from bianbt.data.hashing import content_sha256
-from bianbt.data.manifests import manifest_sha256
-from bianbt.reports.event_study import render_event_parameter_study
-from bianbt.reports.renderer import render_report_from_artifacts
+from bfbt.application.run import RunExecutionError, execute_formal_run
+from bfbt.artifacts.environment import capture_environment
+from bfbt.artifacts.store import RunArtifactStore
+from bfbt.config.bundle import ResolvedConfig
+from bfbt.data.catalog import DuckDBCatalog
+from bfbt.data.hashing import content_sha256
+from bfbt.data.manifests import manifest_sha256
+from bfbt.reports.event_study import render_event_parameter_study
+from bfbt.reports.renderer import render_report_from_artifacts
 
 
 PROJECT_ROOT = Path(__file__).resolve().parents[1]

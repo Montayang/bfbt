@@ -1,5 +1,7 @@
 # Security policy
 
+BFBT 是独立开源研究项目，与 Binance 不存在隶属、背书、赞助或利益关系。
+
 ## Supported scope
 
 `main` 的最新版本是当前接受安全修复的版本。项目仍处于 `0.x` 开发阶段，尚未承诺长期维护
@@ -13,7 +15,7 @@
 
 ## Security boundary
 
-- bianbt 是离线研究与回测系统，不应包含交易账户 Client、API key 或订单入口。
+- bfbt 是离线研究与回测系统，不应包含交易账户 Client、API key 或订单入口。
 - 系统不得读取 `.env`、账户余额或私有订单流。
 - 网络功能仅限明确请求的公共市场数据获取；正式运行绑定不可变本地数据版本。
 - 报告和 Showcase 只应读取已验证 artifact，并拒绝路径逃逸与哈希不一致。

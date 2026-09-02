@@ -17,15 +17,15 @@ from time import perf_counter
 
 import polars as pl
 
-from bianbt.artifacts.matrix import MatrixResearchStore
-from bianbt.config.backtest import BacktestConfig, PortfolioConfig
-from bianbt.data.hashing import content_sha256, sha256_file
-from bianbt.data.manifests import DatasetSnapshotManifest, load_manifest
-from bianbt.engine.fast_matrix.chunked import run_fast_matrix_chunked
-from bianbt.engine.fast_matrix.target_schedule import build_target_schedule
-from bianbt.factors.registry import compute_factor
-from bianbt.portfolio.constraints import construct_portfolio
-from bianbt.reports.matrix import matrix_report_metrics
+from bfbt.artifacts.matrix import MatrixResearchStore
+from bfbt.config.backtest import BacktestConfig, PortfolioConfig
+from bfbt.data.hashing import content_sha256, sha256_file
+from bfbt.data.manifests import DatasetSnapshotManifest, load_manifest
+from bfbt.engine.fast_matrix.chunked import run_fast_matrix_chunked
+from bfbt.engine.fast_matrix.target_schedule import build_target_schedule
+from bfbt.factors.registry import compute_factor
+from bfbt.portfolio.constraints import construct_portfolio
+from bfbt.reports.matrix import matrix_report_metrics
 
 # The examples directory is deliberately executable without installing it as a package.
 sys.path.insert(0, str(Path(__file__).resolve().parent))

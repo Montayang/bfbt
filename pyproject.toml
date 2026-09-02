@@ -3,9 +3,9 @@ requires = ["setuptools>=69"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "bianbt"
+name = "bfbt"
 version = "0.1.0"
-description = "Research and backtesting framework for Binance perpetual futures"
+description = "Offline cross-sectional factor research and backtesting for Binance futures"
 readme = "README.md"
 requires-python = ">=3.10"
 license = { file = "LICENSE" }
@@ -35,15 +35,15 @@ test = [
 ]
 
 [project.scripts]
-bianbt = "bianbt.cli:app"
+bfbt = "bfbt.cli:app"
 
 [project.urls]
-Repository = "https://github.com/montayang/bianbt"
-Issues = "https://github.com/montayang/bianbt/issues"
+Repository = "https://github.com/Montayang/bfbt"
+Issues = "https://github.com/Montayang/bfbt/issues"
 
 [tool.setuptools.packages.find]
 where = ["src"]
-include = ["bianbt*"]
+include = ["bfbt*"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]

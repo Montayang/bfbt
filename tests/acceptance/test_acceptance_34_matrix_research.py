@@ -10,13 +10,13 @@ import polars as pl
 import pytest
 from polars.testing import assert_frame_equal
 
-from bianbt.application.matrix import prepare_event_promotion
-from bianbt.artifacts.matrix import MatrixArtifactError, MatrixResearchStore
-from bianbt.config.backtest import BacktestConfig
-from bianbt.engine.fast_matrix.batch import run_fast_matrix_batch
-from bianbt.engine.fast_matrix.kernel import run_fast_matrix
-from bianbt.engine.fast_matrix.target_schedule import build_target_schedule
-from bianbt.reports.research_study import render_factor_study_reports
+from bfbt.application.matrix import prepare_event_promotion
+from bfbt.artifacts.matrix import MatrixArtifactError, MatrixResearchStore
+from bfbt.config.backtest import BacktestConfig
+from bfbt.engine.fast_matrix.batch import run_fast_matrix_batch
+from bfbt.engine.fast_matrix.kernel import run_fast_matrix
+from bfbt.engine.fast_matrix.target_schedule import build_target_schedule
+from bfbt.reports.research_study import render_factor_study_reports
 
 START = datetime(2026, 3, 1, tzinfo=timezone.utc)
 UTC_MS = pl.Datetime("ms", "UTC")
@@ -82,9 +82,12 @@ def test_research_store_is_immutable_verified_and_promotes_to_event(tmp_path: Pa
     assert manifest.run_id.startswith("fm-")
     assert store.load(manifest.run_id) == manifest
     report = (store.directory(manifest.run_id) / "report.html").read_text()
-    assert "未经过 Event 正式确认" in report
+    chinese = (store.directory(manifest.run_id) / "report.zh-CN.html").read_text()
+    assert report == (store.directory(manifest.run_id) / "report.en.html").read_text()
+    assert "has not received formal Event confirmation" in report
+    assert "未经过 Event 正式确认" in chinese
     assert "four-hour reversal" in report
-    assert "执行口径 / Execution" in report
+    assert "Execution" in report
     metrics = json.loads((store.directory(manifest.run_id) / "metrics.json").read_text())
     assert metrics["rebalance_count"] == 1
     assert metrics["cumulative_turnover"] > 0
@@ -135,11 +138,13 @@ def test_factor_study_reports_separate_screening_and_matrix_indexes(tmp_path: Pa
     (study / "summary.json").write_text(json.dumps(summary))
     rendered = render_factor_study_reports(study, matrix_runs_root=runs)
     landing = rendered["landing"].read_text()
+    landing_zh = rendered["landing_zh_cn"].read_text()
     quick = rendered["quick_research"].read_text()
     matrix = rendered["fast_matrix"].read_text()
-    assert "本页不再混放两阶段明细" in landing
+    assert "Factor screening and portfolio simulation are separated" in landing
+    assert "本页不再混放两阶段明细" in landing_zh
     assert "classic|2026-03|REV4|1h" in quick
-    assert "策略方向 Rank IC" in quick
+    assert "Strategy-direction Rank IC" in quick
     assert "方向调整 Rank IC" not in quick
     assert f"classic|2026-03|REV4|zero|{manifest.run_id}" in matrix
     rebuilt = (study / "fast_matrix_reports" / f"{manifest.run_id}.html").read_text()

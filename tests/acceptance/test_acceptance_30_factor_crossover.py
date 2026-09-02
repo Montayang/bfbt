@@ -7,11 +7,11 @@ from datetime import datetime, timedelta, timezone
 import polars as pl
 import pytest
 
-from bianbt.config.backtest import BacktestConfig, FactorCrossoverConfig, RankSelectionConfig
-from bianbt.engine.v2 import run_v2_backtest
-from bianbt.portfolio.constraints import finalize_v2_selections
-from bianbt.portfolio.crossover import FactorCrossoverTracker
-from bianbt.portfolio.ranking import RANKING_SCHEMA
+from bfbt.config.backtest import BacktestConfig, FactorCrossoverConfig, RankSelectionConfig
+from bfbt.engine.v2 import run_v2_backtest
+from bfbt.portfolio.constraints import finalize_v2_selections
+from bfbt.portfolio.crossover import FactorCrossoverTracker
+from bfbt.portfolio.ranking import RANKING_SCHEMA
 
 START = datetime(2026, 6, 1, tzinfo=timezone.utc)
 UTC_MS = pl.Datetime("ms", "UTC")
@@ -265,7 +265,7 @@ def test_strategy_flat_signal_closes_only_the_existing_long() -> None:
 
 
 def test_report_explains_crossover_without_claiming_rank_selection() -> None:
-    from bianbt.reports.renderer import _v2_audit_html
+    from bfbt.reports.renderer import _v2_audit_html
 
     config = _config().model_dump(mode="json")
     html = _v2_audit_html(

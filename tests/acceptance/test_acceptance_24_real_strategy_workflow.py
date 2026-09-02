@@ -8,7 +8,7 @@ from types import SimpleNamespace
 
 import polars as pl
 
-from bianbt.config import ConfigPaths, load_config_bundle
+from bfbt.config import ConfigPaths, load_config_bundle
 
 BACKTEST_ROOT = Path(__file__).resolve().parents[2]
 PREPARE = (
@@ -80,7 +80,7 @@ def test_report_recovers_ranked_symbol_range_without_full_universe(
         tables / "rankings.parquet"
     )
 
-    from bianbt.reports.renderer import _panel_stats
+    from bfbt.reports.renderer import _panel_stats
 
     assert _panel_stats(tmp_path) == {
         "ranked_min": 586,
@@ -106,7 +106,7 @@ def test_report_explains_rank_descent_and_exact_momentum_formula(
         for name in ("data", "universe", "factor", "backtest")
     }
 
-    from bianbt.reports.renderer import _factor_html, _v2_audit_html
+    from bfbt.reports.renderer import _factor_html, _v2_audit_html
 
     factor_html = _factor_html("momentum", payload["factor"]["factors"][0])
     audit_html = _v2_audit_html(payload)

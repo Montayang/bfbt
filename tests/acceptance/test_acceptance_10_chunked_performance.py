@@ -12,21 +12,21 @@ import pytest
 from polars.testing import assert_frame_equal
 from typer.testing import CliRunner
 
-from bianbt.application.planning import contracts_scan_end
-from bianbt.cli import app
-from bianbt.config.backtest import BacktestConfig
-from bianbt.engine.streaming import StreamingLedger
-from bianbt.engine.vectorized import BacktestError, run_vectorized_backtest
-from bianbt.performance.chunks import ChunkPlanError, plan_time_chunks
-from bianbt.performance.diagnostics import (
+from bfbt.application.planning import contracts_scan_end
+from bfbt.cli import app
+from bfbt.config.backtest import BacktestConfig
+from bfbt.engine.streaming import StreamingLedger
+from bfbt.engine.vectorized import BacktestError, run_vectorized_backtest
+from bfbt.performance.chunks import ChunkPlanError, plan_time_chunks
+from bfbt.performance.diagnostics import (
     PerformanceMonitor,
     RowBudgetExceeded,
 )
-from bianbt.performance.spool import (
+from bfbt.performance.spool import (
     ChunkWorkspace,
     cleanup_stale_workspaces,
 )
-from bianbt.universe.point_in_time import _bar_metrics
+from bfbt.universe.point_in_time import _bar_metrics
 
 START = datetime(2024, 1, 1, tzinfo=timezone.utc)
 PORTFOLIO_VERSION = "portfolio-a10-fixture"

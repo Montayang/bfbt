@@ -7,9 +7,9 @@ from datetime import datetime, timedelta, timezone
 import polars as pl
 import pytest
 
-from bianbt.config.backtest import BacktestConfig
-from bianbt.portfolio.ranking import RANKING_SCHEMA
-from bianbt.research.replay_sweep import (
+from bfbt.config.backtest import BacktestConfig
+from bfbt.portfolio.ranking import RANKING_SCHEMA
+from bfbt.research.replay_sweep import (
     ReplaySweepCandidate,
     ReplaySweepError,
     run_chunked_replay_sweep,

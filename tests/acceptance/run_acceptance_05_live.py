@@ -6,12 +6,12 @@ import argparse
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
 
-from bianbt.data.catalog import DuckDBCatalog
-from bianbt.data.ingest.raw_store import RawRestStore
-from bianbt.data.normalize.service import NormalizationService
-from bianbt.data.sources.binance_rest import BinanceRestSource
-from bianbt.data.sources.http import PublicHttpClient
-from bianbt.data.storage import ParquetDataStore
+from bfbt.data.catalog import DuckDBCatalog
+from bfbt.data.ingest.raw_store import RawRestStore
+from bfbt.data.normalize.service import NormalizationService
+from bfbt.data.sources.binance_rest import BinanceRestSource
+from bfbt.data.sources.http import PublicHttpClient
+from bfbt.data.storage import ParquetDataStore
 
 
 def main() -> None:

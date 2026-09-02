@@ -6,7 +6,7 @@ from datetime import datetime, timezone
 
 import polars as pl
 
-from bianbt.engine.fast_matrix.equivalence import first_return_difference
+from bfbt.engine.fast_matrix.equivalence import first_return_difference
 
 
 def _returns(equity: float) -> pl.DataFrame:

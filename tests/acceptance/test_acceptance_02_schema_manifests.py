@@ -7,9 +7,9 @@ import pytest
 from pydantic import ValidationError
 from typer.testing import CliRunner
 
-from bianbt.cli import app
-from bianbt.data.hashing import canonical_json_bytes, content_sha256, sha256_file
-from bianbt.data.manifests import (
+from bfbt.cli import app
+from bfbt.data.hashing import canonical_json_bytes, content_sha256, sha256_file
+from bfbt.data.manifests import (
     ArtifactHash,
     DatasetReference,
     DatasetSnapshotManifest,
@@ -23,7 +23,7 @@ from bianbt.data.manifests import (
     manifest_json,
     manifest_sha256,
 )
-from bianbt.data.schemas import (
+from bfbt.data.schemas import (
     UnknownSchemaError,
     get_schema_definition,
     list_schema_definitions,
@@ -136,6 +136,8 @@ def test_bars_schema_has_expected_key_types_and_metadata() -> None:
     assert schema.field("open_time").nullable is False
     assert schema.field("close").type == pa.float64()
     assert schema.field("trades").type == pa.int64()
+    # The historical namespace is part of the immutable v1 wire format. The
+    # public project/package rename must not invalidate existing fingerprints.
     assert schema.metadata[b"bianbt.schema_version"] == b"v1"
 
 

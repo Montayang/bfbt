@@ -13,31 +13,31 @@ import pytest
 from typer.testing import CliRunner
 from pydantic import BaseModel
 
-from bianbt.artifacts import (
+from bfbt.artifacts import (
     ArtifactStoreError,
     V2AuditArtifacts,
     V2RunArtifactStore,
 )
-from bianbt.cli import app
-from bianbt.artifacts.environment import EnvironmentInfo
-from bianbt.config.backtest import BacktestOutputConfig
-from bianbt.data.hashing import sha256_file
-from bianbt.data.manifests import (
+from bfbt.cli import app
+from bfbt.artifacts.environment import EnvironmentInfo
+from bfbt.config.backtest import BacktestOutputConfig
+from bfbt.data.hashing import sha256_file
+from bfbt.data.manifests import (
     DatasetReference,
     DatasetSnapshotManifest,
     FactorVersionReference,
     RunManifestV2,
     load_manifest_auto,
 )
-from bianbt.data.schemas import get_schema_definition
-from bianbt.data.v2_contracts import V2ReasonCode
-from bianbt.engine.events import (
+from bfbt.data.schemas import get_schema_definition
+from bfbt.data.v2_contracts import V2ReasonCode
+from bfbt.engine.events import (
     EventArbitrationError,
     EventArbitrator,
     link_risk_event_fills,
 )
-from bianbt.engine.vectorized import BacktestResult
-from bianbt.reports.renderer import render_report_from_artifacts
+from bfbt.engine.vectorized import BacktestResult
+from bfbt.reports.renderer import render_report_from_artifacts
 
 START = datetime(2024, 1, 1, tzinfo=timezone.utc)
 ROOT = Path(__file__).resolve().parents[2]
@@ -512,38 +512,40 @@ def test_v2_publish_is_idempotent_and_binds_audit_hash(tmp_path: Path) -> None:
     assert metadata["audit_result_hash"] == SHA_C
 
 
-def test_v2_report_contains_bilingual_interactive_audit(tmp_path: Path) -> None:
+def test_v2_report_contains_localized_interactive_audit(tmp_path: Path) -> None:
     _, published = _publish(tmp_path)
     report = (published.path / "report.html").read_text(encoding="utf-8")
+    chinese = (published.path / "report.zh-CN.html").read_text(encoding="utf-8")
+    assert report == (published.path / "report.en.html").read_text(encoding="utf-8")
+    assert '<html lang="en">' in report
+    assert '<html lang="zh-CN">' in chinese
     for expected in (
-        "第二版策略与风险执行 / V2 Strategy & Risk Execution",
-        "Rank 来源 / Rank Sources",
-        "仓位指令与抑制 / Position Instructions & Suppression",
-        "风险事件 / Risk Events",
-        "因子频率 / Factor",
-        "调仓频率 / Rebalance",
-        "风险检查 / Risk",
+        "V2 Strategy & Risk Execution",
+        "Rank Sources",
+        "Position Instructions & Suppression",
+        "Risk Events",
+        "Factor",
+        "Rebalance",
+        "Risk",
         "data-report-target=\"analysis\"",
         "data-report-view=\"strategy\"",
         "data-report-view=\"details\"",
         "chart-workbench",
         "nav-kpis",
-            "a38-report-v18-complete-execution-audit",
-        "手续费实际扣除 / Actual Fee Deduction",
-        "滑点实际扣除 / Actual Slippage Deduction",
-        "总盈利/亏损 / Total Profit &amp; Loss",
+            "a40-report-v19-localized-public-output",
+        "Actual Fee Deduction",
+        "Actual Slippage Deduction",
+        "Total Profit &amp; Loss",
         "0.0000 USDT",
         "--bg:#f3f5f2",
-        "账户权益 / Equity (USDT)",
+        "Equity (USDT)",
         "data-snapshot-tab=\"rankings\"",
         "data-chart-action=\"next-trade\"",
         "data-chart-action=\"next-position\"",
         "point-audit-time",
-        "成交前 / Before",
-        "成交后 / After",
-        "成交前权重 / Before",
-        "目标权重 / Target",
-        "成交后权重 / After",
+        "Before",
+        "After",
+        "Target",
         "data-local-target=\"factor\"",
         "data-local-target=\"metrics\"",
         "data-local-panel=\"risk\"",
@@ -555,6 +557,8 @@ def test_v2_report_contains_bilingual_interactive_audit(tmp_path: Path) -> None:
         "font-size:14px;margin-top:2px",
     ):
         assert expected in report
+    for expected in ("第二版策略与风险执行", "Rank 来源", "仓位指令与抑制", "风险事件"):
+        assert expected in chinese
     assert "移动鼠标查看任意时刻" not in report
     assert "min-height:320px" not in report
     assert "<details" not in report

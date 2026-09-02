@@ -41,8 +41,8 @@ A01 又区分两种配置状态：
 ## 3. 当前状态
 
 - A01：已验收并推送，commit `9ec9924`。
-- A02：已在 `bianbt-acceptance` tmux 中验收通过并推送，commit `30860610441a9291c2d994d50ca76cca73bf3abc`。
-- A03：已在 `bianbt-acceptance` tmux 中验收通过并推送，commit `509a4a3a34c432cc0fedb8b8e4e082ee63a7a334`。
+- A02：已在 `bfbt-acceptance` tmux 中验收通过并推送，commit `30860610441a9291c2d994d50ca76cca73bf3abc`。
+- A03：已在 `bfbt-acceptance` tmux 中验收通过并推送，commit `509a4a3a34c432cc0fedb8b8e4e082ee63a7a334`。
 - A04：离线与真实 Binance 公共数据验收均已通过并推送，commit `9f35c1d`。
 - A05：已通过 8 个离线用例及真实 Binance 公共 REST 闭环并推送，commit `ef3d795`。
 - A06：10 个离线用例与隔离的重采样/universe CLI 闭环均已验收通过并推送，commit `f65ba07`。

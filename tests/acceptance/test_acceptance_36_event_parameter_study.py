@@ -4,7 +4,7 @@ from pathlib import Path
 
 import pytest
 
-from bianbt.reports.event_study import (
+from bfbt.reports.event_study import (
     EventStudyReportError,
     render_event_parameter_study,
 )
@@ -44,6 +44,10 @@ def test_parent_report_indexes_independent_child_sheets(tmp_path: Path) -> None:
     }
     output = render_event_parameter_study(summary, output_path=tmp_path / "report.html")
     page = output.read_text(encoding="utf-8")
+    chinese = (tmp_path / "report.zh-CN.html").read_text(encoding="utf-8")
+    assert page == (tmp_path / "report.en.html").read_text(encoding="utf-8")
+    assert '<html lang="en">' in page
+    assert "参数总览" in chinese
     assert "BASE" in page and "F2" in page
     assert "children/BASE.html" in page and "children/F2.html" in page
     assert "data-open-sheet='F2'" in page

@@ -7,9 +7,9 @@ from datetime import datetime, timedelta, timezone
 import polars as pl
 import pytest
 
-from bianbt.config.backtest import BacktestConfig
-from bianbt.engine.fast_matrix.capabilities import MatrixCapabilityError, plan_backend
-from bianbt.engine.fast_matrix.target_schedule import TargetScheduleError, build_target_schedule
+from bfbt.config.backtest import BacktestConfig
+from bfbt.engine.fast_matrix.capabilities import MatrixCapabilityError, plan_backend
+from bfbt.engine.fast_matrix.target_schedule import TargetScheduleError, build_target_schedule
 
 START = datetime(2026, 1, 1, tzinfo=timezone.utc)
 

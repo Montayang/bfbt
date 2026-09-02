@@ -8,10 +8,10 @@ import polars as pl
 import pytest
 from polars.testing import assert_frame_equal
 
-from bianbt.config.backtest import BacktestConfig
-from bianbt.engine.fast_matrix.chunked import run_fast_matrix_chunked
-from bianbt.engine.fast_matrix.kernel import MatrixExecutionError, run_fast_matrix
-from bianbt.engine.fast_matrix.target_schedule import build_target_schedule
+from bfbt.config.backtest import BacktestConfig
+from bfbt.engine.fast_matrix.chunked import run_fast_matrix_chunked
+from bfbt.engine.fast_matrix.kernel import MatrixExecutionError, run_fast_matrix
+from bfbt.engine.fast_matrix.target_schedule import build_target_schedule
 
 START = datetime(2026, 2, 1, tzinfo=timezone.utc)
 UTC_MS = pl.Datetime("ms", "UTC")

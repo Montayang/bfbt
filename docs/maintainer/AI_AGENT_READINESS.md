@@ -59,9 +59,9 @@ Agent 产品入口。
 | AG10 | P1 | partial | 研究治理自动化 | QR-v1 和研究注册表已有稳定规则与血缘；相关性去重未实现，Fast Matrix 人工选择尚无结构化 decision artifact，Event promotion 也没有通用、可校验的来源合同。人工选择本身必须保留，不能改成黑箱自动晋级。 |
 | AG11 | P1 | partial | Agent 可消费的结果解释接口 | HTML 和 JSON/Parquet 产物丰富，但缺少稳定的结构化结果摘要、警告严重度、失败原因码、证据定位和对比 API；Agent 的结论必须能回链到 manifest/表格，而不是只读网页后自由发挥。 |
 | AG12 | P1 | missing | 安全的生成与扩展沙箱 | 需要路径白名单、资源限额、生成因子静态检查、确定性 fixture、代码评审门及禁止凭据/网络/下单依赖的自动检查。生成代码与运行研究必须是两个独立授权动作。 |
-| AG13 | P1 | partial | 部署与环境自检 | 有 `pyproject.toml` 和人工安装教程，但缺少锁定/可复现环境、单命令 doctor、依赖/磁盘/内存/数据目录检查，以及适合无人值守 Agent 的明确退出码和修复建议。 |
+| AG13 | P1 | partial | 部署与环境自检 | 已有 `pyproject.toml`、安装教程和单命令只读 doctor，可检查运行时、依赖、输出根、磁盘、catalog、intent、artifact、provenance 与可选端口，并提供稳定退出码和修复建议；仍缺依赖锁和完整可复现发布环境。 |
 | AG14 | P1 | partial | Agent 工作流验收 | A39 已覆盖意图 hash、歧义暂停、artifact 篡改、来源限定、doctor 只读、确定性页面和结果证据引用；缺数据规划、高换手门、后台 job、人工 promotion 等通用链路仍待补齐。 |
-| AG15 | P2 | missing | 开源工程化配套 | 当前未见 CI、依赖锁、贡献指南、安全政策、版本发布/变更日志和插件兼容策略；应在公开接收外部因子与 Agent 集成前补齐。 |
+| AG15 | P2 | partial | 开源工程化配套 | 已有双版本离线 CI、MIT License、英文主 README、中文 README、贡献指南、安全政策、变更日志及 Issue/PR 模板；仍缺依赖锁、正式 release 自动化、依赖更新策略和插件兼容政策。 |
 | AG16 | P2 | missing | 多用户与配额模型 | 当前是单机本地工作区语义。若未来提供服务，需要项目/用户隔离、并发与存储配额、任务排队、审计主体和 artifact 访问控制；不能让共享服务直接沿用单用户路径假设。 |
 
 ## 推荐实施顺序

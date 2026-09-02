@@ -4,7 +4,7 @@
 
 - 先完成数据正确性，再写因子和回测。
 - 每个阶段都产生可独立验证的命令和产物。
-- 不以 notebook 中“能跑”为完成标准，核心逻辑必须进入 `src/bianbt` 并有测试。
+- 不以 notebook 中“能跑”为完成标准，核心逻辑必须进入 `src/bfbt` 并有测试。
 - 第一版只做一个执行语义清晰的向量化引擎，不同时开发事件引擎。
 
 用户验收按 [`acceptance_plan.md`](../acceptance/plan.md) 进一步拆分：Phase 1 的配置、schema、catalog 分别对应 A01、A02、A03，均已验收并推送。Phase 2 对应 A04，Phase 3 对应 A05，Phase 4 对应 A06，Phase 5 对应 A07，均已验收。Phase 6 对应 A08，已完成验收。

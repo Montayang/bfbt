@@ -8,9 +8,9 @@ from collections import defaultdict
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
 
-from bianbt.data.catalog import DuckDBCatalog
-from bianbt.data.hashing import content_sha256
-from bianbt.data.manifests import (
+from bfbt.data.catalog import DuckDBCatalog
+from bfbt.data.hashing import content_sha256
+from bfbt.data.manifests import (
     DatasetReference,
     DatasetSnapshotManifest,
     PartitionManifest,
@@ -18,13 +18,13 @@ from bianbt.data.manifests import (
     load_manifest,
     manifest_json,
 )
-from bianbt.data.normalize import (
+from bfbt.data.normalize import (
     NORMALIZER_CODE_VERSION,
     build_normalization_release,
 )
-from bianbt.data.normalize.service import NormalizationService
-from bianbt.data.schemas import get_schema_definition
-from bianbt.data.validation.reports import QualityPolicy
+from bfbt.data.normalize.service import NormalizationService
+from bfbt.data.schemas import get_schema_definition
+from bfbt.data.validation.reports import QualityPolicy
 
 UTC = timezone.utc
 RUN_START = datetime(2025, 1, 1, tzinfo=UTC)

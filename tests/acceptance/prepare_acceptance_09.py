@@ -7,17 +7,17 @@ import json
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
 
-from bianbt.data.catalog import DuckDBCatalog
-from bianbt.data.hashing import content_sha256
-from bianbt.data.manifests import (
+from bfbt.data.catalog import DuckDBCatalog
+from bfbt.data.hashing import content_sha256
+from bfbt.data.manifests import (
     DatasetReference,
     DatasetSnapshotManifest,
     manifest_json,
 )
-from bianbt.data.schemas import get_schema_definition
-from bianbt.data.ingest.raw_store import RawRestStore
-from bianbt.data.normalize.service import NormalizationService
-from bianbt.data.sources.base import RestPage
+from bfbt.data.schemas import get_schema_definition
+from bfbt.data.ingest.raw_store import RawRestStore
+from bfbt.data.normalize.service import NormalizationService
+from bfbt.data.sources.base import RestPage
 
 START = datetime(2024, 1, 1, tzinfo=timezone.utc)
 SERIES = {

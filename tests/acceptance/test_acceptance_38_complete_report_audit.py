@@ -8,7 +8,7 @@ from pathlib import Path
 
 import polars as pl
 
-from bianbt.reports.renderer import _bounded_returns, _interactive_payload
+from bfbt.reports.renderer import _bounded_returns, _interactive_payload
 
 
 START = datetime(2026, 7, 1, tzinfo=timezone.utc)

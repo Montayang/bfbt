@@ -7,12 +7,12 @@ from pathlib import Path
 import polars as pl
 import pytest
 
-from bianbt.artifacts.store import RunArtifactStore
-from bianbt.config.backtest import PortfolioConfig, PortfolioV2Config
-from bianbt.data.schemas import get_schema_definition
-from bianbt.portfolio.constraints import construct_portfolio
-from bianbt.portfolio.ranking import build_rank_snapshots
-from bianbt.portfolio.selection import v1_rank_counts
+from bfbt.artifacts.store import RunArtifactStore
+from bfbt.config.backtest import PortfolioConfig, PortfolioV2Config
+from bfbt.data.schemas import get_schema_definition
+from bfbt.portfolio.constraints import construct_portfolio
+from bfbt.portfolio.ranking import build_rank_snapshots
+from bfbt.portfolio.selection import v1_rank_counts
 
 BACKTEST_ROOT = Path(__file__).resolve().parents[2]
 SCORES = (

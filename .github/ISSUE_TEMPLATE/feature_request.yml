@@ -1,0 +1,38 @@
+name: Feature request
+description: Propose a research, engine, reporting, or Agent-workflow capability
+title: "[Feature] "
+labels: [enhancement]
+body:
+  - type: textarea
+    id: use_case
+    attributes:
+      label: Research use case
+      description: What research question or workflow should this capability support?
+    validations:
+      required: true
+  - type: dropdown
+    id: layer
+    attributes:
+      label: Intended layer
+      options:
+        - Quick Research
+        - Fast Matrix
+        - Event / V2
+        - Reports and artifacts
+        - Agent-facing workflow
+        - Data and catalog
+        - Unsure
+    validations:
+      required: true
+  - type: textarea
+    id: semantics
+    attributes:
+      label: Required semantics
+      description: Describe timing, costs, sizing, path dependence, data identity, and audit needs where applicable.
+  - type: textarea
+    id: acceptance
+    attributes:
+      label: Acceptance evidence
+      description: What deterministic fixture or observable result would prove the feature works?
+    validations:
+      required: true

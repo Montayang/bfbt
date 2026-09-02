@@ -12,19 +12,19 @@ import json
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
 
-from bianbt.data.catalog import DuckDBCatalog
-from bianbt.data.hashing import content_sha256
-from bianbt.data.manifests import (
+from bfbt.data.catalog import DuckDBCatalog
+from bfbt.data.hashing import content_sha256
+from bfbt.data.manifests import (
     DatasetReference,
     DatasetSnapshotManifest,
     RawObjectManifest,
     load_manifest,
     manifest_json,
 )
-from bianbt.data.normalize import NORMALIZER_CODE_VERSION
-from bianbt.data.normalize.service import NormalizationService
-from bianbt.data.schemas import get_schema_definition
-from bianbt.data.validation.reports import QualityPolicy
+from bfbt.data.normalize import NORMALIZER_CODE_VERSION
+from bfbt.data.normalize.service import NormalizationService
+from bfbt.data.schemas import get_schema_definition
+from bfbt.data.validation.reports import QualityPolicy
 
 UTC = timezone.utc
 SYMBOLS = (

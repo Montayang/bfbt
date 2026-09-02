@@ -1,4 +1,4 @@
-# bianbt Showcase
+# BFBT Showcase
 
 这套展示面向 8–12 分钟的本地演示。它只读取并验证既有不可变回测产物，生成派生静态页面；
 不会下载数据、运行回测、访问交易账户或发送订单。
@@ -8,7 +8,7 @@
 在仓库根目录运行：
 
 ```bash
-.venv/bin/bianbt showcase prepare \
+.venv/bin/bfbt showcase prepare \
   --spec showcase/r5_t4_h2_rolling_202605_202607.json
 ```
 
@@ -18,14 +18,17 @@
 data/backtest/showcases/r5-t4-h2-rolling-202605-202607-r01/index.html
 ```
 
+`index.html` 是英文兼容入口；同目录还会生成显式英文 `index.en.html` 和独立简体中文
+`index.zh-CN.html`。三者共享同一份语言中立 `evidence.json`。
+
 演示现场可以直接用浏览器打开该文件。页面不引用 CDN、远程字体或外部脚本，因此断网可用。
 如果只想检查而不写派生页面：
 
 ```bash
-.venv/bin/bianbt doctor \
+.venv/bin/bfbt doctor \
   --spec showcase/r5_t4_h2_rolling_202605_202607.json
 
-.venv/bin/bianbt showcase inspect \
+.venv/bin/bfbt showcase inspect \
   --spec showcase/r5_t4_h2_rolling_202605_202607.json
 ```
 
@@ -42,7 +45,7 @@ data/backtest/showcases/r5-t4-h2-rolling-202605-202607-r01/index.html
 
 ## 无网络排练清单
 
-- `bianbt doctor` 返回 `ready=true`；warning 可以存在，但必须在讲解中说明。
+- `bfbt doctor` 返回 `ready=true`；warning 可以存在，但必须在讲解中说明。
 - 三个 run 均逐文件验证成功，展示页的 `verified_runs=3`。
 - 页面中不存在绝对本机路径，深度报告与五类证据链接均能打开。
 - 桌面宽屏和窄窗口均可阅读；Tab 键能访问导航、详情和证据链接。

@@ -2,11 +2,11 @@
 
 Updated: 2026-09-01.
 
-Implementation status (2026-09-02): S0–S5 are implemented on `codex/showcase-plan`. Six focused
-A39 tests and the 331-test full offline suite pass; the real local preparation verifies all three
-H2 runs with one expected provenance warning and no failures. The current presentation uses the
-existing qualified H2 `r01` evidence and displays `git_dirty=true`. Clean `r02` evidence remains a
-separately authorized future run, not a hidden prerequisite or rewrite of this release.
+Implementation status (2026-09-02): S0–S5 were implemented, verified, committed as `9f991f2`, and
+merged into `main`. Six focused A39 tests and the 331-test full offline suite passed; real local
+preparation verified all three H2 runs with one expected provenance warning and no failures. The
+current presentation uses the qualified H2 `r01` evidence and displays `git_dirty=true`. Clean
+`r02` evidence remains a separately authorized future run, not a hidden prerequisite or rewrite.
 
 ## Product decision
 
@@ -28,26 +28,18 @@ and must not require a long backtest during the presentation.
 
 ## Current assessment
 
-The computation layer is already stronger than the current presentation layer. Quick Research,
-Fast Matrix, Event/V2, bounded-memory recovery, immutable artifacts, detailed audit reports, and
-325 offline tests are implemented. The gaps that make the repository awkward to demonstrate are:
+The local presentation entry point, executive comparison page, ResearchIntent freeze sheet,
+read-only doctor, evidence verification, README preview, CI, CONTRIBUTING, SECURITY, and CHANGELOG
+are implemented. The current public-release work adds the BFBT identity and independent English and
+Simplified-Chinese HTML variants. Remaining presentation boundaries are explicit:
 
-- The first-use path starts with installation, a long public-data download, preparation scripts,
-  four configuration files, and several commands. There is no single showcase entry point.
-- Reports are strong run-level audit workbenches, but there is no executive page that connects the
-  research request, engine workflow, multi-period comparison, costs, risks, and evidence links.
-- The Agent workflow exists as maintainer practice rather than a versioned product contract. A
-  visitor cannot see a structured intent, ambiguity list, frozen semantics, preflight, or exact
-  authorization boundary.
-- The root README is materially behind the implemented A01–A38 architecture and does not lead with
-  a visual workflow, current capabilities, a short demo, or current limitations.
-- There is no `doctor`/showcase readiness command, so environment and artifact problems are found
-  piecemeal during a presentation.
-- The only H2 artifacts present on this machine are useful real full-market results, but their
-  environment records say `git_dirty=true`. This fact is already documented and must remain visible;
-  clean replacement runs would require a separately authorized `r02` execution.
-- CI, a dependency lock, CONTRIBUTING, SECURITY, CHANGELOG, and release automation are still absent.
-  These matter before an open-source launch, but most are not prerequisites for a local showcase.
+- A fresh checkout does not include real market data or immutable H2 runs; the committed preview,
+  contracts, renderer, and deterministic fixtures remain reproducible offline.
+- The retained H2 evidence records `git_dirty=true` and must continue to display that qualification.
+- Package installation and wheel contents are verified. A dependency lock, release automation,
+  dependency-update policy, and plugin compatibility policy are not yet implemented.
+- A hosted GitHub Pages Showcase is a future enhancement. The repository must not describe it as a
+  current live demo.
 
 ## Showcase experience
 
@@ -106,7 +98,7 @@ showcase.
 - Add a side-effect-free planner that validates the intent/spec, resolves exact artifacts, verifies
   every manifest hash, checks required tables, reports source/dependency provenance, and calculates
   the output paths it would use.
-- Add `bianbt doctor` with machine-readable JSON and human output for Python/package identity,
+- Add `bfbt doctor` with machine-readable JSON and human output for Python/package identity,
   required dependencies, writable local output root, disk headroom, catalog availability, selected
   run availability, manifest validity, and presentation port availability when requested.
 - Use stable check IDs, severities, exit codes, and repair suggestions. `doctor` must not download,
@@ -114,7 +106,7 @@ showcase.
 
 ### SC04 — Deterministic showcase hub
 
-- Add `bianbt showcase build --spec <path>` and a read-only `showcase inspect` command.
+- Add `bfbt showcase build --spec <path>` and a read-only `showcase inspect` command.
 - Generate a self-contained local hub with these sections:
   1. one-screen product proposition and explicit “offline research, not live trading” boundary;
   2. Quick Research → Fast Matrix → Event/V2 architecture and current support boundary;
@@ -127,8 +119,9 @@ showcase.
   but numeric result fields must not be manually copied into the renderer.
 - Avoid leading with extrapolated one-month annualized return. Headline metrics are total return,
   maximum drawdown, ending equity, explicit cost drag, turnover, and sample interval.
-- Preserve responsive layout, Chinese-first bilingual labels, keyboard navigation, and a printable
-  view. The existing deep report remains the audit surface rather than being duplicated.
+- Preserve responsive layout, independent English/Simplified-Chinese pages, keyboard navigation,
+  and a printable view. The existing deep report remains the audit surface rather than being
+  duplicated.
 
 ### SC05 — One-command local presentation
 
@@ -144,16 +137,15 @@ showcase.
 
 ### SC06 — Credibility and repository front door
 
-- Rewrite the root README around the current A01–A38 system: value proposition, workflow diagram,
+- Rewrite the root README around the current implemented system: value proposition, workflow diagram,
   screenshots, supported/unsupported behavior, quick showcase path, architecture links, test
   baseline, and investment-risk disclaimer.
 - Remove stale statements such as “A01–A10 implemented” and the incomplete built-in factor list.
 - Add a small architecture image or repository-native diagram and two screenshots generated from
   the showcase hub. Screenshots are documentation assets, not result truth.
 - Add minimal `CONTRIBUTING.md`, `SECURITY.md`, and `CHANGELOG.md` before sharing the repository link.
-  A dependency lock, multi-version CI, packaging/release automation, and plugin compatibility policy
-  remain part of the later engineering-grade open-source phase unless the showcase will be publicly
-  distributed rather than shown locally.
+  A dependency lock, release automation, dependency-update policy, and plugin compatibility policy
+  remain part of the later engineering-grade open-source phase.
 
 ### SC07 — Clean evidence decision
 
@@ -204,7 +196,7 @@ link. S6 is strongly preferred for an external or recorded presentation.
 
 ## Explicitly deferred
 
-- General-purpose natural-language parsing inside `bianbt`.
+- General-purpose natural-language parsing inside `bfbt`.
 - Arbitrary factor DSL/plugins and generated-code execution.
 - A production background-job daemon, queue, cancellation service, or multi-user quotas.
 - Automatic Fast Matrix candidate selection; the user remains the promotion decision maker.

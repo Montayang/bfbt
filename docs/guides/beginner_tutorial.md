@@ -1,4 +1,4 @@
-# bianbt 傻瓜式入门教程
+# bfbt 傻瓜式入门教程
 
 这份教程只做一件事：让第一次接触本项目的人，用真实 Binance 永续合约数据跑出
 一份完整回测报告。
@@ -13,7 +13,8 @@
 
 完成后会得到一个回测目录，其中包括：
 
-- `report.html`：最容易阅读的网页报告。
+- `report.html`：默认英文网页报告；同目录的 `report.en.html` 是显式英文版，
+  `report.zh-CN.html` 是独立简体中文版。
 - `metrics.json`：收益、回撤、Sharpe 等汇总指标。
 - `tables/trades.parquet`：每笔模拟成交。
 - `tables/positions.parquet`：每分钟持仓。
@@ -37,7 +38,7 @@
 打开终端，复制：
 
 ```bash
-cd /path/to/bianbt
+cd /path/to/bfbt
 ```
 
 确认位置：
@@ -49,7 +50,7 @@ pwd
 应该看到：
 
 ```text
-/path/to/bianbt
+/path/to/bfbt
 ```
 
 后面的命令都在这个目录执行。
@@ -67,7 +68,7 @@ source .venv/bin/activate
 命令行左侧通常会出现 `(.venv)`。再确认 CLI 可用：
 
 ```bash
-bianbt --help
+bfbt --help
 ```
 
 只要能看到 `run`、`data`、`catalog` 等命令，就可以继续。
@@ -81,7 +82,7 @@ python3 -m venv .venv
 source .venv/bin/activate
 python -m pip install --upgrade pip
 python -m pip install -e ".[test]"
-bianbt --help
+bfbt --help
 ```
 
 如果安装依赖时失败，先不要继续，查看文末“常见错误”。
@@ -131,7 +132,7 @@ RAW_ROOT="$SOURCE/raw"
 RAW_MANIFESTS="$SOURCE/manifests/raw"
 
 mkdir -p "$DATA_ROOT/catalogs" "$LOG_ROOT"
-bianbt catalog init --database "$DB"
+bfbt catalog init --database "$DB"
 ```
 
 下载 8 个合约的 2026 年 6 月数据。整段复制即可。你也可以把三处时间同时改成
@@ -141,21 +142,21 @@ bianbt catalog init --database "$DB"
 for SYMBOL in BTCUSDT ETHUSDT BNBUSDT SOLUSDT XRPUSDT DOGEUSDT ADAUSDT LINKUSDT
 do
   echo "正在下载 $SYMBOL trade bars"
-  bianbt data archive-sync bars "$SYMBOL" \
+  bfbt data archive-sync bars "$SYMBOL" \
     2026-06-01T00:00:00Z 2026-07-01T00:00:00Z \
     --interval 1m --frequency monthly --workers 1 \
     --raw-root "$RAW_ROOT" --manifest-root "$RAW_MANIFESTS" \
     --database "$DB" || break
 
   echo "正在下载 $SYMBOL mark bars"
-  bianbt data archive-sync mark_bars "$SYMBOL" \
+  bfbt data archive-sync mark_bars "$SYMBOL" \
     2026-06-01T00:00:00Z 2026-07-01T00:00:00Z \
     --interval 1m --frequency monthly --workers 1 \
     --raw-root "$RAW_ROOT" --manifest-root "$RAW_MANIFESTS" \
     --database "$DB" || break
 
   echo "正在下载 $SYMBOL funding"
-  bianbt data archive-sync funding "$SYMBOL" \
+  bfbt data archive-sync funding "$SYMBOL" \
     2026-06-01T00:00:00Z 2026-07-01T00:00:00Z \
     --frequency monthly --workers 1 \
     --raw-root "$RAW_ROOT" --manifest-root "$RAW_MANIFESTS" \
@@ -170,7 +171,7 @@ done
 最后下载公开合约信息：
 
 ```bash
-bianbt data snapshot exchange-info \
+bfbt data snapshot exchange-info \
   --raw-root "$RAW_ROOT" \
   --manifest-root "$RAW_MANIFESTS" \
   --database "$DB"
@@ -260,7 +261,7 @@ echo "$DATASET_VERSION"
 整段复制：
 
 ```bash
-bianbt run \
+bfbt run \
   "$DATASET_ID" \
   "$DATASET_VERSION" \
   momentum \
@@ -351,7 +352,7 @@ test -f "$RUN_ROOT/$RUN_ID/report.html" && echo "报告已生成"
 
 ## 第九步：验证相同输入不会产生第二份结果
 
-原样重新执行第六步的 `bianbt run` 命令。
+原样重新执行第六步的 `bfbt run` 命令。
 
 如果代码、数据和配置完全没变，应该看到：
 
@@ -416,7 +417,7 @@ $CONFIG_ROOT/backtest.json
 - 改多空数量：保持 `construction=long_short_count`，修改 `long_count` 和
   `short_count`。
 
-改完后重新运行 `bianbt run`。配置变化会产生新的 run ID，这是正确行为。
+改完后重新运行 `bfbt run`。配置变化会产生新的 run ID，这是正确行为。
 
 不要一开始就修改：
 
@@ -427,14 +428,14 @@ $CONFIG_ROOT/backtest.json
 
 ## 常见错误
 
-### `bianbt: command not found`
+### `bfbt: command not found`
 
 通常是没有启动虚拟环境：
 
 ```bash
-cd /path/to/bianbt
+cd /path/to/bfbt
 source .venv/bin/activate
-bianbt --help
+bfbt --help
 ```
 
 ### `No such file or directory`
@@ -445,7 +446,7 @@ bianbt --help
 pwd
 ```
 
-必须是 `/path/to/bianbt`。再检查变量：
+必须是 `/path/to/bfbt`。再检查变量：
 
 ```bash
 echo "$SOURCE"
@@ -493,7 +494,7 @@ find "$SOURCE/manifests/raw" -type f | sort
 
 依次确认：
 
-- [ ] `bianbt --help` 能正常显示。
+- [ ] `bfbt --help` 能正常显示。
 - [ ] 第四步输出了 `dataset_id=...` 和 `dataset_version=live-smoke-...`。
 - [ ] 第六步输出了 `status=succeeded`。
 - [ ] 第七步没有 AssertionError，并显示 `memory_budget_passed=true`。

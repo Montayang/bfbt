@@ -1,4 +1,4 @@
-# bianbt 文档导航
+# bfbt 文档导航
 
 文档按用途分类。第一次使用系统从“使用指南”开始；开发或审阅引擎时从“架构设计”与
 “参考资料”开始。
@@ -95,3 +95,5 @@
   真实相邻账本状态。
 - [`acceptance/A39.md`](acceptance/A39.md)：受控 ResearchIntent、只读 doctor、不可变证据
   验证与离线 Showcase 页面。
+- [`acceptance/A40.md`](acceptance/A40.md)：BFBT 公开身份、英文主入口与独立中英文 HTML
+  产物合同。

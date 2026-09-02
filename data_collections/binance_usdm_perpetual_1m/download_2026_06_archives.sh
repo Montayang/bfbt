@@ -4,7 +4,7 @@ set -euo pipefail
 BACKTEST_ROOT=$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)
 DATA_ROOT=${1:-"$BACKTEST_ROOT/data/backtest/datasets/binance_usdm_perpetual_1m"}
 WORKERS=${WORKERS:-6}
-CLI="$BACKTEST_ROOT/.venv/bin/bianbt"
+CLI="$BACKTEST_ROOT/.venv/bin/bfbt"
 RAW_ROOT="$DATA_ROOT/raw"
 MANIFEST_ROOT="$DATA_ROOT/manifests/raw"
 LOG_ROOT="$DATA_ROOT/logs/download"

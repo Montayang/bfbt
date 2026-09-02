@@ -12,12 +12,12 @@ import pyarrow.parquet as pq
 import pytest
 from typer.testing import CliRunner
 
-from bianbt.cli import app
-from bianbt.data.catalog import DuckDBCatalog
-from bianbt.data.hashing import sha256_bytes
-from bianbt.data.ingest.raw_store import RawRestStore
-from bianbt.data.manifests import RawObjectManifest, manifest_json
-from bianbt.data.normalize.core import (
+from bfbt.cli import app
+from bfbt.data.catalog import DuckDBCatalog
+from bfbt.data.hashing import sha256_bytes
+from bfbt.data.ingest.raw_store import RawRestStore
+from bfbt.data.manifests import RawObjectManifest, manifest_json
+from bfbt.data.normalize.core import (
     NormalizationError,
     build_normalization_release,
     normalize_bars,
@@ -25,12 +25,12 @@ from bianbt.data.normalize.core import (
     normalize_funding,
     raw_object_path,
 )
-from bianbt.data.normalize.service import NormalizationService
-from bianbt.data.publisher import ParquetPublisher, PublicationConflictError
-from bianbt.data.schemas import validate_arrow_schema
-from bianbt.data.sources.base import RestPage
-from bianbt.data.storage import DataStoreError, ParquetDataStore
-from bianbt.data.validation.reports import QualityError, QualityPolicy, evaluate_quality
+from bfbt.data.normalize.service import NormalizationService
+from bfbt.data.publisher import ParquetPublisher, PublicationConflictError
+from bfbt.data.schemas import validate_arrow_schema
+from bfbt.data.sources.base import RestPage
+from bfbt.data.storage import DataStoreError, ParquetDataStore
+from bfbt.data.validation.reports import QualityError, QualityPolicy, evaluate_quality
 
 BACKTEST_ROOT = Path(__file__).resolve().parents[2]
 A04_FIXTURES = BACKTEST_ROOT / "tests" / "fixtures" / "ingest" / "acceptance_04"

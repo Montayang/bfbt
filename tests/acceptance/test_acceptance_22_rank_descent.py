@@ -6,9 +6,9 @@ import polars as pl
 import pytest
 from polars.testing import assert_frame_equal
 
-from bianbt.config.backtest import PortfolioV2Config, RankSelectionConfig
-from bianbt.portfolio.constraints import construct_portfolio
-from bianbt.portfolio.history import (
+from bfbt.config.backtest import PortfolioV2Config, RankSelectionConfig
+from bfbt.portfolio.constraints import construct_portfolio
+from bfbt.portfolio.history import (
     RankDescentTracker,
     RankStateBudgetExceeded,
 )

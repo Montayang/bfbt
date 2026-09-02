@@ -45,6 +45,10 @@ manifests before reporting success.
 - Every curve report with trade artifacts must expose every fill and every position-change timestamp.
 - Strategy-family parent reports may index multiple immutable child reports but must not merge their
   identities.
+- New human-facing HTML publishes `*.en.html` and `*.zh-CN.html`; the compatibility `*.html` path is
+  the English document. JSON, Parquet, manifests, hashes, and metric keys remain language-neutral.
+- Existing immutable runs are not rewritten merely to add a language file. Rebuild language variants
+  under `reports/` or another derived-output root after verifying the original manifest.
 
 Showcase pages under `showcases/` are derived presentation views. They must verify every selected
 immutable run before reading metrics, display source/warning qualifications, avoid absolute machine

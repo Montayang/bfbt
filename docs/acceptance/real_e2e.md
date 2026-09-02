@@ -44,7 +44,7 @@ Catalog、四份 JSON 配置与 runs 分别写入 `DB`、`CONFIG_ROOT` 和 `RUN_
 使用准备器输出的 `dataset_version`：
 
 ```bash
-bianbt run binance-usdm-real-e2e-smoke-2025-01 DATASET_VERSION momentum \
+bfbt run binance-usdm-real-e2e-smoke-2025-01 DATASET_VERSION momentum \
   --database "$DB" \
   --data-config "$CONFIG_ROOT/data.json" \
   --universe-config "$CONFIG_ROOT/universe.json" \

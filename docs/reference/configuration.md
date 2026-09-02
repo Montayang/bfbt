@@ -11,7 +11,7 @@ factor.yaml     因子、参数、预处理和标签
 backtest.yaml   组合、执行、成本、风险和输出
 ```
 
-每次运行先加载配置，再由 Pydantic 解析为不可变模型。可通过 `bianbt config show` 查看完全展开结果；正式 run artifact 将同一结果保存为 `resolved_config.json`。
+每次运行先加载配置，再由 Pydantic 解析为不可变模型。可通过 `bfbt config show` 查看完全展开结果；正式 run artifact 将同一结果保存为 `resolved_config.json`。
 
 优先级从低到高：
 
@@ -281,7 +281,7 @@ datasets.mark_bars: required when valuation.price=mark_close
   模型，不能混用第一版扁平 portfolio 字段。
 
 可审阅示例为 `configs/backtest_v2.example.yaml`。A18 已开放 V2 的正式事件循环，A20
-已支持 `performance.mode=chunked`；`bianbt run` 会发布 run/v2 manifest、Rank、仓位
+已支持 `performance.mode=chunked`；`bfbt run` 会发布 run/v2 manifest、Rank、仓位
 指令、风险事件、带引用成交和交互报告。
 
 V2 关键校验包括：

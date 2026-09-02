@@ -7,10 +7,10 @@ import json
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
 
-from bianbt.data.catalog import DuckDBCatalog
-from bianbt.data.ingest.raw_store import RawRestStore
-from bianbt.data.normalize.service import NormalizationService
-from bianbt.data.sources.base import RestPage
+from bfbt.data.catalog import DuckDBCatalog
+from bfbt.data.ingest.raw_store import RawRestStore
+from bfbt.data.normalize.service import NormalizationService
+from bfbt.data.sources.base import RestPage
 
 START = datetime(2024, 1, 1, tzinfo=timezone.utc)
 

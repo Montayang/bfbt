@@ -9,15 +9,15 @@ import polars as pl
 import pytest
 from polars.testing import assert_frame_equal
 
-from bianbt.config.backtest import PortfolioV2Config
-from bianbt.portfolio.base import PortfolioError
-from bianbt.portfolio.constraints import construct_portfolio
-from bianbt.portfolio.history import (
+from bfbt.config.backtest import PortfolioV2Config
+from bfbt.portfolio.base import PortfolioError
+from bfbt.portfolio.constraints import construct_portfolio
+from bfbt.portfolio.history import (
     RankHistoryBuffer,
     RankStateBudgetExceeded,
     iter_rank_snapshots,
 )
-from bianbt.portfolio.ranking import build_rank_snapshots
+from bfbt.portfolio.ranking import build_rank_snapshots
 
 BACKTEST_ROOT = Path(__file__).resolve().parents[2]
 FIXTURE = (

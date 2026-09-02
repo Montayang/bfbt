@@ -316,26 +316,26 @@ ArtifactStore 使用临时目录，只有全部产物成功后才原子发布为
 
 ## 13. CLI 边界
 
-A09 新增顶层 `bianbt run DATASET_ID DATASET_VERSION FACTOR` 和 `bianbt report RUN_ID`。正式 run 只接受 Catalog 中精确 DatasetSnapshot；report 先验证 artifact 集合、大小和 hash，并禁止写回不可变 run 目录。A10 增加 `bianbt performance plan`、`inspect` 和 `clean-work`；清理默认 dry-run，只识别已死亡、达到年龄阈值且带 marker 的 `.work/a10-*`。
+A09 新增顶层 `bfbt run DATASET_ID DATASET_VERSION FACTOR` 和 `bfbt report RUN_ID`。正式 run 只接受 Catalog 中精确 DatasetSnapshot；report 先验证 artifact 集合、大小和 hash，并禁止写回不可变 run 目录。A10 增加 `bfbt performance plan`、`inspect` 和 `clean-work`；清理默认 dry-run，只识别已死亡、达到年龄阈值且带 marker 的 `.work/a10-*`。
 
 
 预定命令：
 
 ```text
-bianbt data discover
-bianbt data download
-bianbt data normalize
-bianbt data validate
-bianbt data compact
-bianbt data coverage
-bianbt universe build
-bianbt factor compute
-bianbt factor evaluate
-bianbt run
-bianbt report
-bianbt performance plan
-bianbt performance inspect
-bianbt performance clean-work
+bfbt data discover
+bfbt data download
+bfbt data normalize
+bfbt data validate
+bfbt data compact
+bfbt data coverage
+bfbt universe build
+bfbt factor compute
+bfbt factor evaluate
+bfbt run
+bfbt report
+bfbt performance plan
+bfbt performance inspect
+bfbt performance clean-work
 ```
 
 CLI 只负责解析配置、调用 application service 和返回退出码，不放置业务计算逻辑。

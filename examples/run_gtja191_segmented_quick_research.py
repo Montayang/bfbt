@@ -12,18 +12,18 @@ from time import perf_counter
 
 import polars as pl
 
-from bianbt.config.factor import LabelDefinition
-from bianbt.config.universe import UniverseConfig
-from bianbt.data.hashing import content_sha256
-from bianbt.data.manifests import DatasetSnapshotManifest, load_manifest
-from bianbt.data.resample import resample_bars
-from bianbt.factors.registry import compute_factor
-from bianbt.labels.forward_returns import compute_forward_returns
-from bianbt.reports.research_study import render_quick_only_study_report
-from bianbt.research.ic import information_coefficient
-from bianbt.research.quantiles import quantile_returns
-from bianbt.research.turnover import factor_rank_turnover
-from bianbt.universe.point_in_time import build_point_in_time_universe, build_schedule
+from bfbt.config.factor import LabelDefinition
+from bfbt.config.universe import UniverseConfig
+from bfbt.data.hashing import content_sha256
+from bfbt.data.manifests import DatasetSnapshotManifest, load_manifest
+from bfbt.data.resample import resample_bars
+from bfbt.factors.registry import compute_factor
+from bfbt.labels.forward_returns import compute_forward_returns
+from bfbt.reports.research_study import render_quick_only_study_report
+from bfbt.research.ic import information_coefficient
+from bfbt.research.quantiles import quantile_returns
+from bfbt.research.turnover import factor_rank_turnover
+from bfbt.universe.point_in_time import build_point_in_time_universe, build_schedule
 
 from run_gtja191_quick_research import FORMULAS, definition, sink_cache
 

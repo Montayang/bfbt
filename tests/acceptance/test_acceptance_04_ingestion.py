@@ -14,12 +14,12 @@ import pytest
 from pydantic import ValidationError
 from typer.testing import CliRunner
 
-from bianbt.cli import app
-from bianbt.data.catalog import DuckDBCatalog
-from bianbt.data.ingest.raw_store import RawRestStore
-from bianbt.data.ingest.service import ArchiveIngestService
-from bianbt.data.manifests import RawObjectManifest, load_manifest
-from bianbt.data.sources.base import (
+from bfbt.cli import app
+from bfbt.data.catalog import DuckDBCatalog
+from bfbt.data.ingest.raw_store import RawRestStore
+from bfbt.data.ingest.service import ArchiveIngestService
+from bfbt.data.manifests import RawObjectManifest, load_manifest
+from bfbt.data.sources.base import (
     ArchiveDiscoveryRequest,
     ChecksumError,
     FetchStatus,
@@ -27,14 +27,14 @@ from bianbt.data.sources.base import (
     SourceError,
     SourceProtocolError,
 )
-from bianbt.data.sources.binance_archive import (
+from bfbt.data.sources.binance_archive import (
     BinanceArchiveSource,
     archive_candidates,
     local_archive_coverage,
     parse_checksum,
 )
-from bianbt.data.sources.binance_rest import BinanceRestSource
-from bianbt.data.sources.http import PublicHttpClient, RetryPolicy
+from bfbt.data.sources.binance_rest import BinanceRestSource
+from bfbt.data.sources.http import PublicHttpClient, RetryPolicy
 
 BACKTEST_ROOT = Path(__file__).resolve().parents[2]
 FIXTURES = BACKTEST_ROOT / "tests" / "fixtures" / "ingest" / "acceptance_04"

@@ -6,8 +6,8 @@ import duckdb
 import pytest
 from typer.testing import CliRunner
 
-from bianbt.cli import app
-from bianbt.data.catalog import (
+from bfbt.cli import app
+from bfbt.data.catalog import (
     CATALOG_SCHEMA_VERSION,
     CatalogConflictError,
     CatalogNotFoundError,
@@ -18,7 +18,7 @@ from bianbt.data.catalog import (
     rebuild_catalog,
     rebuild_catalog_from_directory,
 )
-from bianbt.data.manifests import (
+from bfbt.data.manifests import (
     ArtifactHash,
     DatasetSnapshotManifest,
     FactorVersionReference,
@@ -30,7 +30,7 @@ from bianbt.data.manifests import (
     load_manifest_auto,
     manifest_sha256,
 )
-from bianbt.data.schemas import get_schema_definition
+from bfbt.data.schemas import get_schema_definition
 
 BACKTEST_ROOT = Path(__file__).resolve().parents[2]
 MANIFESTS = BACKTEST_ROOT / "tests" / "fixtures" / "catalog" / "acceptance_03" / "manifests"

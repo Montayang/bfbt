@@ -1,4 +1,4 @@
-# bianbt 用户使用手册（当前版本）
+# bfbt 用户使用手册（当前版本）
 
 本文面向需要在本地使用 Binance USDⓈ-M 永续合约数据进行截面因子研究和正式
 回测的用户。当前版本号为 `0.1.0`，A01–A10 功能已经实现，并已用 8 个真实合约、
@@ -6,7 +6,7 @@
 
 ## 1. 先了解边界
 
-bianbt 是离线研究系统，不是实盘下单程序：
+bfbt 是离线研究系统，不是实盘下单程序：
 
 - 只使用 Binance 公共市场数据，不需要 API key，也不会读取仓库根目录 `.env`。
 - 不包含实盘交易 Client，不会访问账户、余额或下单接口。
@@ -29,7 +29,7 @@ Binance archive/REST
   → 标准化 Parquet + QualityReport + PartitionManifest
   → DuckDB Catalog
   → DatasetSnapshot（精确绑定四类数据版本和分区）
-  → bianbt run
+  → bfbt run
   → 不可变 run artifacts
 ```
 
@@ -51,18 +51,18 @@ Binance archive/REST
 进入克隆后的仓库根目录：
 
 ```bash
-cd /path/to/bianbt
+cd /path/to/bfbt
 python3 -m venv .venv
 source .venv/bin/activate
 python -m pip install --upgrade pip
 python -m pip install -e ".[test]"
-bianbt --help
+bfbt --help
 ```
 
 以后每次新终端只需：
 
 ```bash
-cd /path/to/bianbt
+cd /path/to/bfbt
 source .venv/bin/activate
 ```
 
@@ -86,7 +86,7 @@ data/backtest/
 ### 4.1 设置路径
 
 ```bash
-cd /path/to/bianbt
+cd /path/to/bfbt
 source .venv/bin/activate
 
 DATA_ROOT=data/backtest
@@ -118,7 +118,7 @@ python tests/live/prepare_real_backtest_smoke.py \
 DATASET_ID=binance-usdm-real-e2e-smoke-2026-06
 DATASET_VERSION=live-smoke-替换为实际值
 
-bianbt run \
+bfbt run \
   "$DATASET_ID" "$DATASET_VERSION" momentum \
   --database "$DB" \
   --data-config "$CONFIG_ROOT/data.json" \
@@ -140,15 +140,17 @@ RUN_ID=a09-替换为实际值
 python tests/live/validate_real_backtest_smoke.py \
   "$RUN_ROOT/$RUN_ID"
 
-bianbt performance inspect "$RUN_ID" \
+bfbt performance inspect "$RUN_ID" \
   --output-root "$RUN_ROOT"
 ```
 
-run 内的 `report.html` 是不可变发布产物。需要用新版渲染器重建时写到集中报告目录：
+run 内的 `report.html` 是默认英文不可变发布产物；同一新 run 还包含显式英文
+`report.en.html` 和独立简体中文 `report.zh-CN.html`。需要用新版渲染器重建时写到集中报告
+目录，命令会同时生成三者：
 
 ```bash
 mkdir -p "$REPORT_ROOT/$RUN_ID"
-bianbt report "$RUN_ID" \
+bfbt report "$RUN_ID" \
   --output-root "$RUN_ROOT" \
   --output "$REPORT_ROOT/$RUN_ID/report.html"
 ```
@@ -161,7 +163,7 @@ bianbt report "$RUN_ID" \
 运行前校验：
 
 ```bash
-bianbt config validate \
+bfbt config validate \
   --data configs/data.yaml \
   --universe configs/universe.yaml \
   --factor configs/factor.yaml \
@@ -169,7 +171,7 @@ bianbt config validate \
   --run-ready
 ```
 
-使用 `bianbt config show` 可查看默认值展开、路径稳定化后的完整配置。建议每次
+使用 `bfbt config show` 可查看默认值展开、路径稳定化后的完整配置。建议每次
 正式运行都保留四份配置，不用命令行临时逻辑替代配置。
 
 ### 5.1 data.yaml
@@ -209,7 +211,7 @@ filters:
 当前内建因子均为 `v1`：
 
 ```bash
-bianbt research list-factors
+bfbt research list-factors
 ```
 
 可用名称：
@@ -265,8 +267,8 @@ RAW_ROOT="$DATA_ROOT/raw"
 RAW_MANIFESTS="$DATA_ROOT/manifests/raw"
 DB="$DATA_ROOT/catalog.duckdb"
 
-bianbt catalog init --database "$DB"
-bianbt catalog info --database "$DB"
+bfbt catalog init --database "$DB"
+bfbt catalog info --database "$DB"
 ```
 
 ### 6.2 规划和下载 archive
@@ -274,7 +276,7 @@ bianbt catalog info --database "$DB"
 离线查看候选对象：
 
 ```bash
-bianbt data archive-plan bars BTCUSDT \
+bfbt data archive-plan bars BTCUSDT \
   2025-01-01T00:00:00Z 2025-02-01T00:00:00Z \
   --interval 1m --frequency monthly
 ```
@@ -282,19 +284,19 @@ bianbt data archive-plan bars BTCUSDT \
 真实下载并验证官方 checksum、ZIP CRC、文件 hash：
 
 ```bash
-bianbt data archive-sync bars BTCUSDT \
+bfbt data archive-sync bars BTCUSDT \
   2025-01-01T00:00:00Z 2025-02-01T00:00:00Z \
   --interval 1m --frequency monthly --workers 1 \
   --raw-root "$RAW_ROOT" --manifest-root "$RAW_MANIFESTS" \
   --database "$DB"
 
-bianbt data archive-sync mark_bars BTCUSDT \
+bfbt data archive-sync mark_bars BTCUSDT \
   2025-01-01T00:00:00Z 2025-02-01T00:00:00Z \
   --interval 1m --frequency monthly --workers 1 \
   --raw-root "$RAW_ROOT" --manifest-root "$RAW_MANIFESTS" \
   --database "$DB"
 
-bianbt data archive-sync funding BTCUSDT \
+bfbt data archive-sync funding BTCUSDT \
   2025-01-01T00:00:00Z 2025-02-01T00:00:00Z \
   --frequency monthly --workers 1 \
   --raw-root "$RAW_ROOT" --manifest-root "$RAW_MANIFESTS" \
@@ -304,7 +306,7 @@ bianbt data archive-sync funding BTCUSDT \
 覆盖率检查不会联网：
 
 ```bash
-bianbt data archive-coverage bars BTCUSDT \
+bfbt data archive-coverage bars BTCUSDT \
   2025-01-01T00:00:00Z 2025-02-01T00:00:00Z \
   --interval 1m --frequency monthly \
   --raw-root "$RAW_ROOT" --manifest-root "$RAW_MANIFESTS"
@@ -316,18 +318,18 @@ archive 尚未发布的最近数据可通过 `rest-klines`、`rest-funding` 分�
 响应都作为不可变 Raw JSON 保存。用 `--help` 查看完整分页参数：
 
 ```bash
-bianbt data rest-klines --help
-bianbt data rest-funding --help
+bfbt data rest-klines --help
+bfbt data rest-funding --help
 ```
 
 抓取当前公开快照：
 
 ```bash
-bianbt data snapshot exchange-info \
+bfbt data snapshot exchange-info \
   --raw-root "$RAW_ROOT" --manifest-root "$RAW_MANIFESTS" \
   --database "$DB"
 
-bianbt data snapshot funding-info \
+bfbt data snapshot funding-info \
   --raw-root "$RAW_ROOT" --manifest-root "$RAW_MANIFESTS" \
   --database "$DB"
 ```
@@ -339,7 +341,7 @@ exchangeInfo 是采集时刻的快照，不是历史真相。
 一个标准化批次应属于同一 UTC 月。示例：
 
 ```bash
-bianbt data normalize bars \
+bfbt data normalize bars \
   "$RAW_MANIFESTS/archive-bars-BTCUSDT-1m-monthly-2025-01.json" \
   --raw-root "$RAW_ROOT" \
   --normalized-root "$DATA_ROOT/normalized" \
@@ -360,7 +362,7 @@ QualityReport 和 PartitionManifest，并登记 Catalog。重复运行相同输�
 预览标准化数据：
 
 ```bash
-bianbt data normalized-scan bars DATASET_VERSION \
+bfbt data normalized-scan bars DATASET_VERSION \
   2025-01-01T00:00:00Z 2025-01-02T00:00:00Z \
   --interval 1m --columns open_time,symbol,close \
   --normalized-root "$DATA_ROOT/normalized" \
@@ -369,7 +371,7 @@ bianbt data normalized-scan bars DATASET_VERSION \
 
 ### 6.5 生成 DatasetSnapshot
 
-正式 `bianbt run` 只接受已经登记到 Catalog 的 DatasetSnapshot。当前应编写一个
+正式 `bfbt run` 只接受已经登记到 Catalog 的 DatasetSnapshot。当前应编写一个
 项目级准备脚本，完成以下工作：
 
 1. 为 bars、mark_bars、funding、contracts 选择精确 dataset version。
@@ -386,7 +388,7 @@ bianbt data normalized-scan bars DATASET_VERSION \
 正式命令的一般形式：
 
 ```bash
-bianbt run DATASET_ID DATASET_VERSION FACTOR_NAME \
+bfbt run DATASET_ID DATASET_VERSION FACTOR_NAME \
   --database /path/to/catalog.duckdb \
   --data-config /path/to/data.yaml \
   --universe-config /path/to/universe.yaml \
@@ -432,7 +434,7 @@ DatasetSnapshot、schema、factor 和所有 artifact hash。不要手工修改�
 期末持仓表示最后估值时刻仍在账面的仓位，当前引擎不会为了报告美观而在回测边界
 伪造一笔强制平仓交易。
 
-旧的不可变 run 可以使用本节末尾的 `bianbt report` 命令重建到外部 HTML。
+旧的不可变 run 可以使用本节末尾的 `bfbt report` 命令重建到外部 HTML。
 
 先看 `report.html` 和 `metrics.json`，再按问题读取 Parquet：
 
@@ -460,7 +462,7 @@ DatasetSnapshot、schema、factor 和所有 artifact hash。不要手工修改�
 重建报告不会重跑回测，且会先验证 artifact：
 
 ```bash
-bianbt report RUN_ID \
+bfbt report RUN_ID \
   --output-root /path/to/runs \
   --output /path/outside/run/rebuilt.html
 ```
@@ -471,10 +473,10 @@ bianbt report RUN_ID \
 
 预览命令适合调试单个阶段，不发布正式 run：
 
-- `bianbt data resample-preview`：验证 1m 到更高周期的 UTC 聚合。
-- `bianbt universe preview`：查看时点合约池和过滤 reason code。
-- `bianbt research preview`：查看因子、label、IC、quantile、coverage、turnover。
-- `bianbt backtest preview`：查看 targets、trades、positions、costs、returns。
+- `bfbt data resample-preview`：验证 1m 到更高周期的 UTC 聚合。
+- `bfbt universe preview`：查看时点合约池和过滤 reason code。
+- `bfbt research preview`：查看因子、label、IC、quantile、coverage、turnover。
+- `bfbt backtest preview`：查看 targets、trades、positions、costs、returns。
 
 这些命令要求显式提供 `history_start`，研究/回测预览还要求 `future_end`。CLI 不会
 发现历史不足后自动联网补数据。完整参数以各命令 `--help` 为准；可复制的已验证
@@ -505,17 +507,17 @@ performance:
 查看分块计划和成功诊断：
 
 ```bash
-bianbt performance plan \
+bfbt performance plan \
   2025-01-01T00:00:00Z 2025-02-01T00:00:00Z \
   --chunk-interval 1d --overlap-seconds 90000
 
-bianbt performance inspect RUN_ID --output-root /path/to/runs
+bfbt performance inspect RUN_ID --output-root /path/to/runs
 ```
 
 清理异常退出遗留的临时 workspace 时，先 dry-run：
 
 ```bash
-bianbt performance clean-work \
+bfbt performance clean-work \
   --output-root /path/to/runs \
   --older-than-hours 24 --dry-run
 ```
@@ -528,15 +530,15 @@ bianbt performance clean-work \
 常用命令：
 
 ```bash
-bianbt catalog info --database /path/catalog.duckdb
-bianbt catalog coverage bars DATASET_VERSION --database /path/catalog.duckdb
-bianbt catalog resolve DATASET_ID SNAPSHOT_VERSION --database /path/catalog.duckdb
+bfbt catalog info --database /path/catalog.duckdb
+bfbt catalog coverage bars DATASET_VERSION --database /path/catalog.duckdb
+bfbt catalog resolve DATASET_ID SNAPSHOT_VERSION --database /path/catalog.duckdb
 ```
 
 Catalog 是可重建控制面，不存放主要行情。数据库损坏或迁移时可从 manifests 重建：
 
 ```bash
-bianbt catalog rebuild /path/to/manifests \
+bfbt catalog rebuild /path/to/manifests \
   --database /path/to/new-catalog.duckdb
 ```
 
@@ -547,7 +549,7 @@ bianbt catalog rebuild /path/to/manifests \
 ### `config validate --run-ready` 失败
 
 通常是 start/end/dataset_version、手续费或滑点仍为 null，或者组合 construction 与
-quantile/count 字段混用。先执行 `bianbt config show` 查看展开配置。
+quantile/count 字段混用。先执行 `bfbt config show` 查看展开配置。
 
 ### `no partitions overlap the requested constraints`
 
@@ -594,7 +596,7 @@ Fast Matrix 是 V2 语义下的研究后端，不是正式回测的替代品。�
 TargetSchedule parquet、完整调仓时间 JSON 和父 SignalSnapshot hash 后运行：
 
 ```bash
-bianbt research matrix-run targets.parquet bars.parquet \
+bfbt research matrix-run targets.parquet bars.parquet \
   --rebalance-times rebalance_times.json \
   --parent-manifest-sha256 <sha256> \
   --market-identity <dataset-identity> \
@@ -609,7 +611,7 @@ bianbt research matrix-run targets.parquet bars.parquet \
 后可重建报告：
 
 ```bash
-bianbt research study-report data/backtest/research_studies/<study_id> \
+bfbt research study-report data/backtest/research_studies/<study_id> \
   --matrix-runs-root data/backtest/research_runs
 ```
 
@@ -635,7 +637,7 @@ bianbt research study-report data/backtest/research_studies/<study_id> \
 查看任意命令的当前参数时，以本地安装版本为准：
 
 ```bash
-bianbt --help
-bianbt data --help
-bianbt run --help
+bfbt --help
+bfbt data --help
+bfbt run --help
 ```

@@ -8,8 +8,8 @@ from pathlib import Path
 import polars as pl
 import pytest
 
-from bianbt.config.backtest import RiskV2Config
-from bianbt.risk import (
+from bfbt.config.backtest import RiskV2Config
+from bfbt.risk import (
     RiskEvaluationError,
     RiskStateBudgetExceeded,
     RiskStateMachine,

@@ -7,7 +7,7 @@ from datetime import datetime, timedelta, timezone
 import polars as pl
 import pytest
 
-from bianbt.config.backtest import (
+from bfbt.config.backtest import (
     CapitalConfig,
     FeeConfig,
     HoldingPolicyConfig,
@@ -16,11 +16,11 @@ from bianbt.config.backtest import (
     RiskV2Config,
     SlippageConfig,
 )
-from bianbt.portfolio.instructions import (
+from bfbt.portfolio.instructions import (
     IncrementalPositionEngine,
     PositionInstructionError,
 )
-from bianbt.risk import RiskStateMachine
+from bfbt.risk import RiskStateMachine
 
 T0 = datetime(2026, 1, 1, tzinfo=timezone.utc)
 
@@ -289,7 +289,7 @@ def test_v2_event_loop_executes_hard_stop_in_trigger_bar() -> None:
         _strategy,
     )
 
-    from bianbt.engine.v2 import run_v2_backtest
+    from bfbt.engine.v2 import run_v2_backtest
 
     strategy = _strategy().filter(
         (pl.col("symbol") == "BTCUSDT")

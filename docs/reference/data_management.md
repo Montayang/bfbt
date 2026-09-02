@@ -31,7 +31,7 @@ data/backtest/
 │       ├── configs/
 │       └── logs/
 ├── runs/
-│   ├── <run_id>/{manifest.json,metrics.json,performance.json,report.html,tables/*.parquet}
+│   ├── <run_id>/{manifest.json,metrics.json,performance.json,report*.html,tables/*.parquet}
 │   ├── .staging/
 │   └── .work/
 └── reports/
@@ -48,7 +48,7 @@ data/backtest/
 - `reports/<run_id>` 只保存从 run 重建出的外部展示版本，可以覆盖或生成多个变体。
 
 `runs/<run_id>/report.html` 与 `reports/<run_id>/*.html` 含义不同：前者是发布 run 时
-写入 manifest 的冻结报告，不得修改；后者是后来使用 `bianbt report` 从不可变 artifact
+写入 manifest 的冻结报告，不得修改；后者是后来使用 `bfbt report` 从不可变 artifact
 重建的展示文件。任何重建报告都不得再散落在 dataset 或 workspace 根目录。
 
 A09 只在集中 runs 根目录的 `.staging` 下准备目录，完整校验后原子改名；A10 的

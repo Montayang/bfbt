@@ -5,9 +5,9 @@ from datetime import datetime, timedelta, timezone
 import polars as pl
 import pytest
 
-from bianbt.config.factor import FactorDefinition
-from bianbt.factors.base import FactorError
-from bianbt.factors.sampled_mean import (
+from bfbt.config.factor import FactorDefinition
+from bfbt.factors.base import FactorError
+from bfbt.factors.sampled_mean import (
     sampled_mean_ratio_inverse_raw,
     sampled_mean_ratio_raw,
 )

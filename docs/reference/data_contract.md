@@ -243,7 +243,9 @@ gross_exposure, net_exposure, turnover, run_id
 ├── resolved_config.json
 ├── environment.json
 ├── run_metadata.json
-├── report.html
+├── report.html                 # default English compatibility entry
+├── report.en.html              # explicit English
+├── report.zh-CN.html           # Simplified Chinese
 └── tables/{targets,returns,trades,positions,costs,factor_values,universe}.parquet
 ```
 
@@ -285,7 +287,7 @@ random_seed, artifact_hashes, warnings_count
 
 ## Schema registry 与 fingerprint
 
-A02 在 `src/bianbt/data/schemas.py` 登记四个精确版本：
+A02 在 `src/bfbt/data/schemas.py` 登记四个精确版本：
 
 ```text
 bars/v1
@@ -340,7 +342,7 @@ A12 在不改变四张 V1 市场数据 schema 列表的前提下，增加独立 
 | `risk_events` | `v1` | event_id | 单合约及组合风险触发和成交关联 |
 
 三张表尚未在 A12 生成。其字段顺序、Arrow 类型、nullability、主键、排序键和 metadata
-已在 `src/bianbt/data/schemas.py` 固定，并由
+已在 `src/bfbt/data/schemas.py` 固定，并由
 `tests/fixtures/config/acceptance_12/v2_contract_golden.json` 审计。
 
 新增 identity 字段的原因：
@@ -352,7 +354,7 @@ A12 在不改变四张 V1 市场数据 schema 列表的前提下，增加独立 
 
 ## A12 事件契约
 
-`src/bianbt/data/v2_contracts.py` 集中定义：
+`src/bfbt/data/v2_contracts.py` 集中定义：
 
 - 优先级：未来强平保留位、组合风险、单合约风险、universe 强退、定时策略。
 - 选择、约束、资金、风险、冷却、抑制和结束边界 reason code。

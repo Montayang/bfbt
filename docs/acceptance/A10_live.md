@@ -47,7 +47,7 @@ exchangeInfo 不是历史快照，因此年度运行明确设置
 原子方式发布 Raw 和 manifest：
 
 ```bash
-bianbt data archive-sync DATASET SYMBOL \
+bfbt data archive-sync DATASET SYMBOL \
   2024-12-01T00:00:00Z 2026-02-01T00:00:00Z \
   --frequency monthly --workers 4 ...
 ```
@@ -87,7 +87,7 @@ python tests/live/prepare_capacity_2025.py \
 ## 6. 年度正式运行
 
 ```bash
-bianbt run binance-usdm-full-market-2025 DATASET_VERSION momentum \
+bfbt run binance-usdm-full-market-2025 DATASET_VERSION momentum \
   --database "$DB" \
   --data-config "$CONFIG_ROOT/data.json" \
   --universe-config "$CONFIG_ROOT/universe.json" \

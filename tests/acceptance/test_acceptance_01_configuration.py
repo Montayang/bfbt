@@ -6,12 +6,12 @@ import pytest
 from pydantic import ValidationError
 from typer.testing import CliRunner
 
-from bianbt.cli import app
-from bianbt.config.backtest import BacktestConfig, RunConfig
-from bianbt.config.bundle import ResolvedConfig, RunReadinessError
-from bianbt.config.data import DataConfig
-from bianbt.config.fingerprint import config_fingerprint
-from bianbt.config.loader import ConfigLoadError, ConfigPaths, load_config_bundle
+from bfbt.cli import app
+from bfbt.config.backtest import BacktestConfig, RunConfig
+from bfbt.config.bundle import ResolvedConfig, RunReadinessError
+from bfbt.config.data import DataConfig
+from bfbt.config.fingerprint import config_fingerprint
+from bfbt.config.loader import ConfigLoadError, ConfigPaths, load_config_bundle
 
 BACKTEST_ROOT = Path(__file__).resolve().parents[2]
 FIXTURES = BACKTEST_ROOT / "tests" / "fixtures" / "config" / "acceptance_01"

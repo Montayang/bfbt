@@ -9,13 +9,13 @@ import polars as pl
 import pytest
 from polars.testing import assert_frame_equal
 
-import bianbt.engine.v2_chunked as chunked_module
-from bianbt.config.backtest import BacktestConfig
-from bianbt.data.v2_contracts import V2ReasonCode
-from bianbt.engine.v2 import run_v2_backtest
-from bianbt.engine.v2_chunked import run_v2_backtest_chunked
-from bianbt.performance.diagnostics import MemoryBudgetExceeded
-from bianbt.performance.memory import WorkerMemorySupervisor
+import bfbt.engine.v2_chunked as chunked_module
+from bfbt.config.backtest import BacktestConfig
+from bfbt.data.v2_contracts import V2ReasonCode
+from bfbt.engine.v2 import run_v2_backtest
+from bfbt.engine.v2_chunked import run_v2_backtest_chunked
+from bfbt.performance.diagnostics import MemoryBudgetExceeded
+from bfbt.performance.memory import WorkerMemorySupervisor
 
 START = datetime(2026, 6, 1, tzinfo=timezone.utc)
 END = START + timedelta(minutes=7)

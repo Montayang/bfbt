@@ -8,9 +8,9 @@ import polars as pl
 import pytest
 from polars.testing import assert_frame_equal
 
-from bianbt.config.factor import FactorDefinition
-from bianbt.factors.base import FactorError
-from bianbt.factors.registry import compute_factor
+from bfbt.config.factor import FactorDefinition
+from bfbt.factors.base import FactorError
+from bfbt.factors.registry import compute_factor
 
 START = datetime(2026, 7, 1, tzinfo=timezone.utc)
 BARS_VERSION = "bars-a26"
@@ -173,7 +173,7 @@ def test_state_start_requires_matching_state_and_source_alignment() -> None:
 
 
 def test_report_renders_exact_r3_formula_and_clocks() -> None:
-    from bianbt.reports.renderer import _factor_html, _v2_audit_html
+    from bfbt.reports.renderer import _factor_html, _v2_audit_html
 
     definition = _definition(
         source_interval="15m", fast_span=7, slow_span=25

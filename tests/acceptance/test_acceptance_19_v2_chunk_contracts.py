@@ -9,23 +9,23 @@ from pathlib import Path
 import polars as pl
 import pytest
 
-from bianbt.config.backtest import BacktestPerformanceV2Config
-from bianbt.engine.v2 import V2ExecutionCheckpoint
-from bianbt.engine.v2_checkpoint import (
+from bfbt.config.backtest import BacktestPerformanceV2Config
+from bfbt.engine.v2 import V2ExecutionCheckpoint
+from bfbt.engine.v2_checkpoint import (
     read_v2_execution_checkpoint,
     write_v2_execution_checkpoint,
 )
-from bianbt.performance.chunks import TimeChunk, plan_time_chunks
-from bianbt.performance.diagnostics import MemoryBudgetExceeded
-from bianbt.performance.memory import AbsoluteMemoryMonitor
-from bianbt.performance.recovery import (
+from bfbt.performance.chunks import TimeChunk, plan_time_chunks
+from bfbt.performance.diagnostics import MemoryBudgetExceeded
+from bfbt.performance.memory import AbsoluteMemoryMonitor
+from bfbt.performance.recovery import (
     V2ChunkRunIdentity,
     V2ChunkWorkspace,
     V2WorkspaceCorruptionError,
     V2WorkspaceError,
 )
-from bianbt.portfolio.instructions import PositionCheckpoint
-from bianbt.risk.state_machine import RiskCheckpoint
+from bfbt.portfolio.instructions import PositionCheckpoint
+from bfbt.risk.state_machine import RiskCheckpoint
 
 START = datetime(2026, 6, 1, tzinfo=timezone.utc)
 END = START + timedelta(hours=12)

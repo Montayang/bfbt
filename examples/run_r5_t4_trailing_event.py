@@ -7,10 +7,10 @@ from copy import deepcopy
 from pathlib import Path
 from typing import Any
 
-from bianbt.application.run import execute_formal_run
-from bianbt.artifacts.environment import capture_environment
-from bianbt.config.bundle import ResolvedConfig
-from bianbt.data.catalog import DuckDBCatalog
+from bfbt.application.run import execute_formal_run
+from bfbt.artifacts.environment import capture_environment
+from bfbt.config.bundle import ResolvedConfig
+from bfbt.data.catalog import DuckDBCatalog
 
 from run_sampled_mean_rank5_event_2026_07 import (
     CATALOG_PATH,

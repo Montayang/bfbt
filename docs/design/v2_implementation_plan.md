@@ -30,12 +30,12 @@ A12 配置与契约
 
 ### 2.1 代码落点
 
-第二版不复制一个 `bianbt_v2` 包，也不从回测子项目再次独立出去。它是现有
-`src/bianbt` 的兼容演进，可以复用已经验收的数据、账本、分块、artifact
+第二版不复制一个 `bfbt_v2` 包，也不从回测子项目再次独立出去。它是现有
+`src/bfbt` 的兼容演进，可以复用已经验收的数据、账本、分块、artifact
 和报告能力；仍与仓库中的实盘 `bianbot` 保持隔离。
 
 ```text
-src/bianbt/
+src/bfbt/
 ├── config/backtest.py          # V1 adapter、V2 配置和跨字段校验
 ├── data/schemas.py             # rankings/instructions/risk events schema
 ├── portfolio/

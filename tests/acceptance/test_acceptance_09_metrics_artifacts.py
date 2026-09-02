@@ -13,22 +13,22 @@ import pytest
 from pydantic import BaseModel
 from typer.testing import CliRunner
 
-from bianbt.artifacts.environment import EnvironmentInfo, capture_environment
-from bianbt.artifacts.store import ArtifactStoreError, RunArtifactStore
-from bianbt.cli import app
-from bianbt.config.backtest import BacktestOutputConfig
-from bianbt.data.hashing import sha256_file
-from bianbt.data.manifests import (
+from bfbt.artifacts.environment import EnvironmentInfo, capture_environment
+from bfbt.artifacts.store import ArtifactStoreError, RunArtifactStore
+from bfbt.cli import app
+from bfbt.config.backtest import BacktestOutputConfig
+from bfbt.data.hashing import sha256_file
+from bfbt.data.manifests import (
     DatasetReference,
     DatasetSnapshotManifest,
     FactorVersionReference,
     RunManifest,
     load_manifest,
 )
-from bianbt.data.schemas import get_schema_definition
-from bianbt.engine.vectorized import BacktestResult
-from bianbt.metrics import MetricsError, compute_run_metrics
-from bianbt.reports.renderer import _report_metrics, render_report_from_artifacts
+from bfbt.data.schemas import get_schema_definition
+from bfbt.engine.vectorized import BacktestResult
+from bfbt.metrics import MetricsError, compute_run_metrics
+from bfbt.reports.renderer import _report_metrics, render_report_from_artifacts
 
 START = datetime(2024, 1, 1, tzinfo=timezone.utc)
 SHA_A = "a" * 64
@@ -85,14 +85,14 @@ def _snapshot() -> DatasetSnapshotManifest:
 def test_environment_fingerprint_covers_standalone_repository_root(
     tmp_path: Path,
 ) -> None:
-    repository = tmp_path / "bianbt"
+    repository = tmp_path / "bfbt"
     repository.mkdir()
     subprocess.run(("git", "init", "-q"), cwd=repository, check=True)
     subprocess.run(
-        ("git", "config", "user.name", "bianbt-test"), cwd=repository, check=True
+        ("git", "config", "user.name", "bfbt-test"), cwd=repository, check=True
     )
     subprocess.run(
-        ("git", "config", "user.email", "bianbt@example.invalid"),
+        ("git", "config", "user.email", "bfbt@example.invalid"),
         cwd=repository,
         check=True,
     )
@@ -295,7 +295,9 @@ def test_success_publish_is_terminal_hashed_and_complete(tmp_path: Path) -> None
     expected = {
         "environment.json",
         "metrics.json",
+        "report.en.html",
         "report.html",
+        "report.zh-CN.html",
         "resolved_config.json",
         "run_metadata.json",
         "tables/costs.parquet",
@@ -316,28 +318,34 @@ def test_success_publish_is_terminal_hashed_and_complete(tmp_path: Path) -> None
     assert '"factor_names": [' in metadata
     assert '"factor_name": "momentum"' in metadata
     report = (published.path / "report.html").read_text(encoding="utf-8")
+    report_en = (published.path / "report.en.html").read_text(encoding="utf-8")
+    report_zh = (published.path / "report.zh-CN.html").read_text(encoding="utf-8")
+    assert report == report_en
+    assert '<html lang="en">' in report
+    assert '<html lang="zh-CN">' in report_zh
     for expected_text in (
-        "数据与运行概览 / Data & Run Overview",
-        "因子公式 / Factor Formula",
-        "动量因子 / Momentum",
-        "总收益率 / Total Return",
-        "手续费实际扣除 / Actual Fee Deduction",
-        "滑点实际扣除 / Actual Slippage Deduction",
-        "总盈利/亏损 / Total Profit &amp; Loss",
-        "成交详情 / Trade Details",
-        "期末持仓 / Ending Positions",
-        "净值走势与时点审计 / Equity & Point-in-time Audit",
+        "Data & Run Overview",
+        "Factor Formula",
+        "Total Return",
+        "Actual Fee Deduction",
+        "Actual Slippage Deduction",
+        "Total Profit &amp; Loss",
+        "Trade Details",
+        "Ending Positions",
+        "Equity & Point-in-time Audit",
         'id="interactive-report-data"',
         'data-chart-action="worst"',
         'data-chart-action="next-trade"',
-        "持仓变化 / Position State",
-        "关联成交 / Trades",
+        "Position State",
+        "Trades",
         'data-local-target="overview"',
         'data-local-target="metrics"',
-        "成交前 / Before",
-        "成交后 / After",
+        "Before",
+        "After",
     ):
         assert expected_text in report
+    for expected_text in ("数据与运行概览", "因子公式", "总收益率", "成交详情", "期末持仓"):
+        assert expected_text in report_zh
     assert "<details" not in report
     match = re.search(
         r'<script id="interactive-report-data" '
@@ -433,7 +441,7 @@ def test_render_failure_cleans_staging_and_publishes_nothing(
         raise ValueError("intentional renderer failure")
 
     monkeypatch.setattr(
-        "bianbt.artifacts.store.render_report_from_artifacts", fail_report
+        "bfbt.artifacts.store.render_report_from_artifacts", fail_report
     )
     store = RunArtifactStore(
         tmp_path / "runs", now=lambda: START + timedelta(days=2)

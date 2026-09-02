@@ -10,10 +10,10 @@ import polars as pl
 import pytest
 from typer.testing import CliRunner
 
-from bianbt.artifacts.store import RunArtifactStore
-from bianbt.cli import app
-from bianbt.data.hashing import sha256_bytes, sha256_file
-from bianbt.data.manifests import (
+from bfbt.artifacts.store import RunArtifactStore
+from bfbt.cli import app
+from bfbt.data.hashing import sha256_bytes, sha256_file
+from bfbt.data.manifests import (
     ArtifactHash,
     FactorVersionReference,
     RunDatasetReference,
@@ -21,10 +21,10 @@ from bianbt.data.manifests import (
     SchemaVersionReference,
     manifest_json,
 )
-from bianbt.data.schemas import get_schema_definition
-from bianbt.showcase.doctor import doctor
-from bianbt.showcase.models import ShowcaseSpec
-from bianbt.showcase.service import ShowcaseError, build_showcase, inspect_showcase
+from bfbt.data.schemas import get_schema_definition
+from bfbt.showcase.doctor import doctor
+from bfbt.showcase.models import ShowcaseSpec
+from bfbt.showcase.service import ShowcaseError, build_showcase, inspect_showcase
 
 
 UTC = timezone.utc
@@ -253,14 +253,27 @@ def test_a39_verified_evidence_and_deterministic_static_hub(tmp_path: Path) -> N
     assert run["opening_margin_trajectory"][0]["margin"] == pytest.approx(200.0)
     page, first = build_showcase(spec, runs_root=runs_root, output_root=output_root)
     first_html = page.read_bytes()
+    first_en = (page.parent / "index.en.html").read_bytes()
+    first_zh = (page.parent / "index.zh-CN.html").read_bytes()
     first_json = (page.parent / "evidence.json").read_bytes()
     page, second = build_showcase(spec, runs_root=runs_root, output_root=output_root)
     assert first == second
     assert page.read_bytes() == first_html
+    assert (page.parent / "index.en.html").read_bytes() == first_en
+    assert (page.parent / "index.zh-CN.html").read_bytes() == first_zh
     assert (page.parent / "evidence.json").read_bytes() == first_json
     html = first_html.decode("utf-8")
+    assert html == first_en.decode("utf-8")
+    assert '<html lang="en">' in html
+    assert '<html lang="zh-CN">' in first_zh.decode("utf-8")
     assert "QUALIFIED" in html
     assert "5.00%" in html
+    assert "May 2026" in html
+    assert "2026 年 5 月" in first_zh.decode("utf-8")
+    assert "retained in their source language for auditability" in html
+    assert "funding_assume_zero" in html
+    assert "funding_assume_zero:fixture" not in html
+    assert "funding_assume_zero:fixture" in first_json.decode("utf-8")
     assert "http://" not in html and "https://" not in html
     assert str(tmp_path) not in html and str(tmp_path) not in first_json.decode()
 

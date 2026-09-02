@@ -5,8 +5,8 @@ from datetime import datetime, timedelta, timezone
 import polars as pl
 import pytest
 
-from bianbt.config.factor import FactorDefinition
-from bianbt.factors.gtja191 import gtja191_raw
+from bfbt.config.factor import FactorDefinition
+from bfbt.factors.gtja191 import gtja191_raw
 
 
 UTC_MS = pl.Datetime("ms", "UTC")

@@ -9,8 +9,8 @@ from pathlib import Path
 
 import polars as pl
 
-from bianbt.artifacts.store import RunArtifactStore
-from bianbt.data.manifests import RunManifest, load_manifest
+from bfbt.artifacts.store import RunArtifactStore
+from bfbt.data.manifests import RunManifest, load_manifest
 
 EXPECTED_SYMBOLS = {
     "BTCUSDT",

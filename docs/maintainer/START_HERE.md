@@ -44,7 +44,7 @@ category is used. A new session must not inherit old approvals.
 Use this generic prompt when opening a clean session in a checkout of this repository:
 
 ```text
-Use this bianbt repository as the only backtest workspace.
+Use this bfbt repository as the only backtest workspace.
 
 First read AGENTS.md and docs/maintainer/START_HERE.md, follow its reading order, and read
 .local/CODEX_HANDOFF.md if it exists. Then only inspect the branch, HEAD, worktree, recent

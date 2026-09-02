@@ -9,13 +9,13 @@ from types import SimpleNamespace
 import polars as pl
 import pytest
 
-from bianbt.application.reuse import signal_identity
-from bianbt.artifacts.reuse import (
+from bfbt.application.reuse import signal_identity
+from bfbt.artifacts.reuse import (
     ReuseArtifactError,
     ReusableSnapshotStore,
     reuse_manifest_sha256,
 )
-from bianbt.data.hashing import sha256_file
+from bfbt.data.hashing import sha256_file
 
 START = datetime(2026, 6, 1, tzinfo=timezone.utc)
 

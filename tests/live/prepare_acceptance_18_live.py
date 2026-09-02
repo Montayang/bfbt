@@ -13,19 +13,19 @@ import subprocess
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
 
-from bianbt.data.catalog import DuckDBCatalog
-from bianbt.data.hashing import content_sha256
-from bianbt.data.manifests import (
+from bfbt.data.catalog import DuckDBCatalog
+from bfbt.data.hashing import content_sha256
+from bfbt.data.manifests import (
     DatasetReference,
     DatasetSnapshotManifest,
     RawObjectManifest,
     load_manifest,
     manifest_json,
 )
-from bianbt.data.normalize import NORMALIZER_CODE_VERSION
-from bianbt.data.normalize.service import NormalizationService
-from bianbt.data.schemas import get_schema_definition
-from bianbt.data.validation.reports import QualityPolicy
+from bfbt.data.normalize import NORMALIZER_CODE_VERSION
+from bfbt.data.normalize.service import NormalizationService
+from bfbt.data.schemas import get_schema_definition
+from bfbt.data.validation.reports import QualityPolicy
 
 UTC = timezone.utc
 SYMBOLS = ("BTCUSDT", "ETHUSDT", "BNBUSDT", "SOLUSDT")
@@ -49,7 +49,7 @@ def _download(root: Path, database: Path) -> None:
     for symbol in SYMBOLS:
         for dataset in ("bars", "mark_bars"):
             _command(
-                "bianbt",
+                "bfbt",
                 "data",
                 "archive-sync",
                 dataset,
@@ -70,7 +70,7 @@ def _download(root: Path, database: Path) -> None:
                 "2",
             )
         _command(
-            "bianbt",
+            "bfbt",
             "data",
             "rest-funding",
             symbol,
@@ -84,7 +84,7 @@ def _download(root: Path, database: Path) -> None:
             database,
         )
     _command(
-        "bianbt",
+        "bfbt",
         "data",
         "snapshot",
         "exchange-info",

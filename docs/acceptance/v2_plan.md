@@ -10,7 +10,7 @@
 2. Codex 在交付验收点时说明测试内容、验证功能、环境搭建、命令、预期结果和代码
    索引。
 3. 默认由用户执行测试；未经该阶段明确授权，Codex 不代替用户运行验收。
-4. 用户明确许可自行验收后，Codex 才在保留的 `bianbt-acceptance` tmux 会话中按
+4. 用户明确许可自行验收后，Codex 才在保留的 `bfbt-acceptance` tmux 会话中按
    文档执行，并如实报告结果。
 5. 验收失败只修当前阶段，不混入后续阶段功能。
 6. 用户确认或授权的验收通过后，才按用户指示 commit 和 push；“通过”本身不等于
@@ -38,10 +38,10 @@
 每一阶段的具体命令由对应 `Axx.md` 固定，统一从下列环境开始：
 
 ```bash
-cd /path/to/bianbt
+cd /path/to/bfbt
 source .venv/bin/activate
 python --version
-bianbt --help
+bfbt --help
 ```
 
 自动验收脚本位于 `tests/acceptance/`。标准命令形式为：
@@ -114,13 +114,13 @@ Codex 到达每个验收点时应一次性交付：
 - 第一版 A01–A11 的主要功能和交互报告已经完成，现有版本作为兼容基线。
 - 第二版开发前架构、实施路线和验收边界已经形成文档。
 - A12：18 个本阶段 item 与 A01/A02/A12 共 40 个联合回归已在
-  `bianbt-acceptance:a12` tmux 中通过。
+  `bfbt-acceptance:a12` tmux 中通过。
 - A13：8 个本阶段 item 与 A08/A09/A12/A13 共 58 个联合回归已在
-  `bianbt-acceptance:a13` tmux 中通过。
+  `bfbt-acceptance:a13` tmux 中通过。
 - A14：8 个本阶段 item 与 A08/A09/A10/A12/A13/A14 共 81 个联合回归已在
-  `bianbt-acceptance:a14` tmux 中通过；V2 正式全链路仍受数据扫描前执行保护。
+  `bfbt-acceptance:a14` tmux 中通过；V2 正式全链路仍受数据扫描前执行保护。
 - A15：17 个本阶段 item 与 A08/A09/A10/A12/A13/A14/A15 共 98 个联合回归已在
-  `bianbt-acceptance:a15` tmux 中通过；V2 正式全链路仍受数据扫描前执行保护。
+  `bfbt-acceptance:a15` tmux 中通过；V2 正式全链路仍受数据扫描前执行保护。
 - A16 风险状态机、next-open 意图、fixture 和用户验收文档已完成；2026-08-04
   单阶段 12 项和 A08–A16 联合回归 110 项均已通过。V2 正式全链路仍受数据扫描前
   执行保护。

@@ -8,14 +8,14 @@ from pathlib import Path
 import polars as pl
 import pytest
 
-from bianbt.config.backtest import (
+from bfbt.config.backtest import (
     CapitalConfig,
     FeeConfig,
     PortfolioConstraintsV2Config,
     PositionSizingConfig,
     SlippageConfig,
 )
-from bianbt.portfolio.instructions import (
+from bfbt.portfolio.instructions import (
     IncrementalPositionEngine,
     PositionInstructionError,
     PositionStateBudgetExceeded,

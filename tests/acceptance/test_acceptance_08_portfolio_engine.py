@@ -10,17 +10,17 @@ from pydantic import ValidationError
 from typer.main import get_command
 from typer.testing import CliRunner
 
-from bianbt.cli import app
-from bianbt.config.backtest import (
+from bfbt.cli import app
+from bfbt.config.backtest import (
     BacktestConfig,
     FeeConfig,
     PortfolioConfig,
     SlippageConfig,
 )
-from bianbt.engine.costs import CostModelError, fee_rate, slippage_rate
-from bianbt.engine.execution import fill_time
-from bianbt.engine.vectorized import BacktestError, run_vectorized_backtest
-from bianbt.portfolio.constraints import construct_portfolio
+from bfbt.engine.costs import CostModelError, fee_rate, slippage_rate
+from bfbt.engine.execution import fill_time
+from bfbt.engine.vectorized import BacktestError, run_vectorized_backtest
+from bfbt.portfolio.constraints import construct_portfolio
 
 START = datetime(2024, 1, 1, tzinfo=timezone.utc)
 FACTOR_VERSION = "factor-a08-fixture"

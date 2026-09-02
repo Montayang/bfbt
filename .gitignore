@@ -13,6 +13,7 @@ __pycache__/
 .pytest_cache/
 .coverage
 htmlcov/
+/build/
 
 # Backtest data, catalogs, checkpoints, runs, reports, and logs
 /data/
@@ -27,7 +28,3 @@ htmlcov/
 .codex/
 .agents/
 /.local/
-
-# Keep the bianbt.data Python package trackable despite /data/ above.
-!src/bianbt/data/
-!src/bianbt/data/**

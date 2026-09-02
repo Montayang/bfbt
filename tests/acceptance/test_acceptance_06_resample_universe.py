@@ -9,11 +9,11 @@ import pytest
 from typer.main import get_command
 from typer.testing import CliRunner
 
-from bianbt.cli import app
-from bianbt.config.universe import UniverseConfig
-from bianbt.data.resample import ResampleError, resample_bars
-from bianbt.universe.filters import UniverseReason
-from bianbt.universe.point_in_time import (
+from bfbt.cli import app
+from bfbt.config.universe import UniverseConfig
+from bfbt.data.resample import ResampleError, resample_bars
+from bfbt.universe.filters import UniverseReason
+from bfbt.universe.point_in_time import (
     UniverseBuildError,
     build_point_in_time_universe,
     build_schedule,

@@ -10,12 +10,12 @@ import pytest
 from typer.main import get_command
 from typer.testing import CliRunner
 
-from bianbt.cli import app
-from bianbt.config.factor import FactorDefinition, LabelDefinition
-from bianbt.factors.base import FactorError
-from bianbt.factors.registry import compute_factor, list_factors
-from bianbt.labels.forward_returns import compute_forward_returns
-from bianbt.research.evaluator import evaluate_factor
+from bfbt.cli import app
+from bfbt.config.factor import FactorDefinition, LabelDefinition
+from bfbt.factors.base import FactorError
+from bfbt.factors.registry import compute_factor, list_factors
+from bfbt.labels.forward_returns import compute_forward_returns
+from bfbt.research.evaluator import evaluate_factor
 
 START = datetime(2024, 1, 1, tzinfo=timezone.utc)
 BARS_VERSION = "bars-a07-fixture"

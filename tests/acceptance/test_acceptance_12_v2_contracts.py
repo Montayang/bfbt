@@ -11,18 +11,18 @@ import yaml
 from pydantic import ValidationError
 from typer.testing import CliRunner
 
-from bianbt.cli import app
-from bianbt.config.backtest import (
+from bfbt.cli import app
+from bfbt.config.backtest import (
     BacktestConfig,
     PortfolioV2Config,
     PositionSizingConfig,
     RankSelectionConfig,
     SymbolExitRuleConfig,
 )
-from bianbt.config.bundle import ResolvedConfig, RunReadinessError
-from bianbt.config.fingerprint import config_fingerprint
-from bianbt.config.loader import ConfigPaths, load_config_bundle
-from bianbt.data.manifests import (
+from bfbt.config.bundle import ResolvedConfig, RunReadinessError
+from bfbt.config.fingerprint import config_fingerprint
+from bfbt.config.loader import ConfigPaths, load_config_bundle
+from bfbt.data.manifests import (
     ArtifactSchemaVersionReference,
     FactorVersionReference,
     RunDatasetReference,
@@ -31,12 +31,12 @@ from bianbt.data.manifests import (
     load_manifest_auto,
     manifest_json,
 )
-from bianbt.data.schemas import (
+from bfbt.data.schemas import (
     get_schema_definition,
     list_artifact_schema_definitions,
     list_schema_definitions,
 )
-from bianbt.data.v2_contracts import (
+from bfbt.data.v2_contracts import (
     V2_EVENT_CONTRACT_VERSION,
     event_contract_descriptor,
     event_contract_fingerprint,

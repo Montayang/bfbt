@@ -4,7 +4,8 @@ Updated: 2026-09-02.
 
 ## Repository identity
 
-- Package: `bianbt`, version `0.1.0`.
+- Brand: BFBT — Binance Futures Backtesting Framework. Package, import namespace, and CLI:
+  `bfbt`, version `0.1.0`.
 - Standalone repository root; no parent-repository or `bianbot` runtime dependency.
 - Initial standalone commit: `2f3a4d2e0170cffa0c0d121e3654b89b1882b32a`, migrated from
   the former mixed-repository `backtest/` snapshot at
@@ -23,8 +24,9 @@ Updated: 2026-09-02.
   sweep, per-symbol crossover instructions, and missing-bar valuation.
 - A31-A35: Fast Matrix capability planning, TargetSchedule, columnar economics, funding/mark,
   chunked checkpoints, research artifacts, and explicit Event promotion.
-- A36-A39: sampled-mean factors, Event parameter studies, activated trailing exits, rolling-margin
-  state, complete trade/position audit navigation, and a verified offline Agent Showcase thin slice.
+- A36-A40: sampled-mean factors, Event parameter studies, activated trailing exits, rolling-margin
+  state, complete trade/position audit navigation, a verified offline Agent Showcase thin slice,
+  full BFBT identity migration, and independent English/Simplified-Chinese HTML outputs.
 
 The intended workflow is:
 
@@ -61,6 +63,11 @@ V1 remains for compatibility and historical reproduction, not for new daily stra
   `331 passed in 21.58s` on Python 3.12.3 and pytest 8.4.2. Its focused A39 suite passed 6 tests,
   and the real local H2 preparation verified all three immutable runs with one expected provenance
   warning and no failures.
+- The BFBT public-release candidate completed the full offline suite on 2026-09-02:
+  `334 passed in 21.58s` on Python 3.12.3 and pytest 8.4.2. Its focused report, Showcase, and
+  language-contract suite passed 48 tests, and the real derived Showcase rebuild verified all
+  three immutable H2 runs. The editable install, CLI entry point, dependency check, and distributable
+  wheel were also verified; the wheel contains `bfbt` only and no legacy Python package.
 - Migration-time static checks covered Python AST parsing, TOML/YAML parsing, shell syntax,
   imports, project-root discovery, Markdown links, secret/path scanning, and Git integrity.
 
@@ -79,9 +86,9 @@ V1 remains for compatibility and historical reproduction, not for new daily stra
 
 - The deterministic research and Event engines, immutable identities, reports, and CLI provide a
   strong execution foundation for supervised Agent use.
-- A general no-code Agent control plane is not implemented. In particular, there is no versioned
-  ResearchIntent, authorization action contract, safe factor-expression boundary, unified research
-  orchestrator, or recorded background-job service.
+- A general no-code Agent control plane is not implemented. The curated Showcase has a versioned
+  ResearchIntent and action classes, but there is no general safe factor-expression boundary,
+  unified research orchestrator, authorization binding service, or recorded background-job service.
 - The durable gap register and implementation order are maintained in
   `docs/maintainer/AI_AGENT_READINESS.md`.
 - The bounded Showcase now has a strict ResearchIntent/ShowcaseSpec, ambiguity gate, action classes,
@@ -90,13 +97,15 @@ V1 remains for compatibility and historical reproduction, not for new daily stra
 
 ## Showcase surface
 
-- `bianbt doctor` performs stable read-only runtime, storage, catalog, intent, artifact, provenance,
+- `bfbt doctor` performs stable read-only runtime, storage, catalog, intent, artifact, provenance,
   and optional loopback-port checks.
-- `bianbt showcase inspect/build/prepare` verifies exact immutable runs and publishes only derived
+- `bfbt showcase inspect/build/prepare` verifies exact immutable runs and publishes only derived
   output under `data/backtest/showcases/`.
 - Showcase preflight proves each run's period, factor parameters, strategy name, and shared frozen
   economic identity match the ResearchIntent before rendering.
 - The initial H2 three-month Showcase exposes all dirty-provenance and funding-warning qualifications,
   includes loss and profit months, and derives opening margin directly from verified trades.
-- The repository front door now reflects A01-A39 and includes CI configuration plus minimum
-  contribution, security, and changelog documents.
+- The English repository front door and standalone Chinese README reflect A01-A40 and include CI,
+  contribution, security, changelog, MIT license, and Binance-independence disclosures.
+- Human-facing generated HTML publishes default English, explicit English, and independent
+  Simplified-Chinese files. Machine-readable artifacts remain language-neutral and single-copy.

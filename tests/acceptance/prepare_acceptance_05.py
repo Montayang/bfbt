@@ -7,9 +7,9 @@ import zipfile
 from datetime import datetime, timezone
 from pathlib import Path
 
-from bianbt.data.catalog import DuckDBCatalog
-from bianbt.data.hashing import sha256_bytes
-from bianbt.data.manifests import RawObjectManifest, manifest_json
+from bfbt.data.catalog import DuckDBCatalog
+from bfbt.data.hashing import sha256_bytes
+from bfbt.data.manifests import RawObjectManifest, manifest_json
 
 BACKTEST_ROOT = Path(__file__).resolve().parents[2]
 

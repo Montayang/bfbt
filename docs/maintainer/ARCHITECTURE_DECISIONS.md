@@ -59,3 +59,15 @@ silently approximated.
   runs and derive opening margin from audited notional/leverage, but cannot rewrite result truth.
 - Dirty source provenance, data warnings, and authorization action classes are presentation facts,
   not details the renderer may suppress.
+
+## Public identity and languages
+
+- The public brand is BFBT — Binance Futures Backtesting Framework; distribution, import namespace,
+  module entry point, and CLI use `bfbt`. No pre-release `bianbt` compatibility package is retained.
+- The historical `bianbt.*` Arrow metadata namespace is frozen as part of v1 wire-schema and run
+  fingerprints. Brand migration must not invalidate immutable evidence by renaming those keys.
+- English is the default repository and generated-report language. Human-facing HTML also publishes
+  an independent Simplified-Chinese sibling. Machine-readable identities and evidence are not
+  translated or duplicated.
+- BFBT is independent from Binance and has no affiliation, endorsement, sponsorship, or financial
+  relationship with Binance. This disclaimer must remain visible in the public front door.

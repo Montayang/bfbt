@@ -1,0 +1,42 @@
+name: Bug report
+description: Report a reproducible problem in BFBT
+title: "[Bug] "
+labels: [bug]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for helping improve BFBT. Do not include credentials, `.env` contents, account data, or private market data. Report security issues privately as described in `SECURITY.md`.
+  - type: textarea
+    id: summary
+    attributes:
+      label: Problem
+      description: What happened, and what did you expect instead?
+    validations:
+      required: true
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Minimal reproduction
+      description: Include the smallest safe configuration, command, or fixture that reproduces the issue.
+    validations:
+      required: true
+  - type: textarea
+    id: environment
+    attributes:
+      label: Environment
+      description: BFBT version/commit, Python version, operating system, and relevant dependency versions.
+    validations:
+      required: true
+  - type: textarea
+    id: identity
+    attributes:
+      label: Research identity and timing
+      description: If relevant, include dataset/config/factor identities and decision/fill timing without attaching private data.
+  - type: checkboxes
+    id: safety
+    attributes:
+      label: Safety check
+      options:
+        - label: I removed credentials, account data, `.env` contents, and private data.
+          required: true

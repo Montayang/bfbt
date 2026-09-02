@@ -7,10 +7,10 @@ from datetime import datetime, timedelta, timezone
 import polars as pl
 import pytest
 
-from bianbt.config.backtest import BacktestConfig
-from bianbt.data.v2_contracts import V2ReasonCode
-from bianbt.engine.v2 import run_v2_backtest
-from bianbt.engine.vectorized import BacktestError
+from bfbt.config.backtest import BacktestConfig
+from bfbt.data.v2_contracts import V2ReasonCode
+from bfbt.engine.v2 import run_v2_backtest
+from bfbt.engine.vectorized import BacktestError
 
 START = datetime(2025, 1, 8, tzinfo=timezone.utc)
 SYMBOLS = ("BTCUSDT", "ETHUSDT", "BNBUSDT")

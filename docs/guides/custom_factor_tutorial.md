@@ -22,9 +22,9 @@
 ## 2. 进入环境
 
 ```bash
-cd /path/to/bianbt
+cd /path/to/bfbt
 source .venv/bin/activate
-bianbt research list-factors
+bfbt research list-factors
 ```
 
 当前列表应包含 `amihud_illiquidity` 和版本 `v1`。如果缺失，先确认分支和安装环境，不要按
@@ -32,7 +32,7 @@ bianbt research list-factors
 
 ## 3. 阅读计算函数
 
-现有实现位于 `src/bianbt/factors/illiquidity.py`。以下代码展示新滚动因子必须处理的时点、
+现有实现位于 `src/bfbt/factors/illiquidity.py`。以下代码展示新滚动因子必须处理的时点、
 连续窗口、完整 K 线和有限值边界；新增自己的因子时复制结构而不是覆盖该文件：
 
 ```python
@@ -42,9 +42,9 @@ from __future__ import annotations
 
 import polars as pl
 
-from bianbt.config.durations import duration_seconds
-from bianbt.config.factor import FactorDefinition
-from bianbt.factors.base import FactorError
+from bfbt.config.durations import duration_seconds
+from bfbt.config.factor import FactorDefinition
+from bfbt.factors.base import FactorError
 
 
 def amihud_illiquidity_raw(
@@ -122,10 +122,10 @@ def amihud_illiquidity_raw(
 
 ## 4. 阅读注册信息和数据依赖
 
-当前 `src/bianbt/factors/registry.py` 已包含导入：
+当前 `src/bfbt/factors/registry.py` 已包含导入：
 
 ```python
-from bianbt.factors.illiquidity import amihud_illiquidity_raw
+from bfbt.factors.illiquidity import amihud_illiquidity_raw
 ```
 
 并在 `FACTOR_REGISTRY` 中注册：
@@ -157,7 +157,7 @@ from bianbt.factors.illiquidity import amihud_illiquidity_raw
 检查现有注册：
 
 ```bash
-bianbt research list-factors
+bfbt research list-factors
 ```
 
 输出中应出现 `amihud_illiquidity` 和版本 `v1`。
@@ -251,7 +251,7 @@ DATASET_VERSION="live-smoke-a345bf75422a6bad1f333017"
 运行：
 
 ```bash
-bianbt run \
+bfbt run \
   "$DATASET_ID" \
   "$DATASET_VERSION" \
   amihud_illiquidity \
@@ -298,7 +298,7 @@ echo "$RUN_ROOT/$RUN_ID/report.html"
 接入任意新因子都遵循同一流程：
 
 1. 明确公式、时间窗口、数值方向和行情字段。
-2. 在 `src/bianbt/factors/` 实现只使用当前及历史数据的 `raw_value`。
+2. 在 `src/bfbt/factors/` 实现只使用当前及历史数据的 `raw_value`。
 3. 在 registry 声明名称、版本、依赖列和计算函数。
 4. 添加公式、缺口、完整性和防未来数据测试。
 5. 创建独立因子配置，保留原始基准配置。

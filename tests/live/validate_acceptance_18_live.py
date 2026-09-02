@@ -11,9 +11,9 @@ from pathlib import Path
 
 import polars as pl
 
-from bianbt.artifacts.store import RunArtifactStore
-from bianbt.data.manifests import RunManifestV2, load_manifest_auto
-from bianbt.data.v2_contracts import V2ReasonCode
+from bfbt.artifacts.store import RunArtifactStore
+from bfbt.data.manifests import RunManifestV2, load_manifest_auto
+from bfbt.data.v2_contracts import V2ReasonCode
 
 SCENARIOS = (
     "exact_rank",
@@ -66,7 +66,7 @@ def _value(output: str, name: str) -> str:
 def _command(context: dict[str, object], scenario: str) -> list[str]:
     configs = Path(str(context["config_root"]))
     return [
-        "bianbt",
+        "bfbt",
         "run",
         str(context["dataset_id"]),
         str(context["dataset_version"]),
@@ -195,7 +195,7 @@ def main() -> None:
         rebuilt.parent.mkdir(parents=True, exist_ok=True)
         _run(
             [
-                "bianbt",
+                "bfbt",
                 "report",
                 first_id,
                 "--output-root",

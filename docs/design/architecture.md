@@ -64,7 +64,7 @@ catalog / parquet
 sources / raw files
 ```
 
-下层不能导入上层；`data.sources` 可以使用 HTTP，但 factor、portfolio、engine 和 reports 不能访问网络。`bianbt` 的任何模块都不能导入 `bianbot.Clients`。
+下层不能导入上层；`data.sources` 可以使用 HTTP，但 factor、portfolio、engine 和 reports 不能访问网络。`bfbt` 的任何模块都不能导入 `bianbot.Clients`。
 
 ## 两条运行路径
 
@@ -94,7 +94,7 @@ resolve dataset → build universe → compute factor/labels
 A01–A10 已实现并通过本地功能验收；A10 真实一年全市场容量仍需在用户目标机器验收。
 
 ```text
-src/bianbt/
+src/bfbt/
 ├── application/
 │   ├── run.py                 # A09/A10 模式分派和 terminal failure
 │   ├── planning.py            # A10 history overlap 与 final tail

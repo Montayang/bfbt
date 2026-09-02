@@ -6,17 +6,17 @@ import argparse
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
 
-from bianbt.data.catalog import DuckDBCatalog
-from bianbt.data.hashing import content_sha256
-from bianbt.data.manifests import (
+from bfbt.data.catalog import DuckDBCatalog
+from bfbt.data.hashing import content_sha256
+from bfbt.data.manifests import (
     DatasetReference,
     DatasetSnapshotManifest,
     RawObjectManifest,
     load_manifest,
     manifest_json,
 )
-from bianbt.data.normalize import NORMALIZER_CODE_VERSION
-from bianbt.data.schemas import get_schema_definition
+from bfbt.data.normalize import NORMALIZER_CODE_VERSION
+from bfbt.data.schemas import get_schema_definition
 
 from prepare_2026_06_dataset import _normalize
 
