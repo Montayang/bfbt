@@ -6,7 +6,7 @@ import json
 import os
 import shutil
 import tempfile
-from datetime import UTC, datetime
+from datetime import datetime, timezone
 from pathlib import Path, PurePosixPath
 
 from pydantic import Field, field_validator
@@ -156,7 +156,9 @@ class MatrixResearchStore:
                     byte_size=path.stat().st_size, sha256=sha256_file(path),
                 )
             manifest = MatrixResearchManifest(
-                run_id=result.run_id, created_at=datetime.now(UTC), result_hash=result.result_hash,
+                run_id=result.run_id,
+                created_at=datetime.now(timezone.utc),
+                result_hash=result.result_hash,
                 target_schedule_id=schedule.schedule_id,
                 target_parent_sha256=schedule.parent_manifest_sha256,
                 market_identity=market_identity, resolved_config_sha256=config_hash,

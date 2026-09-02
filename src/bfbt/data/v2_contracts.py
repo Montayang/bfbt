@@ -2,9 +2,10 @@
 
 from __future__ import annotations
 
-from enum import IntEnum, StrEnum, unique
+from enum import IntEnum, unique
 from typing import Any
 
+from bfbt.compat import StrEnum
 from bfbt.data.hashing import content_sha256
 
 V2_EVENT_CONTRACT_VERSION = "events/v3"

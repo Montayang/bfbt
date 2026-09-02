@@ -83,7 +83,7 @@ offline fixture tests are included; see the [Showcase guide](showcase/README.md)
   position-change, and risk-event audit navigation.
 - A controlled Agent-facing `ResearchIntent`, ambiguity gate, action classes, read-only doctor, and
   verified Showcase evidence. This is a curated thin slice, not a general no-code Agent service.
-- Public acceptance coverage through A40. The BFBT public-release candidate passes all 334 offline
+- Public acceptance coverage through A40. The BFBT public-release candidate passes all 335 offline
   tests; exact environment and historical evidence are recorded in
   [`CURRENT_STATE.md`](docs/maintainer/CURRENT_STATE.md).
 

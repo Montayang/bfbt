@@ -3,11 +3,16 @@ from __future__ import annotations
 import json
 from pathlib import Path
 
+from bfbt.compat import StrEnum
 from bfbt.reports.locales import localize_html, variant_path, write_html_variants
 from bfbt.reports.research_study import render_quick_only_study_report
 
 
 ROOT = Path(__file__).resolve().parents[2]
+
+
+class _CompatibilityValue(StrEnum):
+    VALUE = "VALUE"
 
 
 def test_public_identity_is_bfbt_with_english_front_door() -> None:
@@ -22,6 +27,12 @@ def test_public_identity_is_bfbt_with_english_front_door() -> None:
     assert "financially connected to Binance" in readme
     assert chinese.startswith("# BFBT\n")
     assert "不存在隶属、背书、赞助或任何利益关系" in chinese
+
+
+def test_declared_python_310_compatibility_surface() -> None:
+    project = (ROOT / "pyproject.toml").read_text(encoding="utf-8")
+    assert 'requires-python = ">=3.10"' in project
+    assert str(_CompatibilityValue.VALUE) == _CompatibilityValue.VALUE.value == "VALUE"
 
 
 def test_html_variants_are_separate_deterministic_documents(tmp_path: Path) -> None:

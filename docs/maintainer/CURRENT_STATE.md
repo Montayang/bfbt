@@ -64,10 +64,13 @@ V1 remains for compatibility and historical reproduction, not for new daily stra
   and the real local H2 preparation verified all three immutable runs with one expected provenance
   warning and no failures.
 - The BFBT public-release candidate completed the full offline suite on 2026-09-02:
-  `334 passed in 21.58s` on Python 3.12.3 and pytest 8.4.2. Its focused report, Showcase, and
+  `335 passed in 37.81s` on Python 3.12.3 and pytest 8.4.2. Its focused report, Showcase, and
   language-contract suite passed 48 tests, and the real derived Showcase rebuild verified all
   three immutable H2 runs. The editable install, CLI entry point, dependency check, and distributable
   wheel were also verified; the wheel contains `bfbt` only and no legacy Python package.
+- Declared Python 3.10 support uses a small standard-library compatibility surface for `StrEnum`
+  and UTC; all 183 Python files parse under the 3.10 grammar, while GitHub's 3.10/3.12 matrix is the
+  cross-runtime release gate.
 - Migration-time static checks covered Python AST parsing, TOML/YAML parsing, shell syntax,
   imports, project-root discovery, Markdown links, secret/path scanning, and Git integrity.
 

@@ -23,6 +23,8 @@ BFBT keeps a behavior-oriented changelog. Release dates use UTC.
   BFBT/`bfbt`; English is the default public entry point with separate Chinese documents.
 - Public contribution, security, changelog, documentation-map, and Showcase-preview surfaces use
   English-first presentation with linked Simplified-Chinese counterparts where applicable.
+- Python 3.10 compatibility now uses an explicit `StrEnum` fallback and `timezone.utc`, matching the
+  declared interpreter floor and CI matrix.
 
 ## 0.1.0
 

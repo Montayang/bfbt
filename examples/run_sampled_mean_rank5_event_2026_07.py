@@ -5,7 +5,7 @@ from __future__ import annotations
 import argparse
 import html
 import json
-from datetime import UTC, datetime
+from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
 
@@ -453,7 +453,7 @@ def _study_summary(strategy: str, candidates: list[dict[str, Any]]) -> dict[str,
                 else "completed_with_failures"
             )
         ),
-        "updated_at": datetime.now(UTC).isoformat(),
+        "updated_at": datetime.now(timezone.utc).isoformat(),
         "contract": contract,
         "contract_sha256": content_sha256(contract),
         "candidates": candidates,
@@ -477,7 +477,10 @@ def run(strategy: str, profiles: tuple[str, ...]) -> None:
     snapshot = catalog.resolve_dataset(DATASET_ID, DATASET_VERSION)
     environment = capture_environment(PROJECT_ROOT)
     for profile_id in profiles:
-        print(f"[{datetime.now(UTC).isoformat()}] {strategy} {profile_id} start", flush=True)
+        print(
+            f"[{datetime.now(timezone.utc).isoformat()}] {strategy} {profile_id} start",
+            flush=True,
+        )
         config = _resolved(strategy, profile_id)
         _write_configs(strategy, profile_id, config)
         child = children / f"{profile_id}.html"
@@ -521,7 +524,7 @@ def run(strategy: str, profiles: tuple[str, ...]) -> None:
         else:
             detail = "failed (see child report)"
         print(
-            f"[{datetime.now(UTC).isoformat()}] {strategy} {profile_id} "
+            f"[{datetime.now(timezone.utc).isoformat()}] {strategy} {profile_id} "
             f"run_id={candidate['run_id']} {detail}",
             flush=True,
         )

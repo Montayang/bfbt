@@ -26,7 +26,7 @@ Updated: 2026-09-02.
 - The Showcase candidate passed `331 passed in 21.58s` on 2026-09-02; its real local preparation
   verified three H2 runs with one expected dirty-provenance warning and zero failures.
 - The BFBT public-release candidate passes 48 focused report, Showcase, and language-contract tests
-  and the complete offline suite (`334 passed in 21.58s`). Its real derived Showcase rebuild
+  and the complete offline suite (`335 passed in 37.81s`). Its real derived Showcase rebuild
   verified all three immutable H2 runs. Editable installation, CLI metadata, dependencies, and a
   `bfbt`-only wheel are verified. Public-surface/history, secret/path, format, link, generated-output,
   and diff checks passed. The implementation is committed as `3507c52`; the GitHub repository was
@@ -36,6 +36,10 @@ Updated: 2026-09-02.
   language for README navigation, the preview image, contribution guidance, security policy, and
   changelog; independent Simplified-Chinese counterparts remain linked. The renamed remote now
   exposes only `main`; all merged remote feature branches were removed before visibility changes.
+- The first GitHub Actions runs exposed Python 3.10-only standard-library imports despite the
+  declared `>=3.10` support. `codex/ci-python310` replaces them with a tested compatibility surface;
+  local 3.12 full-suite and 3.10 syntax/contract gates pass. The remote 3.10/3.12 matrix remains the
+  final confirmation after push.
 - Inspect Git for the exact current branch, commit, worktree, and upstream state rather than relying
   on a branch name recorded in this document.
 

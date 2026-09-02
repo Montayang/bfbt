@@ -3,9 +3,9 @@
 from __future__ import annotations
 
 from dataclasses import dataclass
-from enum import StrEnum
 from typing import Literal
 
+from bfbt.compat import StrEnum
 from bfbt.config.backtest import BacktestConfig, PortfolioV2Config, RiskV2Config
 
 

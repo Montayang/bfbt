@@ -86,7 +86,7 @@ data/backtest/showcases/r5-t4-h2-rolling-202605-202607-r01/index.html
 - 全市场分钟级 bounded-memory chunk、原子 checkpoint、失败恢复和连续/恢复经济等价。
 - 不可变成功/失败 artifact、源码与依赖指纹、双语交互报告，以及完整成交、持仓变化和风险
   事件导航。
-- 当前公开验收覆盖 A01–A40；BFBT 公开发布候选的完整离线 suite 为 334 项通过，精确环境
+- 当前公开验收覆盖 A01–A40；BFBT 公开发布候选的完整离线 suite 为 335 项通过，精确环境
   与历史基线见 [`CURRENT_STATE.md`](docs/maintainer/CURRENT_STATE.md)。
 
 ## 安装

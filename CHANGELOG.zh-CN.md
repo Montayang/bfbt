@@ -21,6 +21,8 @@
   BFBT/`bfbt`；英文 README 成为默认入口，中文 README 独立保留。
 - 公开贡献、安全、变更记录、文档导航和 Showcase 预览采用英文主入口，并在适用位置链接
   独立简体中文版本。
+- Python 3.10 兼容性改用显式 `StrEnum` fallback 和 `timezone.utc`，与声明的最低版本和 CI
+  矩阵保持一致。
 
 ## 0.1.0
 

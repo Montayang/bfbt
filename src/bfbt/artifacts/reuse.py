@@ -6,7 +6,7 @@ import json
 import os
 import shutil
 import tempfile
-from datetime import UTC, datetime
+from datetime import datetime, timezone
 from pathlib import Path, PurePosixPath
 from typing import Literal
 
@@ -206,7 +206,7 @@ class ReusableSnapshotStore:
             tables=tables,
             factory=lambda parts: AnalysisSnapshotManifest(
                 analysis_id=analysis_id,
-                created_at=datetime.now(UTC),
+                created_at=datetime.now(timezone.utc),
                 dataset_manifest_sha256=dataset_manifest_sha256,
                 dependency_sha256=dependency_sha256,
                 start=start,
@@ -245,7 +245,7 @@ class ReusableSnapshotStore:
             tables=tables,
             factory=lambda parts: SignalSnapshotManifest(
                 signal_id=signal_id,
-                created_at=datetime.now(UTC),
+                created_at=datetime.now(timezone.utc),
                 analysis_id=analysis_id,
                 analysis_manifest_sha256=analysis_manifest_sha256,
                 dependency_sha256=dependency_sha256,
