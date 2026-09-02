@@ -1,24 +1,32 @@
 # Security policy
 
-BFBT 是独立开源研究项目，与 Binance 不存在隶属、背书、赞助或利益关系。
+[简体中文](SECURITY.zh-CN.md)
+
+BFBT is an independent open-source research project. It is not affiliated with, endorsed by,
+sponsored by, or financially connected to Binance.
 
 ## Supported scope
 
-`main` 的最新版本是当前接受安全修复的版本。项目仍处于 `0.x` 开发阶段，尚未承诺长期维护
-旧版本。
+The latest version on `main` is the currently supported security-fix target. BFBT remains in `0.x`
+development and does not yet promise long-term support for earlier versions.
 
 ## Reporting a vulnerability
 
-请不要在公开 issue 中披露凭据泄漏、路径逃逸、任意代码执行、供应链或数据完整性漏洞。
-通过仓库所有者在 `pyproject.toml` 中公开的维护邮箱私下报告，并包含：受影响版本、最小复现、
-潜在影响和建议缓解方式。维护者确认前不要发布利用代码。
+Do not disclose credential exposure, path traversal, arbitrary code execution, supply-chain, or
+data-integrity vulnerabilities in a public issue. Report them privately through the maintainer
+email published in `pyproject.toml`, including the affected version, minimal reproduction,
+potential impact, and suggested mitigation. Do not publish exploit code before acknowledgement.
 
 ## Security boundary
 
-- bfbt 是离线研究与回测系统，不应包含交易账户 Client、API key 或订单入口。
-- 系统不得读取 `.env`、账户余额或私有订单流。
-- 网络功能仅限明确请求的公共市场数据获取；正式运行绑定不可变本地数据版本。
-- 报告和 Showcase 只应读取已验证 artifact，并拒绝路径逃逸与哈希不一致。
-- Agent 生成代码和研究执行是不同授权动作；当前不支持直接执行任意生成代码。
+- BFBT is an offline research and backtesting system; it must not contain exchange account clients,
+  API keys, or order-entry paths.
+- It must not read `.env`, account balances, or private order streams.
+- Network behavior is limited to explicitly requested public market-data retrieval; formal runs bind
+  immutable local data versions.
+- Reports and Showcase pages read only verified artifacts and reject path traversal or hash mismatch.
+- Agent-generated code and research execution are separate authorization actions; arbitrary
+  generated-code execution is not supported.
 
-若发现任何行为突破这些边界，请按安全漏洞处理，而不是普通功能请求。
+Treat any behavior that crosses these boundaries as a security vulnerability, not a normal feature
+request.

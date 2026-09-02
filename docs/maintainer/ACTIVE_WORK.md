@@ -32,6 +32,10 @@ Updated: 2026-09-02.
   and diff checks passed. The implementation is committed as `3507c52`; the GitHub repository was
   renamed to `Montayang/bfbt`. Public visibility and any optional tag/release remain separate
   owner-controlled publication actions.
+- Final public-front-door polish is complete on `codex/public-polish`: English is now the primary
+  language for README navigation, the preview image, contribution guidance, security policy, and
+  changelog; independent Simplified-Chinese counterparts remain linked. The renamed remote now
+  exposes only `main`; all merged remote feature branches were removed before visibility changes.
 - Inspect Git for the exact current branch, commit, worktree, and upstream state rather than relying
   on a branch name recorded in this document.
 

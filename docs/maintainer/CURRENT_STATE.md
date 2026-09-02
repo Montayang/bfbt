@@ -107,5 +107,7 @@ V1 remains for compatibility and historical reproduction, not for new daily stra
   includes loss and profit months, and derives opening margin directly from verified trades.
 - The English repository front door and standalone Chinese README reflect A01-A40 and include CI,
   contribution, security, changelog, MIT license, and Binance-independence disclosures.
+- English-first contribution, security, changelog, documentation-map, and Showcase-preview surfaces
+  link to independent Simplified-Chinese counterparts where applicable.
 - Human-facing generated HTML publishes default English, explicit English, and independent
   Simplified-Chinese files. Machine-readable artifacts remain language-neutral and single-copy.

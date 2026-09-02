@@ -3,7 +3,7 @@
 **Binance Futures Backtesting Framework** — an offline research and backtesting system for
 cross-sectional factors on Binance USDⓈ-M perpetual futures.
 
-[中文说明](README.zh-CN.md) · [Documentation](docs/README.md) ·
+[中文说明](README.zh-CN.md) · [Documentation](docs/README.en.md) ·
 [Showcase guide](showcase/README.md) · [Contributing](CONTRIBUTING.md)
 
 > BFBT is an independent open-source research project. It is not affiliated with, endorsed by,
@@ -130,7 +130,8 @@ not duplicated. Compatibility entry pages default to English and link to the Chi
 
 ## Project map
 
-- [`docs/README.md`](docs/README.md): design, reference, acceptance, research, and usage docs.
+- [`docs/README.en.md`](docs/README.en.md): English documentation map; detailed engineering records
+  link to their current Chinese originals where an English translation is not yet available.
 - [`docs/maintainer/START_HERE.md`](docs/maintainer/START_HERE.md): maintenance and authorization
   entry point.
 - [`docs/maintainer/SHOWCASE_PLAN.md`](docs/maintainer/SHOWCASE_PLAN.md): implemented showcase scope

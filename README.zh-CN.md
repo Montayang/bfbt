@@ -3,7 +3,8 @@
 **Binance Futures Backtesting Framework**——面向 Binance USDⓈ-M 永续合约截面因子研究的
 离线研究与回测系统。
 
-[English](README.md) · [文档导航](docs/README.md) · [Showcase 指南](showcase/README.md)
+[English](README.md) · [文档导航](docs/README.md) · [Showcase 指南](showcase/README.md) ·
+[贡献指南](CONTRIBUTING.zh-CN.md)
 
 > BFBT 是独立的开源研究项目，与 Binance 不存在隶属、背书、赞助或任何利益关系。项目只
 > 使用公开历史市场数据，不包含账户 Client 或实盘下单路径，也不构成投资建议。

@@ -1,39 +1,47 @@
-# Contributing to bfbt
+# Contributing to BFBT
 
-感谢参与。当前项目优先保证因果时序、经济语义、有限内存和不可变审计，而不是扩大命令或
-因子数量。
+[简体中文](CONTRIBUTING.zh-CN.md)
 
-## 开发流程
+Thanks for contributing. BFBT prioritizes causal timing, explicit economic semantics,
+bounded-memory execution, and immutable auditability over adding commands or factor count.
 
-1. 从同步且已验证的 `main` 创建短期功能分支。
-2. 在 issue 或变更说明中冻结行为、数据/配置身份和兼容边界。
-3. 通用能力进入 `src/bfbt/`；真实策略规格与 run 映射进入 `strategies/`。
-4. 同时更新聚焦测试、验收文档和维护状态。
-5. 运行相关测试，再运行完整离线 suite：
+## Development workflow
+
+1. Create a short-lived feature branch from a synchronized and verified `main`.
+2. Freeze behavior, data/configuration identities, and compatibility boundaries in the issue or
+   change description.
+3. Put reusable capabilities in `src/bfbt/`; put real strategy specifications and run mappings in
+   `strategies/`.
+4. Update focused tests, acceptance documentation, and maintainer state together.
+5. Run focused tests, then the complete offline suite:
 
 ```bash
 python -m pip install -e ".[test]"
 python -B -m pytest -q
 ```
 
-6. 提交前运行 `git diff --check`，确认没有数据、凭据、绝对本机路径或生成 run 被跟踪。
+6. Before committing, run `git diff --check` and confirm that no data, credentials, absolute local
+   paths, or generated runs are tracked.
 
-## 不可破坏的合同
+## Non-negotiable contracts
 
-- 保持 `Quick Research -> Fast Matrix -> Event/V2` 的职责分离。
-- 保持时点化数据、下一根 K 线成交、显式成本和 UTC `[start, end)` 语义。
-- Event/V2 正式全市场运行必须分块、有限内存、可 checkpoint/恢复，并与连续执行经济等价。
-- 不覆盖成功或失败的终态 run；修订必须获得新身份。
-- 报告压缩曲线时仍须保留每笔成交、持仓变化和风险事件。
-- 不加入账户 Client、API 凭据、下单入口或依赖 `.env` 的行为。
+- Preserve the `Quick Research -> Fast Matrix -> Event/V2` responsibility boundary.
+- Preserve point-in-time data, next-bar execution, explicit costs, and UTC `[start, end)` semantics.
+- Formal full-market Event/V2 runs must be chunked, bounded in memory, checkpointable/recoverable,
+  and economically equivalent to continuous execution.
+- Never overwrite a successful or failed terminal run; revisions receive new identities.
+- Reports may compress display curves but must retain every fill, position change, and risk event.
+- Do not add account clients, API credentials, order entry points, or `.env` dependencies.
 
-## 数据与联网测试
+## Data and network tests
 
-`data/backtest/`、数据集、catalog、checkpoint、workspace、run 和派生报告均不提交 Git。
-默认测试必须离线且使用小型确定性 fixture。需要下载公开市场数据或执行长回测的验收，应在
-变更说明中单独列出，并保存精确数据版本和产物身份。
+Do not commit `data/backtest/`, datasets, catalogs, checkpoints, workspaces, runs, or derived
+reports. Default tests must be offline and use small deterministic fixtures. Acceptance work that
+downloads public market data or executes a long backtest must be called out separately and retain
+exact data and artifact identities.
 
-## 新因子
+## New factors
 
-新因子必须声明依赖列、窗口/warmup、可用时点、缺口政策、有限值政策和版本；必须有无前视、
-跨 chunk 及边界 fixture。不要把任意 `eval`/`exec` 或 Agent 生成代码作为公共因子接口。
+Every factor must declare input columns, window/warmup, availability timing, gap policy,
+finite-value policy, and version. Add no-lookahead, cross-chunk, and boundary fixtures. Arbitrary
+`eval`/`exec` or direct Agent-generated code execution is not an acceptable public factor API.
