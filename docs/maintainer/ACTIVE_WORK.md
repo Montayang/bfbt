@@ -5,7 +5,8 @@ Updated: 2026-09-02.
 ## Current state
 
 - No engine development or formal backtest is active.
-- Public-release preparation is active on `codex/bfbt-public-release`. It performs the complete
+- The public-release implementation was completed on `codex/bfbt-public-release` and approved for
+  fast-forward publication to `main`. It performs the complete
   `bianbt` → BFBT/`bfbt` brand, distribution, import, CLI, and repository-link migration; makes the
   English README the front door; adds a standalone Chinese README and Binance-independence
   disclosure; and publishes separate English/Simplified-Chinese human-facing HTML.
@@ -28,8 +29,9 @@ Updated: 2026-09-02.
   and the complete offline suite (`334 passed in 21.58s`). Its real derived Showcase rebuild
   verified all three immutable H2 runs. Editable installation, CLI metadata, dependencies, and a
   `bfbt`-only wheel are verified. Public-surface/history, secret/path, format, link, generated-output,
-  and diff checks passed. The candidate is committed as `3507c52`; push, GitHub repository rename,
-  and visibility change remain pending external publication actions.
+  and diff checks passed. The implementation is committed as `3507c52`; the GitHub repository was
+  renamed to `Montayang/bfbt`. Public visibility and any optional tag/release remain separate
+  owner-controlled publication actions.
 - Inspect Git for the exact current branch, commit, worktree, and upstream state rather than relying
   on a branch name recorded in this document.
 
