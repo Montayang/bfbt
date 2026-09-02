@@ -7,7 +7,7 @@
 **Binance Futures Backtesting Framework**——面向 Binance USDⓈ-M 永续合约截面因子研究的
 离线研究与回测系统。
 
-[English](README.md) · [文档导航](docs/README.md) · [探索三层报告](showcase/README.zh-CN.md) ·
+[English](README.md) · [文档导航](docs/README.zh-CN.md) · [探索三层报告](showcase/README.zh-CN.md) ·
 [贡献指南](CONTRIBUTING.zh-CN.md)
 
 > BFBT 是独立的开源研究项目，与 Binance 不存在隶属、背书、赞助或任何利益关系。项目只
@@ -72,8 +72,8 @@ bfbt doctor
 
 真实数据首次使用需要访问 Binance 公共市场数据服务，但不需要 API key。详细安装、数据准备
 和第一份真实小样本回测见
-[`beginner_tutorial.md`](docs/guides/beginner_tutorial.md)；完整配置与故障排查见
-[`user_manual.md`](docs/guides/user_manual.md)。
+[`beginner_tutorial.zh-CN.md`](docs/guides/beginner_tutorial.zh-CN.md)；完整配置与故障排查见
+[`user_manual.zh-CN.md`](docs/guides/user_manual.zh-CN.md)。
 
 ## 可复现与可审计
 
@@ -94,11 +94,11 @@ bfbt doctor
 
 ## 从这里开始
 
-- [入门教程](docs/guides/beginner_tutorial.md)：准备公开数据并生成第一份回测报告。
-- [用户手册](docs/guides/user_manual.md)：命令、配置、输出解读和故障排查。
-- [自定义因子教程](docs/guides/custom_factor_tutorial.md)：添加并研究新的截面因子。
+- [入门教程](docs/guides/beginner_tutorial.zh-CN.md)：准备公开数据并生成第一份回测报告。
+- [用户手册](docs/guides/user_manual.zh-CN.md)：命令、配置、输出解读和故障排查。
+- [自定义因子教程](docs/guides/custom_factor_tutorial.zh-CN.md)：添加并研究新的截面因子。
 - [三层报告自助导览](showcase/README.zh-CN.md)：理解并探索三层报告。
-- [文档导航](docs/README.md)：架构、数据合同、研究记录和开发者资料。
+- [文档导航](docs/README.zh-CN.md)：架构、数据合同、研究记录和开发者资料。
 
 ## 参与和安全
 

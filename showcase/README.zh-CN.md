@@ -45,10 +45,10 @@ Event 引擎负责正式回测，尤其适合移动止损、风险优先级、�
 ## 推荐探索路径
 
 1. 安装 BFBT，确认本机可以运行 `bfbt --help` 和 `bfbt doctor`。
-2. 按照[入门教程](../docs/guides/beginner_tutorial.md)下载一份小型公开数据并生成第一份正式
+2. 按照[入门教程](../docs/guides/beginner_tutorial.zh-CN.md)下载一份小型公开数据并生成第一份正式
    回测报告；不需要 API key。
 3. 在浏览器中打开报告，从净值曲线选择一笔成交，再追溯到对应持仓和风险证据。
-4. 按照[用户手册](../docs/guides/user_manual.md#13-fast-matrix-常规截面研究)继续体验 Quick
+4. 按照[用户手册](../docs/guides/user_manual.zh-CN.md#13-fast-matrix-常规截面研究)继续体验 Quick
    Research 和 Fast Matrix。
 5. 按照三类报告各自回答的问题理解它们，不要把它们当成可以互相替代的回测引擎。
 

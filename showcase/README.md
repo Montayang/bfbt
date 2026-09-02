@@ -54,7 +54,7 @@ data version, and source fingerprint.
    dataset and produce a first formal report. No API key is required.
 3. Open the report in a browser and trace one trade from the equity curve to its position and risk
    evidence.
-4. Use the [user manual](../docs/guides/user_manual.md#13-fast-matrix-常规截面研究) to explore Quick
+4. Use the [user manual](../docs/guides/user_manual.md#13-fast-matrix-portfolio-research) to explore Quick
    Research and Fast Matrix on versioned local data.
 5. Compare the three reports by the question each one answers; do not compare them as if they were
    interchangeable backtest engines.

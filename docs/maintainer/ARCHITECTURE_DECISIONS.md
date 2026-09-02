@@ -75,5 +75,8 @@ silently approximated.
 - English is the default repository and generated-report language. Human-facing HTML also publishes
   an independent Simplified-Chinese sibling. Machine-readable identities and evidence are not
   translated or duplicated.
+- Public Markdown entry points follow the same convention: the unsuffixed file is English and an
+  independent `.zh-CN.md` sibling contains Simplified Chinese. This includes the documentation map,
+  beginner tutorial, user manual, custom-factor tutorial, and Showcase guide.
 - BFBT is independent from Binance and has no affiliation, endorsement, sponsorship, or financial
   relationship with Binance. This disclaimer must remain visible in the public front door.

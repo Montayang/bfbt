@@ -44,6 +44,34 @@ def test_public_identity_is_bfbt_with_english_front_door() -> None:
     assert "README.zh-CN.md" in showcase_english
     assert showcase_chinese.startswith("# 探索 BFBT\n")
     assert "README.md" in showcase_chinese
+    public_documents = (
+        ("docs/README.md", "docs/README.zh-CN.md", "# BFBT documentation", "# BFBT 文档导航"),
+        (
+            "docs/guides/beginner_tutorial.md",
+            "docs/guides/beginner_tutorial.zh-CN.md",
+            "# BFBT beginner tutorial",
+            "# BFBT 傻瓜式入门教程",
+        ),
+        (
+            "docs/guides/user_manual.md",
+            "docs/guides/user_manual.zh-CN.md",
+            "# BFBT user manual",
+            "# BFBT 用户使用手册",
+        ),
+        (
+            "docs/guides/custom_factor_tutorial.md",
+            "docs/guides/custom_factor_tutorial.zh-CN.md",
+            "# Add a cross-sectional factor",
+            "# 以现有 Amihud 实现为模板新增截面因子",
+        ),
+    )
+    for english_path, chinese_path, english_title, chinese_title in public_documents:
+        english_document = (ROOT / english_path).read_text(encoding="utf-8")
+        chinese_document = (ROOT / chinese_path).read_text(encoding="utf-8")
+        assert english_document.startswith(english_title)
+        assert chinese_document.startswith(chinese_title)
+        assert Path(chinese_path).name in english_document
+        assert Path(english_path).name in chinese_document
     for name in ("research-workflow.svg", "research-workflow.zh-CN.svg"):
         root = ET.parse(ROOT / "docs" / "assets" / name).getroot()
         assert root.attrib["viewBox"] == "0 0 1100 920"

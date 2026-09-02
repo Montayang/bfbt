@@ -4,10 +4,13 @@ Updated: 2026-09-02.
 
 ## Current state
 
-- Public Showcase discovery is being reframed on `codex/self-guided-showcase`: English-first and
+- Public Showcase discovery was reframed and merged into `main` at `82e57eb`: English-first and
   independent Chinese guides now lead a fresh-checkout user through the three report layers, while
   the prior H2 three-month comparison is retained only as an optional prepared-machine evidence
   case. The root README preview now represents report surfaces rather than selected run returns.
+- The four public documentation entry points linked from the root README now follow one convention:
+  unsuffixed files are the complete English editions and `.zh-CN.md` siblings are independent
+  Simplified-Chinese editions. Navigation links and the public-release contract cover both editions.
 - No engine development or formal backtest is active.
 - The public-release implementation was completed on `codex/bfbt-public-release` and approved for
   fast-forward publication to `main`. It performs the complete
@@ -61,5 +64,6 @@ Updated: 2026-09-02.
 
 ## No active formal run
 
-No new data download, Fast Matrix study, or Event formal backtest is part of this release task.
-Only derived report rebuilding is allowed for language and Showcase verification.
+No new market-data download or formal Event backtest is part of this release task. Separately
+authorized README screenshot preparation uses a deterministic documentation fixture and derived
+report rebuilding; it is not formal research evidence.

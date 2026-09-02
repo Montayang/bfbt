@@ -1,25 +1,31 @@
-# 以现有 Amihud 实现为模板新增截面因子
+# Add a cross-sectional factor using the Amihud implementation
 
-这份教程以仓库已经内置的 `amihud_illiquidity` 为完整参考，演示新因子需要具备的计算、
-注册、测试、配置和真实小样本回测链路。当前仓库不要重复添加或重复注册 Amihud；开发自己的
-新公式时，应换用新的稳定因子名、实现文件和测试。过程不会连接交易账户，也不会真实下单。
+[简体中文](custom_factor_tutorial.zh-CN.md)
 
-如果 `data/backtest/datasets/tutorial` 还不存在，请先完成 [`beginner_tutorial.md`](beginner_tutorial.md)。如果只是修改内置因子的窗口或预处理，只需编辑因子配置；本教程针对需要新公式的情况。
+This tutorial uses the built-in `amihud_illiquidity` factor as a complete reference for computing,
+registering, testing, configuring, and running a new formula. Do not register Amihud a second time;
+use a new stable name, implementation file, and tests for your own factor.
 
-## 1. 示例因子
+The workflow is offline, does not connect to an exchange account, and never places an order. Finish
+the [beginner tutorial](beginner_tutorial.md) first if
+`data/backtest/datasets/tutorial` does not exist. If you only need a different window or
+preprocessing chain for an existing factor, edit its configuration instead of adding code.
 
-参考实现是 Amihud 风格的滚动非流动性因子：
+## 1. Reference formula
+
+The Amihud-style rolling illiquidity factor is:
 
 ```text
-单根非流动性 = abs(log(close_t / close_t-1)) / quote_volume_t
-因子值 = 最近 N 根单根非流动性的平均值
+single-bar illiquidity = abs(log(close_t / close_t-1)) / quote_volume_t
+factor value = mean(single-bar illiquidity over the latest N bars)
 ```
 
-数值越大，表示同样成交额伴随越大的价格变化，即相对更不流动。公式只使用教程数据已有的 `close`、`quote_volume`、时间和完整性字段，不需要重新下载数据。
+A larger value means that less quote volume accompanies a larger price change: the contract is
+relatively less liquid. The formula uses only `close`, `quote_volume`, timestamps, and completeness
+fields already present in tutorial bars. The example computes a 24-hour window once per hour while
+the portfolio continues to rebalance every four hours.
 
-本例使用 24 小时窗口，每小时产生一次截面因子，回测仍按原教程每 4 小时调仓。
-
-## 2. 进入环境
+## 2. Enter the environment
 
 ```bash
 cd /path/to/bfbt
@@ -27,13 +33,13 @@ source .venv/bin/activate
 bfbt research list-factors
 ```
 
-当前列表应包含 `amihud_illiquidity` 和版本 `v1`。如果缺失，先确认分支和安装环境，不要按
-本文盲目重复注册。
+The list should already contain `amihud_illiquidity` at version `v1`. If it does not, check your
+branch and editable installation rather than duplicating the registration.
 
-## 3. 阅读计算函数
+## 3. Study the computation
 
-现有实现位于 `src/bfbt/factors/illiquidity.py`。以下代码展示新滚动因子必须处理的时点、
-连续窗口、完整 K 线和有限值边界；新增自己的因子时复制结构而不是覆盖该文件：
+The implementation is in `src/bfbt/factors/illiquidity.py`. Its structure demonstrates timing,
+contiguous windows, complete-bar checks, and finite-value handling required by a rolling factor:
 
 ```python
 """Amihud-style rolling illiquidity factor."""
@@ -118,17 +124,13 @@ def amihud_illiquidity_raw(
     )
 ```
 
-乘以 `1_000_000` 只为让原始数值容易阅读，不改变截面排序。计算函数必须返回 `timestamp`、`symbol`、`raw_value`。滚动计算必须按 `symbol` 分组，并拒绝缺口、不完整 K 线和非有限值。
+The `1_000_000` scale improves readability without changing cross-sectional order. A factor
+function returns exactly `timestamp`, `symbol`, and `raw_value`. Rolling work must be grouped by
+symbol and reject gaps, incomplete bars, and non-finite inputs.
 
-## 4. 阅读注册信息和数据依赖
+## 4. Register identity and dependencies
 
-当前 `src/bfbt/factors/registry.py` 已包含导入：
-
-```python
-from bfbt.factors.illiquidity import amihud_illiquidity_raw
-```
-
-并在 `FACTOR_REGISTRY` 中注册：
+`src/bfbt/factors/registry.py` imports the function and registers it:
 
 ```python
 "amihud_illiquidity": RegisteredFactor(
@@ -149,35 +151,15 @@ from bfbt.factors.illiquidity import amihud_illiquidity_raw
 ),
 ```
 
-`required_columns` 必须声明公式额外使用的行情列。`display_name_en`、
-`display_name_zh`、`formula` 和 `description_zh` 会直接显示在 HTML 回测报告中；新增
-因子时应一起填写，避免报告只有内部变量名。只创建计算文件而不注册，运行时会报
-`unknown factor`。
+Declare every additional market column in `required_columns`. English/Chinese names, the formula,
+and the description appear in HTML reports, so they are part of the public factor definition. An
+unregistered implementation fails with `unknown factor`.
 
-检查现有注册：
+## 5. Add formula-level tests
 
-```bash
-bfbt research list-factors
-```
-
-输出中应出现 `amihud_illiquidity` 和版本 `v1`。
-
-## 5. 参考离线公式测试
-
-现有 `tests/acceptance/test_acceptance_07_factors_research.py` 已覆盖注册集合和公式。新因子应
-仿照其中的 Amihud 用例，增加自己需要的 import、注册名称和期望值，例如现有用例使用：
-
-```python
-import math
-```
-
-注册集合包含：
-
-```python
-"amihud_illiquidity",
-```
-
-公式参数包含：
+Use the Amihud cases in
+`tests/acceptance/test_acceptance_07_factors_research.py` as a template. The current expected-value
+case includes:
 
 ```python
 (
@@ -187,17 +169,19 @@ import math
 ),
 ```
 
-执行：
+Run the focused suite:
 
 ```bash
 pytest tests/acceptance/test_acceptance_07_factors_research.py -q
 ```
 
-这项测试只使用仓库内固定数据，不联网、不修改教程数据。正式扩展时还应为历史不足、时间缺口、不完整 K 线和未来数据不影响历史值分别增加用例。
+New factors should also cover insufficient history, time gaps, incomplete bars, non-finite values,
+and the rule that later data cannot change an earlier factor value.
 
-## 6. 创建独立因子配置
+## 6. Create a separate factor configuration
 
-保留原来的 `factor.json`，新建 `data/backtest/workspaces/tutorial/configs/factor-amihud.json`：
+Keep the original tutorial configuration and create
+`data/backtest/workspaces/tutorial/configs/factor-amihud.json`:
 
 ```json
 {
@@ -231,26 +215,22 @@ pytest tests/acceptance/test_acceptance_07_factors_research.py -q
 }
 ```
 
-参数名使用 `window` 很重要：正式运行规划器会据此加载回测开始前所需的 24 小时历史。若自定义其他持续时间参数名，需要同步扩展运行规划器。
+The recognized `window` parameter lets the run planner load the required 24-hour warmup. A new
+duration parameter name requires a corresponding planner extension.
 
-## 7. 在刚才的数据集上运行
+## 7. Run on the tutorial dataset
 
-先设置第四步准备器实际输出的版本。以下是本次 2026-06 教程数据；如果重新准备过，必须使用自己终端里的值：
+Use the exact identity printed by your preparation step, not the example value below:
 
 ```bash
 DATA_ROOT=data/backtest
-DATASET_ROOT="$DATA_ROOT/datasets/tutorial"
 DB="$DATA_ROOT/catalogs/tutorial.duckdb"
 CONFIG_ROOT="$DATA_ROOT/workspaces/tutorial/configs"
 LOG_ROOT="$DATA_ROOT/workspaces/tutorial/logs"
 RUN_ROOT="$DATA_ROOT/runs"
 DATASET_ID="binance-usdm-real-e2e-smoke-2026-06"
-DATASET_VERSION="live-smoke-a345bf75422a6bad1f333017"
-```
+DATASET_VERSION="live-smoke-REPLACE_WITH_EXACT_VALUE"
 
-运行：
-
-```bash
 bfbt run \
   "$DATASET_ID" \
   "$DATASET_VERSION" \
@@ -264,45 +244,40 @@ bfbt run \
   | tee "$LOG_ROOT/run-amihud.log"
 ```
 
-成功时会显示 `status=succeeded` 和新的 `run_id=a09-...`。填写并检查结果：
+After `status=succeeded`, validate and open the exact run:
 
 ```bash
-RUN_ID="a09-替换成实际值"
-python tests/live/validate_real_backtest_smoke.py \
-  "$RUN_ROOT/$RUN_ID"
+RUN_ID="a09-REPLACE_WITH_EXACT_VALUE"
+python tests/live/validate_real_backtest_smoke.py "$RUN_ROOT/$RUN_ID"
 echo "$RUN_ROOT/$RUN_ID/report.html"
 ```
 
-新增自己的因子源码会改变 source fingerprint，所以新 run ID 与既有回测不同是正常现象。
-代码提交前后环境指纹也可能不同，不要依赖旧 run ID。
+New source code changes the source fingerprint, so a different run ID is expected.
 
-## 8. 理解多空方向
+## 8. Understand score direction
 
-`rank` 会让原始值最高的合约得到最高分。当前教程组合做多最高分的两个合约，做空最低分的两个合约，因此本例测试的是：
+Rank preprocessing gives the largest raw value the highest score. The tutorial portfolio buys the
+two highest scores and shorts the two lowest, so the Amihud example means:
 
 ```text
-做多相对不流动的合约，做空相对流动的合约
+long relatively illiquid contracts; short relatively liquid contracts
 ```
 
-如果假设相反，希望高分代表流动性更好，不应静默修改已经发布的
-`amihud_illiquidity:v1`。应以新名称和版本注册反向定义，例如新计算函数中取负：
+If your hypothesis has the opposite direction, do not silently change the published
+`amihud_illiquidity:v1` definition. Register a new name/version and explicitly negate the value,
+then rerun formula tests before formal execution.
 
-```python
-.then(-pl.col("_amihud").rolling_mean(window).over("symbol"))
-```
+## 9. Replace the formula with your own
 
-注册新定义后应先重跑离线公式测试，再执行正式回测。
+Every custom factor follows the same sequence:
 
-## 9. 换成自己的公式
+1. Freeze its formula, time window, score direction, and required fields.
+2. Implement `raw_value` using only information available at that timestamp.
+3. Register a stable name, version, dependencies, display metadata, and compute function.
+4. Test formula values, gaps, completeness, finite values, and future-data isolation.
+5. Create a separate configuration and preserve the baseline.
+6. Run a small deterministic fixture before reusing the real tutorial dataset.
+7. Inspect factor values, fills, costs, metrics, and the report—not total return alone.
 
-接入任意新因子都遵循同一流程：
-
-1. 明确公式、时间窗口、数值方向和行情字段。
-2. 在 `src/bfbt/factors/` 实现只使用当前及历史数据的 `raw_value`。
-3. 在 registry 声明名称、版本、依赖列和计算函数。
-4. 添加公式、缺口、完整性和防未来数据测试。
-5. 创建独立因子配置，保留原始基准配置。
-6. 先跑小型离线验收，再复用真实教程数据正式运行。
-7. 检查因子值、成交、成本、指标和 HTML 报告，不要只看总收益。
-
-字段含义参见 [`../reference/data_contract.md`](../reference/data_contract.md)，全部因子配置参见 [`../reference/configuration.md`](../reference/configuration.md)。
+See the [data contract](../reference/data_contract.md) for field semantics and the
+[configuration reference](../reference/configuration.md) for factor settings.
