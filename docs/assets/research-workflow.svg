@@ -1,0 +1,99 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="960" viewBox="0 0 1200 960" role="img" aria-labelledby="title desc">
+  <title id="title">BFBT research workflow</title>
+  <desc id="desc">A vertical research funnel from natural-language intent through Quick Research, Fast Matrix, human selection, Event V2 formal confirmation, and immutable audit evidence.</desc>
+  <defs>
+    <linearGradient id="background" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#07111b"/>
+      <stop offset="1" stop-color="#0d1d2b"/>
+    </linearGradient>
+    <linearGradient id="event-layer" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#122b42"/>
+      <stop offset="1" stop-color="#102338"/>
+    </linearGradient>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto" markerUnits="strokeWidth">
+      <path d="M0 0L10 5L0 10Z" fill="#607991"/>
+    </marker>
+  </defs>
+
+  <rect width="1200" height="960" rx="24" fill="url(#background)"/>
+  <path d="M0 0H1200V6H0Z" fill="#55d6be"/>
+
+  <g font-family="system-ui,-apple-system,'Segoe UI',sans-serif">
+    <text x="68" y="64" fill="#55d6be" font-size="13" font-weight="750" letter-spacing="3">BFBT · RESEARCH ARCHITECTURE</text>
+    <text x="68" y="112" fill="#eef5ff" font-size="38" font-weight="730">From research intent to formal evidence</text>
+    <text x="68" y="145" fill="#91a5b9" font-size="17">Each layer answers a different question. Only Event/V2 produces formal strategy truth.</text>
+
+    <text x="68" y="200" fill="#7f96aa" font-size="11" font-weight="750" letter-spacing="2">INPUT</text>
+    <text x="150" y="200" fill="#dbe8f5" font-size="20" font-weight="620">Natural-language research idea</text>
+    <path d="M68 224H1132" stroke="#263d51" stroke-width="1"/>
+
+    <text x="68" y="262" fill="#f5bd55" font-size="11" font-weight="750" letter-spacing="2">SEMANTIC FREEZE</text>
+    <text x="68" y="292" fill="#dbe8f5" font-size="16" font-weight="620">ResearchIntent</text>
+    <g fill="#8fa5b8" font-size="13">
+      <text x="270" y="292">point-in-time data</text>
+      <text x="470" y="292">decision &amp; fill clocks</text>
+      <text x="690" y="292">sizing &amp; costs</text>
+      <text x="870" y="292">risk &amp; run identity</text>
+    </g>
+    <g stroke="#f5bd55" stroke-width="2">
+      <path d="M252 278V296"/><path d="M452 278V296"/><path d="M672 278V296"/><path d="M852 278V296"/>
+    </g>
+
+    <path d="M112 326V810" stroke="#314a60" stroke-width="2"/>
+    <path d="M112 452V480" stroke="#607991" stroke-width="2" marker-end="url(#arrow)"/>
+    <path d="M112 622V684" stroke="#607991" stroke-width="2" marker-end="url(#arrow)"/>
+
+    <g>
+      <circle cx="112" cy="352" r="25" fill="#0d202c" stroke="#55d6be" stroke-width="2"/>
+      <text x="112" y="358" text-anchor="middle" fill="#55d6be" font-size="14" font-weight="800">01</text>
+      <path d="M156 326H1132M156 452H1132" stroke="#284458"/>
+      <path d="M156 326V452" stroke="#55d6be" stroke-width="5"/>
+      <text x="190" y="360" fill="#55d6be" font-size="12" font-weight="760" letter-spacing="2">SCREEN · FAST / BROAD</text>
+      <text x="190" y="400" fill="#eef5ff" font-size="29" font-weight="720">Quick Research</text>
+      <text x="485" y="382" fill="#b9c9d8" font-size="16">Does the factor contain predictive information?</text>
+      <text x="485" y="414" fill="#8298ab" font-size="14">IC · Rank IC · quantiles · coverage · turnover</text>
+      <text x="1084" y="400" text-anchor="end" fill="#55d6be" font-size="13" font-weight="700">NO ACCOUNT SIMULATION</text>
+    </g>
+
+    <g>
+      <circle cx="112" cy="522" r="25" fill="#0d202c" stroke="#7ea8ff" stroke-width="2"/>
+      <text x="112" y="528" text-anchor="middle" fill="#7ea8ff" font-size="14" font-weight="800">02</text>
+      <path d="M156 496H1080M156 622H1080" stroke="#29445d"/>
+      <path d="M156 496V622" stroke="#7ea8ff" stroke-width="5"/>
+      <text x="190" y="530" fill="#7ea8ff" font-size="12" font-weight="760" letter-spacing="2">MODEL · COLUMNAR / BOUNDED</text>
+      <text x="190" y="570" fill="#eef5ff" font-size="29" font-weight="720">Fast Matrix</text>
+      <text x="485" y="552" fill="#b9c9d8" font-size="16">Does a conventional target path survive portfolio economics?</text>
+      <text x="485" y="584" fill="#8298ab" font-size="14">target schedules · fees · slippage · funding · mark valuation</text>
+      <text x="1032" y="570" text-anchor="end" fill="#7ea8ff" font-size="13" font-weight="700">RESEARCH ARTIFACTS</text>
+    </g>
+
+    <g>
+      <path d="M112 638L132 658L112 678L92 658Z" fill="#f5bd55"/>
+      <text x="156" y="654" fill="#f5bd55" font-size="12" font-weight="800" letter-spacing="2">HUMAN DECISION GATE</text>
+      <text x="156" y="678" fill="#b9c9d8" font-size="14">keep · revise · reject · promote path-dependent semantics</text>
+      <path d="M670 658H1132" stroke="#55492f"/>
+    </g>
+
+    <g>
+      <circle cx="112" cy="730" r="29" fill="#152b40" stroke="#f06b7e" stroke-width="3"/>
+      <text x="112" y="736" text-anchor="middle" fill="#f6a0ad" font-size="14" font-weight="800">03</text>
+      <rect x="156" y="700" width="976" height="132" fill="url(#event-layer)" stroke="#3b5c78"/>
+      <path d="M156 700V832" stroke="#f06b7e" stroke-width="7"/>
+      <text x="190" y="734" fill="#f6a0ad" font-size="12" font-weight="780" letter-spacing="2">CONFIRM · CHRONOLOGICAL / FORMAL</text>
+      <text x="190" y="778" fill="#ffffff" font-size="34" font-weight="760">Event / V2</text>
+      <text x="485" y="752" fill="#d4e0eb" font-size="16">What actually happens when path, margin, and risk state interact?</text>
+      <text x="485" y="786" fill="#9fb2c3" font-size="14">next-bar fills · arbitration · rolling state · exits · checkpoint / recovery</text>
+      <text x="1084" y="778" text-anchor="end" fill="#f6a0ad" font-size="13" font-weight="760">FORMAL RUN</text>
+    </g>
+
+    <g>
+      <path d="M112 832V862" stroke="#607991" stroke-width="2" marker-end="url(#arrow)"/>
+      <rect x="68" y="870" width="1064" height="58" fill="#09131d" stroke="#355068"/>
+      <path d="M68 870H1132" stroke="#55d6be" stroke-width="3"/>
+      <text x="92" y="905" fill="#55d6be" font-size="12" font-weight="800" letter-spacing="2">IMMUTABLE AUDIT</text>
+      <text x="278" y="905" fill="#c4d3e0" font-size="14">data + config + source + run identity</text>
+      <text x="625" y="905" fill="#c4d3e0" font-size="14">fills + positions + risk events</text>
+      <text x="936" y="905" fill="#c4d3e0" font-size="14">reports + hashes</text>
+    </g>
+  </g>
+</svg>

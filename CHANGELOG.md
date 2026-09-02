@@ -23,6 +23,8 @@ BFBT keeps a behavior-oriented changelog. Release dates use UTC.
   BFBT/`bfbt`; English is the default public entry point with separate Chinese documents.
 - Public contribution, security, changelog, documentation-map, and Showcase-preview surfaces use
   English-first presentation with linked Simplified-Chinese counterparts where applicable.
+- The README research architecture now uses dedicated static English and Chinese editorial diagrams
+  with a vertical hierarchy and an explicit human decision gate.
 - Python 3.10 compatibility now uses an explicit `StrEnum` fallback and `timezone.utc`, matching the
   declared interpreter floor and CI matrix.
 

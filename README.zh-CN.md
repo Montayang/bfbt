@@ -22,15 +22,7 @@
 
 ## 为什么分成三层
 
-```mermaid
-flowchart LR
-    A[自然语言研究想法] --> B[ResearchIntent / 语义冻结]
-    B --> C[Quick Research<br/>IC · 分层 · 覆盖 · 换手]
-    C --> D[Fast Matrix<br/>常规截面组合研究]
-    D --> E{用户人工选择}
-    E --> F[Event / V2<br/>路径状态 · 风险仲裁 · 正式产物]
-    F --> G[不可变 run · 报告 · 逐笔审计]
-```
+![BFBT 从研究意图到不可变证据的工作流](docs/assets/research-workflow.zh-CN.svg)
 
 - **Quick Research** 不模拟账户，用于因子 IC、分层收益、覆盖率和 Rank turnover 诊断。
 - **Fast Matrix** 处理目标权重、固定调仓和线性成本边界内的列式组合研究，发布 `fm-*`

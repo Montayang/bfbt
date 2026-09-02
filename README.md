@@ -16,15 +16,7 @@ cross-sectional factors on Binance USDⓈ-M perpetual futures.
 
 ## Why three research layers?
 
-```mermaid
-flowchart LR
-    A[Natural-language research idea] --> B[ResearchIntent / semantic freeze]
-    B --> C[Quick Research<br/>IC · quantiles · coverage · turnover]
-    C --> D[Fast Matrix<br/>conventional portfolio research]
-    D --> E{Human selection}
-    E --> F[Event / V2<br/>path state · risk arbitration · formal artifacts]
-    F --> G[Immutable run · reports · trade-level audit]
-```
+![BFBT research workflow from intent to immutable evidence](docs/assets/research-workflow.svg)
 
 - **Quick Research** evaluates factor information without simulating an account: IC, Rank IC,
   quantile returns, coverage, and Rank turnover.
