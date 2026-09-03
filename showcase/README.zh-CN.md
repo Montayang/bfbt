@@ -12,9 +12,9 @@
 
 | 层级 | 主要报告 | 回答的问题 |
 |---|---|---|
-| Quick Research | `quick_research.html` | 因子的截面排序是否包含值得继续研究的信息？ |
-| Fast Matrix | `fast_matrix.html`，以及每个研究 run 的详情页 | 选定组合在换手、手续费、滑点、资金费和估值之后表现如何？ |
-| Event 引擎 | `report.html`、`report.en.html` 和 `report.zh-CN.html` | 账户、仓位、成交、保证金和风险事件如何随时间发生？ |
+| Quick Research | [打开真实报告](https://montayang.github.io/bfbt/reports/quick-research.zh-CN.html) | 因子的截面排序是否包含值得继续研究的信息？ |
+| Fast Matrix | [打开真实报告](https://montayang.github.io/bfbt/reports/fast-matrix.zh-CN.html) | 选定组合在换手、手续费、滑点、资金费和估值之后表现如何？ |
+| Event 引擎 | [打开真实报告](https://montayang.github.io/bfbt/reports/event-engine.zh-CN.html) | 账户、仓位、成交、保证金和风险事件如何随时间发生？ |
 
 ![BFBT 三层报告](../docs/assets/three-layer-reports.zh-CN.svg)
 
@@ -22,6 +22,9 @@
 
 研究因子时从这里开始。报告关注 Rank IC、分层收益、覆盖率和换手，不模拟账户。它适合低成本
 比较候选，并尽早淘汰薄弱或不稳定的想法。
+
+在线实例比较了 12 个已登记因子、13 组评估序列和 1,638 条研究结果，其中 7 月结果单独标记
+为 holdout。
 
 重点查看：
 
@@ -37,10 +40,16 @@
 
 这些仍是研究结果，由用户决定哪些候选值得进入正式回测。
 
+在线实例是一个选定的研究 run。它保留了负的净收益，目的是如实展示计入成本后的研究过程，
+而不是挑选一条盈利曲线作为宣传。
+
 ### 3. Event 引擎
 
 Event 引擎负责正式回测，尤其适合移动止损、风险优先级、滚仓保证金或中断恢复等依赖时序状态
 的策略。报告把收益和回撤连接到精确成交、持仓变化、风险事件、设置、数据版本与源码指纹。
+
+在线实例来自不可变的 5 月 run `a17-6a0058b81f8c4f8181917dfb`，中文页面保留 1,655 个可交互
+曲线点和 668 个审计快照。
 
 ## 推荐探索路径
 

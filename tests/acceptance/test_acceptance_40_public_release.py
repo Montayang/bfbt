@@ -31,6 +31,9 @@ def test_public_identity_is_bfbt_with_english_front_door() -> None:
     assert "docs/assets/research-workflow.svg" in readme
     assert "docs/assets/three-layer-reports.svg" in readme
     assert "showcase/README.md" in readme
+    assert "https://montayang.github.io/bfbt/reports/quick-research.en.html" in readme
+    assert "https://montayang.github.io/bfbt/reports/fast-matrix.en.html" in readme
+    assert "https://montayang.github.io/bfbt/reports/event-engine.en.html" in readme
     assert chinese.startswith("# BFBT\n")
     assert "不存在隶属、背书、赞助或任何利益关系" in chinese
     assert "```mermaid" not in chinese
@@ -38,12 +41,25 @@ def test_public_identity_is_bfbt_with_english_front_door() -> None:
     assert "docs/assets/research-workflow.zh-CN.svg" in chinese
     assert "docs/assets/three-layer-reports.zh-CN.svg" in chinese
     assert "showcase/README.zh-CN.md" in chinese
+    assert "https://montayang.github.io/bfbt/reports/quick-research.zh-CN.html" in chinese
+    assert "https://montayang.github.io/bfbt/reports/fast-matrix.zh-CN.html" in chinese
+    assert "https://montayang.github.io/bfbt/reports/event-engine.zh-CN.html" in chinese
     showcase_english = (ROOT / "showcase" / "README.md").read_text(encoding="utf-8")
     showcase_chinese = (ROOT / "showcase" / "README.zh-CN.md").read_text(encoding="utf-8")
     assert showcase_english.startswith("# Explore BFBT\n")
     assert "README.zh-CN.md" in showcase_english
     assert showcase_chinese.startswith("# 探索 BFBT\n")
     assert "README.md" in showcase_chinese
+    for report_name in ("quick-research", "fast-matrix", "event-engine"):
+        assert f"https://montayang.github.io/bfbt/reports/{report_name}.en.html" in showcase_english
+        assert f"https://montayang.github.io/bfbt/reports/{report_name}.zh-CN.html" in showcase_chinese
+        assert (ROOT / "site" / "reports" / f"{report_name}.en.html").is_file()
+        assert (ROOT / "site" / "reports" / f"{report_name}.zh-CN.html").is_file()
+    pages_workflow = (ROOT / ".github" / "workflows" / "pages.yml").read_text(encoding="utf-8")
+    assert "branches: [main]" in pages_workflow
+    assert "path: site" in pages_workflow
+    assert (ROOT / "site" / "index.html").is_file()
+    assert (ROOT / "site" / "index.zh-CN.html").is_file()
     public_documents = (
         ("docs/README.md", "docs/README.zh-CN.md", "# BFBT documentation", "# BFBT 文档导航"),
         (
@@ -112,6 +128,52 @@ def test_html_variants_are_separate_deterministic_documents(tmp_path: Path) -> N
     assert "这些结果是历史模拟" in chinese
     assert 'data-bfbt-language="en"' in chinese
     assert localize_html(source, "en") == localize_html(source, "en")
+
+
+def test_html_localization_preserves_executable_and_literal_blocks() -> None:
+    source = (
+        '<!doctype html><html lang="zh-CN"><body>'
+        '<p>成交前 / Before</p>'
+        '<script>var changed = trades.length > 0 || grid < 4;'
+        'var label = "成交前 / Before";</script>'
+        '<script type="application/json">{"label":"成交前 / Before"}</script>'
+        '<style>.row > span { color: green; }</style>'
+        '<pre><code>value > 0 / source evidence</code></pre>'
+        '</body></html>'
+    )
+
+    english = localize_html(source, "en")
+    chinese = localize_html(source, "zh-CN")
+
+    assert "<p>Before</p>" in english
+    assert "<p>成交前</p>" in chinese
+    assert 'trades.length > 0 || grid < 4' in english
+    assert 'trades.length > 0 || grid < 4' in chinese
+    assert 'var label = "Before"' in english
+    assert 'var label = "成交前"' in chinese
+    assert '{"label":"成交前 / Before"}' in english
+    assert '{"label":"成交前 / Before"}' in chinese
+    assert '.row > span { color: green; }' in english
+    assert 'value > 0 / source evidence' in english
+
+
+def test_html_localization_selects_bilingual_text_before_translation() -> None:
+    source = (
+        '<!doctype html><html lang="zh-CN"><body>'
+        '<h2>核心结果 / Performance</h2>'
+        '<p>跨行中文说明 /\nMultiline English explanation</p>'
+        '<span title="因子原始排序与未来Return排序的截面 Spearman 相关系数">因子</span>'
+        '<script>var label = "核心结果 / Performance";</script>'
+        '</body></html>'
+    )
+
+    english = localize_html(source, "en")
+    assert "Performance / Performance" not in english
+    assert "<h2>Performance</h2>" in english
+    assert "<p>Multiline English explanation</p>" in english
+    assert ">Factor</span>" in english
+    assert "Cross-sectional Spearman correlation" in english
+    assert 'var label = "Performance"' in english
 
 
 def test_quick_research_report_publishes_both_languages(tmp_path: Path) -> None:

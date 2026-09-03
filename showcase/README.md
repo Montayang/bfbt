@@ -13,9 +13,9 @@ layers: each layer answers a different question and preserves a different level 
 
 | Layer | Main report | Question it answers |
 |---|---|---|
-| Quick Research | `quick_research.html` | Does a factor's cross-sectional ranking contain useful information? |
-| Fast Matrix | `fast_matrix.html` plus one detail page per research run | How does a selected portfolio path behave after turnover, fees, slippage, funding, and valuation? |
-| Event Engine | `report.html`, `report.en.html`, and `report.zh-CN.html` | What happened to the account, positions, fills, margin, and risk events through time? |
+| Quick Research | [Open the real report](https://montayang.github.io/bfbt/reports/quick-research.en.html) | Does a factor's cross-sectional ranking contain useful information? |
+| Fast Matrix | [Open the real report](https://montayang.github.io/bfbt/reports/fast-matrix.en.html) | How does a selected portfolio path behave after turnover, fees, slippage, funding, and valuation? |
+| Event Engine | [Open the real report](https://montayang.github.io/bfbt/reports/event-engine.en.html) | What happened to the account, positions, fills, margin, and risk events through time? |
 
 ![The three BFBT report layers](../docs/assets/three-layer-reports.svg)
 
@@ -24,6 +24,9 @@ layers: each layer answers a different question and preserves a different level 
 Start here when evaluating a factor. The report focuses on Rank IC, quantile returns, coverage,
 and turnover without simulating an account. Use it to compare candidates and reject weak or
 unstable ideas cheaply.
+
+The hosted example compares 12 registered factors across 13 evaluated series and 1,638 research
+results, including a separately labelled July holdout.
 
 Look for:
 
@@ -40,12 +43,18 @@ index compares research runs; each detail page explains one exact configuration.
 
 These remain research results. The user decides which candidates deserve a formal backtest.
 
+The hosted example is one selected research run. Its negative net return is retained deliberately:
+the report demonstrates cost-aware evaluation rather than presenting a cherry-picked profit claim.
+
 ### 3. Event Engine
 
 Use the Event Engine for the formal backtest, especially when results depend on chronological
 state such as trailing exits, risk priority, rolling margin, or interrupted-run recovery. Its
 report connects headline performance to the exact fills, position changes, risk events, settings,
 data version, and source fingerprint.
+
+The hosted example is the immutable May run `a17-6a0058b81f8c4f8181917dfb`, rendered as a separate
+English document with 1,655 interactive curve points and 668 audit snapshots.
 
 ## A practical exploration path
 

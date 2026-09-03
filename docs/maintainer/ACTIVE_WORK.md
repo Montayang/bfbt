@@ -1,6 +1,6 @@
 # Active work
 
-Updated: 2026-09-02.
+Updated: 2026-09-03.
 
 ## Current state
 
@@ -11,6 +11,16 @@ Updated: 2026-09-02.
 - The four public documentation entry points linked from the root README now follow one convention:
   unsuffixed files are the complete English editions and `.zh-CN.md` siblings are independent
   Simplified-Chinese editions. Navigation links and the public-release contract cover both editions.
+- Event report language generation corrupted interactive JavaScript by treating comparison operators
+  inside `<script>` as HTML text boundaries. `codex/fix-report-localization-js` now isolates
+  executable and literal blocks, localizes JavaScript string literals without altering operators,
+  and adds an A40 regression. Rebuilt English and Chinese May reports retain all 1,655 curve points
+  and 668 snapshots, and all generated JavaScript blocks pass static syntax validation. Pytest has
+  not been run for this branch because the current task did not authorize tests.
+- The same branch now stages six self-contained, path-sanitized report examples for GitHub Pages:
+  English and Simplified-Chinese Quick Research, Fast Matrix, and Event pages. Root and Showcase
+  READMEs link each language to its matching report. Publication still requires this branch to be
+  merged into `main` and GitHub Pages to use GitHub Actions as its source.
 - No engine development or formal backtest is active.
 - The public-release implementation was completed on `codex/bfbt-public-release` and approved for
   fast-forward publication to `main`. It performs the complete
@@ -59,8 +69,8 @@ Updated: 2026-09-02.
 - The current Showcase uses existing H2 `r01` evidence with a visible dirty-provenance qualification.
   Clean `r02` formal evidence remains a separate future decision and requires explicit backtest
   authorization; it is not part of this implementation task.
-- A hosted GitHub Pages Showcase is intentionally deferred as a future presentation enhancement;
-  no date or implemented status is claimed.
+- GitHub Pages report publication is prepared but not yet live: merge authorization and the
+  repository owner's one-time Pages source selection remain pending.
 
 ## No active formal run
 

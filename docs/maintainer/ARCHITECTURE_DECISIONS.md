@@ -60,6 +60,9 @@ silently approximated.
   general no-code Agent service and never embeds arbitrary code execution.
 - Showcase pages are deterministic derived views of verified immutable artifacts. They may compare
   runs and derive opening margin from audited notional/leverage, but cannot rewrite result truth.
+- Public hosted report examples are byte-for-byte copies of generated, self-contained language
+  variants after path/secret/network-reference screening. They contain no datasets or mutable run
+  directories, and their labels must preserve the underlying research/formal-run distinction.
 - Dirty source provenance, data warnings, and authorization action classes are presentation facts,
   not details the renderer may suppress.
 
@@ -75,6 +78,9 @@ silently approximated.
 - English is the default repository and generated-report language. Human-facing HTML also publishes
   an independent Simplified-Chinese sibling. Machine-readable identities and evidence are not
   translated or duplicated.
+- HTML localization may translate visible text and JavaScript presentation string literals, but it
+  must preserve JavaScript syntax, JSON payloads, CSS, preformatted code, and machine-readable
+  evidence byte-for-byte. Executable or literal blocks must not pass through HTML text-node regexes.
 - Public Markdown entry points follow the same convention: the unsuffixed file is English and an
   independent `.zh-CN.md` sibling contains Simplified Chinese. This includes the documentation map,
   beginner tutorial, user manual, custom-factor tutorial, and Showcase guide.

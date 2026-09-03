@@ -789,8 +789,8 @@ def _execution_html(config: Mapping[str, Any], actual_end: object) -> str:
         "trade_close": "成交价格收盘价 / Trade-price close",
     }.get(str(valuation.get("price")), _text(valuation.get("price")))
     funding_text = (
-        f"启用 / Enabled；缺失策略 / Missing policy: "
-        f"{_text(funding.get('missing_policy'))}"
+        f"启用；缺失策略：{_text(funding.get('missing_policy'))} / "
+        f"Enabled; missing policy: {_text(funding.get('missing_policy'))}"
         if funding.get("enabled")
         else "关闭 / Disabled"
     )
@@ -858,21 +858,26 @@ def _v2_audit_html(config: Mapping[str, Any]) -> str:
     crossover = _map(selection.get("crossover"))
     holding = _map(portfolio.get("holding"))
     symbol_exits = _map(risk.get("symbol_exits"))
-    enabled_risks = []
-    for key, label in (
-        ("stop_loss", "止损 / Stop Loss"),
-        ("take_profit", "止盈 / Take Profit"),
-        ("trailing_stop", "移动止损 / Trailing Stop"),
+    enabled_risks_zh: list[str] = []
+    enabled_risks_en: list[str] = []
+    for key, label_zh, label_en in (
+        ("stop_loss", "止损", "Stop Loss"),
+        ("take_profit", "止盈", "Take Profit"),
+        ("trailing_stop", "移动止损", "Trailing Stop"),
     ):
         rule = _map(symbol_exits.get(key))
         if rule.get("enabled"):
-            detail = f"{label} {_percent(rule.get('distance'))}"
+            detail_zh = f"{label_zh} {_percent(rule.get('distance'))}"
+            detail_en = f"{label_en} {_percent(rule.get('distance'))}"
             if (
                 key == "trailing_stop"
                 and rule.get("activation_distance") is not None
             ):
-                detail += f"（盈利 {_percent(rule.get('activation_distance'))} 后激活）"
-            enabled_risks.append(detail)
+                activation = _percent(rule.get("activation_distance"))
+                detail_zh += f"（盈利 {activation} 后激活）"
+                detail_en += f" (activated after a {activation} gain)"
+            enabled_risks_zh.append(detail_zh)
+            enabled_risks_en.append(detail_en)
     risk_fill = {
         "next_bar_open": "下一根 K 线开盘 / Next bar open",
         "same_bar_trigger": "触发 K 线内按保守触发价 / Same-bar conservative trigger",
@@ -952,7 +957,11 @@ def _v2_audit_html(config: Mapping[str, Any]) -> str:
         ("杠杆 / Leverage", _text(risk.get("leverage"))),
         (
             "风险规则 / Risk Rules",
-            "；".join(enabled_risks) if enabled_risks else "未启用 / Disabled",
+            (
+                f"{'；'.join(enabled_risks_zh)} / {'; '.join(enabled_risks_en)}"
+                if enabled_risks_zh
+                else "未启用 / Disabled"
+            ),
         ),
         ("风险触发价格 / Risk Trigger Price", _text(risk.get("trigger_price"))),
         ("风险成交 / Risk Fill", risk_fill),

@@ -14,6 +14,7 @@ BFBT keeps a behavior-oriented changelog. Release dates use UTC.
   derived from immutable runs.
 - A39 offline acceptance, presentation assets, and public contribution/security documentation.
 - Independent English and Simplified-Chinese HTML artifacts plus the A40 public-release contract.
+- Hosted, self-contained English and Simplified-Chinese examples for all three report layers.
 
 ### Changed
 
@@ -27,6 +28,8 @@ BFBT keeps a behavior-oriented changelog. Release dates use UTC.
   with a vertical hierarchy and an explicit human decision gate.
 - Python 3.10 compatibility now uses an explicit `StrEnum` fallback and `timezone.utc`, matching the
   declared interpreter floor and CI matrix.
+- Report localization preserves executable JavaScript, embedded JSON, CSS, and preformatted code;
+  the public README and Showcase tour link directly to the corresponding hosted report language.
 
 ## 0.1.0
 

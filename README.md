@@ -36,9 +36,15 @@ than interchangeable.
 
 ![Quick Research, Fast Matrix, and Event Engine reports](docs/assets/three-layer-reports.svg)
 
+Open the real, interactive report examples:
+
+- [Quick Research: 12 factors and 13 evaluated series](https://montayang.github.io/bfbt/reports/quick-research.en.html)
+- [Fast Matrix: one selected portfolio research run](https://montayang.github.io/bfbt/reports/fast-matrix.en.html)
+- [Event Engine: one formal trade-level backtest](https://montayang.github.io/bfbt/reports/event-engine.en.html)
+
 The [self-guided report tour](showcase/README.md) explains what each report answers, what to inspect,
-and how to continue from a fresh checkout. A separate three-month evidence case remains available
-for machines that already hold its exact local runs, but it is not the default user experience.
+and how to continue from a fresh checkout. These hosted pages are historical research examples,
+not investment advice or promises of future performance.
 
 ## Implemented capabilities
 

@@ -246,6 +246,67 @@ _ENGLISH: Mapping[str, str] = {
     "滑点拖累": "Slippage drag",
     "冻结合同": "Frozen contract",
     "：全部": ": All",
+    "全部": "All",
+    "因子原始排序与未来收益排序的截面 Spearman 相关系数": (
+        "Cross-sectional Spearman correlation between raw factor ranks and future-return ranks"
+    ),
+    "因子原始排序与未来Return排序的截面 Spearman 相关系数": (
+        "Cross-sectional Spearman correlation between raw factor ranks and future-return ranks"
+    ),
+    "Rank IC 均值除以其时序标准差": (
+        "Mean Rank IC divided by its time-series standard deviation"
+    ),
+    "因子最高五分位平均未来收益减最低五分位": (
+        "Mean future return of the highest factor quintile minus the lowest quintile"
+    ),
+    "因子最高五分位平均未来Return减最低五分位": (
+        "Mean future return of the highest factor quintile minus the lowest quintile"
+    ),
+    "Rank 换手": "Rank turnover",
+    "Rank IC 为正比例": "Positive Rank IC share",
+    "因子": "Factor",
+    "Universe 版本": "Universe version",
+    "Portfolio 版本": "Portfolio version",
+    "Performance / Performance": "Performance",
+    "Total return / Total Return": "Total Return",
+    "Ending equity / Terminal Equity": "Terminal Equity",
+    "Maximum drawdown / Max Drawdown": "Max Drawdown",
+    "Total turnover / Turnover": "Turnover",
+    "Funding / Funding": "Funding",
+    "Equity path / Equity": "Equity",
+    "Factor description / Factor": "Factor",
+    "Execution / Execution": "Execution",
+    "Identity & audit / Identity": "Identity & audit",
+    "图例 Chart legend": "Chart legend",
+    "曲线与事件导航 Chart and event navigation": "Chart and event navigation",
+    "起点": "Start",
+    "期末": "End",
+    "← 上一笔": "← Previous trade",
+    "下一笔 →": "Next trade →",
+    "← 上一处": "← Previous position",
+    "下一处 →": "Next position →",
+    "← 上一个": "← Previous event",
+    "下一个 →": "Next event →",
+    "精确成交时刻": "Exact trade timestamps",
+    "次级审计信息 Secondary audit": "Secondary audit",
+    "在基础 K 线上按固定相位间隔抽取价格点。值越高表示当前价格相对同相位历史均值越强；不会重采样成自然慢周期 K 线。": (
+        "Samples price points at fixed phase intervals on the base bars. Higher values mean "
+        "the current price is stronger relative to its same-phase history; the input is not "
+        "resampled into natural slower-horizon bars."
+    ),
+    "跟踪每个合约从 Rank ≥ 5 开始的非上升路径（持平保留、Rank 数字变大重置）；首次到达 Rank 1 时做多。全账户仅持有一个合约，新信号先平旧仓再开新仓。": (
+        "Track each contract's non-increasing path from Rank ≥ 5 (ties continue; a larger rank "
+        "resets the path), and go long the first time it reaches Rank 1. The account holds one "
+        "contract at a time; a new signal closes the old position before opening the new one."
+    ),
+    "仅用已收盘数据计算因子": "Compute factors from closed bars only",
+    "在合格合约中截面排序": "Rank cross-sectionally among eligible contracts",
+    "下一根开盘执行调仓": "Rebalance at the next bar open",
+    "标记估值并计入全部成本": "Mark to market and include all costs",
+    "选择、仓位、保证金与风险参数": "Selection, sizing, margin, and risk parameters",
+    "Stop loss / Stop Loss 2.80%；移动Stop loss / Trailing Stop 2.80%（盈利 5.80% 后激活）": (
+        "Stop loss 2.80%; trailing stop 2.80% (activated after a 5.80% gain)"
+    ),
     "这些结果是历史模拟，不构成投资建议，也不代表未来收益。": (
         "These results are historical simulations, not investment advice or future-return claims."
     ),
@@ -258,6 +319,20 @@ _LOCALIZABLE_ATTRIBUTE = re.compile(
     r"(?P<value>.*?)(?P=quote)"
 )
 _SUMMARY_CARD = re.compile(r"<span>([^<>]+)<small>([^<>]+)</small></span>")
+_RAW_BLOCK = re.compile(
+    r"(?P<open><(?P<tag>script|style|pre|code)\b[^>]*>)"
+    r"(?P<body>.*?)"
+    r"(?P<close></(?P=tag)\s*>)",
+    flags=re.IGNORECASE | re.DOTALL,
+)
+_JAVASCRIPT_STRING = re.compile(
+    r'"(?P<double>(?:\\.|[^"\\])*)"|\'(?P<single>(?:\\.|[^\'\\])*)\'',
+    flags=re.DOTALL,
+)
+_JSON_SCRIPT = re.compile(
+    r"\btype\s*=\s*(['\"])application/(?:ld\+)?json\1",
+    flags=re.IGNORECASE,
+)
 _HAN = re.compile(r"[一-龥]")
 
 
@@ -274,43 +349,91 @@ def _replace_translations(value: str) -> str:
 
 
 def _select_bilingual(value: str, locale: ReportLocale) -> str:
-    if " / " not in value:
+    match = re.match(r"(?s)^(.*?)\s+/\s+(.*)$", value)
+    if match is None:
         return value
-    left, right = value.split(" / ", 1)
+    left, right = match.groups()
     if not _HAN.search(left) or not re.search(r"[A-Za-z]", right):
         return value
     return left if locale == "zh-CN" else right
 
 
+def _localize_javascript(document: str, locale: ReportLocale) -> str:
+    """Localize string literals without interpreting JavaScript operators as HTML."""
+
+    def string_literal(match: re.Match[str]) -> str:
+        quote = match.group(0)[0]
+        value = match.group("double")
+        if value is None:
+            value = match.group("single")
+        assert value is not None
+        value = _select_bilingual(value, locale)
+        if locale == "en":
+            value = _replace_translations(value)
+        value = value.replace("bfbt", "BFBT")
+        value = re.sub(rf"(?<!\\){re.escape(quote)}", rf"\\{quote}", value)
+        return f"{quote}{value}{quote}"
+
+    return _JAVASCRIPT_STRING.sub(string_literal, document)
+
+
+def _protect_raw_blocks(
+    document: str, locale: ReportLocale
+) -> tuple[str, tuple[str, ...]]:
+    """Mask executable and literal blocks while visible HTML text is localized."""
+
+    protected: list[str] = []
+
+    def protect(match: re.Match[str]) -> str:
+        block = match.group(0)
+        if match.group("tag").lower() == "script" and not _JSON_SCRIPT.search(
+            match.group("open")
+        ):
+            block = (
+                match.group("open")
+                + _localize_javascript(match.group("body"), locale)
+                + match.group("close")
+            )
+        token = f"\x00BFBT_RAW_BLOCK_{len(protected)}\x00"
+        protected.append(block)
+        return token
+
+    return _RAW_BLOCK.sub(protect, document), tuple(protected)
+
+
+def _restore_raw_blocks(document: str, protected: tuple[str, ...]) -> str:
+    for index, block in enumerate(protected):
+        document = document.replace(f"\x00BFBT_RAW_BLOCK_{index}\x00", block)
+    return document
+
+
 def localize_html(document: str, locale: ReportLocale) -> str:
     """Select one primary UI language while preserving source evidence verbatim."""
 
+    selected, protected = _protect_raw_blocks(document, locale)
     selected = _SUMMARY_CARD.sub(
         lambda match: f"<span>{match.group(1) if locale == 'zh-CN' else match.group(2)}</span>",
-        document,
+        selected,
     )
-    if locale == "en":
-        selected = _replace_translations(selected)
 
     def text_node(match: re.Match[str]) -> str:
-        value = match.group(1)
+        value = _select_bilingual(match.group(1), locale)
         if locale == "en":
             value = _replace_translations(value)
-        return _select_bilingual(value, locale)
+        return value
 
     selected = _TEXT_NODE.sub(text_node, selected)
 
     def attribute(match: re.Match[str]) -> str:
-        value = match.group("value")
+        value = _select_bilingual(match.group("value"), locale)
         if locale == "en":
             value = _replace_translations(value)
-        value = _select_bilingual(value, locale)
         return f"{match.group('prefix')}{value}{match.group('quote')}"
 
     selected = _LOCALIZABLE_ATTRIBUTE.sub(attribute, selected)
     selected = re.sub(r"<html\s+lang=(['\"]).*?\1", f'<html lang="{locale}"', selected, count=1)
     selected = selected.replace("bfbt", "BFBT")
-    return selected
+    return _restore_raw_blocks(selected, protected)
 
 
 def html_variants(document: str) -> dict[ReportLocale, str]:

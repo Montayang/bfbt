@@ -52,8 +52,10 @@ Simplified-Chinese HTML variants. Remaining presentation boundaries are explicit
 - The retained H2 evidence records `git_dirty=true` and must continue to display that qualification.
 - Package installation and wheel contents are verified. A dependency lock, release automation,
   dependency-update policy, and plugin compatibility policy are not yet implemented.
-- A hosted GitHub Pages Showcase is a future enhancement. The repository must not describe it as a
-  current live demo.
+- GitHub Pages publication of six self-contained report examples is prepared on
+  `codex/fix-report-localization-js`. It becomes live only after merge to `main` and the repository
+  owner's one-time selection of GitHub Actions as the Pages source; until then it must not be
+  described as deployed.
 
 ## Showcase experience
 
@@ -214,7 +216,8 @@ link. S6 is strongly preferred for an external or recorded presentation.
 - Arbitrary factor DSL/plugins and generated-code execution.
 - A production background-job daemon, queue, cancellation service, or multi-user quotas.
 - Automatic Fast Matrix candidate selection; the user remains the promotion decision maker.
-- Cloud hosting, authentication, account connectivity, live trading, or exchange order simulation.
+- Dynamic cloud services, authentication, account connectivity, live trading, or exchange order
+  simulation. Static GitHub Pages report examples are the sole hosted surface in this phase.
 - Full AG01–AG16 completion and full engineering-grade open-source release automation.
 
 ## Decisions needed before implementation

@@ -36,9 +36,14 @@ Fast Matrix 评估选定组合计入成本后的路径，Event 引擎则把候�
 
 ![Quick Research、Fast Matrix 和 Event 引擎报告](docs/assets/three-layer-reports.zh-CN.svg)
 
+直接打开真实的交互报告实例：
+
+- [Quick Research：12 个因子、13 组评估序列](https://montayang.github.io/bfbt/reports/quick-research.zh-CN.html)
+- [Fast Matrix：一个选定的组合研究 run](https://montayang.github.io/bfbt/reports/fast-matrix.zh-CN.html)
+- [Event 引擎：一个可追溯到逐笔成交的正式回测](https://montayang.github.io/bfbt/reports/event-engine.zh-CN.html)
+
 [三层报告自助导览](showcase/README.zh-CN.md)说明每类报告回答什么、应该查看哪些内容，以及
-全新下载仓库后如何继续探索。原有三个月证据案例仍可供已经保存精确本地 run 的机器使用，
-但不再作为普通用户的默认入口。
+全新下载仓库后如何继续探索。这些在线页面是历史研究实例，不构成投资建议或未来收益承诺。
 
 ## 当前能力
 
