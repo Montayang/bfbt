@@ -84,7 +84,7 @@ def test_research_store_is_immutable_verified_and_promotes_to_event(tmp_path: Pa
     report = (store.directory(manifest.run_id) / "report.html").read_text()
     chinese = (store.directory(manifest.run_id) / "report.zh-CN.html").read_text()
     assert report == (store.directory(manifest.run_id) / "report.en.html").read_text()
-    assert "has not received formal Event confirmation" in report
+    assert "has not yet been confirmed by a formal Event Engine backtest" in report
     assert "尚未经过 Event 引擎的正式回测确认" in chinese
     assert "four-hour reversal" in report
     assert "Execution" in report
