@@ -18,6 +18,8 @@ BFBT keeps a behavior-oriented changelog. Release dates use UTC.
 
 ### Changed
 
+- The hosted Event example now uses the clean-source, 1x-leverage May run, and all hosted report
+  language selectors retain consistent right-aligned machine identifiers.
 - The root README now describes the A01–A40 architecture, implemented capabilities, bounded
   Showcase, and explicit exclusions.
 - Brand, Python distribution, import namespace, CLI, and repository links migrated completely to

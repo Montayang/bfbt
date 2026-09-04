@@ -17,6 +17,8 @@
 
 ### Changed
 
+- 托管的 Event 示例现使用干净源码、1 倍杠杆的五月 run；所有托管报告的语言切换器统一
+  保留右对齐所需的机器标识。
 - 根 README 更新为 A01–A40 架构、当前能力、快速展示和明确不支持范围。
 - 项目品牌、Python distribution、import namespace、CLI 与仓库链接完整迁移为
   BFBT/`bfbt`；英文 README 成为默认入口，中文 README 独立保留。

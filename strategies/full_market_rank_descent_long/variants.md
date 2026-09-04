@@ -18,6 +18,7 @@ R5-T4 在 R5 正向因子上冻结激活式移动止盈和滚仓语义；采样�
 | `R5-T4-ROLLING` | `rdl_sampled_mean_ratio_15m12_pos_t4_rolling` | 15 分钟 | 五月至七月已回测 |
 | `R5-T4-H1-ROLLING` | `rdl_sampled_mean_ratio_1h12_pos_t4_rolling` | 1 小时 | 五月至七月已回测 |
 | `R5-T4-H2-ROLLING` | `rdl_sampled_mean_ratio_2h12_pos_t4_rolling` | 2 小时 | 五月至七月已回测 |
+| `R5-T4-H2-L1-ROLLING` | `rdl_sampled_mean_ratio_2h12_pos_t4_1x_rolling` | 2 小时 | 五月 1 倍杠杆展示 run 已回测 |
 
 ## 可接受的口头简称
 

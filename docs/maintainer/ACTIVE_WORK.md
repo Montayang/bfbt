@@ -1,9 +1,13 @@
 # Active work
 
-Updated: 2026-09-03.
+Updated: 2026-09-04.
 
 ## Current state
 
+- The clean-source 1x-leverage May Event run `a17-ca0c6d168e37c07b06239452` completed and all 19
+  immutable artifacts verified. Its English and Simplified-Chinese reports replace the prior 5x
+  hosted Event example. The Fast Matrix English Pages copy also restores lowercase language-switch
+  machine identifiers so its selector is right-aligned and functional like the other reports.
 - Public Showcase discovery was reframed and merged into `main` at `82e57eb`: English-first and
   independent Chinese guides now lead a fresh-checkout user through the three report layers, while
   the prior H2 three-month comparison is retained only as an optional prepared-machine evidence

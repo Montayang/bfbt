@@ -1,6 +1,6 @@
 # Current project state
 
-Updated: 2026-09-02.
+Updated: 2026-09-04.
 
 ## Repository identity
 
@@ -48,6 +48,9 @@ V1 remains for compatibility and historical reproduction, not for new daily stra
 - `R5-T4-H2-ROLLING` May, June, and July formal runs are complete and registered under
   `strategies/full_market_rank_descent_long/`; their immutable environments record commit
   `3b0a32e` with `git_dirty=true`, which remains an explicit audit qualification.
+- The 1x-leverage May presentation identity `R5-T4-H2-L1-ROLLING` is complete as immutable run
+  `a17-ca0c6d168e37c07b06239452`; its environment records clean commit `bf136b5`, and its verified
+  bilingual reports are the current Event example prepared for GitHub Pages.
 
 ## Verification baseline
 

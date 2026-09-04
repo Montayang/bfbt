@@ -53,8 +53,22 @@ def test_public_identity_is_bfbt_with_english_front_door() -> None:
     for report_name in ("quick-research", "fast-matrix", "event-engine"):
         assert f"https://montayang.github.io/bfbt/reports/{report_name}.en.html" in showcase_english
         assert f"https://montayang.github.io/bfbt/reports/{report_name}.zh-CN.html" in showcase_chinese
-        assert (ROOT / "site" / "reports" / f"{report_name}.en.html").is_file()
-        assert (ROOT / "site" / "reports" / f"{report_name}.zh-CN.html").is_file()
+        english_report = ROOT / "site" / "reports" / f"{report_name}.en.html"
+        chinese_report = ROOT / "site" / "reports" / f"{report_name}.zh-CN.html"
+        assert english_report.is_file()
+        assert chinese_report.is_file()
+        for report in (english_report, chinese_report):
+            document = report.read_text(encoding="utf-8")
+            assert 'class="bfbt-language-switch"' in document
+            assert "data-bfbt-language" in document
+            assert "BFBT-language-switch" not in document
+            assert "data-BFBT-language" not in document
+    event_example = (
+        ROOT / "site" / "reports" / "event-engine.en.html"
+    ).read_text(encoding="utf-8")
+    assert "R5-T4-H2-L1-ROLLING-202605-r01" in event_example
+    assert "a17-ca0c6d168e37c07b06239452" in event_example
+    assert "a17-6a0058b81f8c4f8181917dfb" not in event_example
     pages_workflow = (ROOT / ".github" / "workflows" / "pages.yml").read_text(encoding="utf-8")
     assert "branches: [main]" in pages_workflow
     assert "path: site" in pages_workflow
