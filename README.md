@@ -54,8 +54,8 @@ not investment advice or promises of future performance.
   dataset snapshots.
 - Point-in-time universes, causal factor/label timing, preprocessing, IC/Rank IC, quantile returns,
   and turnover diagnostics.
-- Built-in momentum, reversal, volatility, volume, active-buy, Amihud, EMA, sampled-mean-ratio, and
-  registered GTJA191 factors.
+- Built-in momentum, reversal, volatility, volume, active-buy, Amihud, EMA, sampled-mean-ratio,
+  registered GTJA191 factors, and source-pinned Qlib/`ta` trend-momentum factors.
 - Fast Matrix portfolio research with funding and mark-price valuation, costs, checkpoints, and
   comparable research results.
 - Event Engine next-bar execution, explicit fees/slippage/funding, incremental sizing, leverage and

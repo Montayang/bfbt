@@ -1,6 +1,6 @@
 # Current project state
 
-Updated: 2026-09-04.
+Updated: 2026-09-05.
 
 ## Repository identity
 
@@ -27,6 +27,9 @@ Updated: 2026-09-04.
 - A36-A40: sampled-mean factors, Event parameter studies, activated trailing exits, rolling-margin
   state, complete trade/position audit navigation, a verified offline Agent Showcase thin slice,
   full BFBT identity migration, and independent English/Simplified-Chinese HTML outputs.
+- The Quick Research registry also includes 14 source-pinned Qlib/`ta` trend and momentum factors. Exact
+  source formulas remain distinct from BFBT adaptations; formula windows are literal source-bar
+  counts, gaps reset history, and invalid or zero-denominator inputs fail closed.
 
 The intended workflow is:
 
@@ -76,6 +79,9 @@ V1 remains for compatibility and historical reproduction, not for new daily stra
   cross-runtime release gate.
 - Migration-time static checks covered Python AST parsing, TOML/YAML parsing, shell syntax,
   imports, project-root discovery, Markdown links, secret/path scanning, and Git integrity.
+- The open-source trend/momentum factor implementation passed 40 focused formula, recursive-reference,
+  warmup, causality, gap, parameter, and registry tests, followed by the complete offline suite:
+  `360 passed in 38.24s` on 2026-09-05. No Quick Research or backtest was run by this verification.
 
 ## Known boundaries
 

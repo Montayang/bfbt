@@ -43,6 +43,8 @@ text; filenames, commands, schemas, and immutable identities are language-neutra
 ## Research and real strategy records
 
 - [Research registry](research/registry.md): factor candidates, QR-v1 decisions, and promotion state.
+- [Open-source trend/momentum batch](research/open_source_trend_momentum_candidates.md): pinned
+  Qlib/`ta` formulas, BFBT adaptations, de-duplication, parameters, and implementation state.
 - [Research rules](research/rules/QR-v1.md): current versioned Quick Research decision rule.
 - [Strategy identities](../strategies/README.md): real strategy specifications and formal-run maps.
 

@@ -158,7 +158,9 @@ cache:
 约束：
 
 - factor version 必须显式填写。
-- lookback 必须能转换为 base interval 的 bar 数。
+- `lookback/window` 等 duration 参数必须能转换为 base interval 的 bar 数；明确采用来源公式
+  K 线根数的因子使用 `window_bars`、`roc_bars`、`smooth_bars` 等整数参数，它们不随
+  `1m/5m/15m` 自动换算自然时间。
 - preprocess 顺序影响结果，属于版本指纹的一部分。
 - 标签不允许进入 factor 的 required columns。
 

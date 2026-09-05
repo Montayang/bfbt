@@ -1,9 +1,16 @@
 # Active work
 
-Updated: 2026-09-04.
+Updated: 2026-09-05.
 
 ## Current state
 
+- The source-pinned open-source trend/momentum batch now has 14 registered `v1` implementations:
+  exact Qlib/`ta` formulas remain distinct from BFBT adaptations, duplicate controls remain visibly
+  labelled, and gaps/invalid inputs fail closed. Focused formula, recursive-reference, warmup,
+  causality, gap, parameter, and registry coverage passes 40 tests; the complete offline suite
+  passes 360 tests. Quick Research remains unstarted; its `1m/5m/15m` source
+  bars and `1/5/20`-bar forecasts are frozen to match the prior study, while dates and dataset
+  identity still require a new study contract.
 - The clean-source 1x-leverage May Event run `a17-ca0c6d168e37c07b06239452` completed and all 19
   immutable artifacts verified. Its English and Simplified-Chinese reports replace the prior 5x
   hosted Event example. The Fast Matrix English Pages copy also restores lowercase language-switch

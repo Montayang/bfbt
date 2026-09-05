@@ -14,6 +14,7 @@ from bfbt.data.hashing import content_sha256
 from bfbt.factors.base import FactorError, FactorResult, require_columns
 from bfbt.factors.liquidity import quote_volume_raw, taker_buy_ratio_raw
 from bfbt.factors.momentum import momentum_raw
+from bfbt.factors.open_source_momentum import open_source_momentum_raw
 from bfbt.factors.ema import intrabar_ema_ratio_raw
 from bfbt.factors.transforms import apply_preprocess
 from bfbt.factors.volatility import realized_volatility_raw
@@ -71,6 +72,18 @@ def _gtja(alpha: int):
     return compute
 
 
+def _open_source(factor: str):
+    def compute(frame, definition, *, base_interval):
+        return open_source_momentum_raw(
+            frame,
+            definition,
+            base_interval=base_interval,
+            factor=factor,
+        )
+
+    return compute
+
+
 _GTJA_FORMULAS = {
     18: "CLOSE / DELAY(CLOSE,5)",
     20: "(CLOSE-DELAY(CLOSE,6))/DELAY(CLOSE,6)*100",
@@ -99,6 +112,129 @@ _GTJA_FACTORS = {
         description_zh="按原报告的 K 线根数计算；用于截面快速研究。",
     )
     for alpha, formula in _GTJA_FORMULAS.items()
+}
+
+
+_OSS_FACTOR_METADATA = {
+    "oss_qlib_beta": (
+        "Qlib Normalized Trend Slope",
+        "Qlib 归一化趋势斜率",
+        "Slope(CLOSE, window_bars) / CLOSE",
+        "用含截距线性回归斜率衡量窗口内的归一化价格趋势速度。",
+        (),
+    ),
+    "oss_qlib_signed_rsqr": (
+        "Signed Trend R-squared",
+        "有方向趋势拟合度",
+        "sign(Slope(CLOSE, window_bars)) * R-squared(CLOSE, time)",
+        "将线性趋势方向与拟合优度组合，区分平滑上涨和平滑下跌。",
+        (),
+    ),
+    "oss_qlib_rsv": (
+        "Qlib Range Position",
+        "Qlib 区间位置",
+        "(CLOSE-MIN(LOW,n))/(MAX(HIGH,n)-MIN(LOW,n))",
+        "衡量当前收盘价在近期最高价与最低价通道中的位置。",
+        ("high", "low"),
+    ),
+    "oss_qlib_imxd": (
+        "Qlib Extreme-time Difference",
+        "Qlib 高低极值时序差",
+        "(IdxMax(HIGH,n)-IdxMin(LOW,n))/n",
+        "比较窗口内最早最高价与最早最低价的出现次序。",
+        ("high", "low"),
+    ),
+    "oss_qlib_cntd": (
+        "Qlib Direction Persistence",
+        "Qlib 方向持续率",
+        "MEAN(CLOSE>DELAY(CLOSE,1),n)-MEAN(CLOSE<DELAY(CLOSE,1),n)",
+        "衡量上涨 K 线占比与下跌 K 线占比之差。",
+        (),
+    ),
+    "oss_ta_trix": (
+        "TRIX",
+        "三重指数平滑变化率",
+        "ROC(EMA(EMA(EMA(CLOSE,n),n),n),1)*100",
+        "衡量三重指数平滑价格的单根变化率。",
+        (),
+    ),
+    "oss_ta_tsi": (
+        "True Strength Index",
+        "真实强度指数",
+        "100*EMA(EMA(DELTA(CLOSE),slow),fast)/EMA(EMA(ABS(DELTA(CLOSE)),slow),fast)",
+        "同时平滑价格变化及其绝对值，形成有符号的动量强度。",
+        (),
+    ),
+    "oss_ta_kst": (
+        "Know Sure Thing",
+        "多周期加权动量",
+        "100*SUM(weight_i*SMA(ROC(CLOSE,roc_i),smooth_i), i=1..4)",
+        "把四个预先固定的收益周期及平滑周期组合成多尺度动量。",
+        (),
+    ),
+    "oss_ta_kama_distance": (
+        "KAMA Distance",
+        "KAMA 自适应趋势偏离",
+        "CLOSE / KAMA(CLOSE, efficiency_bars, fast_span, slow_span) - 1",
+        "衡量价格相对噪声自适应移动平均线的归一化偏离。",
+        (),
+    ),
+    "oss_ta_vortex_diff": (
+        "Vortex Difference",
+        "Vortex 方向差",
+        "SUM(VM+,n)/SUM(TR,n)-SUM(VM-,n)/SUM(TR,n)",
+        "使用高低价方向运动与真实波幅衡量正负趋势强度差。",
+        ("high", "low"),
+    ),
+    "oss_ta_vpt_roll": (
+        "Rolling Volume-price Trend",
+        "有限窗口量价趋势",
+        "SUM(VOLUME*RETURN,n)/SUM(VOLUME,n)",
+        "将累计 VPT 改为适合跨合约比较的有限窗口成交量加权收益。",
+        ("quote_volume", "volume"),
+    ),
+    "oss_qlib_roc_mom": (
+        "Qlib ROC Momentum Adaptation",
+        "Qlib ROC 正动量适配",
+        "CLOSE / DELAY(CLOSE,window_bars) - 1",
+        "Qlib ROC 的正向动量适配，用作与既有 GTJA 动量的重复基准。",
+        (),
+    ),
+    "oss_qlib_sumd": (
+        "Qlib Up-down Strength",
+        "Qlib 上下行幅度强度",
+        "(SUM(UP,n)-SUM(DOWN,n))/SUM(ABS(DELTA(CLOSE)),n)",
+        "衡量窗口内上涨幅度与下跌幅度的净强度，主要用于重复性校验。",
+        (),
+    ),
+    "oss_qlib_cord": (
+        "Qlib Price-volume Change Correlation",
+        "Qlib 价量变化相关",
+        "CORR(CLOSE/DELAY(CLOSE,1),LOG(VOLUME/DELAY(VOLUME,1)+1),n)",
+        "衡量价格相对变化与成交量相对变化的滚动相关性。",
+        ("quote_volume", "volume"),
+    ),
+}
+
+
+_OSS_FACTORS = {
+    name: RegisteredFactor(
+        name=name,
+        version="v1",
+        required_columns=_BASE + extra_columns,
+        compute_raw=_open_source(name),
+        display_name_en=display_name_en,
+        display_name_zh=display_name_zh,
+        formula=formula,
+        description_zh=description_zh,
+    )
+    for name, (
+        display_name_en,
+        display_name_zh,
+        formula,
+        description_zh,
+        extra_columns,
+    ) in _OSS_FACTOR_METADATA.items()
 }
 
 
@@ -227,6 +363,7 @@ FACTOR_REGISTRY = {
         ),
     ),
     **_GTJA_FACTORS,
+    **_OSS_FACTORS,
 }
 
 

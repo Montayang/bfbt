@@ -155,7 +155,10 @@ WARMUP, INSUFFICIENT_HISTORY, ILLIQUID, MISSING_DATA, EXPLICITLY_EXCLUDED
 
 ## 7. 因子接口
 
-A07 实际入口为 `compute_factor`，使用显式 registry 和版本固定的 bars/universe；只输出当期 eligible 样本，invalid 行保留原因码。五个 v1 名称为 `momentum`、`reversal`、`realized_volatility`、`quote_volume` 和 `taker_buy_ratio`。
+A07 实际入口为 `compute_factor`，使用显式 registry 和版本固定的 bars/universe；只输出当期
+eligible 样本，invalid 行保留原因码。注册表包含基础因子、GTJA191 因子及来源固定的 Qlib/
+`ta` 趋势与动量因子；精确名称、版本、公式与中英文说明以 `list_factors()` 和
+`docs/research/registry.md` 为准，不能维护另一份易过期的手写数量清单。
 
 ```python
 class Factor(Protocol):

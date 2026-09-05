@@ -50,8 +50,9 @@ Fast Matrix 评估选定组合计入成本后的路径，Event 引擎则把候�
 - Binance USD-M、USDT 保证金、永续合约；1m trade/mark bars、funding 与合约元数据。
 - 不可变原始数据、标准化 Parquet、质量报告、DuckDB Catalog 和版本化数据快照。
 - 时点化合约池、无前视因子/标签、预处理、IC/Rank IC、分层收益和 turnover。
-- 内建 momentum、reversal、波动率、成交量、主动买入、Amihud、EMA、采样均值比和已登记
-  GTJA191 因子；精确清单由 `bfbt research list-factors` 输出。
+- 内建 momentum、reversal、波动率、成交量、主动买入、Amihud、EMA、采样均值比、已登记
+  GTJA191 因子及来源固定的 Qlib/`ta` 趋势动量因子；精确清单由
+  `bfbt research list-factors` 输出。
 - Fast Matrix 组合研究、资金费与标记价格估值、成本、checkpoint 和可比较的研究结果。
 - Event 引擎下一根 K 线成交、显式手续费/滑点/资金费率、增量仓位、杠杆/敞口限制、固定与
   移动风险退出、滚仓保证金和统一事件优先级。

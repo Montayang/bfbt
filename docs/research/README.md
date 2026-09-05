@@ -7,7 +7,7 @@
 
 | 层级 | 核心单位 | Git 中的事实来源 | 当前状态 |
 |---|---|---|---|
-| 因子定义 | 公式 ID + 公式版本 + 参数 | 因子实现、测试、来源文档和 `registry.md` | 已登记首批 GTJA191 12 因子 |
+| 因子定义 | 公式 ID + 公式版本 + 参数 | 因子实现、测试、来源文档和 `registry.md` | GTJA191 12 因子及开源趋势/动量 14 因子已登记 |
 | 快速研究记录 | 因子序列 × K 线 × 研究合同 | `studies/` 与本机不可变研究汇总 | 首批研究完成 |
 | 因子信号候选 | 因子版本 × K 线 × 冻结方向 | `registry.md` 中带规则版本的晋级记录 | QR-v1 晋级 12 个组合 |
 | 组合研究 | 因子信号 + 组合构建 + 执行配置 | Fast Matrix study 与 `fm-*` 产物 | 29 个调仓计划已完成双成本研究 |
@@ -43,6 +43,9 @@
   12 个晋级信号、29 个调仓计划的五月—六月连续 Fast Matrix 双成本研究。
 - [`gtja191_trend_momentum_candidates.md`](gtja191_trend_momentum_candidates.md)：原报告来源、候选池与
   公式迁移说明。
+- [`open_source_trend_momentum_candidates.md`](open_source_trend_momentum_candidates.md)：Qlib 与
+  `ta` 开源库的下一批趋势/动量候选、公式、许可证、去重和实现结果；14 个因子已通过
+  聚焦公式/边界测试，尚未运行 Quick Research。
 
 本机 HTML、`summary.json`、缓存和未来 `fm-*` 产物继续放在 `data/backtest/`，不提交 Git。
 Git 文档保存身份、规则、结论与本机产物定位。

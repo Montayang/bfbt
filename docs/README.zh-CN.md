@@ -26,6 +26,8 @@
 - [`research/rules/QR-v1.md`](research/rules/QR-v1.md)：当前版本化快速研究筛选规则。
 - [`research/gtja191_trend_momentum_candidates.md`](research/gtja191_trend_momentum_candidates.md)：
   国泰君安 Alpha191 中趋势、动量、量能确认与趋势强度候选的来源、实现分级和首轮选取依据。
+- [`research/open_source_trend_momentum_candidates.md`](research/open_source_trend_momentum_candidates.md)：
+  Qlib/`ta` 趋势动量公式、BFBT 适配、去重、参数和实现状态。
 
 ## 使用指南
 

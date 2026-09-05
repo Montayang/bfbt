@@ -152,6 +152,20 @@ def test_registry_exposes_supported_factors() -> None:
         "gtja_alpha089",
         "gtja_alpha112",
         "gtja_alpha151",
+        "oss_qlib_beta",
+        "oss_qlib_signed_rsqr",
+        "oss_qlib_rsv",
+        "oss_qlib_imxd",
+        "oss_qlib_cntd",
+        "oss_ta_trix",
+        "oss_ta_tsi",
+        "oss_ta_kst",
+        "oss_ta_kama_distance",
+        "oss_ta_vortex_diff",
+        "oss_ta_vpt_roll",
+        "oss_qlib_roc_mom",
+        "oss_qlib_sumd",
+        "oss_qlib_cord",
     }
 
 
