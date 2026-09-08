@@ -1,6 +1,6 @@
 # Active work
 
-Updated: 2026-09-05.
+Updated: 2026-09-08.
 
 ## Current state
 
@@ -11,6 +11,11 @@ Updated: 2026-09-05.
   passes 360 tests. Quick Research remains unstarted; its `1m/5m/15m` source
   bars and `1/5/20`-bar forecasts are frozen to match the prior study, while dates and dataset
   identity still require a new study contract.
+- The local-first data subsystem goal and DE-v1 next phase are now frozen in
+  `DATA_ENGINE_PLAN.md`; this is planning only. No data engine implementation, download or data
+  build is active.
+- Confirmed unfinished work is consolidated in `DEVELOPMENT_BACKLOG.md`. It distinguishes active
+  research/development lines from optional evidence reruns, capacity checks and demand-gated ideas.
 - The clean-source 1x-leverage May Event run `a17-ca0c6d168e37c07b06239452` completed and all 19
   immutable artifacts verified. Its English and Simplified-Chinese reports replace the prior 5x
   hosted Event example. The Fast Matrix English Pages copy also restores lowercase language-switch
@@ -27,10 +32,9 @@ Updated: 2026-09-05.
   executable and literal blocks, localizes JavaScript string literals without altering operators,
   and adds an A40 regression. Rebuilt English and Chinese May reports retain all 1,655 curve points
   and 668 snapshots, and all generated JavaScript blocks pass static syntax validation.
-- `main` now contains six self-contained, path-sanitized report examples for GitHub Pages:
+- `main` contains six self-contained, path-sanitized report examples published through GitHub Pages:
   English and Simplified-Chinese Quick Research, Fast Matrix, and Event pages. Root and Showcase
-  READMEs link each language to its matching report. Publication still requires public repository
-  visibility and GitHub Pages to use GitHub Actions as its source.
+  READMEs link each language to its matching live report.
 - The first CI run for `8737507` exposed one stale A34 assertion that expected superseded Fast
   Matrix English copy. `codex/fix-ci-matrix-report-copy` aligns the assertion with the implemented
   Event Engine wording; its focused A34 file passes 3 tests and the complete offline suite passes
@@ -83,8 +87,7 @@ Updated: 2026-09-05.
 - The current Showcase uses existing H2 `r01` evidence with a visible dirty-provenance qualification.
   Clean `r02` formal evidence remains a separate future decision and requires explicit backtest
   authorization; it is not part of this implementation task.
-- GitHub Pages report publication is prepared on `main` but not yet live: public repository
-  visibility and the repository owner's one-time Pages source selection remain pending.
+- GitHub Pages publication is complete; it is not a pending release gate.
 
 ## No active formal run
 

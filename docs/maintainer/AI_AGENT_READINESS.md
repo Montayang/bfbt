@@ -1,10 +1,14 @@
 # AI Agent 介入能力与开发欠缺
 
-更新时间：2026-09-01。
+更新时间：2026-09-08。
 
 展示版会先实现受控场景下的 ResearchIntent、冻结单、只读预检和授权分类薄切片，规划见
 `SHOWCASE_PLAN.md`。这用于验证产品交互与证据链，不代表通用 AG01–AG04 已完成；只有合同、
 验收与编排能覆盖非展示场景后，才可提升下表状态。
+
+个人研究者的数据准备目标与下一阶段见 `DATA_ENGINE_PLAN.md`。其中的
+ResearchDataRequirement、DataPlan、记录式 job 和 DataReadiness 应分别与 AG03、AG05、
+AG07、AG08 共用合同，不得由数据入口和 Agent 入口重复实现。
 
 ## 目标工作流
 

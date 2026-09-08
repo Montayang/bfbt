@@ -1,6 +1,6 @@
 # Current project state
 
-Updated: 2026-09-05.
+Updated: 2026-09-08.
 
 ## Repository identity
 
@@ -53,7 +53,7 @@ V1 remains for compatibility and historical reproduction, not for new daily stra
   `3b0a32e` with `git_dirty=true`, which remains an explicit audit qualification.
 - The 1x-leverage May presentation identity `R5-T4-H2-L1-ROLLING` is complete as immutable run
   `a17-ca0c6d168e37c07b06239452`; its environment records clean commit `bf136b5`, and its verified
-  bilingual reports are the current Event example prepared for GitHub Pages.
+  bilingual reports are the current published GitHub Pages Event example.
 
 ## Verification baseline
 
@@ -93,6 +93,18 @@ V1 remains for compatibility and historical reproduction, not for new daily stra
   state and event arbitration require Event/V2.
 - Minute-level full-market schedules can create very large target sets and extreme turnover; they
   require an explicit cost warning before execution.
+
+## Data subsystem
+
+- The repository separates the data path from research and execution through immutable Raw
+  objects, normalized Parquet, quality gates, Catalog identities and exact DatasetSnapshots.
+- It remains a local toolkit whose lower-level preparation steps require substantial user knowledge;
+  it is not an independently operated data platform, scheduler or feature service.
+- The accepted long-term target is a low-maintenance, local-first preparation workflow for an
+  individual researcher, not an enterprise data stack. `DATA_ENGINE_PLAN.md` freezes that boundary
+  and the DE-v1 planning/prepare/readiness sequence; no DE-v1 implementation has started.
+- Binance USD-M archive Klines remain minute-or-coarser in BFBT. Futures `trades`/`aggTrades` and
+  derived second bars are demand-gated future work, not part of DE-v1.
 
 ## AI Agent readiness
 

@@ -1,6 +1,6 @@
 # Showcase version plan
 
-Updated: 2026-09-01.
+Updated: 2026-09-08.
 
 ## Public discovery direction update (2026-09-02)
 
@@ -52,10 +52,9 @@ Simplified-Chinese HTML variants. Remaining presentation boundaries are explicit
 - The retained H2 evidence records `git_dirty=true` and must continue to display that qualification.
 - Package installation and wheel contents are verified. A dependency lock, release automation,
   dependency-update policy, and plugin compatibility policy are not yet implemented.
-- GitHub Pages publication of six self-contained report examples is prepared on
-  `codex/fix-report-localization-js`. It becomes live only after merge to `main` and the repository
-  owner's one-time selection of GitHub Actions as the Pages source; until then it must not be
-  described as deployed.
+- Six self-contained report examples are now published through GitHub Pages from `main`: English
+  and Simplified-Chinese Quick Research, Fast Matrix and Event Engine reports. The root and
+  Showcase READMEs link to the live pages.
 
 ## Showcase experience
 

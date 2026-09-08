@@ -41,6 +41,22 @@ silently approximated.
 - Reports are deterministic views built from artifacts and may be rebuilt outside an immutable run.
 - Display downsampling cannot delete trades, position changes, or risk events from audit navigation.
 
+## Data subsystem scope
+
+- Data acquisition/preparation and research/execution are separate paths joined only by immutable,
+  verified DatasetSnapshots; an engine must never download or silently repair inputs while running.
+- BFBT targets a local-first data preparation subsystem that one researcher can maintain. It stays
+  in the same repository and process boundary until multiple independent consumers or continuous
+  service operation create evidence for a split.
+- The next data phase organizes existing Archive/REST, Raw, normalization, quality, Catalog,
+  resampling and point-in-time capabilities behind a requirement, side-effect-free plan,
+  recoverable preparation job and readiness result. It does not replace those components.
+- On-demand bounded preparation is preferred to retaining every market, period, interval and
+  feature. Enterprise schedulers, clusters, a universal feature store and permanent online services
+  are not architectural goals.
+- Futures trades/aggregate trades and derived second bars require a separate demand-backed data and
+  execution contract; generic duration parsing alone does not make them supported inputs.
+
 ## Strategy research governance
 
 - Quick Research rules may be versioned and automated.

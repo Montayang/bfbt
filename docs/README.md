@@ -52,5 +52,12 @@ text; filenames, commands, schemas, and immutable identities are language-neutra
 
 - [Start here](maintainer/START_HERE.md): required reading order and authorization boundaries.
 - [Current state](maintainer/CURRENT_STATE.md): implemented capabilities and verified baselines.
+- [Active work](maintainer/ACTIVE_WORK.md): current research and development facts.
+- [Development backlog](maintainer/DEVELOPMENT_BACKLOG.md): confirmed unfinished work, owner
+  decisions, and conditional directions.
+- [Data subsystem plan](maintainer/DATA_ENGINE_PLAN.md): local-first data preparation goals and the
+  next bounded development phase.
 - [Architecture decisions](maintainer/ARCHITECTURE_DECISIONS.md): durable cross-session decisions.
 - [AI Agent readiness](maintainer/AI_AGENT_READINESS.md): implemented thin slice and remaining gaps.
+- [Showcase plan](maintainer/SHOWCASE_PLAN.md): implemented bounded showcase and retained boundaries.
+- [Operations](maintainer/OPERATIONS.md): data, artifacts, reports, jobs, and formal-run handling.

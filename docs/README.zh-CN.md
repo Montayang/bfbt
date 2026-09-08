@@ -10,7 +10,13 @@
 - [`maintainer/START_HERE.md`](maintainer/START_HERE.md)：新维护任务与 Codex 会话入口。
 - [`maintainer/CURRENT_STATE.md`](maintainer/CURRENT_STATE.md)：当前能力和验证基线。
 - [`maintainer/ACTIVE_WORK.md`](maintainer/ACTIVE_WORK.md)：未完成或未合并工作。
+- [`maintainer/DEVELOPMENT_BACKLOG.md`](maintainer/DEVELOPMENT_BACKLOG.md)：已经确认但尚未完成的
+  研究与开发主线、待用户决定事项和条件性方向。
+- [`maintainer/DATA_ENGINE_PLAN.md`](maintainer/DATA_ENGINE_PLAN.md)：面向个人研究者的数据处理
+  子系统目标与下一阶段开发规划。
 - [`maintainer/SHOWCASE_PLAN.md`](maintainer/SHOWCASE_PLAN.md)：工程级开源前的受控展示版本范围、验收与实施顺序。
+- [`maintainer/AI_AGENT_READINESS.md`](maintainer/AI_AGENT_READINESS.md)：自然语言研究工作流的
+  当前基础、欠缺和实施顺序。
 - [`maintainer/ARCHITECTURE_DECISIONS.md`](maintainer/ARCHITECTURE_DECISIONS.md)：跨会话架构决策。
 - [`maintainer/OPERATIONS.md`](maintainer/OPERATIONS.md)：数据、run、报告和后台任务操作规则。
 
