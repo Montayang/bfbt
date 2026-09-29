@@ -53,12 +53,12 @@ Agent 产品入口。
 |---|---|---|---|---|
 | AG01 | P0 | partial | Agent 面向的研究意图合同 | 定义版本化 `ResearchIntent`、假设、歧义、用户决定、输入/输出身份和自然语言原文 hash；能区分因子诊断、组合研究、正式回测和结果查询。Showcase v1 已覆盖受控结果查询，尚未进入通用编排。 |
 | AG02 | P0 | partial | 语义冻结与确认协议 | 把因子可用时点、方向、Rank、决策/调仓时钟、成交、仓位、成本、风险退出和期末处理生成人类可读确认单；未解决的经济歧义不得执行。Showcase v1 已有冻结页和歧义硬门。 |
-| AG03 | P0 | partial | 统一预检与行动计划 | 现有配置和 run preflight 可校验部分输入，但缺少一次性、无副作用的 Agent 计划产物，列出数据覆盖、后端选择、预计扫描量/内存、换手与成本风险、将要写入的路径及所需授权。 |
+| AG03 | P0 | partial | 统一预检与行动计划 | DE-v1 已为数据覆盖、资源和授权动作提供一次性无副作用计划；后端选择、换手/成本风险和统一全链路计划仍缺。 |
 | AG04 | P0 | partial | 授权门控合同 | 将只读检查、测试、网络、下载、研究运行、正式回测、提交和外部变更编码为机器可判定的 action classes；Showcase v1 已编码分类，但尚无通用的授权 token/binding 服务。 |
-| AG05 | P0 | missing | 记录式后台任务服务 | `data/backtest/jobs/` 尚无正式实现。需要 job manifest、状态机、命令/配置/数据 hash、PID、日志、心跳、终态、恢复与安全取消，并确保长任务启动后 Agent 可交还控制。 |
+| AG05 | P0 | partial | 记录式后台任务服务 | DE-v1 已有 plan-hash 绑定的四步 job manifest、终态和幂等恢复；通用 PID、日志、心跳、安全取消及研究/Event 接入仍缺。 |
 | AG06 | P0 | missing | 通用因子表达入口 | 新公式目前需要修改 Python 注册表和测试。需要受限、可版本化、可静态验证的因子规格或插件协议，声明字段依赖、窗口/warmup、时点、缺口和有限值政策；默认不能执行任意 Agent 生成代码。 |
 | AG07 | P0 | partial | 端到端研究编排服务 | CLI 命令齐全但彼此偏底层，尚无从 intent 到 Quick Research、Fast Matrix、Event promotion 的统一 application service、幂等状态机和失败恢复边界。 |
-| AG08 | P1 | partial | 数据需求规划与版本选择 | 已强制精确 DatasetSnapshot，正确拒绝 `latest`；仍缺少根据研究区间、因子 warmup、标签 future、mark/funding 和合约池语义生成覆盖计划及候选快照差异说明的 Agent API。 |
+| AG08 | P1 | ready | 数据需求规划与版本选择 | DE-v1 根据核心区间、warmup、Universe 历史、标签/执行尾部及所需事实生成覆盖计划，拒绝 `latest` 和含糊多版本，并产出精确 Snapshot 就绪证据。 |
 | AG09 | P1 | partial | 换手、成本和可行性硬门 | 已计算 Rank turnover、真实组合 turnover 与显式成本，维护规则也要求高频警告；仍缺少正式运行前统一估算费用/滑点拖累、阈值、确认和审计记录。 |
 | AG10 | P1 | partial | 研究治理自动化 | QR-v1 和研究注册表已有稳定规则与血缘；相关性去重未实现，Fast Matrix 人工选择尚无结构化 decision artifact，Event promotion 也没有通用、可校验的来源合同。人工选择本身必须保留，不能改成黑箱自动晋级。 |
 | AG11 | P1 | partial | Agent 可消费的结果解释接口 | HTML 和 JSON/Parquet 产物丰富，但缺少稳定的结构化结果摘要、警告严重度、失败原因码、证据定位和对比 API；Agent 的结论必须能回链到 manifest/表格，而不是只读网页后自由发挥。 |

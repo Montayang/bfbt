@@ -17,6 +17,8 @@ BFBT keeps a behavior-oriented changelog. Release dates use UTC.
 - Hosted, self-contained English and Simplified-Chinese examples for all three report layers.
 - Joint Fast Matrix candidate execution with state-boundary interval valuation, sparse holdings,
   A41 equivalence coverage, and a reproducible offline benchmark.
+- DE-v1 research-data requirements, side-effect-free bilingual plans, resumable recorded
+  preparation, exact snapshot readiness, and minimal lineage with A42 offline acceptance.
 
 ### Changed
 

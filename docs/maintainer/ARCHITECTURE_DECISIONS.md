@@ -63,6 +63,14 @@ and result hash equivalent to its standalone execution. Dense worst-case arithme
   are not architectural goals.
 - Futures trades/aggregate trades and derived second bars require a separate demand-backed data and
   execution contract; generic duration parsing alone does not make them supported inputs.
+- DE-v1 planning is a pure local observation: it cannot create the workspace, contact a source, or
+  select a floating/latest version. Network acquisition and local mutation are distinct recorded
+  action classes and both require explicit approval.
+- Historical contract state fails closed. A current public `exchangeInfo` snapshot may be used only
+  when the requirement explicitly accepts that limitation, which remains in readiness evidence.
+- DE-v1 uses one four-step recorded job (`acquire_raw`, `normalize`, `publish_snapshot`,
+  `readiness`) and resumes succeeded steps by plan hash. This is the data-specific first slice of a
+  future shared job service, not a competing general scheduler.
 
 ## Strategy research governance
 

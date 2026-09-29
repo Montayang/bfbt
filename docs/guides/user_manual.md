@@ -444,7 +444,42 @@ Outputs include a navigation-only `report.html`, `quick_research.html`, `fast_ma
 enhanced detail page under `fast_matrix_reports/` for every referenced `fm-*` run. Rebuilding these
 views never overwrites immutable research artifacts.
 
-## 14. Further reading
+## 14. Prepare an exact research dataset
+
+Start from [`configs/data_requirement.example.json`](../../configs/data_requirement.example.json)
+and write a `ResearchDataRequirement` JSON. It states the core interval, symbols, base and derived
+bar intervals, fact datasets, warmup, future label tail, execution tail, and target research layer.
+Planning is read-only and does not create the workspace:
+
+```bash
+bfbt data plan requirement.json --workspace data/backtest/data --format human --language en
+bfbt data plan requirement.json --workspace data/backtest/data --format json > data-plan.json
+bfbt data inspect requirement.json --workspace data/backtest/data --language en
+```
+
+Review blockers, exact reusable versions, missing objects, resource estimates, and action classes.
+Then explicitly approve the required capabilities:
+
+```bash
+bfbt data prepare requirement.json data-plan.json \
+  --workspace data/backtest/data \
+  --jobs-root data/backtest/jobs \
+  --allow-writes
+```
+
+Add `--allow-network` only when the reviewed plan says public downloads are required. The command
+returns one exact `DataReadiness` and `DatasetSnapshot`; it does not start research. A repeated call
+resumes or reuses the recorded job. Inspect it later without monitoring:
+
+```bash
+bfbt data status de1-PLAN_HASH_PREFIX --jobs-root data/backtest/jobs
+```
+
+Plans reject unresolved assumptions, floating `latest`, ambiguous compatible versions, and missing
+historical contract state. Accepting a current contract snapshot is explicit and remains visible as
+a readiness warning.
+
+## 15. Further reading
 
 - [Real end-to-end acceptance](../acceptance/real_e2e.md)
 - [Configuration reference](../reference/configuration.md)

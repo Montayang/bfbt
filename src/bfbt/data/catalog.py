@@ -805,6 +805,73 @@ class DuckDBCatalog:
             quality_report_ids=tuple(item[0] for item in reports),
         )
 
+    def list_coverages(
+        self, dataset_name: str, *, interval: str | None = None
+    ) -> tuple[CoverageSummary, ...]:
+        """List exact fact versions without inventing a floating latest alias."""
+
+        with self._connect(read_only=True) as connection:
+            self._require_version(connection)
+            clauses = ["dataset_name = ?"]
+            parameters: list[object] = [dataset_name]
+            if interval is not None:
+                clauses.append("interval = ?")
+                parameters.append(interval)
+            rows = connection.execute(
+                f"""
+                SELECT dataset_version, COUNT(*), COALESCE(SUM(row_count), 0),
+                       MIN(min_time), MAX(max_time),
+                       COALESCE(MAX(symbols_count), 0)
+                FROM partitions
+                WHERE {' AND '.join(clauses)}
+                GROUP BY dataset_version
+                ORDER BY dataset_version
+                """,
+                parameters,
+            ).fetchall()
+            results: list[CoverageSummary] = []
+            for row in rows:
+                reports = connection.execute(
+                    """
+                    SELECT DISTINCT quality_report_id FROM partitions
+                    WHERE dataset_name = ? AND dataset_version = ?
+                    ORDER BY quality_report_id
+                    """,
+                    [dataset_name, row[0]],
+                ).fetchall()
+                results.append(CoverageSummary(
+                    dataset_name=dataset_name,
+                    dataset_version=row[0],
+                    partition_count=int(row[1]),
+                    row_count=int(row[2]),
+                    available_from=row[3],
+                    available_to=row[4],
+                    max_symbols_per_partition=int(row[5]),
+                    quality_report_ids=tuple(item[0] for item in reports),
+                ))
+        return tuple(results)
+
+    def coverage_symbols(
+        self, dataset_name: str, dataset_version: str
+    ) -> tuple[str, ...]:
+        """Return symbols evidenced by the Raw objects behind an exact fact version."""
+
+        with self._connect(read_only=True) as connection:
+            self._require_version(connection)
+            rows = connection.execute(
+                """
+                SELECT DISTINCT r.symbol
+                FROM partitions p
+                JOIN partition_sources ps ON ps.partition_id = p.partition_id
+                JOIN raw_objects r ON r.object_id = ps.object_id
+                WHERE p.dataset_name = ? AND p.dataset_version = ?
+                  AND r.symbol IS NOT NULL
+                ORDER BY r.symbol
+                """,
+                [dataset_name, dataset_version],
+            ).fetchall()
+        return tuple(item[0] for item in rows)
+
     def _assert_run_references(
         self,
         connection: duckdb.DuckDBPyConnection,

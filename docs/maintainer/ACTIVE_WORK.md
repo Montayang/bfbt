@@ -4,6 +4,13 @@ Updated: 2026-09-29.
 
 ## Current state
 
+- DE-v1 is implemented on `codex/data-prepare-de-v1`: a versioned requirement expands core dates by
+  warmup and future tails; `data plan/inspect` is deterministic and side-effect-free; `data prepare`
+  records resumable acquire/normalize/snapshot/readiness steps and publishes exact lineage evidence.
+  The focused A42 offline suite passes 7 tests and the complete suite passes 368 tests in 39.73
+  seconds. No network request, data download, research run, or formal backtest occurred; the
+  separate D4 controlled real-data record remains authorization-gated.
+
 - Fast Matrix phase two is implemented and verified by A41: multi-candidate research now
   shares market preparation, updates state only at joint rebalance/funding boundaries, values each
   interval in one columnar batch, and stores only non-zero holdings. A32-A34/A41 focused verification
@@ -18,9 +25,8 @@ Updated: 2026-09-29.
   passes 360 tests. Quick Research remains unstarted; its `1m/5m/15m` source
   bars and `1/5/20`-bar forecasts are frozen to match the prior study, while dates and dataset
   identity still require a new study contract.
-- The local-first data subsystem goal and DE-v1 next phase are now frozen in
-  `DATA_ENGINE_PLAN.md`; this is planning only. No data engine implementation, download or data
-  build is active.
+- The local-first data subsystem scope remains frozen in `DATA_ENGINE_PLAN.md`; DE-v1 code and
+  offline acceptance are complete, while real-data D4 evidence is still pending separate approval.
 - Confirmed unfinished work is consolidated in `DEVELOPMENT_BACKLOG.md`. It distinguishes active
   research/development lines from optional evidence reruns, capacity checks and demand-gated ideas.
 - The clean-source 1x-leverage May Event run `a17-ca0c6d168e37c07b06239452` completed and all 19

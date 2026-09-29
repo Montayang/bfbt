@@ -331,6 +331,17 @@ runs → run_dataset_refs / run_schema_refs / run_factor_refs / run_artifacts
 
 DatasetSnapshot 的 `available_to` 是开区间上界，必须严格晚于其所有非空 Partition 的 `max_time`。Catalog coverage 返回 Partition 实际 `MIN(min_time)` 和 `MAX(max_time)`，因此 coverage 输出的 `available_to` 字段表示已登记数据的最后时刻，而不是 Snapshot 的开区间边界；两者语义不可互换。
 
+## DE-v1 preparation contracts
+
+`research-data-requirement/v1`、`data-plan/v1`、`data-prepare-job/v1`、
+`data-readiness/v1` 和 `data-lineage/v1` 是数据准备控制面合同，不替代上述事实 manifest。
+Requirement 的 hash 包含用途、symbols、核心区间、预热/未来尾部、数据类型、周期、精确版本
+pin 和未决项。Plan 的 hash 还包含所观察的 Catalog/本地归档状态、动作类别、资源估算和阻断项。
+
+Job ID 由 plan hash 导出；成功步骤只能在同一 plan 下复用。Readiness 绑定精确 Snapshot hash、
+lineage hash、覆盖证据、质量报告 ID、研究用途与保留警告。它不授权研究运行，也不能把当前
+合约快照描述为历史事实。
+
 ## A12 第二版 artifact schema
 
 A12 在不改变四张 V1 市场数据 schema 列表的前提下，增加独立 artifact registry：

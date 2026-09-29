@@ -633,7 +633,39 @@ bfbt research study-report data/backtest/research_studies/<study_id> \
 
 已有 `fm-*` 是不可变产物，重建展示报告不会覆盖其文件或改变 manifest。
 
-## 14. 进一步文档
+## 14. 准备精确的研究数据集
+
+从 [`configs/data_requirement.example.json`](../../configs/data_requirement.example.json) 开始
+编写 `ResearchDataRequirement` JSON，明确核心区间、合约、基础/派生 K 线周期、所需事实
+数据、预热、未来标签尾部、执行尾部和目标研究层。规划命令只读，不会创建数据目录：
+
+```bash
+bfbt data plan requirement.json --workspace data/backtest/data --format human --language zh-CN
+bfbt data plan requirement.json --workspace data/backtest/data --format json > data-plan.json
+bfbt data inspect requirement.json --workspace data/backtest/data --language zh-CN
+```
+
+检查阻断项、可复用精确版本、缺失对象、资源估算和动作授权类别后，再明确批准所需能力：
+
+```bash
+bfbt data prepare requirement.json data-plan.json \
+  --workspace data/backtest/data \
+  --jobs-root data/backtest/jobs \
+  --allow-writes
+```
+
+只有计划明确需要公开数据下载时才增加 `--allow-network`。命令返回精确的
+`DataReadiness` 和 `DatasetSnapshot`，不会自动开始研究。重复执行会恢复或复用已有任务；
+之后可按需查询，而不必持续监控：
+
+```bash
+bfbt data status de1-PLAN_HASH_PREFIX --jobs-root data/backtest/jobs
+```
+
+未决假设、浮动 `latest`、多个未指定的兼容版本和缺失历史合约状态都会失败关闭。若显式接受
+当前合约快照，其限制会继续保留在就绪警告中。
+
+## 15. 进一步文档
 
 - `docs/acceptance/real_e2e.md`：已完成的真实全链路验收和实测数字。
 - `docs/reference/configuration.md`：全部配置字段及校验规则。

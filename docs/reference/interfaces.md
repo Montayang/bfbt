@@ -101,6 +101,11 @@ DataStore 返回惰性查询。调用者不能假定数据已经完整加载到�
 
 A05 的实际实现为 `NormalizationService`、`ParquetPublisher` 和 `ParquetDataStore`。当前 DataStore 直接解析指定 `dataset_name/dataset_version` 的 Partition manifests；`DatasetSnapshot` 仍由后续运行编排层组合多个数据集版本，A05 不提供浮动 `latest` 或扫描时自动下载。
 
+DE-v1 在这些接口之上增加 `ResearchDataRequirement -> DataPlan -> DataReadiness` 应用边界。
+`plan_data_preparation` 只能读取本地 Raw/Catalog 事实；`DataPreparationService.prepare` 必须接收
+经过审阅的同一 plan，并分别校验写入与网络授权。它复用 A04/A05 服务，不实现第二套下载、
+标准化或质量判断。成功结果绑定精确 DatasetSnapshot、job ID 和 lineage hash。
+
 ## 5. 重采样接口
 
 A06 已实现本节接口语义。实际入口 `resample_bars` 返回 `ResampleResult(frame=LazyFrame, dataset_version=...)`；不完整窗口保留并明确标记，调用方不得在因子计算中静默使用。

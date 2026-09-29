@@ -30,6 +30,9 @@ Updated: 2026-09-29.
 - A41: Fast Matrix multi-candidate batches share one market preparation, recurse only at joint
   rebalance/funding boundaries, value complete intervals together, and retain sparse non-zero
   holdings while preserving candidate-level economics, audits, checkpoints, and identities.
+- A42: DE-v1 exposes versioned research-data requirements, deterministic read-only plans, explicit
+  network/write actions, recorded resumable preparation, exact snapshot readiness, and minimal
+  lineage while reusing the existing local data layers.
 - The Quick Research registry also includes 14 source-pinned Qlib/`ta` trend and momentum factors. Exact
   source formulas remain distinct from BFBT adaptations; formula windows are literal source-bar
   counts, gaps reset history, and invalid or zero-denominator inputs fail closed.
@@ -89,6 +92,9 @@ V1 remains for compatibility and historical reproduction, not for new daily stra
   the complete offline suite (`361 passed in 24.72s`). Its fixed
   offline 6-candidate synthetic benchmark measured 4.488 s for independent execution and 0.296 s
   for joint execution (15.14× on that shape).
+- DE-v1 A42 focused verification passed 7 tests, its Catalog/normalization regression set passed
+  23 tests, and the complete offline suite passed `368 passed in 39.73s` on 2026-09-29. No network
+  request, data download, research run, or formal backtest occurred.
 
 ## Known boundaries
 
@@ -105,11 +111,14 @@ V1 remains for compatibility and historical reproduction, not for new daily stra
 
 - The repository separates the data path from research and execution through immutable Raw
   objects, normalized Parquet, quality gates, Catalog identities and exact DatasetSnapshots.
-- It remains a local toolkit whose lower-level preparation steps require substantial user knowledge;
-  it is not an independently operated data platform, scheduler or feature service.
+- DE-v1 now gives ordinary users one read-only `data plan/inspect` surface and one recorded
+  `data prepare` path over the existing lower layers. It is not an independently operated data
+  platform, scheduler, or feature service.
 - The accepted long-term target is a low-maintenance, local-first preparation workflow for an
   individual researcher, not an enterprise data stack. `DATA_ENGINE_PLAN.md` freezes that boundary
-  and the DE-v1 planning/prepare/readiness sequence; no DE-v1 implementation has started.
+  and the implemented DE-v1 planning/prepare/readiness sequence.
+- Offline A42 evidence is complete. The optional D4 controlled real-public-data preparation record
+  still requires separate authorization and is not substituted by unit tests.
 - Binance USD-M archive Klines remain minute-or-coarser in BFBT. Futures `trades`/`aggTrades` and
   derived second bars are demand-gated future work, not part of DE-v1.
 

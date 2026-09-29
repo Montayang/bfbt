@@ -4,8 +4,9 @@
 
 ## 1. 文档状态
 
-本文只冻结后续开发目标、范围和验收边界，不表示相关功能已经实现。当前数据能力的事实仍以
-`CURRENT_STATE.md`、`docs/design/architecture.md` 和 `docs/reference/data_contract.md` 为准。
+本文冻结开发目标、范围和验收边界。DE-v1 的 D0–D3 已于 2026-09-29 实现并通过 A42
+离线验收；D4 受控真实数据记录仍需单独授权。当前事实以 `CURRENT_STATE.md`、
+`docs/design/data_prepare_de_v1.md` 和 `docs/acceptance/A42.md` 为准。
 
 BFBT 不以建设企业级数据平台为目标。目标是在一台个人研究机器上，把 Binance 公开历史
 数据可靠地准备成 Quick Research、Fast Matrix 和 Event Engine 可以共同消费的不可变数据
@@ -146,6 +147,8 @@ Quick Research、Fast Matrix 和 Event 只消费已验证 Snapshot 或其有身�
 三层引擎不得各自实现下载、缺口填补或不同的数据可见性解释。
 
 ## 5. 下一阶段：DE-v1 本地数据准备闭环
+
+实现状态：D0–D3 完成；D4 待另行授权的真实公开数据操作证据。
 
 下一阶段只解决“普通用户能安全准备一次研究所需数据”，不扩充新市场或高频数据类型。
 

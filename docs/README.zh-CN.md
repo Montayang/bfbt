@@ -63,6 +63,8 @@
   常规截面回测后端、能力边界、经济等价、研究产物和目录设计。
 - [`design/fast_matrix_phase2.md`](design/fast_matrix_phase2.md)：Fast Matrix 第二阶段的多候选
   联合区间、稀疏持仓、复杂度与可复现基准合同。
+- [`design/data_prepare_de_v1.md`](design/data_prepare_de_v1.md)：DE-v1 无副作用规划、记录式
+  准备、精确快照、就绪证明和本地优先边界。
 
 ## 验收记录
 
@@ -112,3 +114,5 @@
   产物合同。
 - [`acceptance/A41.md`](acceptance/A41.md)：Fast Matrix 联合执行、稀疏状态、经济等价与离线
   性能证据。
+- [`acceptance/A42.md`](acceptance/A42.md)：DE-v1 确定性计划、可恢复准备、就绪、血缘与
+  授权门。

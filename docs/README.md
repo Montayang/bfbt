@@ -26,6 +26,8 @@ text; filenames, commands, schemas, and immutable identities are language-neutra
   research artifacts, and Event promotion.
 - [Fast Matrix phase-two design](design/fast_matrix_phase2.md): joint candidate intervals, sparse
   holdings, complexity, and reproducible benchmark contract.
+- [DE-v1 data preparation](design/data_prepare_de_v1.md): read-only planning, recorded preparation,
+  exact snapshots, readiness, and local-first boundaries.
 - [Configuration reference](reference/configuration.md): fields, defaults, and validation rules.
 - [Data contract](reference/data_contract.md): fact tables, derived tables, and artifact schemas.
 - [Data management](reference/data_management.md): local layout, partitions, versions, and catalog.
@@ -43,6 +45,8 @@ text; filenames, commands, schemas, and immutable identities are language-neutra
 - [Public-release contract](acceptance/A40.md): BFBT identity and independent English/Chinese HTML.
 - [Fast Matrix phase-two acceptance](acceptance/A41.md): joint execution, sparse state, economic
   equivalence, and offline performance evidence.
+- [DE-v1 acceptance](acceptance/A42.md): deterministic planning, resumable preparation, readiness,
+  lineage, and authorization gates.
 
 ## Research and real strategy records
 

@@ -13,6 +13,7 @@ import yaml
 from pydantic import ValidationError
 
 from bfbt.application.run import RunExecutionError, execute_formal_run
+from bfbt.application.data_prepare import DataPreparationService, inspect_job
 from bfbt.artifacts.environment import EnvironmentError
 from bfbt.artifacts.matrix import MatrixArtifactError, MatrixResearchStore
 from bfbt.artifacts.store import ArtifactStoreError, RunArtifactStore
@@ -46,6 +47,13 @@ from bfbt.data.manifests import (
     manifest_sha256,
 )
 from bfbt.data.normalize.service import NormalizationService
+from bfbt.data.preparation import (
+    DataPreparationError,
+    DataWorkspace,
+    load_plan,
+    load_requirement,
+    plan_data_preparation,
+)
 from bfbt.data.resample import resample_bars
 from bfbt.data.storage import ParquetDataStore
 from bfbt.data.validation.reports import QualityPolicy
@@ -595,6 +603,158 @@ def _show_fetch_results(results) -> None:
             f"{result.status.value} object_id={result.object_id} "
             f"bytes={result.byte_size} catalog={catalog_state}"
         )
+
+
+def _data_contract_or_exit(operation):
+    try:
+        return operation()
+    except (DataPreparationError, CatalogError, OSError, ValidationError) as exc:
+        typer.echo(f"Data preparation error:\n{exc}", err=True)
+        raise typer.Exit(code=2) from exc
+
+
+def _data_plan_summary(plan, language: str) -> str:
+    if language not in {"en", "zh-CN"}:
+        raise DataPreparationError("language must be en or zh-CN")
+    zh = language == "zh-CN"
+    labels = {
+        "title": "数据准备计划" if zh else "Data preparation plan",
+        "executable": "可执行" if zh else "executable",
+        "network": "需要联网" if zh else "network required",
+        "window": "所需区间" if zh else "required window",
+        "snapshot": "复用快照" if zh else "reusable snapshot",
+        "resources": "资源估算" if zh else "resource estimate",
+        "actions": "动作" if zh else "actions",
+        "issues": "问题" if zh else "issues",
+        "none": "无" if zh else "none",
+    }
+    lines = [
+        f"{labels['title']} {plan.plan_id}",
+        f"{labels['executable']}: {str(plan.executable).lower()}",
+        f"{labels['network']}: {str(plan.requires_network).lower()}",
+        f"{labels['window']}: {plan.required_start.isoformat()} -> {plan.required_end.isoformat()}",
+    ]
+    if plan.reusable_snapshot is not None:
+        lines.append(
+            f"{labels['snapshot']}: {plan.reusable_snapshot.dataset_id}/"
+            f"{plan.reusable_snapshot.dataset_version}"
+        )
+    rows = sum(item.estimated_rows for item in plan.datasets)
+    disk = sum(item.estimated_disk_bytes for item in plan.datasets)
+    low = sum(item.estimated_download_bytes_low or 0 for item in plan.datasets)
+    high = sum(item.estimated_download_bytes_high or 0 for item in plan.datasets)
+    lines.append(
+        f"{labels['resources']}: rows={rows} download={low}..{high}B "
+        f"disk={disk}B peak_memory={plan.estimated_peak_memory_bytes}B"
+    )
+    lines.append(f"{labels['actions']}:")
+    lines.extend(
+        f"  {item.ordinal}. [{item.action_class.value}] {item.kind.value}: {item.detail}"
+        for item in plan.actions
+    )
+    lines.append(f"{labels['issues']}:")
+    lines.extend(
+        [f"  [{item.severity.value}] {item.code}: {item.detail}" for item in plan.issues]
+        or [f"  {labels['none']}"]
+    )
+    return "\n".join(lines)
+
+
+@data_app.command("plan")
+def data_plan(
+    requirement: Annotated[Path, typer.Argument(help="ResearchDataRequirement JSON.")],
+    workspace: Annotated[
+        Path, typer.Option(help="Local immutable data workspace.")
+    ] = Path("data/backtest/data"),
+    format: Annotated[str, typer.Option(help="json or human.")] = "human",
+    language: Annotated[str, typer.Option(help="en or zh-CN.")] = "en",
+) -> None:
+    """Plan exact coverage and resources without network access or writes."""
+
+    def operation():
+        value = plan_data_preparation(
+            load_requirement(_project_path(requirement)),
+            workspace=DataWorkspace(_project_path(workspace)),
+        )
+        if format == "json":
+            rendered = json.dumps(
+                value.model_dump(mode="json"), ensure_ascii=False, indent=2, sort_keys=True
+            ) + "\n"
+        elif format == "human":
+            rendered = _data_plan_summary(value, language) + "\n"
+        else:
+            raise DataPreparationError("format must be json or human")
+        return rendered
+
+    typer.echo(_data_contract_or_exit(operation), nl=False)
+
+
+@data_app.command("inspect")
+def data_inspect(
+    requirement: Annotated[Path, typer.Argument(help="ResearchDataRequirement JSON.")],
+    workspace: Annotated[
+        Path, typer.Option(help="Local immutable data workspace.")
+    ] = Path("data/backtest/data"),
+    language: Annotated[str, typer.Option(help="en or zh-CN.")] = "en",
+) -> None:
+    """Inspect local readiness with the same side-effect-free planner."""
+
+    value = _data_contract_or_exit(lambda: plan_data_preparation(
+        load_requirement(_project_path(requirement)),
+        workspace=DataWorkspace(_project_path(workspace)),
+    ))
+    typer.echo(_data_contract_or_exit(lambda: _data_plan_summary(value, language)))
+
+
+@data_app.command("prepare")
+def data_prepare(
+    requirement: Annotated[Path, typer.Argument(help="ResearchDataRequirement JSON.")],
+    plan: Annotated[Path, typer.Argument(help="Approved DataPlan JSON.")],
+    workspace: Annotated[
+        Path, typer.Option(help="Local immutable data workspace.")
+    ] = Path("data/backtest/data"),
+    jobs_root: Annotated[
+        Path, typer.Option(help="Recorded data job directory.")
+    ] = Path("data/backtest/jobs"),
+    allow_writes: Annotated[
+        bool, typer.Option("--allow-writes", help="Approve planned local writes.")
+    ] = False,
+    allow_network: Annotated[
+        bool, typer.Option("--allow-network", help="Approve planned public downloads.")
+    ] = False,
+    workers: Annotated[int, typer.Option(min=1, max=64)] = 4,
+    max_missing_ratio: Annotated[float, typer.Option(min=0.0, max=1.0)] = 0.01,
+) -> None:
+    """Execute an approved plan as a resumable, recorded job."""
+
+    readiness = _data_contract_or_exit(lambda: DataPreparationService().prepare(
+        load_requirement(_project_path(requirement)),
+        load_plan(_project_path(plan)),
+        workspace=DataWorkspace(_project_path(workspace)),
+        jobs_root=_project_path(jobs_root),
+        allow_writes=allow_writes,
+        allow_network=allow_network,
+        max_workers=workers,
+        max_missing_ratio=max_missing_ratio,
+    ))
+    typer.echo(json.dumps(
+        readiness.model_dump(mode="json"), ensure_ascii=False, indent=2, sort_keys=True
+    ))
+
+
+@data_app.command("status")
+def data_status(
+    job_id: Annotated[str, typer.Argument(help="Recorded DE-v1 job ID.")],
+    jobs_root: Annotated[
+        Path, typer.Option(help="Recorded data job directory.")
+    ] = Path("data/backtest/jobs"),
+) -> None:
+    """Print one recorded data-preparation job without monitoring it."""
+
+    job = _data_contract_or_exit(lambda: inspect_job(_project_path(jobs_root), job_id))
+    typer.echo(json.dumps(
+        job.model_dump(mode="json"), ensure_ascii=False, indent=2, sort_keys=True
+    ))
 
 
 @data_app.command("archive-plan")

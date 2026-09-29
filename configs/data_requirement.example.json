@@ -1,0 +1,33 @@
+{
+  "requirement_version": "research-data-requirement/v1",
+  "purpose": "quick_research",
+  "market": "binance_usd_m_futures",
+  "symbols": [
+    "BTCUSDT",
+    "ETHUSDT"
+  ],
+  "core_start": "2024-01-01T00:00:00Z",
+  "core_end": "2024-02-01T00:00:00Z",
+  "base_interval": "1m",
+  "derived_intervals": [
+    "5m",
+    "15m"
+  ],
+  "datasets": [
+    {
+      "dataset_name": "bars",
+      "required": true,
+      "interval": "1m"
+    }
+  ],
+  "factor_warmup_bars": 240,
+  "universe_history_bars": 0,
+  "label_future_bars": 20,
+  "execution_tail_bars": 0,
+  "archive_frequency": "monthly",
+  "dataset_versions": [],
+  "snapshot": null,
+  "allow_current_contract_snapshot": false,
+  "intent_hash": null,
+  "unresolved": []
+}
