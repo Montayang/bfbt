@@ -2,6 +2,9 @@
 
 [简体中文](beginner_tutorial.zh-CN.md)
 
+If BFBT and a server-connected Agent are already deployed for you and you do not want to use a
+terminal, follow the [no-programming AI Agent guide](ai_agent_guide.md) instead.
+
 This tutorial has one goal: help a first-time user produce a complete backtest report from real
 Binance perpetual-futures data.
 

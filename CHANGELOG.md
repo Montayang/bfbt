@@ -24,6 +24,8 @@ BFBT keeps a behavior-oriented changelog. Release dates use UTC.
 
 ### Changed
 
+- Added independent English and Simplified-Chinese no-programming guides for using a deployed BFBT
+  system through a supervised external Agent, and separated that path from the terminal tutorial.
 - The hosted Event example now uses the clean-source, 1x-leverage May run, and all hosted report
   language selectors retain consistent right-aligned machine identifiers.
 - The root README now describes the A01–A40 architecture, implemented capabilities, bounded

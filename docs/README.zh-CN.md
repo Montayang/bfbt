@@ -37,6 +37,8 @@
 
 ## 使用指南
 
+- [`guides/ai_agent_guide.zh-CN.md`](guides/ai_agent_guide.zh-CN.md)：完全不会编程的用户如何通过
+  自然语言、冻结单和逐阶段授权使用已经部署好的 BFBT。
 - [`../showcase/README.zh-CN.md`](../showcase/README.zh-CN.md)：面向普通用户的三层报告自助导览。
 - [`guides/beginner_tutorial.zh-CN.md`](guides/beginner_tutorial.zh-CN.md)：从真实数据下载开始，按步骤跑出第一份回测报告。
 - [`guides/custom_factor_tutorial.zh-CN.md`](guides/custom_factor_tutorial.zh-CN.md)：实现、注册、测试一个全新截面因子，并在入门教程数据集上回测。

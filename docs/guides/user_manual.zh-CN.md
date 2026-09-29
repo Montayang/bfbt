@@ -667,6 +667,9 @@ bfbt data status de1-PLAN_HASH_PREFIX --jobs-root data/backtest/jobs
 
 ## 15. 通过受监督 AI Agent 使用 BFBT
 
+完全不会编程、并且服务器已经部署完成的用户应先阅读
+[AI Agent 零代码使用指南](ai_agent_guide.zh-CN.md)。本节保留底层运维命令和合同说明。
+
 AI Agent 先把用户自然语言整理为可审阅的 `AgentResearchIntent`；BFBT 不会自行猜测缺失的
 交易语义。可从
 [`configs/agent_intent.example.json`](../../configs/agent_intent.example.json) 开始：

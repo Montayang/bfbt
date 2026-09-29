@@ -2,6 +2,9 @@
 
 [English](beginner_tutorial.md)
 
+如果服务器已经部署好 BFBT 和可操作工作区的 Agent，而你不想使用终端，请改读
+[AI Agent 零代码使用指南](ai_agent_guide.zh-CN.md)。
+
 这份教程只做一件事：让第一次接触本项目的人，用真实 Binance 永续合约数据跑出
 一份完整回测报告。
 

@@ -162,7 +162,8 @@ V1 remains for compatibility and historical reproduction, not for new daily stra
   contribution, security, changelog, MIT license, and Binance-independence disclosures.
 - English-first contribution, security, changelog, documentation-map, and Showcase-preview surfaces
   link to independent Simplified-Chinese counterparts where applicable.
-- The public documentation map, beginner tutorial, user manual, custom-factor tutorial, and
-  Showcase guide now use unsuffixed English entry points with independent `.zh-CN.md` siblings.
+- The public documentation map, no-programming Agent guide, beginner tutorial, user manual,
+  custom-factor tutorial, and Showcase guide use unsuffixed English entry points with independent
+  `.zh-CN.md` siblings.
 - Human-facing generated HTML publishes default English, explicit English, and independent
   Simplified-Chinese files. Machine-readable artifacts remain language-neutral and single-copy.

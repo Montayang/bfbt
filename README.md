@@ -84,11 +84,13 @@ bfbt doctor
 ```
 
 Downloading real market history requires access to Binance public market-data services but no API
-key. Start with the [beginner tutorial](docs/guides/beginner_tutorial.md), then use the
+key. If an operator has already deployed BFBT with a server-connected Agent, start with the
+[no-programming Agent guide](docs/guides/ai_agent_guide.md). For manual operation, use the
+[beginner tutorial](docs/guides/beginner_tutorial.md), then the
 [user manual](docs/guides/user_manual.md) for complete configuration and troubleshooting.
-The Agent workflow starts from the reviewed
-[`agent_intent.example.json`](configs/agent_intent.example.json); it never turns natural language
-directly into unreviewed execution.
+The external Agent turns the conversation into a reviewed intent; operators can inspect the
+underlying [`agent_intent.example.json`](configs/agent_intent.example.json). Natural language never
+becomes unreviewed execution.
 
 ## Reproducibility and auditability
 
@@ -109,8 +111,9 @@ directly into unreviewed execution.
 - Full exchange liquidation tiers, ADL, order-book queueing, and tick-level fill simulation.
 - Automatic Agent selection of Fast Matrix candidates.
 - Direct execution of arbitrary LLM-generated Python, shell, or factor expressions.
-- A general natural-language/no-code research control plane. The current Showcase implements only
-  a bounded, verifiable result-query workflow.
+- A built-in chat model, hosted chat UI, or unsupervised one-click research service. The general
+  control plane is implemented, but a server-connected external Agent performs natural-language
+  interpretation and invokes BFBT under explicit authorization.
 
 ## Human-readable output languages
 
@@ -120,6 +123,8 @@ not duplicated. Compatibility entry pages default to English and link to the Chi
 
 ## Start here
 
+- [No-programming AI Agent guide](docs/guides/ai_agent_guide.md): describe research in ordinary
+  language, review the freeze sheet, authorize stages, and read evidence-backed results.
 - [Beginner tutorial](docs/guides/beginner_tutorial.md): prepare public data and produce a first
   backtest report.
 - [User manual](docs/guides/user_manual.md): commands, configuration, outputs, and troubleshooting.

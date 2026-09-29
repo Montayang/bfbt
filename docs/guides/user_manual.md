@@ -481,6 +481,10 @@ a readiness warning.
 
 ## 15. Use BFBT through a supervised AI Agent
 
+Non-programmers using an already deployed server should begin with the
+[no-programming AI Agent guide](ai_agent_guide.md). This section documents the underlying operator
+commands and contracts.
+
 An AI Agent starts from the user's natural language and produces a reviewed
 `AgentResearchIntent`; BFBT itself does not guess missing trading semantics. Start from
 [`configs/agent_intent.example.json`](../../configs/agent_intent.example.json):

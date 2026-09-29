@@ -76,13 +76,15 @@ bfbt --help
 bfbt doctor
 ```
 
-真实数据首次使用需要访问 Binance 公共市场数据服务，但不需要 API key。详细安装、数据准备
-和第一份真实小样本回测见
+真实数据首次使用需要访问 Binance 公共市场数据服务，但不需要 API key。服务器部署完成后，
+完全不会编程的用户可以从
+[`ai_agent_guide.zh-CN.md`](docs/guides/ai_agent_guide.zh-CN.md) 开始，只用自然语言完成受监督
+研究。需要亲自操作终端时，安装、数据准备和第一份真实小样本回测见
 [`beginner_tutorial.zh-CN.md`](docs/guides/beginner_tutorial.zh-CN.md)；完整配置与故障排查见
 [`user_manual.zh-CN.md`](docs/guides/user_manual.zh-CN.md)。
-Agent 工作流从经过审阅的
-[`agent_intent.example.json`](configs/agent_intent.example.json) 开始，不会把自然语言直接变成
-未经审阅的执行。
+外部 Agent 会把对话整理成经过审阅的意图；运维者可以查看底层
+[`agent_intent.example.json`](configs/agent_intent.example.json)。自然语言不会直接变成未经
+审阅的执行。
 
 ## 可复现与可审计
 
@@ -102,6 +104,8 @@ Agent 工作流从经过审阅的
 
 ## 从这里开始
 
+- [AI Agent 零代码使用指南](docs/guides/ai_agent_guide.zh-CN.md)：用自然语言描述研究、审阅
+  冻结单、逐阶段授权并阅读证据化结果。
 - [入门教程](docs/guides/beginner_tutorial.zh-CN.md)：准备公开数据并生成第一份回测报告。
 - [用户手册](docs/guides/user_manual.zh-CN.md)：命令、配置、输出解读和故障排查。
 - [自定义因子教程](docs/guides/custom_factor_tutorial.zh-CN.md)：添加并研究新的截面因子。

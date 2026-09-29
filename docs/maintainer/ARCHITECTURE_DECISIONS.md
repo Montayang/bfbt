@@ -127,6 +127,7 @@ and result hash equivalent to its standalone execution. Dense worst-case arithme
   evidence byte-for-byte. Executable or literal blocks must not pass through HTML text-node regexes.
 - Public Markdown entry points follow the same convention: the unsuffixed file is English and an
   independent `.zh-CN.md` sibling contains Simplified Chinese. This includes the documentation map,
-  beginner tutorial, user manual, custom-factor tutorial, and Showcase guide.
+  no-programming Agent guide, beginner tutorial, user manual, custom-factor tutorial, and Showcase
+  guide.
 - BFBT is independent from Binance and has no affiliation, endorsement, sponsorship, or financial
   relationship with Binance. This disclaimer must remain visible in the public front door.
