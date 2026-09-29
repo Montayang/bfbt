@@ -1,5 +1,18 @@
 # Operations and formal-run handling
 
+## Fresh Ubuntu deployment
+
+The public no-programming path assumes a normal-user checkout on a 64-bit Ubuntu 22.04/24.04 LTS
+server. After cloning the repository, `scripts/install_ubuntu.sh` creates or reuses the local
+`.venv`, installs runtime dependencies, creates ignored `data/backtest/` directories, and runs the
+read-only doctor. It may install missing `python3`/`python3-venv` packages through `sudo` on an
+`apt`-based host; it must not overwrite an invalid existing `.venv`.
+
+The helper does not configure an Agent vendor, download market data, execute research, start a
+formal run, open a port, or create a background service. Those remain separate setup or authorized
+actions. A server-connected Agent should use the repository as its workspace and `.venv/bin/bfbt`
+as the executable. Never expose `data/backtest/` directly to the public internet.
+
 ## Local storage
 
 All generated state is rooted at `data/backtest/` and ignored by Git:

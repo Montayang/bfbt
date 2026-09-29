@@ -67,6 +67,21 @@ Fast Matrix 评估选定组合计入成本后的路径，Event 引擎则把候�
 
 需要 Python 3.10 或更高版本：
 
+在全新的 Ubuntu 22.04/24.04 服务器上，可以复制下面几行完成基础安装：
+
+```bash
+sudo apt-get update && sudo apt-get install -y git
+git clone https://github.com/Montayang/bfbt.git
+cd bfbt
+bash scripts/install_ubuntu.sh
+```
+
+[`scripts/install_ubuntu.sh`](scripts/install_ubuntu.sh) 只安装本地运行依赖并创建被 Git
+忽略的工作目录，不会下载行情或启动回测。完全不会编程的用户请阅读完整的
+[Linux 服务器与 AI Agent 指南](docs/guides/ai_agent_guide.zh-CN.md)。
+
+在其他受支持环境中手工安装时：
+
 ```bash
 python3 -m venv .venv
 source .venv/bin/activate
@@ -104,8 +119,8 @@ bfbt doctor
 
 ## 从这里开始
 
-- [AI Agent 零代码使用指南](docs/guides/ai_agent_guide.zh-CN.md)：用自然语言描述研究、审阅
-  冻结单、逐阶段授权并阅读证据化结果。
+- [AI Agent 零代码使用指南](docs/guides/ai_agent_guide.zh-CN.md)：准备 Ubuntu 服务器、接入
+  Agent，再用自然语言描述研究、逐阶段授权并阅读证据化结果。
 - [入门教程](docs/guides/beginner_tutorial.zh-CN.md)：准备公开数据并生成第一份回测报告。
 - [用户手册](docs/guides/user_manual.zh-CN.md)：命令、配置、输出解读和故障排查。
 - [自定义因子教程](docs/guides/custom_factor_tutorial.zh-CN.md)：添加并研究新的截面因子。

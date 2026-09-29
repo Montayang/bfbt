@@ -8,8 +8,8 @@ text; filenames, commands, schemas, and immutable identities are language-neutra
 
 ## Start here
 
-- [No-programming AI Agent guide](guides/ai_agent_guide.md): use a deployed BFBT system through
-  ordinary language, reviewed semantics, staged authorization, and verified evidence.
+- [No-programming AI Agent guide](guides/ai_agent_guide.md): prepare an Ubuntu server, install BFBT,
+  connect an Agent, and complete research through reviewed natural language and staged permission.
 - [Beginner tutorial](guides/beginner_tutorial.md): prepare public data and produce a first report.
 - [User manual](guides/user_manual.md): CLI, configuration, outputs, interpretation, and
   troubleshooting.

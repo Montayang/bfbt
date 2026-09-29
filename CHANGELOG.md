@@ -26,6 +26,8 @@ BFBT keeps a behavior-oriented changelog. Release dates use UTC.
 
 - Added independent English and Simplified-Chinese no-programming guides for using a deployed BFBT
   system through a supervised external Agent, and separated that path from the terminal tutorial.
+- Added an idempotent Ubuntu setup helper and expanded the no-programming guides from Linux server
+  selection through installation, Agent workspace connection, readiness, and research use.
 - The hosted Event example now uses the clean-source, 1x-leverage May run, and all hosted report
   language selectors retain consistent right-aligned machine identifiers.
 - The root README now describes the A01–A40 architecture, implemented capabilities, bounded

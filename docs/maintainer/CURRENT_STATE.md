@@ -165,5 +165,8 @@ V1 remains for compatibility and historical reproduction, not for new daily stra
 - The public documentation map, no-programming Agent guide, beginner tutorial, user manual,
   custom-factor tutorial, and Showcase guide use unsuffixed English entry points with independent
   `.zh-CN.md` siblings.
+- The no-programming route now starts from a fresh Ubuntu server. The idempotent
+  `scripts/install_ubuntu.sh` helper installs the local runtime, prepares ignored workspace
+  directories, and runs the read-only doctor without downloading data or starting research.
 - Human-facing generated HTML publishes default English, explicit English, and independent
   Simplified-Chinese files. Machine-readable artifacts remain language-neutral and single-copy.

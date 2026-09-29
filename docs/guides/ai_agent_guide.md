@@ -2,20 +2,106 @@
 
 [简体中文](ai_agent_guide.zh-CN.md)
 
-This guide is for a researcher who has access to a server where BFBT and an AI Agent are already
-set up, but does not want to write code, edit JSON, or use a terminal. You describe the research in
-ordinary language, review the important choices, and authorize each consequential stage. The Agent
-handles BFBT's files and commands.
+> **You need a Linux server before starting.** BFBT is not a website and does not run inside a
+> normal browser chat. The simplest supported starting point is a 64-bit Ubuntu 22.04 or 24.04 LTS
+> server with internet access and a server-connected AI Agent.
+
+This guide starts from obtaining that server and ends with a completed, evidence-backed research
+workflow. You do not need to write Python, edit JSON, or understand terminal commands. There is one
+short copy-and-paste installation step if your Agent has not yet been connected; after that, you
+describe research in ordinary language, review important choices, and authorize each consequential
+stage.
 
 The [beginner tutorial](beginner_tutorial.md) serves a different purpose: it teaches a user or
 operator to run BFBT manually from a terminal. You do not need to complete it when an operator has
 already prepared the server and Agent integration.
 
-## Before you start
+## Part A — put BFBT on a server
 
-Confirm with the server operator that:
+### 1. Obtain a Linux server
 
-- BFBT is installed and the market-data workspace is configured;
+Create a server at a cloud provider or use a Linux machine you already control. When the provider
+asks for an operating system, choose **Ubuntu 24.04 LTS, 64 bit**. Ubuntu 22.04 LTS also works.
+
+A reasonable starting size for learning and bounded studies is:
+
+- 4 virtual CPU cores;
+- 16 GiB memory;
+- 100 GiB SSD storage;
+- outbound internet access to GitHub, Python package services, and—only when you approve a market-
+  data download—Binance public data services.
+
+Larger full-market minute studies can need 8 or more cores, 32 GiB memory, and 500 GiB or more
+storage. Actual storage depends on symbols, dates, intervals, and retained datasets. A GPU, domain
+name, exchange API key, inbound public web port, and trading account are not required.
+
+Cloud servers normally cost money while running, and extra disk storage may be billed separately.
+Deleting the server can also delete its datasets and reports. Use the provider's spending alerts
+and snapshots or another backup method for research you want to retain. Do not open public ports
+other than the access method required by your server or Agent provider.
+
+Use a normal non-root login account. Keep the provider's password or SSH key private; never paste
+it into a research request or commit it to this repository.
+
+### 2. Connect an AI Agent, or use the server console once
+
+Choose an AI coding or operations Agent that can open a workspace on the server and run commands
+there. Follow that product's own instructions to connect it to the server; BFBT does not bundle or
+require a particular model vendor.
+
+If the Agent can already operate the server, give it this deployment request:
+
+```text
+Install the public repository https://github.com/Montayang/bfbt on this Ubuntu server under my
+normal user account. Follow its no-programming Agent guide and run scripts/install_ubuntu.sh.
+Do not access credentials, download market data, run research, or start a backtest. Report the
+checkout path and the final bfbt doctor result.
+```
+
+If no Agent is connected yet, open the cloud provider's browser-based terminal or SSH console and
+paste these four lines exactly:
+
+```bash
+sudo apt-get update
+sudo apt-get install -y git
+git clone https://github.com/Montayang/bfbt.git
+cd bfbt && bash scripts/install_ubuntu.sh
+```
+
+The server may ask for its login password while installing the standard Ubuntu packages. The BFBT
+[`scripts/install_ubuntu.sh`](../../scripts/install_ubuntu.sh) helper then creates a private Python
+environment inside the checkout, installs runtime
+dependencies, prepares ignored local data directories, and runs the read-only readiness check. It
+does **not** download market data, start research, run a backtest, open a network port, or access an
+exchange account.
+
+Successful output ends with text similar to:
+
+```text
+ready=true
+BFBT is installed in /home/your-user/bfbt.
+No market data was downloaded and no backtest was started.
+```
+
+If it stops, copy the complete error into the Agent and ask it to diagnose the installation without
+deleting an existing `.venv` or changing anything outside the BFBT checkout without your approval.
+
+### 3. Point the Agent at the BFBT workspace
+
+Set the Agent's workspace to the checkout path printed by the installer, commonly
+`/home/your-user/bfbt`. The Agent must be able to read the repository, run `.venv/bin/bfbt`, and
+write only the ignored `data/backtest/` workspace when authorized.
+
+“Deployment” here does not mean starting a permanent web service. BFBT is an offline research
+application. The Agent invokes it when you request work, and long operations use recorded
+background jobs. Do not expose BFBT or its data directory directly to the public internet.
+
+### 4. Confirm that deployment is ready
+
+Ask the Agent to confirm that:
+
+- BFBT is installed, its local workspace is writable, and the Agent has reported whether market
+  data is already present or still needs separate authorization;
 - the Agent can work inside the BFBT repository and run the installed `bfbt` application;
 - the Agent cannot access exchange accounts, credentials, private order streams, or live trading;
 - the Agent will ask before downloading data, writing research state, or starting a formal run;
@@ -26,7 +112,9 @@ access the server is not enough. You need a server-connected Agent such as a sup
 operations Agent. BFBT remains the deterministic research engine and permission boundary beneath
 that Agent.
 
-## 1. Start a research session
+## Part B — run research by conversation
+
+### 1. Start a research session
 
 Paste this message into a new Agent session:
 
@@ -47,7 +135,7 @@ monitoring it; I will ask for status later.
 The Agent should first report the current system, data, and job facts. Inspection is not permission
 to execute research.
 
-## 2. Describe what you want to learn
+### 2. Describe what you want to learn
 
 You may begin with an incomplete idea. For example:
 
@@ -75,7 +163,7 @@ If you already know the intended design, include as many of these items as you c
 You do not have to understand every item. Say “recommend options and explain them” for anything you
 do not know. The Agent must not silently fill an economically material gap.
 
-## 3. Review the freeze sheet
+### 3. Review the freeze sheet
 
 Before any execution, ask the Agent to show one plain-language freeze sheet containing:
 
@@ -98,7 +186,7 @@ Ask questions until the sheet matches your intent. Useful questions include:
 BFBT rejects unresolved material ambiguities. If you change the plan, the Agent must produce a new
 freeze sheet; an approval for the old plan does not transfer automatically.
 
-## 4. Authorize one stage at a time
+### 4. Authorize one stage at a time
 
 Use narrow approvals in ordinary language. For example:
 
@@ -125,7 +213,7 @@ configuration and required authorization before starting the formal backtest.
 Data/network access, data writes, research execution, formal Event execution, tests, and source
 control are separate capabilities. “Continue” is not a blanket approval to expand the plan.
 
-## 5. Understand the three stages
+### 5. Understand the three stages
 
 The route depends on the question; not every request needs all three layers.
 
@@ -141,7 +229,7 @@ The route depends on the question; not every request needs all three layers.
 The Agent may explain and compare Fast Matrix candidates, but it must not choose one on your behalf.
 Your selection and rationale become part of the evidence trail.
 
-## 6. Leave long jobs and return later
+### 6. Leave long jobs and return later
 
 For a long authorized operation, the Agent should start a recorded background job and then tell you:
 
@@ -161,7 +249,7 @@ before reporting success; if it failed, explain the recorded cause and the safes
 Process exit alone is not proof of a valid result. The Agent must verify the recorded evidence and
 artifact hashes.
 
-## 7. Read the result with the Agent
+### 7. Read the result with the Agent
 
 Ask for separate English and Simplified-Chinese reports when both are useful. Request a summary
 that clearly separates:
@@ -177,7 +265,7 @@ A positive backtest does not prove that a strategy will remain profitable. Ask t
 cost sensitivity, turnover, drawdown, regime dependence, factor overlap, and development-versus-
 holdout evidence before considering further research.
 
-## A complete example request
+### A complete example request
 
 ```text
 Research a cross-sectional 24-hour momentum factor on Binance USDT-margined perpetual futures from

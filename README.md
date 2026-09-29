@@ -74,6 +74,22 @@ not investment advice or promises of future performance.
 
 BFBT requires Python 3.10 or newer.
 
+For a fresh Ubuntu 22.04/24.04 server, clone the repository and run the idempotent setup helper:
+
+```bash
+sudo apt-get update && sudo apt-get install -y git
+git clone https://github.com/Montayang/bfbt.git
+cd bfbt
+bash scripts/install_ubuntu.sh
+```
+
+The [`scripts/install_ubuntu.sh`](scripts/install_ubuntu.sh) helper installs only local runtime
+dependencies and creates ignored workspace directories. It does not download market data or start
+a backtest. Non-programmers should follow the complete
+[server and AI Agent guide](docs/guides/ai_agent_guide.md).
+
+For a manual installation on another supported system:
+
 ```bash
 python3 -m venv .venv
 source .venv/bin/activate
@@ -123,8 +139,8 @@ not duplicated. Compatibility entry pages default to English and link to the Chi
 
 ## Start here
 
-- [No-programming AI Agent guide](docs/guides/ai_agent_guide.md): describe research in ordinary
-  language, review the freeze sheet, authorize stages, and read evidence-backed results.
+- [No-programming AI Agent guide](docs/guides/ai_agent_guide.md): prepare an Ubuntu server, connect
+  an Agent, describe research, authorize stages, and read evidence-backed results.
 - [Beginner tutorial](docs/guides/beginner_tutorial.md): prepare public data and produce a first
   backtest report.
 - [User manual](docs/guides/user_manual.md): commands, configuration, outputs, and troubleshooting.
