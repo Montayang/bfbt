@@ -61,7 +61,18 @@ def test_batch_reads_shared_market_once_and_keeps_candidate_state_isolated() -> 
     assert batch.diagnostics["shared_market_loads"] == 1
     standalone = run_fast_matrix(_schedule(), _bars(), config=config, market_identity="a34:base")
     assert_frame_equal(batch.candidates["base"].returns, standalone.returns)
+    assert_frame_equal(
+        batch.candidates["base"].rebalance_summary,
+        standalone.rebalance_summary,
+        rel_tol=1e-12,
+        abs_tol=1e-12,
+    )
+    assert batch.candidates["base"].checkpoint == standalone.checkpoint
+    assert batch.candidates["base"].result_hash == standalone.result_hash
     assert batch.candidates["base"].checkpoint.previous_equity != batch.candidates["half"].checkpoint.previous_equity
+    assert batch.diagnostics["state_boundary_count"] == 2
+    assert batch.diagnostics["market_time_count"] == 5
+    assert batch.diagnostics["valuation_interval_count"] == 2
 
 
 def test_research_store_is_immutable_verified_and_promotes_to_event(tmp_path: Path) -> None:

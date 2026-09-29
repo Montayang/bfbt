@@ -15,7 +15,7 @@ from bfbt.engine.fast_matrix.capabilities import plan_backend
 from bfbt.engine.fast_matrix.result import MatrixCheckpoint, MatrixResult
 from bfbt.engine.fast_matrix.target_schedule import TargetSchedule
 
-MATRIX_ENGINE_VERSION = "a35-fast-matrix-v1"
+MATRIX_ENGINE_VERSION = "a41-fast-matrix-v2"
 UTC_MS = pl.Datetime("ms", "UTC")
 EPSILON = 1e-10
 RETURN_SCHEMA = {
@@ -265,7 +265,10 @@ def run_fast_matrix(
                 .when(pl.col("new_quantity").abs() > pl.col("quantity").abs() + EPSILON).then(
                     (pl.col("quantity").abs() * pl.col("average_entry_price") + (pl.col("new_quantity").abs() - pl.col("quantity").abs()) * pl.col("open_mark")) / pl.col("new_quantity").abs()
                 ).otherwise(pl.col("average_entry_price")).alias("average_entry_price"),
-                pl.col("new_quantity").alias("quantity"),
+                pl.when(pl.col("new_quantity").abs() <= EPSILON)
+                .then(0.0)
+                .otherwise(pl.col("new_quantity"))
+                .alias("quantity"),
             ).select("symbol", "quantity", "average_entry_price", "last_close", "real_open", "open_mark", "held")
 
         funding_total = 0.0

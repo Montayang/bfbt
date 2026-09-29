@@ -1,6 +1,6 @@
 # Current project state
 
-Updated: 2026-09-08.
+Updated: 2026-09-29.
 
 ## Repository identity
 
@@ -27,6 +27,9 @@ Updated: 2026-09-08.
 - A36-A40: sampled-mean factors, Event parameter studies, activated trailing exits, rolling-margin
   state, complete trade/position audit navigation, a verified offline Agent Showcase thin slice,
   full BFBT identity migration, and independent English/Simplified-Chinese HTML outputs.
+- A41: Fast Matrix multi-candidate batches share one market preparation, recurse only at joint
+  rebalance/funding boundaries, value complete intervals together, and retain sparse non-zero
+  holdings while preserving candidate-level economics, audits, checkpoints, and identities.
 - The Quick Research registry also includes 14 source-pinned Qlib/`ta` trend and momentum factors. Exact
   source formulas remain distinct from BFBT adaptations; formula windows are literal source-bar
   counts, gaps reset history, and invalid or zero-denominator inputs fail closed.
@@ -82,6 +85,10 @@ V1 remains for compatibility and historical reproduction, not for new daily stra
 - The open-source trend/momentum factor implementation passed 40 focused formula, recursive-reference,
   warmup, causality, gap, parameter, and registry tests, followed by the complete offline suite:
   `360 passed in 38.24s` on 2026-09-05. No Quick Research or backtest was run by this verification.
+- Fast Matrix phase-two focused A32-A34/A41 verification passed 8 tests on 2026-09-29, followed by
+  the complete offline suite (`361 passed in 24.72s`). Its fixed
+  offline 6-candidate synthetic benchmark measured 4.488 s for independent execution and 0.296 s
+  for joint execution (15.14× on that shape).
 
 ## Known boundaries
 

@@ -1,9 +1,16 @@
 # Active work
 
-Updated: 2026-09-08.
+Updated: 2026-09-29.
 
 ## Current state
 
+- Fast Matrix phase two is implemented and verified by A41: multi-candidate research now
+  shares market preparation, updates state only at joint rebalance/funding boundaries, values each
+  interval in one columnar batch, and stores only non-zero holdings. A32-A34/A41 focused verification
+  passes 8 tests, including exact checkpoint/result-hash equivalence for mark valuation and funding;
+  the complete offline suite passes 361 tests in 24.72 seconds.
+  A fixed offline 6-candidate benchmark measured 4.488 s independent versus 0.296 s joint execution
+  (15.14× for that synthetic shape). No formal backtest, research run, or data download occurred.
 - The source-pinned open-source trend/momentum batch now has 14 registered `v1` implementations:
   exact Qlib/`ta` formulas remain distinct from BFBT adaptations, duplicate controls remain visibly
   labelled, and gaps/invalid inputs fail closed. Focused formula, recursive-reference, warmup,
@@ -39,7 +46,7 @@ Updated: 2026-09-08.
   Matrix English copy. `codex/fix-ci-matrix-report-copy` aligns the assertion with the implemented
   Event Engine wording; its focused A34 file passes 3 tests and the complete offline suite passes
   337 tests locally.
-- No engine development or formal backtest is active.
+- No formal backtest or research run is active.
 - The public-release implementation was completed on `codex/bfbt-public-release` and approved for
   fast-forward publication to `main`. It performs the complete
   `bianbt` → BFBT/`bfbt` brand, distribution, import, CLI, and repository-link migration; makes the

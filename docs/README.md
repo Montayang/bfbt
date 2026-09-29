@@ -24,6 +24,8 @@ text; filenames, commands, schemas, and immutable identities are language-neutra
 - [Event Engine design](design/v2_design.md): chronological execution, state, risk, and artifact model.
 - [Fast Matrix design](design/v5_fast_matrix_engine.md): capability boundary, columnar economics,
   research artifacts, and Event promotion.
+- [Fast Matrix phase-two design](design/fast_matrix_phase2.md): joint candidate intervals, sparse
+  holdings, complexity, and reproducible benchmark contract.
 - [Configuration reference](reference/configuration.md): fields, defaults, and validation rules.
 - [Data contract](reference/data_contract.md): fact tables, derived tables, and artifact schemas.
 - [Data management](reference/data_management.md): local layout, partitions, versions, and catalog.
@@ -39,6 +41,8 @@ text; filenames, commands, schemas, and immutable identities are language-neutra
 - [Verified Showcase](acceptance/A39.md): ResearchIntent, read-only doctor, immutable evidence, and
   deterministic presentation.
 - [Public-release contract](acceptance/A40.md): BFBT identity and independent English/Chinese HTML.
+- [Fast Matrix phase-two acceptance](acceptance/A41.md): joint execution, sparse state, economic
+  equivalence, and offline performance evidence.
 
 ## Research and real strategy records
 

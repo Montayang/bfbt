@@ -425,6 +425,14 @@ margin, risk exits, cooldowns, and event arbitration fail closed instead of bein
 After human selection, promote a candidate to an Event Engine configuration and run the formal
 workflow.
 
+Application code that evaluates several normalized TargetSchedules can use
+`run_fast_matrix_batch`. The batch prepares trade/mark/funding inputs once, values candidates
+jointly between rebalance or funding boundaries, and stores only active holdings. Every candidate
+still receives an independent `fm-*` identity, costs, audit rows, checkpoint, and result hash; the
+batch does not rank candidates or promote one automatically. This is an execution optimization, not
+a relaxed research model. Complexity and benchmark limits are recorded in the
+[phase-two design](../design/fast_matrix_phase2.md).
+
 Rebuild a successful study's searchable reports with:
 
 ```bash

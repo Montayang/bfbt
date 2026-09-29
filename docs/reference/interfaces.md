@@ -276,6 +276,11 @@ filled_weight, turnover, fill_price, notional, status
 
 A08 的 `BacktestResult` 返回 version-pinned 的 targets、trades、positions、costs、returns 五个 LazyFrame，以及 run ID、结果 hash 和 warnings。A10 的 `StreamingLedger` 按有序市场块调用 `process`，在块间只保留数量、平均成本、请求权重、上一标记价格、净值/峰值、序号和 warnings；重复或倒序块会失败。正式 runner 根据 `backtest.performance.mode` 选择内存或分块路径，两者保持同一五表契约。分块路径另返回确定性 diagnostics 和 `presorted` 标志，供 artifact writer 流式发布。
 
+A41 的 `run_fast_matrix_batch` 接收 `Mapping[str, TargetSchedule]` 和共享 trade/mark/funding
+输入，返回 `MatrixBatchResult(candidates, diagnostics)`。行情只准备一次，候选状态在联合调仓/
+funding 边界更新，区间估值按非零持仓联合执行。`candidates` 中每项仍是完整、独立的
+`MatrixResult`；batch 不承担候选筛选、Event 晋级或正式 artifact 发布。
+
 
 ```python
 class BacktestEngine(Protocol):

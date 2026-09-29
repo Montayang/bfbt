@@ -609,6 +609,12 @@ bfbt research matrix-run targets.parquet bars.parquet \
 后端改为 `event`、用途改为 `formal` 并运行正式流程；动态保证金、止盈止损、冷却或事件仲裁
 策略会由能力规划器拒绝 Fast Matrix。
 
+应用层需要评估多个规范化 TargetSchedule 时，可以使用 `run_fast_matrix_batch`。批量入口只
+准备一次 trade/mark/funding 输入，在调仓或 funding 边界之间联合估值，并只保存活动持仓；
+每个候选仍有独立的 `fm-*` 身份、成本、审计行、checkpoint 和结果 hash。batch 不会替用户
+排序候选或自动晋级，这只是执行优化，不是放宽经济模型。复杂度和基准边界见
+[`fast_matrix_phase2.md`](../design/fast_matrix_phase2.md)。
+
 一次研究项目包含大量因子时，快速研究与 Fast Matrix 分开查看。成功项目含 `summary.json`
 后可重建报告：
 

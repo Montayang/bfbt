@@ -16,6 +16,13 @@ in `docs/design/` and `docs/reference/`.
 Unsupported Fast Matrix behavior fails closed or is explicitly promoted to Event; it must not be
 silently approximated.
 
+Fast Matrix multi-candidate execution prepares each market input once, keeps only non-zero candidate
+holdings, and recurses at the union of rebalance and funding boundaries. Complete intervals between
+those boundaries are valued jointly. This changes batch complexity and control depth, not economic
+semantics: each candidate retains independent cash, costs, funding, audit rows, checkpoint, identity,
+and result hash equivalent to its standalone execution. Dense worst-case arithmetic remains
+`O(candidate × time × symbol)`; the practical sparse case scales with active holdings.
+
 ## Time and causality
 
 - All intervals use UTC left-closed/right-open semantics.

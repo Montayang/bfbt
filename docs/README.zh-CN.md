@@ -61,6 +61,8 @@
 - [`design/v4_reusable_analysis_and_fast_replay.md`](design/v4_reusable_analysis_and_fast_replay.md)：第四阶段可复用分析、分层失效、稀疏交易回放和参数扫描设计。
 - [`design/v5_fast_matrix_engine.md`](design/v5_fast_matrix_engine.md)：第五阶段 Fast Matrix
   常规截面回测后端、能力边界、经济等价、研究产物和目录设计。
+- [`design/fast_matrix_phase2.md`](design/fast_matrix_phase2.md)：Fast Matrix 第二阶段的多候选
+  联合区间、稀疏持仓、复杂度与可复现基准合同。
 
 ## 验收记录
 
@@ -108,3 +110,5 @@
   验证与离线 Showcase 页面。
 - [`acceptance/A40.md`](acceptance/A40.md)：BFBT 公开身份、英文主入口与独立中英文 HTML
   产物合同。
+- [`acceptance/A41.md`](acceptance/A41.md)：Fast Matrix 联合执行、稀疏状态、经济等价与离线
+  性能证据。

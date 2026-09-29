@@ -15,6 +15,8 @@ BFBT keeps a behavior-oriented changelog. Release dates use UTC.
 - A39 offline acceptance, presentation assets, and public contribution/security documentation.
 - Independent English and Simplified-Chinese HTML artifacts plus the A40 public-release contract.
 - Hosted, self-contained English and Simplified-Chinese examples for all three report layers.
+- Joint Fast Matrix candidate execution with state-boundary interval valuation, sparse holdings,
+  A41 equivalence coverage, and a reproducible offline benchmark.
 
 ### Changed
 
@@ -32,6 +34,8 @@ BFBT keeps a behavior-oriented changelog. Release dates use UTC.
   declared interpreter floor and CI matrix.
 - Report localization preserves executable JavaScript, embedded JSON, CSS, and preformatted code;
   the public README and Showcase tour link directly to the corresponding hosted report language.
+- Fast Matrix batch research now prepares the market once and values all candidates jointly between
+  rebalance/funding boundaries while retaining independent identities, costs, funding, and audits.
 
 ## 0.1.0
 
