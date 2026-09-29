@@ -1,6 +1,6 @@
 # Showcase version plan
 
-Updated: 2026-09-08.
+Updated: 2026-09-29.
 
 ## Public discovery direction update (2026-09-02)
 
@@ -24,9 +24,10 @@ current presentation uses the qualified H2 `r01` evidence and displays `git_dirt
 
 ## Product decision
 
-The showcase is a short, local, evidence-backed demonstration of the research workflow. It is not
-the finished open-source release and must not pretend that the general no-code Agent control plane
-already exists.
+The showcase is a short, local, evidence-backed demonstration of the research workflow. This
+section records the product boundary frozen for the September 2026 Showcase implementation. The
+general supervised Agent control plane was subsequently implemented and accepted by A43; it does
+not retroactively turn the curated Showcase scenario into a general Agent demonstration.
 
 The primary audience is a technically curious visitor watching a 8–12 minute demonstration on the
 maintainer's prepared machine. The secondary audience is someone opening the repository afterward.
@@ -104,9 +105,9 @@ all numerical summaries must be deterministic application code.
 - Natural-language parsing itself remains an Agent responsibility in this iteration. Do not add an
   embedded LLM dependency and do not execute arbitrary generated Python or shell.
 
-This is a coherent thin slice of AG01–AG04. Their global readiness status must remain `partial` or
-`missing` until the general contracts and end-to-end workflow are implemented beyond the curated
-showcase.
+This was the coherent Showcase thin slice of AG01–AG04. The later A43 implementation supplies the
+general contracts and supervised end-to-end workflow; current readiness status is maintained in
+`AI_AGENT_READINESS.md`, not inferred from this historical scope.
 
 ### SC03 — Read-only preflight and readiness command
 

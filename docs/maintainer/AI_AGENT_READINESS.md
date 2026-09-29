@@ -59,7 +59,7 @@ Agent 产品入口。
 | AG07 | P0 | ready | 端到端研究编排服务 | `AgentWorkflowStore` 按 intent/plan hash 记录 Data → Quick → Matrix → 人工选择 → Event → 解释阶段，跨会话恢复已完成证据；具体计算继续委托现有确定性服务。 |
 | AG08 | P1 | ready | 数据需求规划与版本选择 | DE-v1 根据核心区间、warmup、Universe 历史、标签/执行尾部及所需事实生成覆盖计划，拒绝 `latest` 和含糊多版本，并产出精确 Snapshot 就绪证据。 |
 | AG09 | P1 | ready | 换手、成本和可行性硬门 | 组合/Event 计划强制要求预估调仓换手，按调仓次数、手续费和滑点计算拖累；超过绝对或预期毛收益占比阈值时必须显式确认并进入授权记录。 |
-| AG10 | P1 | partial | 研究治理自动化 | QR-v1 和研究注册表已有稳定规则与血缘；相关性去重未实现，Fast Matrix 人工选择尚无结构化 decision artifact，Event promotion 也没有通用、可校验的来源合同。人工选择本身必须保留，不能改成黑箱自动晋级。 |
+| AG10 | P1 | partial | 研究治理自动化 | QR-v1 和研究注册表已有稳定规则与血缘；A43 已提供 Fast Matrix 人工选择 decision artifact 与可校验 Event 来源合同。相关性去重、开发/验证/留出隔离和标签 horizon purge 尚未实现。人工选择本身必须保留，不能改成黑箱自动晋级。 |
 | AG11 | P1 | ready | Agent 可消费的结果解释接口 | `AgentEvidenceSummary` 区分事实、资格说明和警告；每条 claim 强制引用已经接纳的 SHA-256 evidence，结果查询也会重新校验显式引用文件。 |
 | AG12 | P1 | missing | 安全的生成与扩展沙箱 | 需要路径白名单、资源限额、生成因子静态检查、确定性 fixture、代码评审门及禁止凭据/网络/下单依赖的自动检查。生成代码与运行研究必须是两个独立授权动作。 |
 | AG13 | P1 | partial | 部署与环境自检 | 已有 `pyproject.toml`、安装教程和单命令只读 doctor，可检查运行时、依赖、输出根、磁盘、catalog、intent、artifact、provenance 与可选端口，并提供稳定退出码和修复建议；仍缺依赖锁和完整可复现发布环境。 |

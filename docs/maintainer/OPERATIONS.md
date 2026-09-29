@@ -16,6 +16,7 @@ data/backtest/
 ├── research_studies/
 ├── event_studies/
 ├── showcases/
+├── agent_jobs/
 └── jobs/
 ```
 
@@ -54,6 +55,24 @@ Showcase pages under `showcases/` are derived presentation views. They must veri
 immutable run before reading metrics, display source/warning qualifications, avoid absolute machine
 paths and remote assets, and never write inside `runs/`. Rebuilding a showcase does not authorize a
 research run or formal backtest.
+
+## Supervised Agent jobs
+
+Agent workflow state is recorded under `data/backtest/agent_jobs/` and remains untracked. An Agent
+first creates a side-effect-free plan from a complete `AgentResearchIntent`; the plan does not
+authorize execution. Every mutating stage requires an unexpired grant bound to the exact plan hash
+and action class.
+
+The recorded route is Data preparation → Quick Research → Fast Matrix → human promotion → Event →
+evidence summary. Completed stages may be resumed across sessions only after their evidence hashes
+are revalidated. Fast Matrix selection remains a human decision, and Event evidence must name the
+selected Matrix source run. Long authorized operations follow the same background-job rule as
+formal backtests: launch the recorded job, return control, and inspect it only after a later status
+request.
+
+The Agent surface never authorizes model-generated shell/Python, account access, credentials, live
+orders, or silent expansion from research into a formal Event run. See
+`docs/design/agent_workflow.md` and `docs/acceptance/A43.md` for the exact contracts and gates.
 
 ## Development workflow
 

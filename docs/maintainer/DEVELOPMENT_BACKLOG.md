@@ -1,6 +1,6 @@
 # 已确认但尚未完成的开发与研究清单
 
-更新时间：2026-09-08。
+更新时间：2026-09-29。
 
 本文汇总已经在用户目标、维护规划或研究记录中明确出现，但尚未完成的工作。它用于避免
 跨会话遗漏，不把所有“未来可以做”的想法都提升为当前任务。准确实现状态仍以 Git、不可变
@@ -20,41 +20,13 @@ artifact 和各专题文档为准。
 - 事实来源：`docs/research/open_source_trend_momentum_candidates.md`、
   `docs/research/registry.md`。
 
-### BL02 — DE-v1 个人研究数据准备闭环
-
-- 状态：已于 2026-09-29 完成实现与 A42 离线验收；受控真实数据 D4 记录仍需单独授权，
-  不属于代码完成的默认门槛。
-- 范围：ResearchDataRequirement、无副作用 DataPlan、覆盖/资源估计、记录式可恢复
-  `data prepare`、DataReadiness 和最小派生血缘。
-- 原则：复用现有 Archive/REST、Raw、标准化、质量门、Catalog 和 Snapshot；不建设企业级
-  平台，不把秒级数据纳入下一阶段。
-- 事实来源：`DATA_ENGINE_PLAN.md`。
-
-### BL03 — Fast Matrix 第二阶段性能架构
-
-- 状态：已于 2026-09-29 完成。多候选共享一次市场准备，只在联合调仓/funding 边界递推，
-  边界之间整段列式估值，活动状态使用非零持仓稀疏布局。
-- 经济合同：trade/mark、费用、滑点、funding、rebalance audit、checkpoint 与结果身份继续与
-  独立单候选执行等价；未关闭任何真实性或审计字段换取速度。
-- 复杂度、最坏情况边界、可复现离线基准和 15.14× 本机合成证据见
-  `docs/design/fast_matrix_phase2.md` 与 `docs/acceptance/A41.md`。
-
-### BL04 — 通用自然语言 Agent 研究闭环
-
-- 状态：通用受监督工作流已于 2026-09-29 完成并由 A43 离线验收。
-- 已有：通用意图、语义冻结、DE-v1/后端/成本统一预检、plan-bound 授权、安全表达式因子、
-  可暂停恢复阶段、Fast Matrix 人工 promotion、Event 来源校验和逐 claim 证据摘要。
-- 保留边界：BFBT 不内置特定 LLM，不执行 Agent 生成的 shell/Python；通用进程 PID/心跳/
-  取消仍是 AG05 后续工程增强，多用户配额仍为条件性远期方向。
-- 事实来源：`docs/design/agent_workflow.md`、`docs/acceptance/A43.md` 和
-  `AI_AGENT_READINESS.md`。
-
 ### BL05 — 研究治理补强
 
 - 状态：QR-v1 和不可变研究身份已经存在，治理仍为 `partial`。
 - 未完成：因子相关性/重复性矩阵；开发、验证、留出期的统一合同；标签 horizon 对分段边界
-  的 purge/隔离；用户 Fast Matrix 人工选择的结构化 decision artifact；Event promotion 的
-  可校验来源链。
+  的 purge/隔离。
+- 已有但需沿用：A43 已提供 Fast Matrix 人工选择的结构化 decision artifact 和 Event
+  promotion 的可校验来源链；治理补强不得另建冲突合同。
 - 自动化只能整理证据，不能代替用户选择 Fast Matrix 候选。
 - 事实来源：`AI_AGENT_READINESS.md` 的 AG10，以及 `docs/research/registry.md`。
 
@@ -109,15 +81,19 @@ Event 实测，因此一年复验只在需要声明相应容量或评估新数�
 - R5-T4-H2-ROLLING May/June/July 正式 run；
 - 1x May Event 展示 run 和 Pages 报告替换；
 - 14 个开源趋势/动量因子的代码实现与公式级验证。
-- DE-v1 数据需求、无副作用计划、记录式恢复、精确 Snapshot 就绪与最小血缘。
-- 通用受监督 AI Agent 工作流、安全因子表达式、人工晋级与证据解释。
+- DE-v1 数据需求、无副作用计划、记录式恢复、精确 Snapshot 就绪与最小血缘（BL02，
+  `94204cb`，A42）。
+- Fast Matrix 第二阶段共享准备、联合边界执行、区间估值和稀疏持仓（BL03，`7cef70a`，
+  A41）。
+- 通用受监督 AI Agent 工作流、安全因子表达式、人工晋级与证据解释（BL04，`9800438`，
+  A43）。
 
 ## 5. 建议推进顺序
 
 在用户没有另行调整优先级时：
 
 1. 完成 BL01 开源因子 Quick Research，补足当前量化研究故事；
-2. 逐步完成 BL05 研究治理与 BL04 Agent 闭环；
+2. 逐步完成 BL05 研究治理补强；
 3. 在最终工程级版本前完成 BL06 发布补强。
 
 每条主线启动时仍需当前任务授权；本文不授权测试、网络、下载、研究、正式回测或外部

@@ -4,14 +4,14 @@ Updated: 2026-09-29.
 
 ## Current state
 
-- The general supervised Agent workflow is implemented on `codex/general-agent-workflow`: strict
+- The general supervised Agent workflow is merged into `main` at `9800438`: strict
   original-text-bound intent, semantic/data/backend/cost planning, plan-bound expiring grants,
   causal expression factors, resumable evidence hand-offs, human Matrix selection, Event source
   validation, and claim-level citations. A43 focused verification passes 10 tests, the combined
   factor/DE/Agent set passes 34, and the complete suite passes 378 tests in 24.23 seconds. No model
   API, network, market download, real research, or formal backtest was invoked.
 
-- DE-v1 is implemented on `codex/data-prepare-de-v1`: a versioned requirement expands core dates by
+- DE-v1 is merged into `main` at `94204cb`: a versioned requirement expands core dates by
   warmup and future tails; `data plan/inspect` is deterministic and side-effect-free; `data prepare`
   records resumable acquire/normalize/snapshot/readiness steps and publishes exact lineage evidence.
   The focused A42 offline suite passes 7 tests and the complete suite passes 368 tests in 39.73
@@ -70,8 +70,9 @@ Updated: 2026-09-29.
   pre-rename baseline.
 - The three authorized `R5-T4-H2-ROLLING` May–July formal runs are complete and registered; their
   generated artifacts and derived margin-trajectory report remain ignored local data.
-- An AI Agent readiness audit is recorded in `AI_AGENT_READINESS.md`. It defines the intended
-  natural-language research workflow and AG01–AG16 backlog; implementation has not started.
+- AI Agent readiness and remaining gaps are recorded in `AI_AGENT_READINESS.md`. The general
+  supervised workflow is implemented and accepted by A43; AG05, AG10, AG12, AG13, AG15 and AG16
+  retain the explicitly documented partial or missing follow-up scope.
 - Durable cross-session guidance is maintained by root `AGENTS.md`, `docs/maintainer/`, and the
   ignored local `.local/CODEX_HANDOFF.md` when it is present.
 - The standalone offline pytest suite passed all 322 tests on 2026-08-29 against HEAD `69e8588`;
