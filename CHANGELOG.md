@@ -19,6 +19,8 @@ BFBT keeps a behavior-oriented changelog. Release dates use UTC.
   A41 equivalence coverage, and a reproducible offline benchmark.
 - DE-v1 research-data requirements, side-effect-free bilingual plans, resumable recorded
   preparation, exact snapshot readiness, and minimal lineage with A42 offline acceptance.
+- General supervised Agent contracts, causal expression factors, semantic/cost preflight,
+  plan-bound grants, resumable evidence hand-offs, human promotion, and A43 acceptance.
 
 ### Changed
 

@@ -96,6 +96,19 @@ and result hash equivalent to its standalone execution. Dense worst-case arithme
   directories, and their labels must preserve the underlying research/formal-run distinction.
 - Dirty source provenance, data warnings, and authorization action classes are presentation facts,
   not details the renderer may suppress.
+- The general Agent API begins at a strict `AgentResearchIntent`; natural-language interpretation is
+  supplied by the integrating Agent and remains reviewable. BFBT does not embed a model vendor or
+  accept generated shell/Python as a research specification.
+- Authorization is capability-specific, expiring, and bound to one exact workflow-plan hash.
+  Acknowledging semantic or cost warnings does not authorize network, data writes, research, Event,
+  tests, or Git unless the matching action is separately granted.
+- Novel formula factors use the bounded causal expression language. The parser never calls
+  `eval`/`exec`; rolling state is per symbol and continuous segment, gaps reset history, and future
+  lags are structurally impossible.
+- Fast Matrix promotion is a human artifact, not an Agent ranking decision. Event evidence must
+  retain the selected `fm-*` identity in resolved configuration.
+- Agent explanations are data products: each fact, qualification, or warning cites admitted
+  evidence hashes. Free-form prose cannot become workflow truth without those references.
 
 ## Public identity and languages
 

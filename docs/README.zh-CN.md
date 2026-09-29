@@ -65,6 +65,8 @@
   联合区间、稀疏持仓、复杂度与可复现基准合同。
 - [`design/data_prepare_de_v1.md`](design/data_prepare_de_v1.md)：DE-v1 无副作用规划、记录式
   准备、精确快照、就绪证明和本地优先边界。
+- [`design/agent_workflow.md`](design/agent_workflow.md)：通用 Agent 意图、语义确认、授权、
+  安全表达式、人工晋级与证据交接。
 
 ## 验收记录
 
@@ -116,3 +118,5 @@
   性能证据。
 - [`acceptance/A42.md`](acceptance/A42.md)：DE-v1 确定性计划、可恢复准备、就绪、血缘与
   授权门。
+- [`acceptance/A43.md`](acceptance/A43.md)：安全因子表达式、统一预检、计划绑定授权、
+  可恢复阶段、人工晋级和证据引用。

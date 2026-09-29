@@ -33,6 +33,9 @@ Updated: 2026-09-29.
 - A42: DE-v1 exposes versioned research-data requirements, deterministic read-only plans, explicit
   network/write actions, recorded resumable preparation, exact snapshot readiness, and minimal
   lineage while reusing the existing local data layers.
+- A43: the general supervised Agent control plane provides strict natural-language intent,
+  semantic/data/backend/cost preflight, plan-bound grants, causal expression factors, resumable
+  evidence stages, human Matrix promotion, Event source checks, and claim-level citations.
 - The Quick Research registry also includes 14 source-pinned Qlib/`ta` trend and momentum factors. Exact
   source formulas remain distinct from BFBT adaptations; formula windows are literal source-bar
   counts, gaps reset history, and invalid or zero-denominator inputs fail closed.
@@ -95,6 +98,9 @@ V1 remains for compatibility and historical reproduction, not for new daily stra
 - DE-v1 A42 focused verification passed 7 tests, its Catalog/normalization regression set passed
   23 tests, and the complete offline suite passed `368 passed in 39.73s` on 2026-09-29. No network
   request, data download, research run, or formal backtest occurred.
+- A43 focused verification passed 10 tests; the combined factor/DE/Agent regression set passed 34
+  tests, and the complete offline suite passed `378 passed in 24.23s` on 2026-09-29. No model API,
+  network request, data download, research execution, or formal Event run occurred.
 
 ## Known boundaries
 
@@ -124,16 +130,17 @@ V1 remains for compatibility and historical reproduction, not for new daily stra
 
 ## AI Agent readiness
 
-- The deterministic research and Event engines, immutable identities, reports, and CLI provide a
-  strong execution foundation for supervised Agent use.
-- A general no-code Agent control plane is not implemented. The curated Showcase has a versioned
-  ResearchIntent and action classes, but there is no general safe factor-expression boundary,
-  unified research orchestrator, authorization binding service, or recorded background-job service.
+- The general supervised control plane is implemented. An external AI Agent translates natural
+  language into the public strict contract; BFBT validates ambiguity, semantics, data, backend,
+  costs, permissions, stage evidence, human promotion, and result claims.
+- BFBT deliberately does not embed a particular LLM, run generated shell/Python, automatically
+  choose Matrix candidates, or turn a plan into implicit authority.
+- The recorded workflow is a cross-stage evidence protocol. Generic PID/heartbeat/safe-cancel
+  process management remains an AG05 enhancement; DE/Event retain their existing recovery paths.
 - The durable gap register and implementation order are maintained in
   `docs/maintainer/AI_AGENT_READINESS.md`.
-- The bounded Showcase now has a strict ResearchIntent/ShowcaseSpec, ambiguity gate, action classes,
-  read-only doctor/preflight, verified evidence JSON, and a deterministic static hub. This validates
-  the interaction shape for a curated result query; it does not complete the general control plane.
+- The bounded Showcase remains a curated presentation surface; A43, not Showcase, is the general
+  Agent contract and workflow acceptance.
 
 ## Showcase surface
 

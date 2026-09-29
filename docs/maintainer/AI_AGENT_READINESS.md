@@ -1,10 +1,9 @@
 # AI Agent 介入能力与开发欠缺
 
-更新时间：2026-09-08。
+更新时间：2026-09-29。
 
-展示版会先实现受控场景下的 ResearchIntent、冻结单、只读预检和授权分类薄切片，规划见
-`SHOWCASE_PLAN.md`。这用于验证产品交互与证据链，不代表通用 AG01–AG04 已完成；只有合同、
-验收与编排能覆盖非展示场景后，才可提升下表状态。
+Showcase 保留受控展示薄切片；通用工作流现由 A43 的 `AgentResearchIntent`、冻结单、统一
+预检、授权、阶段 evidence、人工晋级和解释合同承担。两者不能互相冒充事实来源。
 
 个人研究者的数据准备目标与下一阶段见 `DATA_ENGINE_PLAN.md`。其中的
 ResearchDataRequirement、DataPlan、记录式 job 和 DataReadiness 应分别与 AG03、AG05、
@@ -51,33 +50,32 @@ Agent 产品入口。
 
 | ID | 优先级 | 状态 | 欠缺 | 完成边界 |
 |---|---|---|---|---|
-| AG01 | P0 | partial | Agent 面向的研究意图合同 | 定义版本化 `ResearchIntent`、假设、歧义、用户决定、输入/输出身份和自然语言原文 hash；能区分因子诊断、组合研究、正式回测和结果查询。Showcase v1 已覆盖受控结果查询，尚未进入通用编排。 |
-| AG02 | P0 | partial | 语义冻结与确认协议 | 把因子可用时点、方向、Rank、决策/调仓时钟、成交、仓位、成本、风险退出和期末处理生成人类可读确认单；未解决的经济歧义不得执行。Showcase v1 已有冻结页和歧义硬门。 |
-| AG03 | P0 | partial | 统一预检与行动计划 | DE-v1 已为数据覆盖、资源和授权动作提供一次性无副作用计划；后端选择、换手/成本风险和统一全链路计划仍缺。 |
-| AG04 | P0 | partial | 授权门控合同 | 将只读检查、测试、网络、下载、研究运行、正式回测、提交和外部变更编码为机器可判定的 action classes；Showcase v1 已编码分类，但尚无通用的授权 token/binding 服务。 |
+| AG01 | P0 | ready | Agent 面向的研究意图合同 | A43 的 `AgentResearchIntent` 绑定自然语言原文 hash、目标、假设、歧义、决定、数据、因子、语义、成本、输出与结果引用，可区分诊断、组合研究、正式回测和结果查询。 |
+| AG02 | P0 | ready | 语义冻结与确认协议 | 通用计划冻结因子方向、四类时钟、Rank、组合、成交、仓位、成本、风险与期末处理；歧义失败关闭，语义确认码必须进入 plan-bound grant。 |
+| AG03 | P0 | ready | 统一预检与行动计划 | A43 组合 DE-v1 数据计划、合法后端、成本拖累、资源、阶段路线、写入和全部授权动作，且规划无副作用。 |
+| AG04 | P0 | ready | 授权门控合同 | `AuthorizationGrant` 把单个动作、确认码、批准人和有效期绑定到精确 plan hash；只读、网络、下载、写入、研究、Event、测试和 Git 仍为独立类别。 |
 | AG05 | P0 | partial | 记录式后台任务服务 | DE-v1 已有 plan-hash 绑定的四步 job manifest、终态和幂等恢复；通用 PID、日志、心跳、安全取消及研究/Event 接入仍缺。 |
-| AG06 | P0 | missing | 通用因子表达入口 | 新公式目前需要修改 Python 注册表和测试。需要受限、可版本化、可静态验证的因子规格或插件协议，声明字段依赖、窗口/warmup、时点、缺口和有限值政策；默认不能执行任意 Agent 生成代码。 |
-| AG07 | P0 | partial | 端到端研究编排服务 | CLI 命令齐全但彼此偏底层，尚无从 intent 到 Quick Research、Fast Matrix、Event promotion 的统一 application service、幂等状态机和失败恢复边界。 |
+| AG06 | P0 | ready | 通用因子表达入口 | `bfbt-factor-expression/v1` 只允许白名单字段、算术、因果 lag、rolling/EMA、abs/log；禁止任意代码，按 symbol 与连续段计算，缺口重置，非有限值失败并产生内容版本。 |
+| AG07 | P0 | ready | 端到端研究编排服务 | `AgentWorkflowStore` 按 intent/plan hash 记录 Data → Quick → Matrix → 人工选择 → Event → 解释阶段，跨会话恢复已完成证据；具体计算继续委托现有确定性服务。 |
 | AG08 | P1 | ready | 数据需求规划与版本选择 | DE-v1 根据核心区间、warmup、Universe 历史、标签/执行尾部及所需事实生成覆盖计划，拒绝 `latest` 和含糊多版本，并产出精确 Snapshot 就绪证据。 |
-| AG09 | P1 | partial | 换手、成本和可行性硬门 | 已计算 Rank turnover、真实组合 turnover 与显式成本，维护规则也要求高频警告；仍缺少正式运行前统一估算费用/滑点拖累、阈值、确认和审计记录。 |
+| AG09 | P1 | ready | 换手、成本和可行性硬门 | 组合/Event 计划强制要求预估调仓换手，按调仓次数、手续费和滑点计算拖累；超过绝对或预期毛收益占比阈值时必须显式确认并进入授权记录。 |
 | AG10 | P1 | partial | 研究治理自动化 | QR-v1 和研究注册表已有稳定规则与血缘；相关性去重未实现，Fast Matrix 人工选择尚无结构化 decision artifact，Event promotion 也没有通用、可校验的来源合同。人工选择本身必须保留，不能改成黑箱自动晋级。 |
-| AG11 | P1 | partial | Agent 可消费的结果解释接口 | HTML 和 JSON/Parquet 产物丰富，但缺少稳定的结构化结果摘要、警告严重度、失败原因码、证据定位和对比 API；Agent 的结论必须能回链到 manifest/表格，而不是只读网页后自由发挥。 |
+| AG11 | P1 | ready | Agent 可消费的结果解释接口 | `AgentEvidenceSummary` 区分事实、资格说明和警告；每条 claim 强制引用已经接纳的 SHA-256 evidence，结果查询也会重新校验显式引用文件。 |
 | AG12 | P1 | missing | 安全的生成与扩展沙箱 | 需要路径白名单、资源限额、生成因子静态检查、确定性 fixture、代码评审门及禁止凭据/网络/下单依赖的自动检查。生成代码与运行研究必须是两个独立授权动作。 |
 | AG13 | P1 | partial | 部署与环境自检 | 已有 `pyproject.toml`、安装教程和单命令只读 doctor，可检查运行时、依赖、输出根、磁盘、catalog、intent、artifact、provenance 与可选端口，并提供稳定退出码和修复建议；仍缺依赖锁和完整可复现发布环境。 |
-| AG14 | P1 | partial | Agent 工作流验收 | A39 已覆盖意图 hash、歧义暂停、artifact 篡改、来源限定、doctor 只读、确定性页面和结果证据引用；缺数据规划、高换手门、后台 job、人工 promotion 等通用链路仍待补齐。 |
+| AG14 | P1 | ready | Agent 工作流验收 | A39 保留展示薄切片；A43 覆盖通用意图、歧义、数据/成本计划、受限表达式、授权、暂停恢复、证据链和人工 promotion，且完全离线。 |
 | AG15 | P2 | partial | 开源工程化配套 | 已有双版本离线 CI、MIT License、英文主 README、中文 README、贡献指南、安全政策、变更日志及 Issue/PR 模板；仍缺依赖锁、正式 release 自动化、依赖更新策略和插件兼容政策。 |
 | AG16 | P2 | missing | 多用户与配额模型 | 当前是单机本地工作区语义。若未来提供服务，需要项目/用户隔离、并发与存储配额、任务排队、审计主体和 artifact 访问控制；不能让共享服务直接沿用单用户路径假设。 |
 
 ## 推荐实施顺序
 
-1. 先实现 AG01–AG04：ResearchIntent、确认单、只读预检和授权动作合同。此时 Agent 只能
-   规划，不能自行运行。
-2. 实现 AG05 与 AG07：统一编排和后台任务状态机，把现有确定性 application service 接入，
-   不改写引擎经济语义。
-3. 实现 AG06、AG08、AG09：安全因子规格、数据覆盖规划和成本硬门，形成 Quick Research
-   与 Fast Matrix 的无代码闭环。
-4. 实现 AG10 与 AG11：保存用户人工选择并用 Event/V2 正式确认，提供可引用证据的解释接口。
-5. 用 AG12–AG14 封闭安全、部署和端到端验收，再推进 AG15–AG16 的开源生态与服务化。
+1. 将 AG05 的通用 PID、心跳、日志和安全取消作为工程增强，与已经存在的 DE/Event 恢复
+   语义复用，不建设第二套任务计算引擎。
+2. 在研究治理任务中补齐 AG10 的相关性、开发/验证/留出隔离和 purge 合同；保留已经实现的
+   人工 promotion artifact。
+3. AG12 继续补路径白名单、资源限额和扩展审查；安全表达式本身已经禁止任意代码。
+4. 最终发布阶段完成 AG13/AG15 的依赖锁、可复现安装、Release 与兼容政策。
+5. 只有出现真实共享服务需求后再规划 AG16 多用户隔离与配额。
 
 ## 不应采取的捷径
 

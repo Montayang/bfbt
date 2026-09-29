@@ -64,8 +64,9 @@ not investment advice or promises of future performance.
   resumed economic equivalence.
 - Immutable success/failure artifacts, source and dependency fingerprints, plus complete trade,
   position-change, and risk-event audit navigation.
-- A controlled natural-language research workflow for the included Showcase, with ambiguity checks,
-  read-only diagnostics, and evidence-backed results. It is not yet a general no-code service.
+- A general supervised Agent control plane with strict natural-language intent, semantic/data/cost
+  preflight, plan-bound authorization, safe causal factor expressions, human Matrix promotion, and
+  evidence-cited results. It remains model-vendor-neutral and local-first.
 - Automated offline verification on supported Python versions, covering research, execution,
   recovery, reports, and immutable evidence.
 
@@ -85,6 +86,9 @@ bfbt doctor
 Downloading real market history requires access to Binance public market-data services but no API
 key. Start with the [beginner tutorial](docs/guides/beginner_tutorial.md), then use the
 [user manual](docs/guides/user_manual.md) for complete configuration and troubleshooting.
+The Agent workflow starts from the reviewed
+[`agent_intent.example.json`](configs/agent_intent.example.json); it never turns natural language
+directly into unreviewed execution.
 
 ## Reproducibility and auditability
 

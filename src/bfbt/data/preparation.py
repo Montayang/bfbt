@@ -344,6 +344,19 @@ class DataReadiness(StrictModel):
     warnings: tuple[str, ...] = ()
     blockers: tuple[str, ...] = ()
 
+    @model_validator(mode="after")
+    def validate_terminal_state(self) -> "DataReadiness":
+        if self.status == "ready":
+            if self.snapshot is None or self.snapshot_sha256 is None:
+                raise ValueError("ready evidence requires an exact snapshot and hash")
+            if not self.coverage:
+                raise ValueError("ready evidence requires dataset coverage")
+            if self.blockers:
+                raise ValueError("ready evidence cannot retain blockers")
+        elif self.snapshot is not None or self.snapshot_sha256 is not None:
+            raise ValueError("blocked evidence cannot publish a snapshot")
+        return self
+
 
 class JobStep(StrictModel):
     ordinal: int = Field(ge=1)

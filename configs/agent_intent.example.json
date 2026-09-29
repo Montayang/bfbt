@@ -1,0 +1,68 @@
+{
+  "intent_version": "agent-research-intent/v1",
+  "user_text": "Research five-bar cross-sectional momentum on BTCUSDT and ETHUSDT.",
+  "user_text_sha256": "e4020bec10f6e828c8b606dbc50a8f769859a8ba9ff0ff08cc8e9151c5d8c0c1",
+  "objective": "portfolio_research",
+  "title": "Five-bar cross-sectional momentum",
+  "factor": {
+    "kind": "registered",
+    "name": "momentum",
+    "version": "v1",
+    "direction": "positive",
+    "parameters": {
+      "lookback_bars": 5
+    },
+    "expression": null
+  },
+  "data": {
+    "requirement_version": "research-data-requirement/v1",
+    "purpose": "fast_matrix",
+    "market": "binance_usd_m_futures",
+    "symbols": ["BTCUSDT", "ETHUSDT"],
+    "core_start": "2024-01-01T00:00:00Z",
+    "core_end": "2024-02-01T00:00:00Z",
+    "base_interval": "1m",
+    "derived_intervals": ["5m"],
+    "datasets": [{"dataset_name": "bars", "required": true, "interval": "1m"}],
+    "factor_warmup_bars": 5,
+    "universe_history_bars": 0,
+    "label_future_bars": 1,
+    "execution_tail_bars": 1,
+    "archive_frequency": "monthly",
+    "dataset_versions": [],
+    "snapshot": null,
+    "allow_current_contract_snapshot": false,
+    "intent_hash": null,
+    "unresolved": []
+  },
+  "semantics": {
+    "base_interval": "1m",
+    "factor_interval": "5m",
+    "decision_interval": "5m",
+    "rebalance_interval": "1h",
+    "signal_availability": "bar_close",
+    "fill_timing": "next_bar_open",
+    "rank_rule": "score_desc_symbol_asc",
+    "portfolio_side": "long_only",
+    "selection_rule": "top_n",
+    "selection_size": 1,
+    "sizing": "equal_weight",
+    "gross_exposure": 1.0,
+    "leverage": 1.0,
+    "risk_model": "none",
+    "terminal_handling": "force_close"
+  },
+  "costs": {
+    "fee_bps_per_side": 4.0,
+    "slippage_bps_per_side": 2.0,
+    "include_funding": true,
+    "expected_turnover_per_rebalance": 0.5,
+    "expected_gross_return_bps": null,
+    "max_acceptable_cost_share": 0.5
+  },
+  "assumptions": [],
+  "unresolved_ambiguities": [],
+  "decisions": [],
+  "requested_outputs": ["bilingual_report", "machine_summary"],
+  "result_references": []
+}

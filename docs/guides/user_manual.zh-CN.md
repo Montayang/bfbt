@@ -665,7 +665,48 @@ bfbt data status de1-PLAN_HASH_PREFIX --jobs-root data/backtest/jobs
 未决假设、浮动 `latest`、多个未指定的兼容版本和缺失历史合约状态都会失败关闭。若显式接受
 当前合约快照，其限制会继续保留在就绪警告中。
 
-## 15. 进一步文档
+## 15. 通过受监督 AI Agent 使用 BFBT
+
+AI Agent 先把用户自然语言整理为可审阅的 `AgentResearchIntent`；BFBT 不会自行猜测缺失的
+交易语义。可从
+[`configs/agent_intent.example.json`](../../configs/agent_intent.example.json) 开始：
+
+```bash
+bfbt agent schema intent
+bfbt agent validate agent-intent.json
+bfbt agent plan agent-intent.json \
+  --data-workspace data/backtest/data --language zh-CN
+bfbt agent plan agent-intent.json \
+  --data-workspace data/backtest/data --format json > workflow-plan.json
+```
+
+先审阅语义冻结、歧义、数据缺口、后端、预计成本拖累、确认码和动作类别。规划完全只读。
+创建可恢复控制面任务属于独立写入：
+
+```bash
+bfbt agent start agent-intent.json workflow-plan.json \
+  --jobs-root data/backtest/agent_jobs --allow-job-write
+bfbt agent status agent-PLAN_HASH_PREFIX \
+  --jobs-root data/backtest/agent_jobs
+```
+
+授权只能针对精确计划中真实存在的动作；确认码来自该计划，不是概括性许可：
+
+```bash
+bfbt agent authorize agent-PLAN_HASH_PREFIX research_execution \
+  --approved-by owner \
+  --acknowledge SEMANTIC_CONFIRMATION_REQUIRED,COST_DRAG_CONFIRMATION_REQUIRED \
+  --jobs-root data/backtest/agent_jobs --allow-job-write
+```
+
+Agent 在该授权下调用现有确定性服务，完成后用 `bfbt agent record` 绑定证据。正式路线在
+Fast Matrix 后暂停；用户用 `bfbt agent promotion` 保存人工选择后，才能另行授权 Event 正式
+运行。最终解释必须使用结构化证据摘要，并逐条引用已经接纳的 hash。
+
+内置因子引用精确注册版本；新公式可以使用受限因果表达式语言（`lag`、有界 rolling、EMA、
+四则运算、`abs` 和 `log`）。任意 Python、import、属性访问、未来 lag、网络与凭据均不接受。
+
+## 16. 进一步文档
 
 - `docs/acceptance/real_e2e.md`：已完成的真实全链路验收和实测数字。
 - `docs/reference/configuration.md`：全部配置字段及校验规则。

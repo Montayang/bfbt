@@ -106,6 +106,11 @@ DE-v1 在这些接口之上增加 `ResearchDataRequirement -> DataPlan -> DataRe
 经过审阅的同一 plan，并分别校验写入与网络授权。它复用 A04/A05 服务，不实现第二套下载、
 标准化或质量判断。成功结果绑定精确 DatasetSnapshot、job ID 和 lineage hash。
 
+A43 再增加 `AgentResearchIntent -> WorkflowPlan -> AuthorizationGrant -> AgentWorkflowJob`
+控制面。它不替代任何计算接口：Agent 取得对应 action grant 后调用既有确定性服务，并把
+DataReadiness、Quick summary、Matrix candidate set、人工 promotion、Event manifest 和最终
+证据摘要依次交回。每个 hand-off 都验证身份与内容 hash。
+
 ## 5. 重采样接口
 
 A06 已实现本节接口语义。实际入口 `resample_bars` 返回 `ResampleResult(frame=LazyFrame, dataset_version=...)`；不完整窗口保留并明确标记，调用方不得在因子计算中静默使用。

@@ -28,6 +28,8 @@ text; filenames, commands, schemas, and immutable identities are language-neutra
   holdings, complexity, and reproducible benchmark contract.
 - [DE-v1 data preparation](design/data_prepare_de_v1.md): read-only planning, recorded preparation,
   exact snapshots, readiness, and local-first boundaries.
+- [General Agent workflow](design/agent_workflow.md): natural-language intent contracts, semantic
+  confirmation, action grants, safe expressions, human promotion, and evidence hand-offs.
 - [Configuration reference](reference/configuration.md): fields, defaults, and validation rules.
 - [Data contract](reference/data_contract.md): fact tables, derived tables, and artifact schemas.
 - [Data management](reference/data_management.md): local layout, partitions, versions, and catalog.
@@ -47,6 +49,8 @@ text; filenames, commands, schemas, and immutable identities are language-neutra
   equivalence, and offline performance evidence.
 - [DE-v1 acceptance](acceptance/A42.md): deterministic planning, resumable preparation, readiness,
   lineage, and authorization gates.
+- [General Agent acceptance](acceptance/A43.md): safe factor expressions, unified preflight,
+  plan-bound authorization, resumable stages, human promotion, and cited evidence.
 
 ## Research and real strategy records
 

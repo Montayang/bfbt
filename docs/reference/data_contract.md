@@ -342,6 +342,16 @@ Job ID 由 plan hash 导出；成功步骤只能在同一 plan 下复用。Readi
 lineage hash、覆盖证据、质量报告 ID、研究用途与保留警告。它不授权研究运行，也不能把当前
 合约快照描述为历史事实。
 
+## Agent workflow contracts
+
+`agent-research-intent/v1` 保存自然语言原文及 hash、完整研究语义、DE-v1 requirement、成本、
+歧义、决定和输出。`agent-workflow-plan/v1` 只读地产生路线、后端、冻结单、成本门、嵌入数据
+计划及动作。`agent-authorization/v1` 将批准人、动作、确认码和有效期绑定到 plan hash。
+
+`agent-workflow-job/v1` 只记录阶段和 evidence，不保存或执行任意命令。Matrix 候选集合、
+`agent-promotion-decision/v1` 和 `agent-evidence-summary/v1` 分别固定候选边界、人工选择与逐条
+证据解释；正式 Event 必须回链选中的 Matrix run。
+
 ## A12 第二版 artifact schema
 
 A12 在不改变四张 V1 市场数据 schema 列表的前提下，增加独立 artifact registry：

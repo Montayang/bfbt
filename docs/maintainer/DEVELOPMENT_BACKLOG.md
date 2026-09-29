@@ -41,13 +41,13 @@ artifact 和各专题文档为准。
 
 ### BL04 — 通用自然语言 Agent 研究闭环
 
-- 状态：Showcase 只有受控薄切片，通用能力尚未完成。
-- 未完成：通用 ResearchIntent、语义冻结、统一预检、授权绑定、记录式后台任务、安全因子
-  规格、端到端编排、数据需求计划、成本硬门、人工 promotion artifact、结构化结果解释和
-  安全验收。
-- 顺序：AG01–AG04，之后 AG05/AG07，再做 AG06/AG08/AG09、AG10/AG11 和 AG12–AG15。
-- 事实来源：`AI_AGENT_READINESS.md`。AG16 多用户配额是条件性远期方向，不属于个人本地
-  工作流的近期完成门槛。
+- 状态：通用受监督工作流已于 2026-09-29 完成并由 A43 离线验收。
+- 已有：通用意图、语义冻结、DE-v1/后端/成本统一预检、plan-bound 授权、安全表达式因子、
+  可暂停恢复阶段、Fast Matrix 人工 promotion、Event 来源校验和逐 claim 证据摘要。
+- 保留边界：BFBT 不内置特定 LLM，不执行 Agent 生成的 shell/Python；通用进程 PID/心跳/
+  取消仍是 AG05 后续工程增强，多用户配额仍为条件性远期方向。
+- 事实来源：`docs/design/agent_workflow.md`、`docs/acceptance/A43.md` 和
+  `AI_AGENT_READINESS.md`。
 
 ### BL05 — 研究治理补强
 
@@ -110,6 +110,7 @@ Event 实测，因此一年复验只在需要声明相应容量或评估新数�
 - 1x May Event 展示 run 和 Pages 报告替换；
 - 14 个开源趋势/动量因子的代码实现与公式级验证。
 - DE-v1 数据需求、无副作用计划、记录式恢复、精确 Snapshot 就绪与最小血缘。
+- 通用受监督 AI Agent 工作流、安全因子表达式、人工晋级与证据解释。
 
 ## 5. 建议推进顺序
 

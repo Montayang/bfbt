@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 import json
-from datetime import datetime
+from datetime import datetime, timedelta, timezone
 from pathlib import Path
 from typing import Annotated, Any
 
@@ -101,6 +101,17 @@ from bfbt.showcase.models import (
     load_showcase_spec,
 )
 from bfbt.showcase.service import ShowcaseError, build_showcase, inspect_showcase
+from bfbt.agent.contracts import (
+    AgentActionClass,
+    AgentResearchIntent,
+    AgentWorkflowError,
+    AuthorizationGrant,
+    PromotionDecision,
+    WorkflowPlan,
+)
+from bfbt.agent.planner import plan_agent_workflow, render_workflow_plan
+from bfbt.agent.workflow import AgentWorkflowStore
+from bfbt.data.hashing import content_sha256
 
 
 app = typer.Typer(
@@ -127,6 +138,10 @@ performance_app = typer.Typer(
 showcase_app = typer.Typer(
     no_args_is_help=True, help="Build a verified offline research showcase."
 )
+agent_app = typer.Typer(
+    no_args_is_help=True,
+    help="Plan and record supervised natural-language research workflows.",
+)
 app.add_typer(config_app, name="config")
 app.add_typer(schema_app, name="schema")
 app.add_typer(manifest_app, name="manifest")
@@ -137,6 +152,7 @@ app.add_typer(research_app, name="research")
 app.add_typer(backtest_app, name="backtest")
 app.add_typer(performance_app, name="performance")
 app.add_typer(showcase_app, name="showcase")
+app.add_typer(agent_app, name="agent")
 
 PathOption = Annotated[Path | None, typer.Option()]
 
@@ -207,6 +223,203 @@ def _print_doctor(payload: dict[str, Any]) -> None:
         f"passed={summary['passed']} warned={summary['warned']} "
         f"failed={summary['failed']}"
     )
+
+
+def _agent_or_exit(operation):
+    try:
+        return operation()
+    except (AgentWorkflowError, ValidationError, OSError, ValueError) as exc:
+        typer.echo(f"Agent workflow error:\n{exc}", err=True)
+        raise typer.Exit(code=2) from exc
+
+
+def _load_agent_intent(path: Path) -> AgentResearchIntent:
+    return AgentResearchIntent.model_validate_json(_project_path(path).read_bytes())
+
+
+def _load_agent_plan(path: Path) -> WorkflowPlan:
+    return WorkflowPlan.model_validate_json(_project_path(path).read_bytes())
+
+
+@agent_app.command("schema")
+def agent_schema(
+    contract: Annotated[str, typer.Argument(help="intent or plan.")],
+) -> None:
+    """Print a machine-readable contract schema for an integrating Agent."""
+
+    models = {"intent": AgentResearchIntent, "plan": WorkflowPlan}
+    if contract not in models:
+        typer.echo("Agent workflow error:\ncontract must be intent or plan", err=True)
+        raise typer.Exit(code=2)
+    typer.echo(json.dumps(models[contract].model_json_schema(), indent=2, sort_keys=True))
+
+
+@agent_app.command("validate")
+def agent_validate(
+    intent: Annotated[Path, typer.Argument(help="AgentResearchIntent JSON.")],
+) -> None:
+    """Validate a structured interpretation of the user's natural language."""
+
+    value = _agent_or_exit(lambda: _load_agent_intent(intent))
+    typer.echo(f"intent_hash={value.intent_hash}")
+    typer.echo(f"executable={str(value.executable).lower()}")
+    for item in value.unresolved_ambiguities:
+        typer.echo(f"ambiguity={item}")
+
+
+@agent_app.command("plan")
+def agent_plan(
+    intent: Annotated[Path, typer.Argument(help="AgentResearchIntent JSON.")],
+    data_workspace: Annotated[
+        Path, typer.Option(help="Local DE-v1 data workspace.")
+    ] = Path("data/backtest/data"),
+    format: Annotated[str, typer.Option(help="json or human.")] = "human",
+    language: Annotated[str, typer.Option(help="en or zh-CN.")] = "en",
+) -> None:
+    """Build a side-effect-free workflow, capability, cost, and data plan."""
+
+    def operation():
+        value = plan_agent_workflow(
+            _load_agent_intent(intent),
+            data_workspace=DataWorkspace(_project_path(data_workspace)),
+        )
+        if format == "json":
+            return json.dumps(
+                value.model_dump(mode="json"), ensure_ascii=False,
+                indent=2, sort_keys=True,
+            ) + "\n"
+        if format == "human":
+            return render_workflow_plan(value, language) + "\n"
+        raise AgentWorkflowError("format must be json or human")
+
+    typer.echo(_agent_or_exit(operation), nl=False)
+
+
+@agent_app.command("start")
+def agent_start(
+    intent: Annotated[Path, typer.Argument(help="AgentResearchIntent JSON.")],
+    plan: Annotated[Path, typer.Argument(help="Reviewed WorkflowPlan JSON.")],
+    jobs_root: Annotated[
+        Path, typer.Option(help="Recorded Agent job directory.")
+    ] = Path("data/backtest/agent_jobs"),
+    allow_job_write: Annotated[
+        bool, typer.Option("--allow-job-write", help="Approve control-plane job writes.")
+    ] = False,
+) -> None:
+    """Create or resume a recorded workflow; this never runs a research stage."""
+
+    job = _agent_or_exit(lambda: AgentWorkflowStore(
+        _project_path(jobs_root)
+    ).create(
+        _load_agent_intent(intent), _load_agent_plan(plan),
+        allow_job_write=allow_job_write,
+    ))
+    typer.echo(json.dumps(job.model_dump(mode="json"), indent=2, sort_keys=True))
+
+
+@agent_app.command("authorize")
+def agent_authorize(
+    job_id: Annotated[str, typer.Argument(help="Recorded Agent job ID.")],
+    action: Annotated[str, typer.Argument(help="Exact action class from the plan.")],
+    approved_by: Annotated[str, typer.Option(help="Auditable approving identity.")],
+    jobs_root: Annotated[
+        Path, typer.Option(help="Recorded Agent job directory.")
+    ] = Path("data/backtest/agent_jobs"),
+    valid_hours: Annotated[int, typer.Option(min=1, max=720)] = 24,
+    acknowledge: Annotated[
+        str, typer.Option(help="Comma-separated plan confirmation codes.")
+    ] = "",
+    note: Annotated[str, typer.Option()] = "",
+    allow_job_write: Annotated[
+        bool, typer.Option("--allow-job-write", help="Approve authorization-record write.")
+    ] = False,
+) -> None:
+    """Bind one explicit action authorization to the exact plan hash."""
+
+    def operation():
+        store = AgentWorkflowStore(_project_path(jobs_root))
+        job = store.load(job_id)
+        issued = datetime.now(timezone.utc)
+        grant = AuthorizationGrant(
+            plan_hash=job.plan_hash,
+            action_class=AgentActionClass(action),
+            approved_by=approved_by,
+            issued_at=issued,
+            expires_at=issued + timedelta(hours=valid_hours),
+            acknowledgement_codes=tuple(
+                sorted({item.strip() for item in acknowledge.split(",") if item.strip()})
+            ),
+            note=note,
+        )
+        return store.authorize(job_id, grant, allow_job_write=allow_job_write)
+
+    job = _agent_or_exit(operation)
+    typer.echo(json.dumps(job.model_dump(mode="json"), indent=2, sort_keys=True))
+
+
+@agent_app.command("status")
+def agent_status(
+    job_id: Annotated[str, typer.Argument(help="Recorded Agent job ID.")],
+    jobs_root: Annotated[
+        Path, typer.Option(help="Recorded Agent job directory.")
+    ] = Path("data/backtest/agent_jobs"),
+) -> None:
+    """Inspect the next required authorization, decision, or evidence without polling."""
+
+    job = _agent_or_exit(lambda: AgentWorkflowStore(
+        _project_path(jobs_root)
+    ).refresh(job_id))
+    typer.echo(json.dumps(job.model_dump(mode="json"), indent=2, sort_keys=True))
+
+
+@agent_app.command("record")
+def agent_record(
+    job_id: Annotated[str, typer.Argument(help="Recorded Agent job ID.")],
+    evidence: Annotated[Path, typer.Argument(help="Verified stage evidence file.")],
+    jobs_root: Annotated[
+        Path, typer.Option(help="Recorded Agent job directory.")
+    ] = Path("data/backtest/agent_jobs"),
+    allow_job_write: Annotated[
+        bool, typer.Option("--allow-job-write", help="Approve evidence-record write.")
+    ] = False,
+) -> None:
+    """Verify and attach evidence for only the current workflow stage."""
+
+    job = _agent_or_exit(lambda: AgentWorkflowStore(
+        _project_path(jobs_root)
+    ).record_evidence(
+        job_id, _project_path(evidence), allow_job_write=allow_job_write
+    ))
+    typer.echo(json.dumps(job.model_dump(mode="json"), indent=2, sort_keys=True))
+
+
+@agent_app.command("promotion")
+def agent_promotion(
+    plan: Annotated[Path, typer.Argument(help="Reviewed WorkflowPlan JSON.")],
+    matrix_run_id: Annotated[str, typer.Argument(help="Human-selected fm-* run ID.")],
+    event_overrides: Annotated[Path, typer.Argument(help="Reviewed Event override JSON.")],
+    rationale: Annotated[str, typer.Option(help="Why the user selected this candidate.")],
+    decided_by: Annotated[str, typer.Option(help="Auditable human decision identity.")],
+) -> None:
+    """Create a structured human promotion decision; output is written only by redirection."""
+
+    def operation():
+        workflow = _load_agent_plan(plan)
+        overrides = json.loads(_project_path(event_overrides).read_text(encoding="utf-8"))
+        decision = PromotionDecision(
+            plan_hash=workflow.plan_hash,
+            selected_matrix_run_id=matrix_run_id,
+            rationale=rationale,
+            decided_by=decided_by,
+            decided_at=datetime.now(timezone.utc),
+            event_overrides_sha256=content_sha256(overrides),
+        )
+        return json.dumps(
+            decision.model_dump(mode="json"), ensure_ascii=False,
+            indent=2, sort_keys=True,
+        )
+
+    typer.echo(_agent_or_exit(operation))
 
 
 @config_app.command("validate")

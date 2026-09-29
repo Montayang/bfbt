@@ -479,7 +479,53 @@ Plans reject unresolved assumptions, floating `latest`, ambiguous compatible ver
 historical contract state. Accepting a current contract snapshot is explicit and remains visible as
 a readiness warning.
 
-## 15. Further reading
+## 15. Use BFBT through a supervised AI Agent
+
+An AI Agent starts from the user's natural language and produces a reviewed
+`AgentResearchIntent`; BFBT itself does not guess missing trading semantics. Start from
+[`configs/agent_intent.example.json`](../../configs/agent_intent.example.json):
+
+```bash
+bfbt agent schema intent
+bfbt agent validate agent-intent.json
+bfbt agent plan agent-intent.json \
+  --data-workspace data/backtest/data --language en
+bfbt agent plan agent-intent.json \
+  --data-workspace data/backtest/data --format json > workflow-plan.json
+```
+
+Review the semantic freeze, ambiguities, data gaps, backend, estimated trading drag, confirmation
+codes, and action classes. Planning is read-only. Creating a resumable control-plane job is a
+separate write:
+
+```bash
+bfbt agent start agent-intent.json workflow-plan.json \
+  --jobs-root data/backtest/agent_jobs --allow-job-write
+bfbt agent status agent-PLAN_HASH_PREFIX \
+  --jobs-root data/backtest/agent_jobs
+```
+
+Grant only an action actually required by the exact plan. Confirmations are comma-separated plan
+codes, not a blanket approval:
+
+```bash
+bfbt agent authorize agent-PLAN_HASH_PREFIX research_execution \
+  --approved-by owner \
+  --acknowledge SEMANTIC_CONFIRMATION_REQUIRED,COST_DRAG_CONFIRMATION_REQUIRED \
+  --jobs-root data/backtest/agent_jobs --allow-job-write
+```
+
+The Agent executes the existing deterministic service under that authorization and later attaches
+its evidence with `bfbt agent record`. A formal route pauses after Fast Matrix. The user creates a
+promotion decision with `bfbt agent promotion`; only then may a separately authorized Event run
+begin. Final explanations must use the structured evidence-summary schema and cite admitted hashes.
+
+Built-in factors are referenced by exact registry version. New formula-only factors may use the
+restricted causal expression language (`lag`, bounded rolling functions, EMA, arithmetic, `abs`,
+and `log`); arbitrary Python, imports, attributes, future lags, network calls, and credentials are
+not accepted.
+
+## 16. Further reading
 
 - [Real end-to-end acceptance](../acceptance/real_e2e.md)
 - [Configuration reference](../reference/configuration.md)

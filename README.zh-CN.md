@@ -59,8 +59,8 @@ Fast Matrix 评估选定组合计入成本后的路径，Event 引擎则把候�
 - 全市场分钟级 bounded-memory chunk、原子 checkpoint、失败恢复和连续/恢复经济等价。
 - 不可变成功/失败 artifact、源码与依赖指纹、双语交互报告，以及完整成交、持仓变化和风险
   事件导航。
-- Showcase 提供受控的自然语言研究工作流，包含歧义检查、只读诊断和可追溯结果；目前还不是
-  通用无代码服务。
+- 通用受监督 Agent 控制面提供严格自然语言意图、语义/数据/成本预检、计划绑定授权、安全
+  因果表达式、Fast Matrix 人工晋级和逐条证据解释；保持模型厂商中立与本地优先。
 - 自动化离线验证覆盖研究、执行、恢复、报告和不可变证据，并在支持的 Python 版本上运行。
 
 ## 安装
@@ -80,6 +80,9 @@ bfbt doctor
 和第一份真实小样本回测见
 [`beginner_tutorial.zh-CN.md`](docs/guides/beginner_tutorial.zh-CN.md)；完整配置与故障排查见
 [`user_manual.zh-CN.md`](docs/guides/user_manual.zh-CN.md)。
+Agent 工作流从经过审阅的
+[`agent_intent.example.json`](configs/agent_intent.example.json) 开始，不会把自然语言直接变成
+未经审阅的执行。
 
 ## 可复现与可审计
 
@@ -95,8 +98,7 @@ bfbt doctor
 - 实盘账户、余额、订单、API key 或 `.env` 访问。
 - 交易所完整强平阶梯、ADL、订单簿排队和 tick 级成交。
 - Agent 自动替用户选择 Fast Matrix 候选。
-- 任意 LLM 生成 Python、shell 或因子表达式的直接执行。
-- 当前 Showcase 的 ResearchIntent 是受控薄切片，不等于通用无代码 Agent 平台已经完成。
+- 任意 LLM 生成 Python、shell 或白名单之外表达式的直接执行。
 
 ## 从这里开始
 

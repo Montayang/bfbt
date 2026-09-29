@@ -4,6 +4,13 @@ Updated: 2026-09-29.
 
 ## Current state
 
+- The general supervised Agent workflow is implemented on `codex/general-agent-workflow`: strict
+  original-text-bound intent, semantic/data/backend/cost planning, plan-bound expiring grants,
+  causal expression factors, resumable evidence hand-offs, human Matrix selection, Event source
+  validation, and claim-level citations. A43 focused verification passes 10 tests, the combined
+  factor/DE/Agent set passes 34, and the complete suite passes 378 tests in 24.23 seconds. No model
+  API, network, market download, real research, or formal backtest was invoked.
+
 - DE-v1 is implemented on `codex/data-prepare-de-v1`: a versioned requirement expands core dates by
   warmup and future tails; `data plan/inspect` is deterministic and side-effect-free; `data prepare`
   records resumable acquire/normalize/snapshot/readiness steps and publishes exact lineage evidence.
