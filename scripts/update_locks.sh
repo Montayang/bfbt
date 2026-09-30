@@ -25,12 +25,14 @@ ACTUAL="$(${UV} --version | awk '{print $2}')"
 }
 
 ${UV} pip compile pyproject.toml requirements/bootstrap.in \
+  --python-version 3.10 \
   --universal \
   --generate-hashes \
   --custom-compile-command 'scripts/update_locks.sh' \
   --output-file requirements/runtime.lock
 
 ${UV} pip compile pyproject.toml requirements/bootstrap.in \
+  --python-version 3.10 \
   --extra test \
   --extra release \
   --universal \

@@ -112,6 +112,7 @@ def test_repository_release_automation_and_public_policies_are_wired() -> None:
     release = (ROOT / ".github/workflows/release.yml").read_text(encoding="utf-8")
     dependabot = (ROOT / ".github/dependabot.yml").read_text(encoding="utf-8")
     installer = (ROOT / "scripts/install_ubuntu.sh").read_text(encoding="utf-8")
+    lock_script = (ROOT / "scripts/update_locks.sh").read_text(encoding="utf-8")
     assert "requirements/dev.lock" in tests
     assert "--require-hashes" in tests
     assert "actions/checkout@v" not in tests
@@ -130,6 +131,7 @@ def test_repository_release_automation_and_public_policies_are_wired() -> None:
     assert "interval: weekly" in dependabot
     assert "--require-hashes -r requirements/runtime.lock" in installer
     assert "--no-deps --no-build-isolation -e ." in installer
+    assert lock_script.count("--python-version 3.10") == 2
 
     for workflow in (ROOT / ".github/workflows").glob("*.yml"):
         contents = workflow.read_text(encoding="utf-8")

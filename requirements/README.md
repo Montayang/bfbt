@@ -1,8 +1,8 @@
 # Reproducible dependency environments
 
 `runtime.lock` is the end-user environment. `dev.lock` adds the `test` and `release` extras. Both
-files are universal Python 3.10–3.12, hash-checked requirements generated from `pyproject.toml` and
-`bootstrap.in`; do not edit them by hand.
+files are universal Python 3.10–3.12, hash-checked requirements resolved from the Python 3.10
+compatibility floor in `pyproject.toml` and `bootstrap.in`; do not edit them by hand.
 
 The exact generator version and SHA-256 identities are recorded in `lock-manifest.json`. Validate
 the committed state without network access:
