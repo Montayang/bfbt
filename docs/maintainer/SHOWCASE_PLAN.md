@@ -51,8 +51,9 @@ Simplified-Chinese HTML variants. Remaining presentation boundaries are explicit
 - A fresh checkout does not include real market data or immutable H2 runs; the committed preview,
   contracts, renderer, and deterministic fixtures remain reproducible offline.
 - The retained H2 evidence records `git_dirty=true` and must continue to display that qualification.
-- Package installation and wheel contents are verified. A dependency lock, release automation,
-  dependency-update policy, and plugin compatibility policy are not yet implemented.
+- Package installation and wheel contents are verified. The later A44 work has also completed
+  hash-locked installation, release automation, dependency-update policy, and extension
+  compatibility policy; these remain separate from Showcase result evidence.
 - Six self-contained report examples are now published through GitHub Pages from `main`: English
   and Simplified-Chinese Quick Research, Fast Matrix and Event Engine reports. The root and
   Showcase READMEs link to the live pages.
@@ -160,8 +161,8 @@ general contracts and supervised end-to-end workflow; current readiness status i
 - Add a small architecture image or repository-native diagram and two screenshots generated from
   the showcase hub. Screenshots are documentation assets, not result truth.
 - Add minimal `CONTRIBUTING.md`, `SECURITY.md`, and `CHANGELOG.md` before sharing the repository link.
-  A dependency lock, release automation, dependency-update policy, and plugin compatibility policy
-  remain part of the later engineering-grade open-source phase.
+  The dependency lock, release automation, update policy, and extension compatibility policy were
+  subsequently completed under A44.
 
 ### SC07 — Clean evidence decision
 
@@ -213,12 +214,13 @@ link. S6 is strongly preferred for an external or recorded presentation.
 ## Explicitly deferred
 
 - General-purpose natural-language parsing inside `bfbt`.
-- Arbitrary factor DSL/plugins and generated-code execution.
+- Third-party runtime plugin loading and unreviewed generated-code execution.
 - A production background-job daemon, queue, cancellation service, or multi-user quotas.
 - Automatic Fast Matrix candidate selection; the user remains the promotion decision maker.
 - Dynamic cloud services, authentication, account connectivity, live trading, or exchange order
   simulation. Static GitHub Pages report examples are the sole hosted surface in this phase.
-- Full AG01–AG16 completion and full engineering-grade open-source release automation.
+- Full AG01–AG16 completion; AG05, AG10, AG12 and AG16 remain separately scoped gaps. A44 later
+  completed the engineering-grade open-source release automation.
 
 ## Decisions needed before implementation
 

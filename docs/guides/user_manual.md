@@ -18,8 +18,9 @@ BFBT is an offline research system, not a live-order application.
 - It supports point-in-time universes, registered cross-sectional factors, diagnostics, long/short
   portfolios, next-bar fills, fees, slippage, funding, mark valuation, chunked execution, and
   immutable publication.
-- Download, normalization, and Catalog commands are available, but a project preparation script is
-  still responsible for combining custom partitions into an exact `DatasetSnapshotManifest`.
+- DE-v1 turns a versioned `ResearchDataRequirement` into a side-effect-free coverage plan, a
+  separately authorized resumable preparation job, exact Snapshot readiness, and lineage evidence.
+  Lower-level download, normalization, and Catalog commands remain available for maintainers.
 - Full-market annual runs are capacity workloads, not the normal path on a low-memory machine.
 
 Historical simulation is not investment advice or evidence of future performance.
@@ -55,8 +56,8 @@ right-open semantics: `[start, end)`. Supply `Z` or an explicit UTC offset.
 cd /path/to/bfbt
 python3 -m venv .venv
 source .venv/bin/activate
-python -m pip install --upgrade pip
-python -m pip install -e ".[test]"
+python -m pip install --require-hashes -r requirements/runtime.lock
+python -m pip install --no-deps --no-build-isolation -e .
 bfbt --help
 ```
 

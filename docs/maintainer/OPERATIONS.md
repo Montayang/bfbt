@@ -98,3 +98,17 @@ orders, or silent expansion from research into a formal Event run. See
 
 Never force-push, rewrite immutable results, or modify another system as an implied part of a
 backtest task.
+
+## Dependency and release operations
+
+- Validate the committed dependency state offline with
+  `.venv/bin/python scripts/release_tools.py check-lock`.
+- Regenerating locks is a deliberate networked maintenance operation using the exact `uv` version
+  in `requirements/lock-manifest.json`; review the complete diff and never edit a generated lock by
+  hand.
+- A release requires matching versions in `pyproject.toml` and `bfbt.__version__`, dated English and
+  Chinese changelog sections, a clean merged `main`, and an owner-created annotated or signed tag.
+- The tag workflow is the package/release gate; it does not create tags, publish to PyPI, download
+  market data, or modify immutable research artifacts.
+- Never move or delete a published release tag. Publish a corrective patch release and retain the
+  original evidence. Full procedure: `docs/reference/open_source_release.md`.

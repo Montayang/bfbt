@@ -49,8 +49,8 @@ if [[ ! -x .venv/bin/python ]]; then
 fi
 
 echo "Installing BFBT and its runtime dependencies..."
-.venv/bin/python -m pip install --upgrade pip setuptools wheel
-.venv/bin/python -m pip install -e .
+.venv/bin/python -m pip install --require-hashes -r requirements/runtime.lock
+.venv/bin/python -m pip install --no-deps --no-build-isolation -e .
 
 mkdir -p \
   data/backtest/catalogs \

@@ -36,6 +36,10 @@ text; filenames, commands, schemas, and immutable identities are language-neutra
 - [Data contract](reference/data_contract.md): fact tables, derived tables, and artifact schemas.
 - [Data management](reference/data_management.md): local layout, partitions, versions, and catalog.
 - [Interfaces](reference/interfaces.md): public module responsibilities and boundaries.
+- [Open-source release policy](reference/open_source_release.md): locked environments, dependency
+  updates, versioning, tags, distribution gates, and GitHub Releases.
+- [Extension compatibility policy](reference/extension_policy.md): supported extension paths,
+  stable contracts, security boundaries, and the current no-plugin-loader decision.
 
 ## Verification and audit evidence
 
@@ -53,6 +57,8 @@ text; filenames, commands, schemas, and immutable identities are language-neutra
   lineage, and authorization gates.
 - [General Agent acceptance](acceptance/A43.md): safe factor expressions, unified preflight,
   plan-bound authorization, resumable stages, human promotion, and cited evidence.
+- [Open-source release acceptance](acceptance/A44.md): lock integrity, tag/version equality,
+  package content, checksums, dependency updates, and release automation.
 
 ## Research and real strategy records
 

@@ -51,6 +51,10 @@
 - [`reference/data_management.md`](reference/data_management.md)：本地目录、分区、版本和 Catalog 管理。
 - [`reference/interfaces.md`](reference/interfaces.md)：模块接口和职责边界。
 - [`reference/dependencies_and_sources.md`](reference/dependencies_and_sources.md)：依赖包、Binance 数据源和公开接口。
+- [`reference/open_source_release.zh-CN.md`](reference/open_source_release.zh-CN.md)：依赖锁、更新
+  政策、版本、tag、构建门和 GitHub Release 流程。
+- [`reference/extension_policy.zh-CN.md`](reference/extension_policy.zh-CN.md)：当前支持的扩展
+  路线、兼容面、安全边界和暂不提供通用插件加载器的决定。
 
 ## 架构设计
 
@@ -122,3 +126,5 @@
   授权门。
 - [`acceptance/A43.md`](acceptance/A43.md)：安全因子表达式、统一预检、计划绑定授权、
   可恢复阶段、人工晋级和证据引用。
+- [`acceptance/A44.md`](acceptance/A44.md)：锁文件完整性、tag/版本一致性、分发包内容、校验和、
+  依赖更新与 Release 自动化。

@@ -1,6 +1,6 @@
 # AI Agent 介入能力与开发欠缺
 
-更新时间：2026-09-29。
+更新时间：2026-09-30。
 
 Showcase 保留受控展示薄切片；通用工作流现由 A43 的 `AgentResearchIntent`、冻结单、统一
 预检、授权、阶段 evidence、人工晋级和解释合同承担。两者不能互相冒充事实来源。
@@ -62,9 +62,9 @@ Agent 产品入口。
 | AG10 | P1 | partial | 研究治理自动化 | QR-v1 和研究注册表已有稳定规则与血缘；A43 已提供 Fast Matrix 人工选择 decision artifact 与可校验 Event 来源合同。相关性去重、开发/验证/留出隔离和标签 horizon purge 尚未实现。人工选择本身必须保留，不能改成黑箱自动晋级。 |
 | AG11 | P1 | ready | Agent 可消费的结果解释接口 | `AgentEvidenceSummary` 区分事实、资格说明和警告；每条 claim 强制引用已经接纳的 SHA-256 evidence，结果查询也会重新校验显式引用文件。 |
 | AG12 | P1 | missing | 安全的生成与扩展沙箱 | 需要路径白名单、资源限额、生成因子静态检查、确定性 fixture、代码评审门及禁止凭据/网络/下单依赖的自动检查。生成代码与运行研究必须是两个独立授权动作。 |
-| AG13 | P1 | partial | 部署与环境自检 | 已有 `pyproject.toml`、安装教程和单命令只读 doctor，可检查运行时、依赖、输出根、磁盘、catalog、intent、artifact、provenance 与可选端口，并提供稳定退出码和修复建议；仍缺依赖锁和完整可复现发布环境。 |
+| AG13 | P1 | ready | 部署与环境自检 | A44 增加 Python 3.10–3.12 通用 hash 锁、精确生成器与输入/输出 manifest、严格锁定安装和全新环境验收；结合现有 `bfbt doctor`，安装与本地就绪合同完整。 |
 | AG14 | P1 | ready | Agent 工作流验收 | A39 保留展示薄切片；A43 覆盖通用意图、歧义、数据/成本计划、受限表达式、授权、暂停恢复、证据链和人工 promotion，且完全离线。 |
-| AG15 | P2 | partial | 开源工程化配套 | 已有双版本离线 CI、MIT License、英文主 README、中文 README、贡献指南、安全政策、变更日志及 Issue/PR 模板；仍缺依赖锁、正式 release 自动化、依赖更新策略和插件兼容政策。 |
+| AG15 | P2 | ready | 开源工程化配套 | A44 在既有双版本 CI、MIT 与双语公共入口上增加固定 SHA 的 Actions、review-only 依赖更新、tag/version/changelog/package 门、GitHub Release 自动化、checksum 和双语扩展兼容政策。 |
 | AG16 | P2 | missing | 多用户与配额模型 | 当前是单机本地工作区语义。若未来提供服务，需要项目/用户隔离、并发与存储配额、任务排队、审计主体和 artifact 访问控制；不能让共享服务直接沿用单用户路径假设。 |
 
 ## 推荐实施顺序
@@ -74,8 +74,7 @@ Agent 产品入口。
 2. 在研究治理任务中补齐 AG10 的相关性、开发/验证/留出隔离和 purge 合同；保留已经实现的
    人工 promotion artifact。
 3. AG12 继续补路径白名单、资源限额和扩展审查；安全表达式本身已经禁止任意代码。
-4. 最终发布阶段完成 AG13/AG15 的依赖锁、可复现安装、Release 与兼容政策。
-5. 只有出现真实共享服务需求后再规划 AG16 多用户隔离与配额。
+4. 只有出现真实共享服务需求后再规划 AG16 多用户隔离与配额。
 
 ## 不应采取的捷径
 

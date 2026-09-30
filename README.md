@@ -85,7 +85,8 @@ bash scripts/install_ubuntu.sh
 
 The [`scripts/install_ubuntu.sh`](scripts/install_ubuntu.sh) helper installs only local runtime
 dependencies and creates ignored workspace directories. It does not download market data or start
-a backtest. Non-programmers should follow the complete
+a backtest. Runtime dependencies are installed from a version- and hash-locked environment;
+installation fails instead of silently resolving different packages. Non-programmers should follow the complete
 [server and AI Agent guide](docs/guides/ai_agent_guide.md).
 
 For a manual installation on another supported system:
@@ -93,8 +94,8 @@ For a manual installation on another supported system:
 ```bash
 python3 -m venv .venv
 source .venv/bin/activate
-python -m pip install --upgrade pip
-python -m pip install -e ".[test]"
+python -m pip install --require-hashes -r requirements/runtime.lock
+python -m pip install --no-deps --no-build-isolation -e .
 bfbt --help
 bfbt doctor
 ```
@@ -149,6 +150,10 @@ not duplicated. Compatibility entry pages default to English and link to the Chi
 - [Self-guided report tour](showcase/README.md): understand and explore the three report layers.
 - [Documentation map](docs/README.md): architecture, data contracts, research records, and
   contributor references.
+- [Release and dependency policy](docs/reference/open_source_release.md): locked installs,
+  dependency updates, version tags, and GitHub Release artifacts.
+- [Extension compatibility policy](docs/reference/extension_policy.md): supported factor and Agent
+  integration surfaces, stability boundaries, and unsupported plugin behavior.
 
 ## License, contribution, and security
 

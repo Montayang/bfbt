@@ -91,7 +91,9 @@ resolve dataset → build universe → compute factor/labels
 
 ## 目标包结构
 
-A01–A10 已实现并通过本地功能验收；A10 真实一年全市场容量仍需在用户目标机器验收。
+A01–A10 是最初的基础验收序列；后续能力及当前验证基线以
+[`CURRENT_STATE.md`](../maintainer/CURRENT_STATE.md) 为准。A10 真实一年全市场容量仍需在
+用户目标机器按需复验。
 
 ```text
 src/bfbt/

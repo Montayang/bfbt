@@ -21,6 +21,9 @@ BFBT keeps a behavior-oriented changelog. Release dates use UTC.
   preparation, exact snapshot readiness, and minimal lineage with A42 offline acceptance.
 - General supervised Agent contracts, causal expression factors, semantic/cost preflight,
   plan-bound grants, resumable evidence hand-offs, human promotion, and A43 acceptance.
+- Hash-locked runtime/development environments, offline release-contract tooling, tag-triggered
+  GitHub Release automation, reviewed dependency updates, bilingual release/extension policies,
+  and A44 acceptance.
 
 ### Changed
 

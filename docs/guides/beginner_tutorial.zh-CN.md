@@ -85,8 +85,8 @@ bfbt --help
 ```bash
 python3 -m venv .venv
 source .venv/bin/activate
-python -m pip install --upgrade pip
-python -m pip install -e ".[test]"
+python -m pip install --require-hashes -r requirements/runtime.lock
+python -m pip install --no-deps --no-build-isolation -e .
 bfbt --help
 ```
 

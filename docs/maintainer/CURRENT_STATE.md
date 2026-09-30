@@ -1,6 +1,6 @@
 # Current project state
 
-Updated: 2026-09-29.
+Updated: 2026-09-30.
 
 ## Repository identity
 
@@ -36,6 +36,10 @@ Updated: 2026-09-29.
 - A43: the general supervised Agent control plane provides strict natural-language intent,
   semantic/data/backend/cost preflight, plan-bound grants, causal expression factors, resumable
   evidence stages, human Matrix promotion, Event source checks, and claim-level citations.
+- A44: hash-locked universal runtime/development environments, immutable GitHub Action references,
+  reviewed dependency updates, tag-gated GitHub Releases, inspected wheel/sdist/checksums, and
+  explicit bilingual release and extension-compatibility policies complete the open-source
+  packaging contract.
 - The Quick Research registry also includes 14 source-pinned Qlib/`ta` trend and momentum factors. Exact
   source formulas remain distinct from BFBT adaptations; formula windows are literal source-bar
   counts, gaps reset history, and invalid or zero-denominator inputs fail closed.
@@ -101,6 +105,11 @@ V1 remains for compatibility and historical reproduction, not for new daily stra
 - A43 focused verification passed 10 tests; the combined factor/DE/Agent regression set passed 34
   tests, and the complete offline suite passed `378 passed in 24.23s` on 2026-09-29. No model API,
   network request, data download, research execution, or formal Event run occurred.
+- A44 focused verification passed 3 tests and the complete offline suite passed
+  `381 passed in 23.78s` on 2026-09-30. Fresh hash-locked runtime and release environments,
+  editable and wheel-installed CLI startup, warning-free wheel/sdist construction, Twine metadata,
+  archive contents and SHA-256 checksums were verified. Dependency packages were downloaded only
+  for this packaging acceptance; no market data, research run or formal Event run occurred.
 
 ## Known boundaries
 
@@ -158,7 +167,7 @@ V1 remains for compatibility and historical reproduction, not for new daily stra
   economic identity match the ResearchIntent before rendering.
 - The initial H2 three-month Showcase exposes all dirty-provenance and funding-warning qualifications,
   includes loss and profit months, and derives opening margin directly from verified trades.
-- The English repository front door and standalone Chinese README reflect A01-A40 and include CI,
+- The English repository front door and standalone Chinese README reflect A01-A44 and include CI,
   contribution, security, changelog, MIT license, and Binance-independence disclosures.
 - English-first contribution, security, changelog, documentation-map, and Showcase-preview surfaces
   link to independent Simplified-Chinese counterparts where applicable.

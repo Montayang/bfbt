@@ -77,7 +77,8 @@ bash scripts/install_ubuntu.sh
 ```
 
 [`scripts/install_ubuntu.sh`](scripts/install_ubuntu.sh) 只安装本地运行依赖并创建被 Git
-忽略的工作目录，不会下载行情或启动回测。完全不会编程的用户请阅读完整的
+忽略的工作目录，不会下载行情或启动回测。运行依赖使用固定版本和 hash 的锁文件；无法精确
+安装时会停止，不会静默解析另一套依赖。完全不会编程的用户请阅读完整的
 [Linux 服务器与 AI Agent 指南](docs/guides/ai_agent_guide.zh-CN.md)。
 
 在其他受支持环境中手工安装时：
@@ -85,8 +86,8 @@ bash scripts/install_ubuntu.sh
 ```bash
 python3 -m venv .venv
 source .venv/bin/activate
-python -m pip install --upgrade pip
-python -m pip install -e ".[test]"
+python -m pip install --require-hashes -r requirements/runtime.lock
+python -m pip install --no-deps --no-build-isolation -e .
 bfbt --help
 bfbt doctor
 ```
@@ -126,6 +127,10 @@ bfbt doctor
 - [自定义因子教程](docs/guides/custom_factor_tutorial.zh-CN.md)：添加并研究新的截面因子。
 - [三层报告自助导览](showcase/README.zh-CN.md)：理解并探索三层报告。
 - [文档导航](docs/README.zh-CN.md)：架构、数据合同、研究记录和开发者资料。
+- [发布与依赖政策](docs/reference/open_source_release.zh-CN.md)：锁定安装、依赖更新、版本 tag
+  和 GitHub Release 产物。
+- [扩展兼容政策](docs/reference/extension_policy.zh-CN.md)：受支持的因子与 Agent 集成面、
+  稳定性边界和不受支持的插件行为。
 
 ## 参与和安全
 

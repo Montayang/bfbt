@@ -3,8 +3,8 @@
 [English](user_manual.md)
 
 本文面向需要在本地使用 Binance USDⓈ-M 永续合约数据进行截面因子研究和正式
-回测的用户。当前版本号为 `0.1.0`，A01–A10 功能已经实现，并已用 8 个真实合约、
-真实 1 分钟行情和资金费率完成全链路验收。
+回测的用户。系统覆盖数据准备、Quick Research、Fast Matrix 与 Event 正式回测；各层均
+保留精确输入、配置、源码、依赖和结果身份。
 
 ## 1. 先了解边界
 
@@ -16,9 +16,9 @@ bfbt 是离线研究系统，不是实盘下单程序：
 - 基础事实数据为 1m trade bars、mark bars、funding 和 contracts；可派生更高周期。
 - 支持时点化合约池、内建截面因子、研究诊断、多空组合、下一根 K 线成交、
   手续费、滑点、资金费率、mark 估值、分块运行和不可变结果发布。
-- 当前没有“任意范围一条命令完成下载到 DatasetSnapshot”的通用命令。下载、
-  标准化和 Catalog CLI 已实现，但自定义数据集仍需准备脚本组合分区并生成
-  `DatasetSnapshotManifest`。现有真实小样本准备器可作为模板。
+- DE-v1 可把版本化 `ResearchDataRequirement` 转换成无副作用覆盖计划、需单独授权且可恢复
+  的准备任务、精确 Snapshot 就绪结果和血缘证据；维护者仍可直接使用下载、标准化和
+  Catalog 底层命令。
 - 一年全市场属于容量验收，不是当前低内存服务器的日常流程。
 
 ## 2. 核心概念
@@ -56,8 +56,8 @@ Binance archive/REST
 cd /path/to/bfbt
 python3 -m venv .venv
 source .venv/bin/activate
-python -m pip install --upgrade pip
-python -m pip install -e ".[test]"
+python -m pip install --require-hashes -r requirements/runtime.lock
+python -m pip install --no-deps --no-build-isolation -e .
 bfbt --help
 ```
 

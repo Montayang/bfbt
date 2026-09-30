@@ -11,14 +11,20 @@
 2. 在 issue 或变更说明中冻结行为、数据/配置身份和兼容边界。
 3. 通用能力进入 `src/bfbt/`；真实策略规格与 run 映射进入 `strategies/`。
 4. 同时更新聚焦测试、验收文档和维护状态。
-5. 运行相关测试，再运行完整离线 suite：
+5. 先安装仓库提交的 hash 锁定开发环境，再运行相关测试和完整离线 suite：
 
 ```bash
-python -m pip install -e ".[test]"
+python -m pip install --require-hashes -r requirements/dev.lock
+python -m pip install --no-deps --no-build-isolation -e .
+python scripts/release_tools.py check-lock
 python -B -m pytest -q
 ```
 
 6. 提交前运行 `git diff --check`，确认没有数据、凭据、绝对本机路径或生成 run 被跟踪。
+
+依赖变化必须遵循[发布与依赖政策](docs/reference/open_source_release.zh-CN.md)，不得手工修改
+锁文件或自动合并依赖更新。公共扩展与兼容声明遵循
+[扩展兼容政策](docs/reference/extension_policy.zh-CN.md)。
 
 ## 不可破坏的合同
 

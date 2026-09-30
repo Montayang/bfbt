@@ -7,15 +7,20 @@ name = "bfbt"
 version = "0.1.0"
 description = "Offline cross-sectional factor research and backtesting for Binance futures"
 readme = "README.md"
-requires-python = ">=3.10"
-license = { file = "LICENSE" }
+requires-python = ">=3.10,<3.13"
+license = "MIT"
+license-files = ["LICENSE"]
+keywords = ["backtesting", "binance", "futures", "quantitative-research"]
 authors = [
     { name = "montayang", email = "montayang0421@gmail.com" },
 ]
 classifiers = [
-    "License :: OSI Approved :: MIT License",
     "Programming Language :: Python :: 3",
     "Programming Language :: Python :: 3 :: Only",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Office/Business :: Financial :: Investment",
 ]
 
 dependencies = [
@@ -33,13 +38,21 @@ dependencies = [
 test = [
     "pytest>=8,<9",
 ]
+release = [
+    "build>=1.2,<2",
+    "twine>=6,<7",
+    "wheel>=0.45,<1",
+]
 
 [project.scripts]
 bfbt = "bfbt.cli:app"
 
 [project.urls]
+Homepage = "https://github.com/Montayang/bfbt"
 Repository = "https://github.com/Montayang/bfbt"
 Issues = "https://github.com/Montayang/bfbt/issues"
+Documentation = "https://github.com/Montayang/bfbt/tree/main/docs"
+Changelog = "https://github.com/Montayang/bfbt/blob/main/CHANGELOG.md"
 
 [tool.setuptools.packages.find]
 where = ["src"]

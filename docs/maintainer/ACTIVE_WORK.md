@@ -1,8 +1,17 @@
 # Active work
 
-Updated: 2026-09-29.
+Updated: 2026-09-30.
 
 ## Current state
+
+- Final open-source hardening is implemented and verified by A44: runtime and development
+  dependencies are universally resolved and hash locked with `uv 0.12.20`; CI, Pages, and release
+  Actions are pinned to immutable commits; reviewed weekly updates, tag/version/changelog gates,
+  wheel/sdist inspection, SHA-256 publication, and bilingual release/extension policies are in
+  place. The focused A44 suite passes 3 tests and the final complete offline suite passes 381 tests
+  in 23.78 seconds. Fresh locked runtime installation, editable CLI startup, locked release-tool
+  installation, warning-free wheel/sdist build, Twine validation, archive inspection, checksums,
+  and installed-wheel CLI startup all pass. No market data, research, or backtest was run.
 
 - The general supervised Agent workflow is merged into `main` at `9800438`: strict
   original-text-bound intent, semantic/data/backend/cost planning, plan-bound expiring grants,
@@ -71,8 +80,8 @@ Updated: 2026-09-29.
 - The three authorized `R5-T4-H2-ROLLING` May–July formal runs are complete and registered; their
   generated artifacts and derived margin-trajectory report remain ignored local data.
 - AI Agent readiness and remaining gaps are recorded in `AI_AGENT_READINESS.md`. The general
-  supervised workflow is implemented and accepted by A43; AG05, AG10, AG12, AG13, AG15 and AG16
-  retain the explicitly documented partial or missing follow-up scope.
+  supervised workflow is implemented and accepted by A43; A44 closes AG13 and AG15, while AG05,
+  AG10, AG12 and AG16 retain the explicitly documented partial or missing follow-up scope.
 - Durable cross-session guidance is maintained by root `AGENTS.md`, `docs/maintainer/`, and the
   ignored local `.local/CODEX_HANDOFF.md` when it is present.
 - The standalone offline pytest suite passed all 322 tests on 2026-08-29 against HEAD `69e8588`;

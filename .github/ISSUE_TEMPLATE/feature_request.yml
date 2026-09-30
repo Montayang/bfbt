@@ -17,10 +17,11 @@ body:
       options:
         - Quick Research
         - Fast Matrix
-        - Event / V2
+        - Event Engine
         - Reports and artifacts
         - Agent-facing workflow
         - Data and catalog
+        - Packaging and extensions
         - Unsure
     validations:
       required: true

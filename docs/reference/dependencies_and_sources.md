@@ -14,9 +14,6 @@
 | `pyarrow` | Arrow schema、Parquet dataset 写入和元数据 | 是 |
 | `duckdb` | Catalog、SQL 审计、Parquet coverage 查询和临时分析 | 是 |
 | `pytz` | DuckDB `TIMESTAMPTZ` 与 Python aware `datetime` 转换 | A03 运行时 |
-| `numpy` | 数值数组、随机数和部分性能敏感计算 | 是 |
-| `pandas` | 与研究生态和小型报告表互操作，不处理主面板 | 辅助 |
-| `scipy` | Spearman、统计检验等研究指标 | 是 |
 
 Polars 的 Lazy API 支持 projection/predicate pushdown 和 streaming，适合只读取所需时间与字段；DuckDB 能直接扫描 Parquet，并同样支持列裁剪和过滤下推；PyArrow 负责稳定 schema 和分区数据集写入。
 
@@ -27,7 +24,6 @@ A05 正式引入 `polars>=1.30,<2`。`ParquetDataStore` 使用 `scan_parquet` �
 | 包 | 用途 |
 | --- | --- |
 | `pydantic` | 配置、manifest 和接口模型校验 |
-| `pydantic-settings` | 非敏感运行参数的环境变量覆盖；回测不读取实盘 `.env` |
 | `PyYAML` | 加载 YAML 配置；加载后必须交给 Pydantic 校验 |
 
 ### 2.3 网络与 CLI
@@ -37,7 +33,6 @@ A05 正式引入 `polars>=1.30,<2`。`ParquetDataStore` 使用 `scan_parquet` �
 | `httpx` | A04 公共 HTTP、连接池、超时、流式下载和可注入测试 transport |
 | `tenacity` | 后续复杂重试策略候选；A04 未引入 |
 | `typer` | 类型化 CLI |
-| `rich` | 下载进度、表格和结构化终端输出 |
 
 ZIP、hash、路径和并发控制优先使用 Python 标准库：`zipfile`、`hashlib`、`pathlib`、`concurrent.futures`、`asyncio`。
 
@@ -45,21 +40,22 @@ A04 采用项目内小型同步重试策略：只重试明确的瞬时 HTTP 状�
 
 ### 2.4 报告
 
-| 包 | 用途 |
-| --- | --- |
-| `jinja2` | HTML 报告模板 |
-| `plotly` | 可交互净值、回撤、IC 和分层图 |
-| `matplotlib` | 静态图和测试基线，可选 |
+报告由项目内确定性渲染器生成自包含 HTML，不声明 Jinja2、Plotly 或 Matplotlib 运行时
+依赖。报告中需要的 CSS、JavaScript 和机器可读 payload 随产物一同写入，不加载远程资源。
 
 ### 2.5 开发依赖
 
 | 包 | 用途 |
 | --- | --- |
 | `pytest` | 单元和集成测试 |
-| `pytest-cov` | 覆盖率 |
-| `hypothesis` | 重采样、权重和成本不变量的性质测试 |
-| `ruff` | lint 和格式检查 |
-| `mypy` | 静态类型检查 |
+| `build` | 生成标准 wheel 与 source distribution |
+| `twine` | 校验发行包元数据与 README 渲染 |
+| `wheel` | 锁定的构建工具链 |
+
+`pyproject.toml` 是直接依赖事实来源；`requirements/runtime.lock` 和
+`requirements/dev.lock` 使用固定 `uv` 版本解析直接与间接依赖并记录所有允许的分发 hash。
+不得根据本文表格手工安装或手改锁文件。完整更新与发布规则见
+[`open_source_release.zh-CN.md`](open_source_release.zh-CN.md)。
 
 ## 3. 暂不采用的依赖
 
@@ -143,8 +139,7 @@ OI 和多空比类 REST 历史窗口很短，因此如果未来需要长历史�
 - `duckdb` 主要存在于 catalog、coverage 和审计查询。
 - `pyarrow` 负责 schema、Parquet 写入和跨库交换。
 - `polars` 是主计算接口。
-- `pandas` 只允许出现在 reports、notebooks 或小型兼容层。
-- Plotly/Jinja2 不得反向成为 engine 依赖。
+- 报告渲染依赖不得反向成为 engine 依赖。
 
 ## 7. 官方技术参考
 

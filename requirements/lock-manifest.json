@@ -1,0 +1,15 @@
+{
+  "generator": "uv",
+  "generator_version": "0.12.20",
+  "locks": {
+    "requirements/dev.lock": "9ee96356567ac4857457a3010596ab2f61ff79f6dfeef0e6b5ee500148fb1bbf",
+    "requirements/runtime.lock": "ed87a6b2d8270c8164dd2eff39fe01b8063ac690490982335869b8dff3a6fdf2"
+  },
+  "python_requires": ">=3.10,<3.13",
+  "schema_version": "bfbt-lock-manifest/v1",
+  "sources": {
+    "pyproject.toml": "e5ba4b2598554d95fae7a1277348f9a0622c042b4d6ba4791c6b612e3e48a253",
+    "requirements/bootstrap.in": "c8a6a009bacbd715f20203dbdf528bd4725efd3666ba50795c2b4dcb74a11dd8",
+    "scripts/update_locks.sh": "6e0b0cb38aef0b3cb8c4e90612d14c1aea49e6b2ebee3f77e8ce0164c2656245"
+  }
+}

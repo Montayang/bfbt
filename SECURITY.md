@@ -27,6 +27,10 @@ potential impact, and suggested mitigation. Do not publish exploit code before a
 - Reports and Showcase pages read only verified artifacts and reject path traversal or hash mismatch.
 - Agent-generated code and research execution are separate authorization actions; arbitrary
   generated-code execution is not supported.
+- Supported installs consume committed hash-locked dependencies. Lock updates are reviewed and
+  tested; release packages are built only from a version-matching tag and publish SHA-256 checksums.
+- BFBT does not auto-discover or execute third-party plugin packages. External integrations cannot
+  weaken authorization, data timing, immutable evidence, or the no-live-trading boundary.
 
 Treat any behavior that crosses these boundaries as a security vulnerability, not a normal feature
 request.

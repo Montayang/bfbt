@@ -131,3 +131,20 @@ and result hash equivalent to its standalone execution. Dense worst-case arithme
   guide.
 - BFBT is independent from Binance and has no affiliation, endorsement, sponsorship, or financial
   relationship with Binance. This disclaimer must remain visible in the public front door.
+
+## Packaging, releases, and extensions
+
+- End-user and CI environments install hash-locked dependency sets before installing BFBT with
+  dependency resolution disabled. `pyproject.toml`, the bootstrap input, both locks, and their
+  exact `uv` generator version form one verified contract.
+- A release is an owner-controlled `vMAJOR.MINOR.PATCH` tag whose version matches package metadata
+  and dated bilingual changelogs. CI verifies the tag, full supported-Python matrix, wheel/sdist
+  contents, and checksums before publishing one GitHub Release.
+- GitHub Releases are the authoritative downloadable packages. PyPI stays disabled until Trusted
+  Publishing and a protected release environment are configured; long-lived upload tokens are not
+  an accepted shortcut.
+- Dependency and GitHub Actions updates are review-only. Actions are pinned to immutable commit
+  SHAs, and neither Dependabot nor another bot may auto-merge a dependency change.
+- The supported external extension surfaces are the versioned causal expression contract and
+  documented CLI/schema/artifact protocols. Reviewed in-repository factors are source
+  contributions; arbitrary Python plugin discovery and internal monkey-patching are not public APIs.

@@ -13,15 +13,22 @@ bounded-memory execution, and immutable auditability over adding commands or fac
 3. Put reusable capabilities in `src/bfbt/`; put real strategy specifications and run mappings in
    `strategies/`.
 4. Update focused tests, acceptance documentation, and maintainer state together.
-5. Run focused tests, then the complete offline suite:
+5. Install the committed hash-locked development environment, then run focused tests and the
+   complete offline suite:
 
 ```bash
-python -m pip install -e ".[test]"
+python -m pip install --require-hashes -r requirements/dev.lock
+python -m pip install --no-deps --no-build-isolation -e .
+python scripts/release_tools.py check-lock
 python -B -m pytest -q
 ```
 
 6. Before committing, run `git diff --check` and confirm that no data, credentials, absolute local
    paths, or generated runs are tracked.
+
+Dependency changes must follow the [release and dependency policy](docs/reference/open_source_release.md).
+Do not hand-edit lock files or auto-merge dependency updates. Public extension and compatibility
+claims follow the [extension policy](docs/reference/extension_policy.md).
 
 ## Non-negotiable contracts
 

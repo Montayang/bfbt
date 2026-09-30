@@ -118,7 +118,7 @@ def test_public_identity_is_bfbt_with_english_front_door() -> None:
 
 def test_declared_python_310_compatibility_surface() -> None:
     project = (ROOT / "pyproject.toml").read_text(encoding="utf-8")
-    assert 'requires-python = ">=3.10"' in project
+    assert 'requires-python = ">=3.10,<3.13"' in project
     assert str(_CompatibilityValue.VALUE) == _CompatibilityValue.VALUE.value == "VALUE"
 
 
