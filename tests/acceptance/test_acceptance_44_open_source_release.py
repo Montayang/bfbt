@@ -115,6 +115,8 @@ def test_repository_release_automation_and_public_policies_are_wired() -> None:
     lock_script = (ROOT / "scripts/update_locks.sh").read_text(encoding="utf-8")
     assert "requirements/dev.lock" in tests
     assert "--require-hashes" in tests
+    assert "python -m compileall -q src tests scripts" in tests
+    assert "python -m compileall -q src tests scripts" in release
     assert "actions/checkout@v" not in tests
     assert "actions/setup-python@v" not in tests
     assert 'tags:\n      - "v*.*.*"' in release

@@ -88,8 +88,9 @@ V1 remains for compatibility and historical reproduction, not for new daily stra
   three immutable H2 runs. The editable install, CLI entry point, dependency check, and distributable
   wheel were also verified; the wheel contains `bfbt` only and no legacy Python package.
 - Declared Python 3.10 support uses a small standard-library compatibility surface for `StrEnum`
-  and UTC; all 183 Python files parse under the 3.10 grammar, while GitHub's 3.10/3.12 matrix is the
-  cross-runtime release gate.
+  and UTC. GitHub's 3.10/3.12 matrix compiles every source, test and script before running the full
+  offline suite, making the supported runtimes—not a newer parser's grammar emulation—the release
+  gate.
 - Migration-time static checks covered Python AST parsing, TOML/YAML parsing, shell syntax,
   imports, project-root discovery, Markdown links, secret/path scanning, and Git integrity.
 - The open-source trend/momentum factor implementation passed 40 focused formula, recursive-reference,
@@ -105,8 +106,9 @@ V1 remains for compatibility and historical reproduction, not for new daily stra
 - A43 focused verification passed 10 tests; the combined factor/DE/Agent regression set passed 34
   tests, and the complete offline suite passed `378 passed in 24.23s` on 2026-09-29. No model API,
   network request, data download, research execution, or formal Event run occurred.
-- A44 focused verification passed 3 tests and the complete offline suite passed
-  `381 passed in 23.77s` on 2026-09-30. Fresh hash-locked runtime and release environments,
+- A44 focused verification passed 3 tests and the complete offline suite passed on both supported
+  runtimes: `381 passed in 24.28s` on Python 3.10 and `381 passed in 23.71s` on Python 3.12 on
+  2026-09-30. Fresh hash-locked runtime and release environments,
   editable and wheel-installed CLI startup, warning-free wheel/sdist construction, Twine metadata,
   archive contents and SHA-256 checksums were verified. Dependency packages were downloaded only
   for this packaging acceptance; no market data, research run or formal Event run occurred.

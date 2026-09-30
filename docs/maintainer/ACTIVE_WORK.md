@@ -101,10 +101,10 @@ Updated: 2026-09-30.
   language for README navigation, the preview image, contribution guidance, security policy, and
   changelog; independent Simplified-Chinese counterparts remain linked. The renamed remote now
   exposes only `main`; all merged remote feature branches were removed before visibility changes.
-- The first GitHub Actions runs exposed Python 3.10-only standard-library imports despite the
-  declared `>=3.10` support. `codex/ci-python310` replaces them with a tested compatibility surface;
-  local 3.12 full-suite and 3.10 syntax/contract gates pass. The remote 3.10/3.12 matrix remains the
-  final confirmation after push.
+- The first GitHub Actions runs exposed Python 3.10-only compatibility gaps despite the declared
+  `>=3.10` support. The compatibility surface, universal dependency locks, and a native compile
+  gate now make both supported CI runtimes validate syntax before the full offline suite. Local
+  3.10 and 3.12 verification is required before the remote matrix is treated as release evidence.
 - Inspect Git for the exact current branch, commit, worktree, and upstream state rather than relying
   on a branch name recorded in this document.
 

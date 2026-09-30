@@ -28,5 +28,7 @@ jobs:
           python -m pip install --no-deps --no-build-isolation -e .
       - name: Verify dependency lock
         run: python scripts/release_tools.py check-lock
+      - name: Compile supported Python syntax
+        run: python -m compileall -q src tests scripts
       - name: Offline test suite
         run: python -B -m pytest -q

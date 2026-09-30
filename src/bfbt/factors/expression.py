@@ -250,13 +250,14 @@ def compute_expression_factor(
             .alias("invalid_reason"),
         )
     )
-    version = f"{compiled.expression_id}-{content_sha256({
+    version_payload = {
         'bars_dataset_version': bars_dataset_version,
         'universe_version': universe_version,
         'base_interval': base_interval,
         'compute_interval': compute_interval,
         'direction': direction,
-    })[:24]}"
+    }
+    version = f"{compiled.expression_id}-{content_sha256(version_payload)[:24]}"
     output = values.with_columns(
         pl.lit(factor_name).alias("factor_name"),
         pl.lit(version).alias("factor_version"),
