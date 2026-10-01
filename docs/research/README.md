@@ -46,6 +46,9 @@
 - [`open_source_trend_momentum_candidates.md`](open_source_trend_momentum_candidates.md)：Qlib 与
   `ta` 开源库的下一批趋势/动量候选、公式、许可证、去重和实现结果；14 个因子已通过
   聚焦公式/边界测试，尚未运行 Quick Research。
+- [`llm_cross_sectional_benchmark_2025_2026/`](llm_cross_sectional_benchmark_2025_2026/)：多模型
+  一次性截面策略设计对比的冻结协议与统一提示词；模型原始回答、数据和回测产物保留在
+  本机忽略目录中。
 
 本机 HTML、`summary.json`、缓存和未来 `fm-*` 产物继续放在 `data/backtest/`，不提交 Git。
 Git 文档保存身份、规则、结论与本机产物定位。
