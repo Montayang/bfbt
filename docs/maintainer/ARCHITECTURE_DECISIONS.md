@@ -112,8 +112,11 @@ and result hash equivalent to its standalone execution. Dense worst-case arithme
 
 ## Public identity and languages
 
-- The public brand is BFBT — Binance Futures Backtesting Framework; distribution, import namespace,
-  module entry point, and CLI use `bfbt`. No pre-release `bianbt` compatibility package is retained.
+- The public brand is the standalone name **BFBT**. Its public descriptor is “an auditable research
+  and backtesting framework for crypto perpetual futures”; distribution, import namespace, module
+  entry point, and CLI use `bfbt`. No pre-release `bianbt` compatibility package is retained.
+- Third-party venue names may appear only as factual compatibility or data-source references, not
+  as part of BFBT's product name or in language that suggests affiliation.
 - User-facing surfaces call the chronological formal engine the **Event Engine**. Internal module,
   configuration, schema, and compatibility identities may retain `v2`; they are implementation
   contracts and must not leak into README, guides, Showcase copy, or generated report headings.

@@ -4,8 +4,9 @@
 ![Python 3.10+](https://img.shields.io/badge/Python-3.10%2B-3776AB?logo=python&logoColor=white)
 [![许可证：MIT](https://img.shields.io/badge/License-MIT-2ea44f.svg)](LICENSE)
 
-**Binance Futures Backtesting Framework**——面向 Binance USDⓈ-M 永续合约截面因子研究的
-离线研究与回测系统。
+**面向加密资产永续合约的可审计研究与回测框架。**
+
+BFBT 当前支持使用 Binance USDⓈ-M 永续合约的公开历史市场数据开展截面研究。
 
 [English](README.md) · [文档导航](docs/README.zh-CN.md) · [探索三层报告](showcase/README.zh-CN.md) ·
 [贡献指南](CONTRIBUTING.zh-CN.md)

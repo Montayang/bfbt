@@ -5,12 +5,12 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "bfbt"
 version = "0.1.0"
-description = "Offline cross-sectional factor research and backtesting for Binance futures"
+description = "Auditable research and backtesting for crypto perpetual futures"
 readme = "README.md"
 requires-python = ">=3.10,<3.13"
 license = "MIT"
 license-files = ["LICENSE"]
-keywords = ["backtesting", "binance", "futures", "quantitative-research"]
+keywords = ["backtesting", "crypto", "futures", "quantitative-research"]
 authors = [
     { name = "montayang", email = "montayang0421@gmail.com" },
 ]

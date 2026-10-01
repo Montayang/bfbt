@@ -116,7 +116,7 @@ from bfbt.data.hashing import content_sha256
 
 app = typer.Typer(
     no_args_is_help=True,
-    help="BFBT: offline cross-sectional research and backtesting for Binance futures.",
+    help="BFBT: auditable research and backtesting for crypto perpetual futures.",
 )
 config_app = typer.Typer(no_args_is_help=True, help="Validate and inspect config.")
 schema_app = typer.Typer(no_args_is_help=True, help="Inspect Arrow data contracts.")

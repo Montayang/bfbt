@@ -27,6 +27,9 @@ BFBT keeps a behavior-oriented changelog. Release dates use UTC.
 
 ### Changed
 
+- Public product naming now treats BFBT as a standalone brand with a venue-neutral
+  crypto-perpetuals descriptor; Binance appears only in factual support and data-source references
+  alongside the existing non-affiliation disclosure.
 - Added independent English and Simplified-Chinese no-programming guides for using a deployed BFBT
   system through a supervised external Agent, and separated that path from the terminal tutorial.
 - Added an idempotent Ubuntu setup helper and expanded the no-programming guides from Linux server

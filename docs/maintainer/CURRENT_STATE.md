@@ -1,11 +1,13 @@
 # Current project state
 
-Updated: 2026-09-30.
+Updated: 2026-10-01.
 
 ## Repository identity
 
-- Brand: BFBT — Binance Futures Backtesting Framework. Package, import namespace, and CLI:
-  `bfbt`, version `0.1.0`.
+- Brand: BFBT — an auditable research and backtesting framework for crypto perpetual futures.
+  Package, import namespace, and CLI: `bfbt`, version `0.1.0`.
+- Current market/data compatibility: public historical data for Binance USDⓈ-M perpetual futures;
+  this is a factual support boundary, not part of the product name or a claim of affiliation.
 - Standalone repository root; no parent-repository or `bianbot` runtime dependency.
 - Initial standalone commit: `2f3a4d2e0170cffa0c0d121e3654b89b1882b32a`, migrated from
   the former mixed-repository `backtest/` snapshot at

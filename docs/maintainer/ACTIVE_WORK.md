@@ -1,8 +1,14 @@
 # Active work
 
-Updated: 2026-09-30.
+Updated: 2026-10-01.
 
 ## Current state
+
+- Public-facing product language now treats BFBT as a standalone brand and uses a venue-neutral
+  crypto-perpetuals descriptor. Binance USDⓈ-M remains documented only as current factual market
+  and public-data compatibility, alongside the existing non-affiliation disclosure. The combined
+  A40/A44 focused verification passes 9 tests and the complete offline suite passes 381 tests in
+  41.96 seconds. No market data, research, or backtest was run.
 
 - Final open-source hardening is implemented and verified by A44: runtime and development
   dependencies are universally resolved and hash locked with `uv 0.12.20`; CI, Pages, and release

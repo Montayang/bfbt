@@ -19,11 +19,22 @@ class _CompatibilityValue(StrEnum):
 def test_public_identity_is_bfbt_with_english_front_door() -> None:
     project = (ROOT / "pyproject.toml").read_text(encoding="utf-8")
     assert '\nname = "bfbt"\n' in project
+    assert (
+        'description = "Auditable research and backtesting for crypto perpetual futures"'
+        in project
+    )
     assert '\nbfbt = "bfbt.cli:app"\n' in project
     assert 'Repository = "https://github.com/Montayang/bfbt"' in project
     readme = (ROOT / "README.md").read_text(encoding="utf-8")
     chinese = (ROOT / "README.zh-CN.md").read_text(encoding="utf-8")
     assert readme.startswith("# BFBT\n")
+    assert (
+        "auditable research and backtesting framework for crypto perpetual futures"
+        in readme
+    )
+    assert "currently supports cross-sectional research" in readme
+    assert "Binance" in readme
+    assert "USDⓈ-M perpetual futures" in readme
     assert "not affiliated with" in readme
     assert "financially connected to Binance" in readme
     assert "```mermaid" not in readme
@@ -35,6 +46,8 @@ def test_public_identity_is_bfbt_with_english_front_door() -> None:
     assert "https://montayang.github.io/bfbt/reports/fast-matrix.en.html" in readme
     assert "https://montayang.github.io/bfbt/reports/event-engine.en.html" in readme
     assert chinese.startswith("# BFBT\n")
+    assert "面向加密资产永续合约的可审计研究与回测框架" in chinese
+    assert "当前支持使用 Binance USDⓈ-M 永续合约" in chinese
     assert "不存在隶属、背书、赞助或任何利益关系" in chinese
     assert "```mermaid" not in chinese
     assert "V2" not in chinese
@@ -74,6 +87,29 @@ def test_public_identity_is_bfbt_with_english_front_door() -> None:
     assert "path: site" in pages_workflow
     assert (ROOT / "site" / "index.html").is_file()
     assert (ROOT / "site" / "index.zh-CN.html").is_file()
+    site_english = (ROOT / "site" / "index.html").read_text(encoding="utf-8")
+    site_chinese = (ROOT / "site" / "index.zh-CN.html").read_text(encoding="utf-8")
+    assert "framework for crypto perpetual futures" in site_english
+    assert "面向加密资产永续合约的可审计研究与" in site_chinese
+    cli_source = (ROOT / "src" / "bfbt" / "cli.py").read_text(encoding="utf-8")
+    package_source = (ROOT / "src" / "bfbt" / "__init__.py").read_text(
+        encoding="utf-8"
+    )
+    assert "auditable research and backtesting for crypto perpetual futures" in cli_source
+    assert "Auditable crypto perpetual-futures" in package_source
+    public_brand_surfaces = (
+        project,
+        readme,
+        chinese,
+        site_english,
+        site_chinese,
+        cli_source,
+        package_source,
+    )
+    assert all(
+        "Binance Futures Backtesting Framework" not in text
+        for text in public_brand_surfaces
+    )
     public_documents = (
         ("docs/README.md", "docs/README.zh-CN.md", "# BFBT documentation", "# BFBT 文档导航"),
         (

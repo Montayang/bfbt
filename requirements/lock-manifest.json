@@ -8,7 +8,7 @@
   "python_requires": ">=3.10,<3.13",
   "schema_version": "bfbt-lock-manifest/v1",
   "sources": {
-    "pyproject.toml": "e5ba4b2598554d95fae7a1277348f9a0622c042b4d6ba4791c6b612e3e48a253",
+    "pyproject.toml": "a68b76369f48b221b11cc3201aabc28987899732384a63dad81c96ad48099a9a",
     "requirements/bootstrap.in": "c8a6a009bacbd715f20203dbdf528bd4725efd3666ba50795c2b4dcb74a11dd8",
     "scripts/update_locks.sh": "984245be695353ed3c9ff28a28ad5177d91bc02ace1b1e5f4dbf417fa7fe6126"
   }

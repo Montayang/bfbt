@@ -4,8 +4,10 @@
 ![Python 3.10+](https://img.shields.io/badge/Python-3.10%2B-3776AB?logo=python&logoColor=white)
 [![License: MIT](https://img.shields.io/badge/License-MIT-2ea44f.svg)](LICENSE)
 
-**Binance Futures Backtesting Framework** — an offline research and backtesting system for
-cross-sectional factors on Binance USDⓈ-M perpetual futures.
+**An auditable research and backtesting framework for crypto perpetual futures.**
+
+BFBT currently supports cross-sectional research on public historical market data for Binance
+USDⓈ-M perpetual futures.
 
 [中文说明](README.zh-CN.md) · [Documentation](docs/README.md) ·
 [Explore the reports](showcase/README.md) · [Contributing](CONTRIBUTING.md)
