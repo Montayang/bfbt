@@ -118,7 +118,7 @@ V1 remains for compatibility and historical reproduction, not for new daily stra
   editable and wheel-installed CLI startup, warning-free wheel/sdist construction, Twine metadata,
   archive contents and SHA-256 checksums were verified. Dependency packages were downloaded only
   for this packaging acceptance; no market data, research run or formal Event run occurred.
-- A45 focused verification passed 11 tests and the complete offline suite passed `392 passed` on
+- A45 focused verification passed 12 tests and the complete offline suite passed `393 passed` on
   2026-10-03 before the formal benchmark launch. These tests used synthetic fixtures and did not
   access the evaluation-period results.
 

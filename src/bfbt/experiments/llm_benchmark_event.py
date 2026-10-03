@@ -115,7 +115,10 @@ RISK_SCHEMA = {
 def _frame(rows: list[dict[str, object]], schema: Mapping[str, pl.DataType]) -> pl.DataFrame:
     if not rows:
         return pl.DataFrame(schema=schema)
-    return pl.DataFrame(rows).select(list(schema)).cast(schema)
+    # Construct with the artifact schema instead of inferring from an initial
+    # row sample.  Sparse audit columns can legitimately be null for hundreds
+    # of ordinary instructions before the first risk-linked string appears.
+    return pl.from_dicts(rows, schema=schema)
 
 
 def _atomic_json(path: Path, payload: object) -> None:

@@ -18,7 +18,13 @@ from bfbt.experiments.llm_benchmark import (
     kimi_decision,
     StrategyDecision,
 )
-from bfbt.experiments.llm_benchmark_event import Account, PendingOrder, _minute_risk
+from bfbt.experiments.llm_benchmark_event import (
+    INSTRUCTION_SCHEMA,
+    Account,
+    PendingOrder,
+    _frame,
+    _minute_risk,
+)
 
 
 UTC = timezone.utc
@@ -224,3 +230,27 @@ def test_kimi_drawdown_repair_retains_submitted_sixty_minute_timeout() -> None:
     order = account.pending["X"]
     assert order.reason == "kimi_drawdown_on"
     assert order.expires_at == NOW + timedelta(minutes=60)
+
+
+def test_sparse_audit_string_after_inference_window_uses_explicit_schema() -> None:
+    rows = [
+        {
+            "instruction_id": f"ins-{index}", "decision_time": NOW,
+            "rank_source_time": NOW, "symbol": "X", "side": "LONG",
+            "instruction_mode": "target_quantity",
+            "requested_delta_notional": 1.0,
+            "constrained_delta_notional": 1.0,
+            "requested_target_weight": 0.01,
+            "source_event_id": None, "reason_code": "scheduled_rebalance",
+            "priority": 30, "run_id": "evt-schema-test",
+        }
+        for index in range(100)
+    ]
+    rows.append({
+        **rows[-1], "instruction_id": "ins-risk",
+        "source_event_id": "risk-63dfe302c4a9471613dbe265",
+        "reason_code": "risk_exit", "priority": 2,
+    })
+    frame = _frame(rows, INSTRUCTION_SCHEMA)
+    assert frame.schema["source_event_id"] == pl.String
+    assert frame.item(100, "source_event_id") == "risk-63dfe302c4a9471613dbe265"

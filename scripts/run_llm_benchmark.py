@@ -70,6 +70,12 @@ def main() -> int:
         if frozen_path.is_file():
             existing = json.loads(frozen_path.read_text(encoding="utf-8"))
             if existing != frozen:
+                # A failed source attempt is immutable evidence, not a file to
+                # rewrite.  A corrected commit receives a separate freeze.
+                frozen_path = directory / f"frozen-strategy.{commit[:12]}.json"
+        if frozen_path.is_file():
+            existing = json.loads(frozen_path.read_text(encoding="utf-8"))
+            if existing != frozen:
                 raise RuntimeError(f"frozen strategy identity conflict: {strategy.strategy_id}")
         else:
             _atomic_status(frozen_path, frozen)

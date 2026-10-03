@@ -37,7 +37,8 @@ data/backtest/experiments/llm-cs-202509-202608-v1/
 │   ├── original.md
 │   ├── identity.json
 │   ├── implementation-audit.json
-│   └── frozen-strategy.json
+│   ├── frozen-strategy.json
+│   └── frozen-strategy.<corrected-source-commit>.json  # only after a retained failed attempt
 ├── data/
 ├── jobs/
 ├── runs/
