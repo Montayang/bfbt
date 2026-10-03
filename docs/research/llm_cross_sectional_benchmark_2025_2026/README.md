@@ -68,6 +68,12 @@ common 5 bp fee plus 2 bp slippage, full-replacement turnover ceilings are econo
 the owner accepted that risk before authorizing the benchmark. No result should be inferred from
 implementation or fixture-test completion.
 
+## Completed formal evidence
+
+The corrected clean-source benchmark completed all four isolated Event runs. The immutable run IDs,
+leaderboard, attribution and qualifications are recorded in [`RESULTS.md`](RESULTS.md). Generated
+Parquet and bilingual HTML remain ignored local evidence rather than source-repository payload.
+
 ## Known qualification
 
 BFBT can infer point-in-time eligibility from observed bars, listing/history boundaries and

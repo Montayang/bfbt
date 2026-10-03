@@ -13,6 +13,10 @@ Updated: 2026-10-03.
   inferred from only leading nulls. The failed evidence is retained; explicit-schema construction
   and an exact regression cover the corrected attempt. No performance result is claimed by this
   implementation record.
+- The corrected formal attempt on source `2b1ca8f` subsequently completed and published all four
+  immutable runs. The result identities, frozen leaderboard, additive attribution and limitations
+  are tracked in `docs/research/llm_cross_sectional_benchmark_2025_2026/RESULTS.md`; the generated
+  bilingual comparison and standard Event reports remain local ignored assets for explicit hosting.
 
 - Public-facing product language now treats BFBT as a standalone brand and uses a venue-neutral
   crypto-perpetuals descriptor. Binance USDⓈ-M remains documented only as current factual market

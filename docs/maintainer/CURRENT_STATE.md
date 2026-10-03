@@ -121,6 +121,12 @@ V1 remains for compatibility and historical reproduction, not for new daily stra
 - A45 focused verification passed 12 tests and the complete offline suite passed `393 passed` on
   2026-10-03 before the formal benchmark launch. These tests used synthetic fixtures and did not
   access the evaluation-period results.
+- The corrected A45 formal benchmark completed four clean-source Event runs on commit `2b1ca8f`.
+  ChatGPT, Grok, Kimi and Claude respectively map to immutable runs
+  `evt-a01175782a0fa6997144d0da`, `evt-c7bdf2892da257893f46be6c`,
+  `evt-498d8f170a3ee9272dbbb66c` and `evt-ed4f9aeb18febee2690b12d4`. The tracked result record retains
+  the frozen ranking, attribution and audit qualifications; large artifacts and reports remain
+  ignored local evidence.
 
 ## Known boundaries
 
