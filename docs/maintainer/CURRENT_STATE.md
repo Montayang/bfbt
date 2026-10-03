@@ -1,6 +1,6 @@
 # Current project state
 
-Updated: 2026-10-01.
+Updated: 2026-10-03.
 
 ## Repository identity
 
@@ -42,6 +42,10 @@ Updated: 2026-10-01.
   reviewed dependency updates, tag-gated GitHub Releases, inspected wheel/sdist/checksums, and
   explicit bilingual release and extension-compatibility policies complete the open-source
   packaging contract.
+- A45: four frozen one-shot model submissions have deterministic, result-blind factor contracts and
+  isolated Event account state machines over one shared chronological market scan. Their source,
+  dataset and submission hashes, causal timing, costs, recovery parts and risk-event audit trail are
+  explicit; formal result production remains a separate background operation.
 - The Quick Research registry also includes 14 source-pinned Qlib/`ta` trend and momentum factors. Exact
   source formulas remain distinct from BFBT adaptations; formula windows are literal source-bar
   counts, gaps reset history, and invalid or zero-denominator inputs fail closed.
@@ -114,6 +118,9 @@ V1 remains for compatibility and historical reproduction, not for new daily stra
   editable and wheel-installed CLI startup, warning-free wheel/sdist construction, Twine metadata,
   archive contents and SHA-256 checksums were verified. Dependency packages were downloaded only
   for this packaging acceptance; no market data, research run or formal Event run occurred.
+- A45 focused verification passed 11 tests and the complete offline suite passed `392 passed` on
+  2026-10-03 before the formal benchmark launch. These tests used synthetic fixtures and did not
+  access the evaluation-period results.
 
 ## Known boundaries
 

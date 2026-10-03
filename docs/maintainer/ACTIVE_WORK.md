@@ -1,8 +1,15 @@
 # Active work
 
-Updated: 2026-10-01.
+Updated: 2026-10-03.
 
 ## Current state
+
+- Benchmark `llm-cs-202509-202608-v1` has four one-shot responses admitted with immutable originals,
+  independent effort labels and pre-result implementation audits. A45 implements their distinct
+  factors and Event state machines, one shared causal market scan, isolated account state, weekly
+  artifacts/checkpoints and clean-source publication. Its focused suite passes 11 tests and the
+  complete offline suite passes 392 tests. Formal runs are authorization-gated background work;
+  no performance result is claimed by this implementation record.
 
 - Public-facing product language now treats BFBT as a standalone brand and uses a venue-neutral
   crypto-perpetuals descriptor. Binance USDⓈ-M remains documented only as current factual market
